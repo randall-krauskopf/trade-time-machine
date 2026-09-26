@@ -17,6 +17,19 @@ function formatPoints(value) {
   return value === null || value === undefined ? "—" : Number(value).toFixed(2);
 }
 
+function formatSigned(value, digits = 1) {
+  if (value === null || value === undefined) return "—";
+  const number = Number(value);
+  return `${number > 0 ? "+" : number < 0 ? "−" : ""}${Math.abs(number).toFixed(digits)}`;
+}
+
+function winImpactLabel(impact) {
+  if (!impact || impact.wins_added === null || impact.wins_added === undefined) return "No lineup data";
+  if (!impact.flips) return "No results flipped";
+  const wins = impact.wins_added;
+  return `${formatSigned(wins, Number.isInteger(wins) ? 0 : 1)} net ${Math.abs(wins) === 1 ? "win" : "wins"}`;
+}
+
 function teamKey(trade, side) {
   return `${trade.league_key}:${side.team_id}`;
 }
@@ -90,17 +103,26 @@ function swing(trade, [a, b]) {
 
 const LEADERBOARDS = [
   {
-    title: "Biggest swing",
-    caption: "Largest gap between each side's received-player points so far.",
+    title: "Matchup movers",
+    caption: "Most matchup results the deal changed (tiebreak: lineup points).",
     rank(trades) {
       return trades
-        .map((trade) => ({trade, result: swing(trade, trade.sides.map((side) => side.total_points))}))
-        .filter(({trade, result}) => trade.weeks.length && result)
-        .sort((a, b) => b.result.value - a.result.value)
-        .map(({trade, result}) => ({
+        .filter((trade) => trade.sides.some((side) => side.impact && side.impact.wins_added !== null && side.impact.wins_added !== undefined))
+        .map((trade) => {
+          const flipped = new Set();
+          for (const side of trade.sides) {
+            for (const [week, detail] of Object.entries((side.impact || {}).weeks || {})) {
+              if (detail.flipped) flipped.add(`${week}|${[side.team, detail.opponent].sort().join("|")}`);
+            }
+          }
+          const net = Math.max(...trade.sides.map((side) => Math.abs((side.impact || {}).net_points || 0)));
+          return {trade, flips: flipped.size, net};
+        })
+        .sort((x, y) => y.flips - x.flips || y.net - x.net)
+        .map(({trade, flips}) => ({
           trade,
-          value: `${result.value.toFixed(2)} pts`,
-          detail: result.leader ? `${result.leader.team} ahead · ${trade.weeks.length} wk${trade.weeks.length === 1 ? "" : "s"}` : "Dead even",
+          value: flips ? `${flips} flip${flips === 1 ? "" : "s"}` : "No results flipped",
+          detail: trade.sides.map((side) => `${side.team}: ${winImpactLabel(side.impact)}`).join(" · "),
         }));
     },
   },
@@ -180,7 +202,7 @@ function renderLeaderboards() {
     row.append(grid);
     content.append(row);
   }
-  const notes = ["Raw hypothetical-hold points, including bench weeks; not a verdict. * = trade week, which may include points scored before the deal."];
+  const notes = ["Matchup movers use real lineups with a projection-based no-trade alternate. The other boards use raw player points, including bench weeks. * = trade week, which may include points scored before the deal. Not verdicts."];
   if (trades.some((trade) => trade.league.source === "reconstructed")) {
     notes.push("Champeens trades are reconstructed from roster history and may omit players who were later dropped or re-traded.");
   }
@@ -333,6 +355,8 @@ function renderDetail(trade) {
     $("trade-sides").append(card);
   }
 
+  renderImpact(trade);
+
   const score = $("score-content");
   score.replaceChildren();
   $("scope-note").textContent = trade.weeks.length ? `WEEKS ${trade.weeks.join(", ")}` : "NO COMPLETED WEEKS YET";
@@ -403,6 +427,68 @@ function renderDetail(trade) {
     box.append(node("p", "", receipt.content), meta);
     receipts.append(box);
   }
+}
+
+function renderImpact(trade) {
+  const content = $("impact-content");
+  content.replaceChildren();
+  const weeks = [...new Set(trade.sides.flatMap((side) => Object.keys((side.impact || {}).weeks || {})))].map(Number).sort((x, y) => x - y);
+  $("impact-scope").textContent = weeks.length ? `WEEKS ${weeks.join(", ")}` : trade.impact_cutoff ? "TRACKING ENDED" : "NO LINEUP WEEKS YET";
+  if (trade.impact_cutoff) {
+    const cutoff = trade.impact_cutoff;
+    const through = cutoff.last_week === null ? "No matchup weeks were counted" : `Tracked through Week ${cutoff.last_week}`;
+    content.append(node("p", "impact-cutoff", `${through} · ${cutoff.player} was traded again by ${cutoff.team} on ${dateFormat.format(new Date(cutoff.traded_at))}. Later weeks are excluded from Matchup Impact; Raw Player Points remain a hypothetical hold.`));
+  }
+  if (!weeks.length) {
+    if (!trade.impact_cutoff) {
+      content.append(node("p", "empty-state", "No completed week has lineups that include these players yet. Check back after the next week ends."));
+    }
+    return;
+  }
+  const grid = node("div", "impact-grid");
+  for (const side of trade.sides) {
+    const impact = side.impact || {weeks: {}};
+    const card = node("article", "impact-card");
+    card.append(node("p", "score-team", side.team.toUpperCase()));
+    const value = node("div", `score-value impact-wins ${impact.wins_added > 0 ? "positive" : impact.wins_added < 0 ? "negative" : ""}${impact.flips ? "" : " no-flips"}`, winImpactLabel(impact));
+    const flips = impact.flips || 0;
+    const stats = node("p", "score-caption", `${formatSigned(impact.net_points, 2)} pts vs no trade${flips ? ` · ${flips} result${flips === 1 ? "" : "s"} flipped` : ""}`);
+    card.append(value, stats);
+    const list = node("ul", "impact-weeks");
+    for (const week of weeks) {
+      const detail = impact.weeks[String(week)];
+      const item = node("li", detail && detail.flipped ? "flipped" : "");
+      if (!detail) {
+        item.append(node("p", "impact-line", `Week ${week} · no lineup data`));
+        list.append(item);
+        continue;
+      }
+      const line = node("div", "impact-line");
+      line.append(
+        node("span", "impact-week", `WK ${week}${week === trade.trade_week ? "*" : ""}`),
+        node("span", "impact-score", `${formatPoints(detail.score)} vs ${formatPoints(detail.opponent_score)}`),
+        node("span", `result-badge ${detail.result.toLowerCase()}`, detail.result),
+      );
+      const alt = node("div", "impact-line impact-alt");
+      alt.append(
+        node("span", "impact-week", "NO TRADE"),
+        node("span", "impact-score", `${formatPoints(detail.alt_score)} vs ${formatPoints(detail.opponent_alt_score)}`),
+        node("span", `result-badge ${detail.alt_result.toLowerCase()}`, detail.alt_result),
+      );
+      item.append(line, alt);
+      const opponent = `vs ${detail.opponent}${detail.opponent_is_partner ? " (trade partner)" : ""}`;
+      item.append(node("p", "impact-meta", `${opponent} · received players started for ${formatPoints(detail.started_points)}, benched ${formatPoints(detail.benched_points)}`));
+      if (detail.flipped) item.append(node("p", "flip-badge", `Result flipped: ${detail.alt_result} → ${detail.result}`));
+      const swaps = (detail.replacements || []).map((change) => change.name
+        ? `${change.slot}: ${change.name} ${formatPoints(change.points)}${change.replaced ? ` over ${change.replaced}` : ""}`
+        : `${change.slot}: no eligible player (0)`);
+      if (swaps.length) item.append(node("p", "impact-swaps", `Alternate lineup · ${swaps.join(" · ")}`));
+      list.append(item);
+    }
+    card.append(list);
+    grid.append(card);
+  }
+  content.append(grid);
 }
 
 async function load() {

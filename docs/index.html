@@ -21,7 +21,7 @@
         <div class="hero-copy">
           <p class="eyebrow"><span class="live-dot"></span> THE LEAGUE ARCHIVE</p>
           <h1 id="title">Trade <em>Time Machine.</em></h1>
-          <p class="hero-description">Every deal has a story. Rewind to the moment it happened, then see what each side's new players would have scored in the full weeks that followed.</p>
+          <p class="hero-description">Every deal has a story. Rewind to the moment it happened, then see whether it actually swung matchups in the weeks that followed.</p>
         </div>
         <div class="hero-stamp" aria-hidden="true"><span>THE DEAL<br>IS DONE.</span><small>PREMIER + CHAMPEENS</small></div>
       </section>
@@ -57,11 +57,16 @@
           <div class="detail-intro">
             <p class="detail-kicker">THE EXCHANGE</p>
             <h2 id="detail-heading"></h2>
-            <p>Players are shown under the team that <strong>received</strong> them. Numbers below are their actual fantasy points, attributed to that original recipient as a hypothetical hold.</p>
+            <p>Players are shown under the team that <strong>received</strong> them. Matchup impact shows whether the deal changed real results; raw player points follow for context.</p>
           </div>
           <div id="trade-sides" class="trade-sides"></div>
+          <section class="impact-section" aria-labelledby="impact-heading">
+            <div class="section-heading"><div><span class="eyebrow">MATCHUP IMPACT</span><h3 id="impact-heading">Did it change the result?</h3></div><span class="scope-note" id="impact-scope"></span></div>
+            <div id="impact-content"></div>
+            <p class="method-note">Uses each team's real lineup from ESPN box scores. For the no-trade alternate, received starters are removed and each empty slot is filled with the eligible bench or traded-away player ESPN <strong>projected</strong> highest (no hindsight); a traded-away player can also replace a lower-projected starter. When the opponent was the trade partner, both scores are re-run. Tracking stops when a received player is traded again; a slot with no eligible replacement scores 0. It's an estimate, not a verdict.</p>
+          </section>
           <section class="score-section" aria-labelledby="score-heading">
-            <div class="section-heading"><div><span class="eyebrow">THE HYPOTHETICAL HOLD</span><h3 id="score-heading">What if they kept them?</h3></div><span class="scope-note" id="scope-note"></span></div>
+            <div class="section-heading"><div><span class="eyebrow">RAW PLAYER POINTS</span><h3 id="score-heading">What did they score anywhere?</h3></div><span class="scope-note" id="scope-note"></span></div>
             <div id="score-content"></div>
             <p class="method-note">Includes completed scoring weeks that <strong>ended after</strong> the transaction. The trade week may include player points scored <strong>before</strong> the deal; it is labeled in the table. Players stay credited to their original recipient even if later traded away. These raw points include bench performances—they are not actual manager points, lineup impact, or a verdict.</p>
           </section>

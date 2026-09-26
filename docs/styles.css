@@ -57,7 +57,27 @@ select { width: 100%; margin-bottom: 19px; padding: 12px 13px; background: #fffe
 .player-list { list-style: none; margin: 0; padding: 0; }
 .player-list li { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid #ebeee7; font-size: 13px; font-weight: 600; }
 .player-list span:last-child { flex: 0 0 auto; color: #829184; font-size: 11px; font-weight: 500; }
-.score-section, .receipts-section { margin-top: 43px; }
+.score-section, .receipts-section, .impact-section { margin-top: 43px; }
+.impact-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.impact-card { padding: 21px; background: #e8eee4; border-radius: 6px; }
+.impact-card:last-child { background: #f4e9df; }
+.impact-card:last-child .score-team { color: #9f704e; }
+.impact-wins.positive { color: #2f6b3a; }
+.impact-wins.negative { color: #a8432f; }
+.impact-wins.no-flips { font-size: 24px; letter-spacing: -.03em; }
+.impact-cutoff { margin: 0 0 15px; padding: 12px 15px; border-left: 3px solid #b87240; background: #fbf0e4; color: #725034; border-radius: 0 5px 5px 0; font-size: 13px; line-height: 1.5; }
+.impact-weeks { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 10px; }
+.impact-weeks li { padding: 12px; background: rgba(255, 255, 255, 0.55); border-radius: 5px; border-left: 3px solid transparent; }
+.impact-weeks li.flipped { border-left-color: #c8742b; }
+.impact-line { display: grid; grid-template-columns: 74px 1fr auto; align-items: center; gap: 8px; margin: 0; font-size: 14px; }
+.impact-alt { margin-top: 4px; opacity: 0.72; }
+.impact-week { font-size: 11px; letter-spacing: 0.08em; font-weight: 700; }
+.impact-score { font-variant-numeric: tabular-nums; }
+.result-badge { min-width: 24px; padding: 2px 6px; border-radius: 3px; text-align: center; font-size: 12px; font-weight: 700; background: #ddd; }
+.result-badge.w { background: #cfe3cf; color: #22552c; }
+.result-badge.l { background: #efd2c9; color: #8a3121; }
+.impact-meta, .impact-swaps { margin: 8px 0 0; font-size: 13px; line-height: 1.4; opacity: 0.85; }
+.flip-badge { display: inline-block; margin: 8px 0 0; padding: 3px 8px; border-radius: 3px; background: #c8742b; color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; }
 .section-heading { margin-bottom: 19px; }
 .section-heading h3 { margin: 7px 0 0; font-size: 23px; letter-spacing: -.05em; }
 .scope-note { color: #859386; text-align: right; font-size: 10px; font-weight: 700; letter-spacing: .08em; }
@@ -127,4 +147,4 @@ footer { display: flex; flex-wrap: wrap; gap: 10px; padding: 28px 0 40px; border
   .trade-item { flex: 0 0 220px; scroll-snap-align: start; }
   .detail-panel { padding: 28px 0 40px; } .detail-intro { padding: 29px 0 26px; } .detail-topline { font-size: 10px; }
 }
-@media (max-width: 500px) { .trade-sides, .score-grid { grid-template-columns: 1fr; } .season-badge { font-size: 8px; } }
+@media (max-width: 500px) { .trade-sides, .score-grid, .impact-grid { grid-template-columns: 1fr; } .season-badge { font-size: 8px; } }

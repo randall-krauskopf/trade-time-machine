@@ -51,11 +51,12 @@ REVIEW_WINDOW_MS = 3 * 24 * 60 * 60 * 1000
 
 
 def week_start(year: int, week: int) -> datetime:
-    """The NFL regular season begins on the Thursday after Labor Day."""
+    """The first week begins Thursday; subsequent scoring weeks begin Tuesday."""
     september_first = date(year, 9, 1)
     labor_day = september_first + timedelta(days=(7 - september_first.weekday()) % 7)
     first_thursday = labor_day + timedelta(days=3)
-    return datetime.combine(first_thursday + timedelta(weeks=week - 1), datetime.min.time(), timezone.utc)
+    start = first_thursday if week == 1 else first_thursday + timedelta(days=5, weeks=week - 2)
+    return datetime.combine(start, datetime.min.time(), LEAGUE_TIMEZONE)
 
 
 def parse_discord_export(path: Path | None) -> list[dict[str, Any]]:
@@ -249,6 +250,234 @@ def reconstruct_trades(
     return trades
 
 
+STARTER_EXCLUDED_SLOTS = {"BE", "IR"}
+FLEX_SLOTS = {"RB/WR/TE", "RB/WR", "WR/TE", "OP"}
+
+
+def refill_lineup(
+    starters: list[dict[str, Any]],
+    bench: list[dict[str, Any]],
+    removed_ids: set[int],
+    added: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Estimate the team's lineup had the trade never happened.
+
+    Starters who arrived in the trade are removed. Each vacated slot (dedicated slots before
+    flex) gets the eligible bench or traded-away player with the highest ESPN *projection*.
+    A traded-away player may also replace a remaining starter whose projection was lower.
+    Choosing by projection avoids hindsight; actual points are then summed.
+    """
+    lineup = [dict(player) for player in starters if player["id"] not in removed_ids]
+    vacated = sorted(
+        (player["slot"] for player in starters if player["id"] in removed_ids),
+        key=lambda slot: slot in FLEX_SLOTS,
+    )
+    lineup_ids = {player["id"] for player in lineup}
+    pool_by_id = {
+        player["id"]: player
+        for player in bench + added
+        if player["id"] not in removed_ids and player["id"] not in lineup_ids
+    }
+    pool = list(pool_by_id.values())
+    added_ids = {player["id"] for player in added}
+    changes = []
+    for slot in vacated:
+        eligible = [player for player in pool if slot in player.get("eligible", [])]
+        if not eligible:
+            changes.append({"slot": slot, "name": None, "points": 0.0, "replaced": None})
+            continue
+        best = max(eligible, key=lambda player: player.get("projected") or 0)
+        pool.remove(best)
+        lineup.append({**best, "slot": slot})
+        changes.append({"slot": slot, "name": best["name"], "points": best["points"], "replaced": None})
+    for player in sorted(
+        (candidate for candidate in pool if candidate["id"] in added_ids),
+        key=lambda candidate: -(candidate.get("projected") or 0),
+    ):
+        targets = [
+            (index, current) for index, current in enumerate(lineup)
+            if current["slot"] in player.get("eligible", [])
+            and (current.get("projected") or 0) < (player.get("projected") or 0)
+        ]
+        if not targets:
+            continue
+        index, current = min(targets, key=lambda item: item[1].get("projected") or 0)
+        lineup[index] = {**player, "slot": current["slot"]}
+        changes.append({"slot": current["slot"], "name": player["name"], "points": player["points"], "replaced": current["name"]})
+    return {
+        "score": round(sum(player["points"] for player in lineup), 2),
+        "replacements": changes,
+    }
+
+
+def result(score: float, opponent: float) -> str:
+    return "W" if score > opponent else "L" if score < opponent else "T"
+
+
+RESULT_VALUE = {"W": 1.0, "T": 0.5, "L": 0.0}
+
+
+def box_player(player: Any) -> dict[str, Any]:
+    return {
+        "id": player.playerId,
+        "name": player.name,
+        "slot": player.slot_position,
+        "points": round(float(player.points or 0), 2),
+        "projected": round(float(getattr(player, "projected_points", 0) or 0), 2),
+        "eligible": list(getattr(player, "eligibleSlots", []) or []),
+    }
+
+
+def add_matchup_impact(league: Any, trades: list[dict[str, Any]], players_by_id: dict[int, Any]) -> None:
+    """Attach real-lineup matchup impact to each trade side, using weekly box scores."""
+    box_cache: dict[int, dict[int, dict[str, Any]]] = {}
+    chronological = sorted(trades, key=lambda trade: trade["traded_at"])
+
+    def first_retrade(trade: dict[str, Any]) -> dict[str, Any] | None:
+        for later in chronological:
+            if later["traded_at"] <= trade["traded_at"]:
+                continue
+            for original_side in trade["sides"]:
+                received = {player["id"]: player["name"] for player in original_side["received"]}
+                later_side = next(
+                    (side for side in later["sides"] if side["team_id"] == original_side["team_id"]), None
+                )
+                if later_side is None:
+                    continue
+                for player in later_side["sent"]:
+                    if player["id"] in received:
+                        recipient = next(
+                            side for side in later["sides"] if side["team_id"] != original_side["team_id"]
+                        )
+                        return {
+                            "player_id": player["id"],
+                            "player": received[player["id"]],
+                            "team": original_side["team"],
+                            "team_id": original_side["team_id"],
+                            "to_team_id": recipient["team_id"],
+                            "traded_at": later["traded_at"],
+                            "last_week": None,
+                        }
+        return None
+
+    def week_boxes(week: int) -> dict[int, dict[str, Any]]:
+        if week not in box_cache:
+            teams: dict[int, dict[str, Any]] = {}
+            for box in league.box_scores(week):
+                for team, lineup, score, opponent in (
+                    (box.home_team, box.home_lineup, box.home_score, box.away_team),
+                    (box.away_team, box.away_lineup, box.away_score, box.home_team),
+                ):
+                    if not hasattr(team, "team_id"):
+                        continue
+                    players = [box_player(player) for player in lineup]
+                    teams[team.team_id] = {
+                        "score": round(float(score), 2),
+                        "opponent_id": getattr(opponent, "team_id", None),
+                        "opponent": opponent.team_name.strip() if hasattr(opponent, "team_name") else None,
+                        "starters": [player for player in players if player["slot"] not in STARTER_EXCLUDED_SLOTS],
+                        "bench": [player for player in players if player["slot"] == "BE"],
+                    }
+            box_cache[week] = teams
+        return box_cache[week]
+
+    def sent_player(player: dict[str, Any], week: int) -> dict[str, Any]:
+        for team in week_boxes(week).values():
+            for rostered in team["starters"] + team["bench"]:
+                if rostered["id"] == player["id"]:
+                    return {key: value for key, value in rostered.items() if key != "slot"}
+        info = players_by_id.get(player["id"])
+        week_stats = getattr(info, "stats", {}).get(week) if info else None
+        week_stats = week_stats if isinstance(week_stats, dict) else {}
+        return {
+            "id": player["id"],
+            "name": player["name"],
+            "points": round(float(week_stats.get("points") or 0), 2),
+            "projected": round(float(week_stats.get("projected_points") or 0), 2),
+            "eligible": list(getattr(info, "eligibleSlots", []) or []),
+        }
+
+    for trade in trades:
+        cutoff = first_retrade(trade)
+        trade["impact_cutoff"] = cutoff
+        for side in trade["sides"]:
+            side["impact"] = {"weeks": {}, "wins_added": None, "net_points": None, "flips": 0}
+        for week in trade["weeks"]:
+            if cutoff and cutoff["traded_at"] <= week_start(league.year, week).isoformat():
+                break
+            boxes = week_boxes(week)
+            if cutoff and cutoff["traded_at"] < week_start(league.year, week + 1).isoformat():
+                original_box = boxes.get(cutoff["team_id"])
+                new_box = boxes.get(cutoff["to_team_id"])
+                if not original_box or not new_box:
+                    break
+                original_ids = {player["id"] for player in original_box["starters"] + original_box["bench"]}
+                new_ids = {player["id"] for player in new_box["starters"] + new_box["bench"]}
+                if cutoff["player_id"] not in original_ids or cutoff["player_id"] in new_ids:
+                    break
+            if week == trade["trade_week"] and not any(
+                player["id"] in {rostered["id"] for rostered in boxes.get(side["team_id"], {}).get("starters", []) + boxes.get(side["team_id"], {}).get("bench", [])}
+                for side in trade["sides"] for player in side["received"]
+            ):
+                continue  # The trade wasn't reflected in lineups until the following week.
+            alternates: dict[int, dict[str, Any]] = {}
+            for side in trade["sides"]:
+                box = boxes.get(side["team_id"])
+                if box is None:
+                    continue
+                received_ids = {player["id"] for player in side["received"]}
+                started = [player for player in box["starters"] if player["id"] in received_ids]
+                benched = [player for player in box["bench"] if player["id"] in received_ids]
+                alternate = refill_lineup(
+                    box["starters"], box["bench"], received_ids,
+                    [sent_player(player, week) for player in side["sent"]],
+                )
+                alternates[side["team_id"]] = {
+                    "box": box,
+                    "alternate": alternate,
+                    "started": started,
+                    "benched": benched,
+                }
+            for side in trade["sides"]:
+                entry = alternates.get(side["team_id"])
+                if entry is None:
+                    continue
+                box = entry["box"]
+                opponent_box = boxes.get(box["opponent_id"])
+                if opponent_box is None:
+                    continue
+                opponent_score = opponent_box["score"]
+                # Undo the trade for the opponent too when they were the trade partner.
+                opponent_alt = alternates.get(box["opponent_id"], {}).get("alternate", {}).get("score", opponent_score)
+                actual = result(box["score"], opponent_score)
+                alternate_result = result(entry["alternate"]["score"], opponent_alt)
+                side["impact"]["weeks"][str(week)] = {
+                    "started_points": round(sum(player["points"] for player in entry["started"]), 2),
+                    "benched_points": round(sum(player["points"] for player in entry["benched"]), 2),
+                    "started": [{"name": player["name"], "slot": player["slot"], "points": player["points"]} for player in entry["started"]],
+                    "replacements": entry["alternate"]["replacements"],
+                    "score": box["score"],
+                    "alt_score": entry["alternate"]["score"],
+                    "net_points": round(box["score"] - entry["alternate"]["score"], 2),
+                    "opponent": box["opponent"],
+                    "opponent_is_partner": box["opponent_id"] in alternates,
+                    "opponent_score": opponent_score,
+                    "opponent_alt_score": opponent_alt,
+                    "result": actual,
+                    "alt_result": alternate_result,
+                    "flipped": actual != alternate_result,
+                }
+        for side in trade["sides"]:
+            weeks = side["impact"]["weeks"].values()
+            if weeks:
+                side["impact"]["wins_added"] = round(sum(RESULT_VALUE[w["result"]] - RESULT_VALUE[w["alt_result"]] for w in weeks), 1)
+                side["impact"]["net_points"] = round(sum(w["net_points"] for w in weeks), 2)
+                side["impact"]["flips"] = sum(1 for w in weeks if w["flipped"])
+        if cutoff:
+            counted = [int(week) for side in trade["sides"] for week in side["impact"]["weeks"]]
+            cutoff["last_week"] = max(counted) if counted else None
+
+
 def build_snapshot(league: Any, messages: list[dict[str, Any]]) -> dict[str, Any]:
     cutoff = datetime.combine(FIRST_TRADE_DATE, datetime.min.time(), LEAGUE_TIMEZONE)
     try:
@@ -334,6 +563,9 @@ def build_snapshot(league: Any, messages: list[dict[str, Any]]) -> dict[str, Any
             "sides": team_sides,
             "receipts": trade_receipts(messages, traded_at, names),
         })
+
+    if hasattr(league, "box_scores"):
+        add_matchup_impact(league, trades, players_by_id)
 
     return {
         "league": league.settings.name,

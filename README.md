@@ -8,11 +8,30 @@ This is a **hypothetical hold** for each individual deal: the received players r
 
 The top of the page ranks trades (top 3 per board, per league under "All leagues") , always across all trades regardless of the league/team filters:
 
-- **Biggest swing**: absolute difference between each side's hypothetical-hold totals across all eligible weeks.
+- **Matchup movers**: total real results flipped by the trade (both sides), then the largest net lineup-point change; the detail shows who gained the most wins.
 - **Most players exchanged**: total players received by both sides (newest first on ties).
 - **Fastest regret**: difference in the first eligible week only; `*` marks when that week is the trade week.
 
 Trades without a completed eligible week are left off the points boards. Clicking an entry opens the trade, clearing the filters if they would hide it.
+
+## Matchup impact
+
+Each trade's detail panel opens with **matchup impact**, built from ESPN box scores (real lineups) for both leagues:
+
+- **Started vs benched**: points the received players scored in the lineup vs on the bench.
+- **No-trade alternate**: received starters are removed, and each vacated slot (dedicated slots before flex) is filled with the eligible bench or traded-away player with the highest ESPN **projection** for that week, so the choice doesn't use hindsight. A traded-away player can also replace a remaining starter projected lower. Actual points are then summed.
+- **Re-scored matchup**: the real score and opponent score are compared with the alternate. When the opponent was the trade partner, both sides are re-run. A changed W/L/T is a **flipped result**; **wins added** sums real minus alternate results (W=1, T=0.5, L=0).
+- The trade week is only counted if the received players already appear in that week's lineups.
+
+The card says **No results flipped** when none changed. **0 net wins** can instead mean that results *did* flip but gains and losses canceled out; a tie can produce a half-win. Win totals are shown without decimals unless a half-win is involved.
+
+Assumptions: managers don't always start their best players, so the refill is an estimate; unrelated waiver moves and drops aren't undone (all traded-away players are added back); a slot with no eligible replacement scores 0; Champeens reconstruction gaps carry over. It's a what-if, not a verdict.
+
+When a player received in the original exchange is later **traded again by that recipient**, matchup impact for **both original sides** stops at the first such re-trade. The detail names the player and last counted week. A midweek re-trade's week is included only when that player's box-score lineup still belongs to the original recipient and not the new recipient; ambiguous or missing lineups stop at the preceding week. Ordinary waiver moves and lineup changes don't trigger this cutoff. Reconstruction gaps in Champeens can hide a re-trade, so the cutoff can only use trades in the snapshot. **Raw Player Points does not stop**: its hypothetical hold continues independently.
+
+Scoring Week 1 begins the Thursday after Labor Day; subsequent ESPN scoring weeks begin Tuesday in league time, after Monday Night Football. A Tuesday trade therefore cannot count the previous week's raw points or matchup.
+
+The older **raw player points** section (formerly the "hypothetical hold") remains below for context.
 
 ## Weekly swing chart
 
