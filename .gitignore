@@ -141,3 +141,8 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Trade Time Machine
+# docs/data.json is intentionally committed: it is the published snapshot.
+discord-export.json
+__pycache__/

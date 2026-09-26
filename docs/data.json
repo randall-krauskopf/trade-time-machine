@@ -1,0 +1,939 @@
+{
+  "generated_at": "2026-09-26T12:00:34.281221+00:00",
+  "first_trade_date": "2026-08-30",
+  "discord_imported": false,
+  "leagues": [
+    {
+      "league": "Lana Straw",
+      "season": 2026,
+      "generated_at": "2026-09-26T12:00:32.104658+00:00",
+      "completed_weeks": [
+        1,
+        2
+      ],
+      "first_trade_date": "2026-08-30",
+      "trades": [
+        {
+          "id": "1790282630618-10-12",
+          "traded_at": "2026-09-24T20:43:50.618000+00:00",
+          "weeks": [],
+          "trade_week": null,
+          "sides": [
+            {
+              "team_id": 10,
+              "team": "Boom Baum",
+              "sent": [
+                {
+                  "id": 4428718,
+                  "name": "Tre Tucker"
+                },
+                {
+                  "id": 4685702,
+                  "name": "Quinshon Judkins"
+                },
+                {
+                  "id": 2973405,
+                  "name": "Kalif Raymond"
+                },
+                {
+                  "id": 4429160,
+                  "name": "De'Von Achane"
+                }
+              ],
+              "received": [
+                {
+                  "id": 16800,
+                  "name": "Davante Adams",
+                  "weeks": {}
+                },
+                {
+                  "id": 4371733,
+                  "name": "Kenny Gainwell",
+                  "weeks": {}
+                },
+                {
+                  "id": 4887558,
+                  "name": "Emanuel Wilson",
+                  "weeks": {}
+                },
+                {
+                  "id": 4569618,
+                  "name": "Garrett Wilson",
+                  "weeks": {}
+                }
+              ],
+              "weekly_points": {},
+              "total_points": null
+            },
+            {
+              "team_id": 12,
+              "team": "Shiny Hineys",
+              "sent": [
+                {
+                  "id": 16800,
+                  "name": "Davante Adams"
+                },
+                {
+                  "id": 4371733,
+                  "name": "Kenny Gainwell"
+                },
+                {
+                  "id": 4887558,
+                  "name": "Emanuel Wilson"
+                },
+                {
+                  "id": 4569618,
+                  "name": "Garrett Wilson"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4428718,
+                  "name": "Tre Tucker",
+                  "weeks": {}
+                },
+                {
+                  "id": 4685702,
+                  "name": "Quinshon Judkins",
+                  "weeks": {}
+                },
+                {
+                  "id": 2973405,
+                  "name": "Kalif Raymond",
+                  "weeks": {}
+                },
+                {
+                  "id": 4429160,
+                  "name": "De'Von Achane",
+                  "weeks": {}
+                }
+              ],
+              "weekly_points": {},
+              "total_points": null
+            }
+          ],
+          "receipts": []
+        },
+        {
+          "id": "1789694404218-6-12",
+          "traded_at": "2026-09-18T01:20:04.218000+00:00",
+          "weeks": [
+            2
+          ],
+          "trade_week": 2,
+          "sides": [
+            {
+              "team_id": 6,
+              "team": "The Kickers n Jigba",
+              "sent": [
+                {
+                  "id": 16800,
+                  "name": "Davante Adams"
+                },
+                {
+                  "id": 4361579,
+                  "name": "Javonte Williams"
+                },
+                {
+                  "id": 4685247,
+                  "name": "Braelon Allen"
+                },
+                {
+                  "id": 4569618,
+                  "name": "Garrett Wilson"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4361370,
+                  "name": "Chris Olave",
+                  "weeks": {
+                    "2": 18.6
+                  }
+                },
+                {
+                  "id": 4430807,
+                  "name": "Bijan Robinson",
+                  "weeks": {
+                    "2": 9.6
+                  }
+                },
+                {
+                  "id": 4426385,
+                  "name": "Zach Charbonnet",
+                  "weeks": {
+                    "2": 0.0
+                  }
+                }
+              ],
+              "weekly_points": {
+                "2": 28.2
+              },
+              "total_points": 28.2
+            },
+            {
+              "team_id": 12,
+              "team": "Shiny Hineys",
+              "sent": [
+                {
+                  "id": 4361370,
+                  "name": "Chris Olave"
+                },
+                {
+                  "id": 4430807,
+                  "name": "Bijan Robinson"
+                },
+                {
+                  "id": 4426385,
+                  "name": "Zach Charbonnet"
+                }
+              ],
+              "received": [
+                {
+                  "id": 16800,
+                  "name": "Davante Adams",
+                  "weeks": {
+                    "2": 36.5
+                  }
+                },
+                {
+                  "id": 4361579,
+                  "name": "Javonte Williams",
+                  "weeks": {
+                    "2": 6.5
+                  }
+                },
+                {
+                  "id": 4685247,
+                  "name": "Braelon Allen",
+                  "weeks": {
+                    "2": 8.0
+                  }
+                },
+                {
+                  "id": 4569618,
+                  "name": "Garrett Wilson",
+                  "weeks": {
+                    "2": 14.2
+                  }
+                }
+              ],
+              "weekly_points": {
+                "2": 65.2
+              },
+              "total_points": 65.2
+            }
+          ],
+          "receipts": []
+        },
+        {
+          "id": "1789515588236-1-5",
+          "traded_at": "2026-09-15T23:39:48.236000+00:00",
+          "weeks": [
+            1,
+            2
+          ],
+          "trade_week": 1,
+          "sides": [
+            {
+              "team_id": 1,
+              "team": "Fart Toot Squeek",
+              "sent": [
+                {
+                  "id": 4569987,
+                  "name": "Jaylen Warren"
+                },
+                {
+                  "id": 4428331,
+                  "name": "Rashee Rice"
+                },
+                {
+                  "id": 3121023,
+                  "name": "Dallas Goedert"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4372016,
+                  "name": "Jaylen Waddle",
+                  "weeks": {
+                    "1": 0.7,
+                    "2": 18.8
+                  }
+                },
+                {
+                  "id": 4723086,
+                  "name": "Colston Loveland",
+                  "weeks": {
+                    "1": 0.0,
+                    "2": 0.8
+                  }
+                },
+                {
+                  "id": 4373626,
+                  "name": "Tyler Allgeier",
+                  "weeks": {
+                    "1": 8.0,
+                    "2": 2.9
+                  }
+                }
+              ],
+              "weekly_points": {
+                "1": 8.7,
+                "2": 22.5
+              },
+              "total_points": 31.2
+            },
+            {
+              "team_id": 5,
+              "team": "Backdoor Heat",
+              "sent": [
+                {
+                  "id": 4372016,
+                  "name": "Jaylen Waddle"
+                },
+                {
+                  "id": 4723086,
+                  "name": "Colston Loveland"
+                },
+                {
+                  "id": 4373626,
+                  "name": "Tyler Allgeier"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4569987,
+                  "name": "Jaylen Warren",
+                  "weeks": {
+                    "1": 7.8,
+                    "2": 8.7
+                  }
+                },
+                {
+                  "id": 4428331,
+                  "name": "Rashee Rice",
+                  "weeks": {
+                    "1": 8.9,
+                    "2": 10.3
+                  }
+                },
+                {
+                  "id": 3121023,
+                  "name": "Dallas Goedert",
+                  "weeks": {
+                    "1": 21.7,
+                    "2": 0.9
+                  }
+                }
+              ],
+              "weekly_points": {
+                "1": 38.4,
+                "2": 19.9
+              },
+              "total_points": 58.3
+            }
+          ],
+          "receipts": []
+        },
+        {
+          "id": "1789511455399-6-9",
+          "traded_at": "2026-09-15T22:30:55.399000+00:00",
+          "weeks": [
+            1,
+            2
+          ],
+          "trade_week": 1,
+          "sides": [
+            {
+              "team_id": 6,
+              "team": "The Kickers n Jigba",
+              "sent": [
+                {
+                  "id": 4608686,
+                  "name": "Kyle Monangai"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4361050,
+                  "name": "Isaiah Likely",
+                  "weeks": {
+                    "1": 23.8,
+                    "2": 5.8
+                  }
+                }
+              ],
+              "weekly_points": {
+                "1": 23.8,
+                "2": 5.8
+              },
+              "total_points": 29.6
+            },
+            {
+              "team_id": 9,
+              "team": "Jackin' Goff",
+              "sent": [
+                {
+                  "id": 4361050,
+                  "name": "Isaiah Likely"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4608686,
+                  "name": "Kyle Monangai",
+                  "weeks": {
+                    "1": 22.4,
+                    "2": 6.8
+                  }
+                }
+              ],
+              "weekly_points": {
+                "1": 22.4,
+                "2": 6.8
+              },
+              "total_points": 29.2
+            }
+          ],
+          "receipts": []
+        },
+        {
+          "id": "1789455749347-7-10",
+          "traded_at": "2026-09-15T07:02:29.347000+00:00",
+          "weeks": [
+            1,
+            2
+          ],
+          "trade_week": 1,
+          "sides": [
+            {
+              "team_id": 7,
+              "team": "The Guy Next Door",
+              "sent": [
+                {
+                  "id": 4431611,
+                  "name": "Caleb Williams"
+                },
+                {
+                  "id": 4685472,
+                  "name": "Tetairoa McMillan"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4426502,
+                  "name": "Drake London",
+                  "weeks": {
+                    "1": 4.5,
+                    "2": 6.9
+                  }
+                },
+                {
+                  "id": 5081397,
+                  "name": "Dylan Sampson",
+                  "weeks": {
+                    "1": 0.0,
+                    "2": 0.0
+                  }
+                }
+              ],
+              "weekly_points": {
+                "1": 4.5,
+                "2": 6.9
+              },
+              "total_points": 11.4
+            },
+            {
+              "team_id": 10,
+              "team": "Boom Baum",
+              "sent": [
+                {
+                  "id": 4426502,
+                  "name": "Drake London"
+                },
+                {
+                  "id": 5081397,
+                  "name": "Dylan Sampson"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4431611,
+                  "name": "Caleb Williams",
+                  "weeks": {
+                    "1": 39.26,
+                    "2": 7.22
+                  }
+                },
+                {
+                  "id": 4685472,
+                  "name": "Tetairoa McMillan",
+                  "weeks": {
+                    "1": 8.0,
+                    "2": 13.6
+                  }
+                }
+              ],
+              "weekly_points": {
+                "1": 47.26,
+                "2": 20.82
+              },
+              "total_points": 68.08
+            }
+          ],
+          "receipts": []
+        },
+        {
+          "id": "1788301181201-3-10",
+          "traded_at": "2026-09-01T22:19:41.201000+00:00",
+          "weeks": [
+            1,
+            2
+          ],
+          "trade_week": null,
+          "sides": [
+            {
+              "team_id": 3,
+              "team": "Texas Tornado's Bush",
+              "sent": [
+                {
+                  "id": 4035687,
+                  "name": "Michael Pittman Jr."
+                },
+                {
+                  "id": 4426502,
+                  "name": "Drake London"
+                },
+                {
+                  "id": 4870808,
+                  "name": "Jeremiyah Love"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4362628,
+                  "name": "Ja'Marr Chase",
+                  "weeks": {
+                    "1": 2.2,
+                    "2": 23.0
+                  }
+                },
+                {
+                  "id": 4696981,
+                  "name": "Cam Skattebo",
+                  "weeks": {
+                    "1": 14.1,
+                    "2": 7.5
+                  }
+                }
+              ],
+              "weekly_points": {
+                "1": 16.3,
+                "2": 30.5
+              },
+              "total_points": 46.8
+            },
+            {
+              "team_id": 10,
+              "team": "Boom Baum",
+              "sent": [
+                {
+                  "id": 4362628,
+                  "name": "Ja'Marr Chase"
+                },
+                {
+                  "id": 4696981,
+                  "name": "Cam Skattebo"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4035687,
+                  "name": "Michael Pittman Jr.",
+                  "weeks": {
+                    "1": 7.3,
+                    "2": 0.0
+                  }
+                },
+                {
+                  "id": 4426502,
+                  "name": "Drake London",
+                  "weeks": {
+                    "1": 4.5,
+                    "2": 6.9
+                  }
+                },
+                {
+                  "id": 4870808,
+                  "name": "Jeremiyah Love",
+                  "weeks": {
+                    "1": 12.0,
+                    "2": 6.0
+                  }
+                }
+              ],
+              "weekly_points": {
+                "1": 23.8,
+                "2": 12.9
+              },
+              "total_points": 36.7
+            }
+          ],
+          "receipts": []
+        },
+        {
+          "id": "1788209266583-4-10",
+          "traded_at": "2026-08-31T20:47:46.583000+00:00",
+          "weeks": [
+            1,
+            2
+          ],
+          "trade_week": null,
+          "sides": [
+            {
+              "team_id": 4,
+              "team": "Diamond Dogs",
+              "sent": [
+                {
+                  "id": 3042519,
+                  "name": "Aaron Jones Sr."
+                },
+                {
+                  "id": 4429059,
+                  "name": "Woody Marks"
+                },
+                {
+                  "id": 4362628,
+                  "name": "Ja'Marr Chase"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4262921,
+                  "name": "Justin Jefferson",
+                  "weeks": {
+                    "1": 27.2,
+                    "2": 7.0
+                  }
+                },
+                {
+                  "id": 4035538,
+                  "name": "David Montgomery",
+                  "weeks": {
+                    "1": 27.4,
+                    "2": 3.4
+                  }
+                },
+                {
+                  "id": 3126486,
+                  "name": "Deebo Samuel Sr.",
+                  "weeks": {
+                    "1": 15.0,
+                    "2": 5.0
+                  }
+                }
+              ],
+              "weekly_points": {
+                "1": 69.6,
+                "2": 15.4
+              },
+              "total_points": 85.0
+            },
+            {
+              "team_id": 10,
+              "team": "Boom Baum",
+              "sent": [
+                {
+                  "id": 4262921,
+                  "name": "Justin Jefferson"
+                },
+                {
+                  "id": 4035538,
+                  "name": "David Montgomery"
+                },
+                {
+                  "id": 3126486,
+                  "name": "Deebo Samuel Sr."
+                }
+              ],
+              "received": [
+                {
+                  "id": 3042519,
+                  "name": "Aaron Jones Sr.",
+                  "weeks": {
+                    "1": 10.0,
+                    "2": 11.5
+                  }
+                },
+                {
+                  "id": 4429059,
+                  "name": "Woody Marks",
+                  "weeks": {
+                    "1": 4.5,
+                    "2": 6.0
+                  }
+                },
+                {
+                  "id": 4362628,
+                  "name": "Ja'Marr Chase",
+                  "weeks": {
+                    "1": 2.2,
+                    "2": 23.0
+                  }
+                }
+              ],
+              "weekly_points": {
+                "1": 16.7,
+                "2": 40.5
+              },
+              "total_points": 57.2
+            }
+          ],
+          "receipts": []
+        }
+      ],
+      "source": "activity",
+      "discord_imported": false,
+      "key": "premier",
+      "label": "Premier",
+      "receipts_enabled": true
+    },
+    {
+      "league": "Lana Straw Champeens League",
+      "season": 2026,
+      "generated_at": "2026-09-26T12:00:34.281158+00:00",
+      "completed_weeks": [
+        1,
+        2
+      ],
+      "first_trade_date": "2026-08-30",
+      "trades": [
+        {
+          "id": "1790305529049-8-9",
+          "traded_at": "2026-09-25T03:05:29.049000+00:00",
+          "weeks": [],
+          "trade_week": null,
+          "sides": [
+            {
+              "team_id": 8,
+              "team": "Jerry GM + Jerry Owner",
+              "sent": [
+                {
+                  "id": 4262921,
+                  "name": "Justin Jefferson"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4890973,
+                  "name": "Ashton Jeanty",
+                  "weeks": {}
+                }
+              ],
+              "weekly_points": {},
+              "total_points": null
+            },
+            {
+              "team_id": 9,
+              "team": "Madison Beer",
+              "sent": [
+                {
+                  "id": 4890973,
+                  "name": "Ashton Jeanty"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4262921,
+                  "name": "Justin Jefferson",
+                  "weeks": {}
+                }
+              ],
+              "weekly_points": {},
+              "total_points": null
+            }
+          ],
+          "receipts": []
+        },
+        {
+          "id": "1788272081062-9-10",
+          "traded_at": "2026-09-01T14:14:41.062000+00:00",
+          "weeks": [
+            1,
+            2
+          ],
+          "trade_week": null,
+          "sides": [
+            {
+              "team_id": 9,
+              "team": "Madison Beer",
+              "sent": [
+                {
+                  "id": 4429160,
+                  "name": "De'Von Achane"
+                },
+                {
+                  "id": 4047646,
+                  "name": "A.J. Brown"
+                },
+                {
+                  "id": 4685472,
+                  "name": "Tetairoa McMillan"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4361579,
+                  "name": "Javonte Williams",
+                  "weeks": {
+                    "1": 21.7,
+                    "2": 6.5
+                  }
+                },
+                {
+                  "id": 4372016,
+                  "name": "Jaylen Waddle",
+                  "weeks": {
+                    "1": 0.7,
+                    "2": 18.8
+                  }
+                },
+                {
+                  "id": 4890973,
+                  "name": "Ashton Jeanty",
+                  "weeks": {
+                    "1": 30.7,
+                    "2": 8.3
+                  }
+                }
+              ],
+              "weekly_points": {
+                "1": 53.1,
+                "2": 33.6
+              },
+              "total_points": 86.7
+            },
+            {
+              "team_id": 10,
+              "team": "Cowboys September Dreams",
+              "sent": [
+                {
+                  "id": 4361579,
+                  "name": "Javonte Williams"
+                },
+                {
+                  "id": 4372016,
+                  "name": "Jaylen Waddle"
+                },
+                {
+                  "id": 4890973,
+                  "name": "Ashton Jeanty"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4429160,
+                  "name": "De'Von Achane",
+                  "weeks": {
+                    "1": 8.6,
+                    "2": 10.8
+                  }
+                },
+                {
+                  "id": 4047646,
+                  "name": "A.J. Brown",
+                  "weeks": {
+                    "1": 4.1,
+                    "2": 0.0
+                  }
+                },
+                {
+                  "id": 4685472,
+                  "name": "Tetairoa McMillan",
+                  "weeks": {
+                    "1": 8.0,
+                    "2": 13.6
+                  }
+                }
+              ],
+              "weekly_points": {
+                "1": 20.7,
+                "2": 24.4
+              },
+              "total_points": 45.1
+            }
+          ],
+          "receipts": []
+        },
+        {
+          "id": "1789092607492-11-12",
+          "traded_at": "2026-09-11T02:10:07.492000+00:00",
+          "weeks": [
+            1,
+            2
+          ],
+          "trade_week": 1,
+          "sides": [
+            {
+              "team_id": 11,
+              "team": "Neaux Gold, All Glory",
+              "sent": [
+                {
+                  "id": 4702555,
+                  "name": "Jonah Coleman"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4685247,
+                  "name": "Braelon Allen",
+                  "weeks": {
+                    "1": 4.0,
+                    "2": 8.0
+                  }
+                }
+              ],
+              "weekly_points": {
+                "1": 4.0,
+                "2": 8.0
+              },
+              "total_points": 12.0
+            },
+            {
+              "team_id": 12,
+              "team": "Amburgers",
+              "sent": [
+                {
+                  "id": 4685247,
+                  "name": "Braelon Allen"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4702555,
+                  "name": "Jonah Coleman",
+                  "weeks": {
+                    "1": 0.0,
+                    "2": 13.3
+                  }
+                }
+              ],
+              "weekly_points": {
+                "1": 0.0,
+                "2": 13.3
+              },
+              "total_points": 13.3
+            }
+          ],
+          "receipts": []
+        }
+      ],
+      "source": "reconstructed",
+      "discord_imported": false,
+      "key": "champeens",
+      "label": "Champeens",
+      "receipts_enabled": false
+    }
+  ]
+}

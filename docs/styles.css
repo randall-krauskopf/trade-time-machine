@@ -1,0 +1,94 @@
+:root {
+  font-family: 'Avenir Next', 'Helvetica Neue', sans-serif;
+  color: #1b251e;
+  background: #f4f5ec;
+  font-synthesis: none;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+button, select { font: inherit; }
+button:focus-visible, select:focus-visible, a:focus-visible { outline: 3px solid #d67a36; outline-offset: 3px; }
+.hidden { display: none !important; }
+.app-shell { max-width: 1540px; margin: auto; padding: 0 42px; }
+.masthead { display: flex; justify-content: space-between; align-items: center; height: 79px; border-bottom: 1px solid #c9d0c2; }
+.brand { display: flex; align-items: center; gap: 13px; font: 700 13px 'Avenir Next',sans-serif; letter-spacing: .11em; }
+.brand-mark { display: grid; place-items: center; width: 29px; height: 29px; color: #fff; background: #193b2d; border-radius: 7px; font-size: 20px; letter-spacing: 0; }
+.brand-muted { color: #879187; }
+.season-badge { padding: 8px 11px; border: 1px solid #cdd5c5; border-radius: 4px; color: #425547; font-size: 10px; font-weight: 700; letter-spacing: .12em; }
+.hero { display: flex; justify-content: space-between; gap: 30px; padding: 68px 0 55px; border-bottom: 1px solid #c9d0c2; }
+.hero-copy { max-width: 750px; }
+.eyebrow { margin: 0; color: #547363; font-size: 10px; font-weight: 700; letter-spacing: .17em; }
+.live-dot { display: inline-block; width: 7px; height: 7px; margin-right: 7px; border-radius: 50%; background: #df8150; }
+h1, h2, h3, p { margin-top: 0; }
+h1, h2, h3 { font-family: 'Avenir Next',sans-serif; }
+h1 { margin: 20px 0 15px; font-size: clamp(46px, 5vw, 76px); letter-spacing: -.075em; line-height: 1.04; }
+h1 em { color: #d47743; font-style: normal; }
+.hero-description { max-width: 610px; margin: 0; color: #58675a; line-height: 1.7; font-size: 15px; }
+.hero-stamp { flex: 0 0 179px; align-self: center; display: flex; flex-direction: column; justify-content: space-between; transform: rotate(8deg); width: 179px; height: 156px; padding: 20px; border: 2px solid #d47743; border-radius: 4px; color: #bd6838; font: 700 23px/1.1 'Avenir Next', sans-serif; letter-spacing: -.06em; }
+.hero-stamp small { font: 700 9px 'Avenir Next',sans-serif; letter-spacing: .18em; }
+.context-bar { display: flex; align-items: center; min-height: 54px; color: #677768; font-size: 12px; border-bottom: 1px solid #c9d0c2; }
+.error { margin: 30px 0; padding: 20px; background: #fff5e9; border: 1px solid #dfab86; color: #743b1c; }
+.workspace { display: grid; grid-template-columns: minmax(260px, 320px) minmax(0, 1fr); min-height: 680px; }
+.trade-list-panel { padding: 37px 24px 40px 0; border-right: 1px solid #c9d0c2; }
+.panel-heading, .section-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.panel-heading h2 { margin: 7px 0 27px; font-size: 24px; letter-spacing: -.05em; }
+.count { align-self: center; margin-bottom: 13px; background: #e1e7d8; color: #355746; padding: 5px 8px; border-radius: 4px; font: 700 11px 'Avenir Next',sans-serif; }
+.filter-label { display: block; margin-bottom: 9px; color: #607466; font-size: 10px; font-weight: 700; letter-spacing: .14em; }
+select { width: 100%; margin-bottom: 19px; padding: 12px 13px; background: #fffefa; border: 1px solid #ced6c8; border-radius: 5px; color: #233b2d; cursor: pointer; }
+.trade-list { display: flex; flex-direction: column; gap: 8px; }
+.trade-item { width: 100%; padding: 15px; text-align: left; background: #fffefa; border: 1px solid #e1e6da; border-radius: 6px; cursor: pointer; transition: border-color .15s, background .15s, transform .15s; }
+.trade-item:hover { border-color: #779b81; transform: translateX(2px); }
+.trade-item.active { background: #e7eee3; border-color: #7da38a; box-shadow: inset 3px 0 #246044; }
+.trade-item-date { display: block; margin-bottom: 7px; font-size: 10px; font-weight: 700; color: #8a5d3d; letter-spacing: .1em; }
+.trade-item-teams { display: block; color: #213429; font: 700 14px/1.4 'Avenir Next',sans-serif; }
+.trade-item-count { display: block; margin-top: 7px; color: #758375; font-size: 11px; }
+.detail-panel { min-width: 0; padding: 38px 0 50px 40px; }
+.detail-topline { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: #7c8a7d; font-size: 11px; font-weight: 700; }
+.detail-intro { max-width: 720px; padding: 38px 0 31px; }
+.detail-kicker { margin-bottom: 9px; color: #bc6a3d; font-size: 10px; font-weight: 700; letter-spacing: .15em; }
+.detail-intro h2 { margin-bottom: 12px; font-size: clamp(29px, 3.4vw, 47px); line-height: 1.14; letter-spacing: -.06em; }
+.detail-intro p:last-child { margin-bottom: 0; color: #627066; font-size: 13px; line-height: 1.6; }
+.trade-sides { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+.side-card { padding: 22px; background: #fffefa; border: 1px solid #dce4d5; border-radius: 7px; }
+.side-card:first-child { border-top: 3px solid #377758; }
+.side-card:last-child { border-top: 3px solid #d47c49; }
+.side-label { color: #6c806e; font-size: 10px; font-weight: 700; letter-spacing: .13em; }
+.side-card h3 { margin: 8px 0 18px; font-size: 22px; letter-spacing: -.05em; }
+.player-list { list-style: none; margin: 0; padding: 0; }
+.player-list li { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid #ebeee7; font-size: 13px; font-weight: 600; }
+.player-list span:last-child { flex: 0 0 auto; color: #829184; font-size: 11px; font-weight: 500; }
+.score-section, .receipts-section { margin-top: 43px; }
+.section-heading { margin-bottom: 19px; }
+.section-heading h3 { margin: 7px 0 0; font-size: 23px; letter-spacing: -.05em; }
+.scope-note { color: #859386; text-align: right; font-size: 10px; font-weight: 700; letter-spacing: .08em; }
+.score-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.score-card { padding: 21px; background: #e8eee4; border-radius: 6px; }
+.score-card:last-child { background: #f4e9df; }
+.score-team { margin: 0 0 7px; color: #607765; font-size: 11px; font-weight: 700; }
+.score-card:last-child .score-team { color: #9f704e; }
+.score-value { font: 700 40px 'Avenir Next', sans-serif; letter-spacing: -.06em; }
+.score-value small { font: 500 13px 'Avenir Next',sans-serif; letter-spacing: 0; }
+.score-caption { margin: 7px 0 0; color: #697969; font-size: 11px; }
+.score-breakdown { margin: 16px 0 0; padding: 0; list-style: none; }
+.score-breakdown li { display: flex; justify-content: space-between; gap: 10px; padding: 7px 0; border-top: 1px solid #d7dfd1; font-size: 11px; }
+.score-breakdown strong { white-space: nowrap; }
+.week-table { width: 100%; margin-top: 15px; border-collapse: collapse; color: #384b3c; font-size: 12px; }
+.week-table th { padding: 11px 6px; border-bottom: 1px solid #c9d0c2; text-align: left; color: #758575; font-size: 10px; letter-spacing: .08em; }
+.week-table td { padding: 11px 6px; border-bottom: 1px solid #e1e6db; }
+.week-table th:not(:first-child), .week-table td:not(:first-child) { text-align: right; }
+.method-note { margin: 17px 0 0; max-width: 760px; color: #758377; line-height: 1.6; font-size: 11px; }
+.empty-state { padding: 24px; background: #f0f1e8; border: 1px dashed #c6d0bc; border-radius: 6px; color: #647367; font-size: 13px; line-height: 1.6; }
+.receipt { padding: 18px 20px; margin-bottom: 10px; background: #fffefa; border-left: 3px solid #d67a43; border-radius: 0 5px 5px 0; }
+.receipt p { margin-bottom: 12px; font-size: 13px; line-height: 1.65; white-space: pre-wrap; overflow-wrap: anywhere; }
+.receipt-meta { display: flex; flex-wrap: wrap; gap: 10px; color: #768578; font-size: 11px; }
+.receipt-meta a { color: #356b4c; font-weight: 700; }
+footer { display: flex; flex-wrap: wrap; gap: 10px; padding: 28px 0 40px; border-top: 1px solid #c9d0c2; color: #899789; font-size: 10px; font-weight: 700; letter-spacing: .1em; }
+@media (max-width: 900px) { .app-shell { padding: 0 24px; } .hero-stamp { display: none; } .workspace { grid-template-columns: 240px minmax(0,1fr); } .detail-panel { padding-left: 23px; } }
+@media (max-width: 700px) {
+  .app-shell { padding: 0 17px; } .masthead { height: 65px; } .brand { font-size: 11px; } .hero { padding: 47px 0 40px; }
+  .workspace { display: block; } .trade-list-panel { border-right: 0; border-bottom: 1px solid #c9d0c2; padding: 28px 0; }
+  .trade-list { flex-direction: row; overflow-x: auto; padding-bottom: 7px; scroll-snap-type: x proximity; }
+  .trade-item { flex: 0 0 220px; scroll-snap-align: start; }
+  .detail-panel { padding: 28px 0 40px; } .detail-intro { padding: 29px 0 26px; } .detail-topline { font-size: 10px; }
+}
+@media (max-width: 500px) { .trade-sides, .score-grid { grid-template-columns: 1fr; } .season-badge { font-size: 8px; } }
