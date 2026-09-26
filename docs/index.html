@@ -14,7 +14,8 @@
     <header class="masthead">
       <div class="brand"><span class="brand-mark">↔</span><span>LANA STRAW <span class="brand-muted" id="brand-league">/ ALL LEAGUES</span></span></div>
       <nav class="site-nav" aria-label="Pages">
-        <a href="./" aria-current="page">Trades</a>
+        <a href="./" aria-current="page">Leaderboards</a>
+        <a href="./archive.html">Archive</a>
         <a href="./alternate.html">Alternate Universe</a>
       </nav>
       <span class="season-badge" id="season-badge">2026 SEASON</span>
@@ -23,7 +24,7 @@
     <main>
       <section class="hero" aria-labelledby="title">
         <div class="hero-copy">
-          <p class="eyebrow"><span class="live-dot"></span> THE LEAGUE ARCHIVE</p>
+          <p class="eyebrow"><span class="live-dot"></span> THE TRADE TIME MACHINE</p>
           <h1 id="title">Trade <em>Time Machine.</em></h1>
           <p class="hero-description">Every deal has a story. Rewind to the moment it happened, then see whether it actually swung matchups in the weeks that followed.</p>
           <p class="hero-tagline">Just because you’re moving doesn’t mean you’re going anywhere.</p>
@@ -43,44 +44,6 @@
         <p class="method-note" id="leaderboard-note"></p>
       </section>
 
-      <div class="workspace hidden" id="workspace">
-        <aside class="trade-list-panel" aria-labelledby="archive-title">
-          <div class="panel-heading">
-            <div><p class="eyebrow">01 / EXPLORE</p><h2 id="archive-title">The archive</h2></div>
-            <span class="count" id="trade-count"></span>
-          </div>
-          <label class="filter-label" for="league-filter">FILTER BY LEAGUE</label>
-          <select id="league-filter" autocomplete="off"><option value="">All leagues</option></select>
-          <label class="filter-label" for="team-filter">FILTER BY TEAM</label>
-          <select id="team-filter" autocomplete="off"><option value="">All teams</option></select>
-          <div class="trade-list" id="trade-list"></div>
-        </aside>
-
-        <section class="detail-panel" id="detail-panel" aria-labelledby="detail-heading">
-          <div class="detail-topline"><span class="eyebrow">02 / REWIND THE TAPE · <span id="detail-league"></span></span><span id="trade-date"></span></div>
-          <p class="method-note hidden" id="source-note"></p>
-          <div class="detail-intro">
-            <p class="detail-kicker">THE EXCHANGE</p>
-            <h2 id="detail-heading"></h2>
-            <p>Players are shown under the team that <strong>received</strong> them. Matchup impact shows whether the deal changed real results; raw player points follow for context.</p>
-          </div>
-          <div id="trade-sides" class="trade-sides"></div>
-          <section class="impact-section" aria-labelledby="impact-heading">
-            <div class="section-heading"><div><span class="eyebrow">MATCHUP IMPACT</span><h3 id="impact-heading">Did it change the result?</h3></div><span class="scope-note" id="impact-scope"></span></div>
-            <div id="impact-content"></div>
-            <p class="method-note">Uses each team's real lineup from ESPN box scores. For the no-trade alternate, received starters are removed and each empty slot is filled with the eligible bench or traded-away player ESPN <strong>projected</strong> highest (no hindsight); a traded-away player can also replace a lower-projected starter. When the opponent was the trade partner, both scores are re-run. Tracking stops when a received player is traded again; a slot with no eligible replacement scores 0. It's an estimate, not a verdict.</p>
-          </section>
-          <section class="score-section" aria-labelledby="score-heading">
-            <div class="section-heading"><div><span class="eyebrow">RAW PLAYER POINTS</span><h3 id="score-heading">What did they score anywhere?</h3></div><span class="scope-note" id="scope-note"></span></div>
-            <div id="score-content"></div>
-            <p class="method-note">Includes completed scoring weeks that <strong>ended after</strong> the transaction. The trade week may include player points scored <strong>before</strong> the deal; it is labeled in the table. Players stay credited to their original recipient even if later traded away. These raw points include bench performances—they are not actual manager points, lineup impact, or a verdict.</p>
-          </section>
-          <section class="receipts-section" aria-labelledby="receipts-heading">
-            <div class="section-heading"><div><span class="eyebrow">AT THE TIME</span><h3 id="receipts-heading">The receipts</h3></div><span class="scope-note" id="receipts-scope">PREMIER CHANNELS ONLY</span></div>
-            <div id="receipts"></div>
-          </section>
-        </section>
-      </div>
     </main>
     <footer>ESPN ACTIVITY + WEEKLY PLAYER POINTS <span>·</span> READ-ONLY LOCAL PROTOTYPE <span>·</span> NO WINNER DECLARED</footer>
   </div>
