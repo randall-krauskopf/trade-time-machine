@@ -13,11 +13,11 @@ The top of the page ranks trades (top 3 per board, per league under "All leagues
 - **Most players exchanged**: total players received by both sides (newest first on ties).
 - **Fastest regret**: difference in the first eligible week only; `*` marks when that week is the trade week.
 
-Trades without a completed eligible week are left off the points boards. Clicking a trade ranking opens that deal directly on the Archive page.
+Trades without a completed eligible week are left off the points boards. Clicking an entry opens the trade, clearing the filters if they would hide it.
 
 ## Alternate Universe standings (2026 experiment)
 
-The site has three pages linked from the header: **Leaderboards** (`docs/index.html`), **Archive** (`docs/archive.html`: filters and trade detail), and **Alternate Universe** (`docs/alternate.html`, rendered by `docs/alternate.js`). Leaderboard trade links open the selected deal directly on the Archive page. The Alternate Universe page replays the completed Premier and Champeens matchups. It shows three records and points-for totals per team: **Real** uses the actual ESPN box-score starting lineup; **Current optimal** chooses the best-scoring legal starters from that week's actual roster; **No trades** chooses the best-scoring legal starters after moving known post-August-30 traded players back to the team that first sent them. The optimizer uses the league's active roster slots and each player's ESPN eligibility, assigning a player at most once. Wins/losses/ties use the actual schedule (ties count as half a win). **Δ wins compares No trades with Current optimal**, not with Real, so it separates modeled roster changes from the benefit of optimizing lineups. That page has its own league selector (independent of the Trades page filters), and no data from the current unfinished week is included.
+The site has two pages linked from the header: **Trades** (`docs/index.html`: leaderboards, archive, and trade detail) and **Alternate Universe** (`docs/alternate.html`, rendered by `docs/alternate.js`). The Alternate Universe page replays the completed Premier and Champeens matchups. It shows three records and points-for totals per team: **Real** uses the actual ESPN box-score starting lineup; **Current optimal** chooses the best-scoring legal starters from that week's actual roster; **No trades** chooses the best-scoring legal starters after moving known post-August-30 traded players back to the team that first sent them. The optimizer uses the league's active roster slots and each player's ESPN eligibility, assigning a player at most once. Wins/losses/ties use the actual schedule (ties count as half a win). **Δ wins compares No trades with Current optimal**, not with Real, so it separates modeled roster changes from the benefit of optimizing lineups. That page has its own league selector (independent of the Trades page filters), and no data from the current unfinished week is included.
 
 This is **not a reconstructed Aug 30 roster or a prediction**: the model starts from each week's actual box-score roster, keeps actual waiver and free-agent acquisitions (which reset a traded player's baseline ownership), and rewinds only players in recovered trade records. Unrostered players stay out; it does not enforce roster size or model hypothetical cuts, future waiver choices, injuries, lineup locks, or whether an owner would have started the optimal lineup. A midweek transaction can therefore affect that whole scoring week. Champeens' trade reconstruction may miss movements and is labeled accordingly. Do not treat these standings as actual standings or a trade verdict.
 
@@ -64,9 +64,32 @@ git add docs/data.json && git commit -m "Refresh trade snapshot" && git push
 
 Credentials are read from `scripts/.env` and **never written** into the snapshot. To preview locally, run `python3 -m http.server 8000 --directory docs` and open <http://localhost:8000/> (opening the file directly cannot fetch JSON).
 
-## Discord receipts (deferred)
+## Optional Discord receipts
 
-The Archive does not display Discord content. `generate.py` retains an experimental local-export importer as groundwork, but publishing receipts is deferred in `ToDo.md` until the league approves the privacy and consent model. Never commit credentials, message exports, or private channel content.
+There is no automated Supabase credential in this workspace. If you export the `discord_messages` table as JSON using an authorized, read-only connection, supply an array of rows containing `guild_id`, `channel_id`, `message_id`, `sent_at`, `author_name`, `content` (and optionally `deleted_at`, `author_bot`). A `{ "messages": [...] }` wrapper also works:
+
+```bash
+../AI-playground/fantasy-football-league/scripts/.venv/bin/python generate.py \
+  --discord-export discord-export.json
+```
+
+The importer accepts only the Premier guild/channel allowlist documented in the AI-playground `fantasy-football-league/scripts/README.md`; all other channels (including old Champeens channels), bots, and deleted messages are excluded. Receipts are therefore attached to Premier trades only. It displays at most four messages per trade that mention a traded player's name within **48 hours either side** of the transaction. These are nearby mentions, not necessarily opinions about the trade. Each quote includes author, time, channel and a Discord permalink. The browser renders all user text as plain text, never HTML. `discord-export.json` is ignored by Git. **Because this site is public, a snapshot generated with a Discord export publishes those quotes**; only commit one with league approval.
+
+If you can run SQL against Supabase, a suitable read-only export query is:
+
+```sql
+SELECT guild_id, channel_id, message_id, sent_at, author_name, content, deleted_at, author_bot
+FROM public.discord_messages
+WHERE guild_id = 1160416084235661426
+  AND channel_id IN (
+    1160416085326188555, 1160416085326188556, 1281464082809098260,
+    1160416085326188557, 1278801017726570617
+  )
+  AND deleted_at IS NULL
+  AND sent_at >= '2026-08-28';
+```
+
+Export the result as a JSON array into `discord-export.json`; never put database keys or private messages in the file. Without an export, the interface explicitly reports that no Discord messages were imported.
 
 ## Checks
 

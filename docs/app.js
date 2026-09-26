@@ -91,10 +91,6 @@ function filteredTrades() {
 }
 
 function selectTrade(id) {
-  if (!$("workspace")) {
-    window.location.href = `./archive.html?trade=${encodeURIComponent(id)}`;
-    return;
-  }
   selectedId = id;
   if (!filteredTrades().some((trade) => trade.id === id)) {
     // Leaderboards ignore filters, so clear them when the chosen trade is hidden.
@@ -245,12 +241,13 @@ function renderList() {
   if (!trades.length) {
     $("trade-list").append(node("p", "empty-state", "No trades match these filters."));
     $("detail-panel").classList.add("hidden");
+    renderLeaderboards();
     return;
   }
   if (!trades.some((trade) => trade.id === selectedId)) {
     selectedId = (trades.find((trade) => trade.weeks.length) || trades[0]).id;
   }
-  window.history.replaceState(null, "", `?trade=${encodeURIComponent(selectedId)}`);
+  renderLeaderboards();
   for (const trade of trades) {
     const button = node("button", `trade-item${selectedId === trade.id ? " active" : ""}`);
     button.type = "button";
@@ -262,7 +259,6 @@ function renderList() {
     );
     button.addEventListener("click", () => {
       selectedId = trade.id;
-      window.history.replaceState(null, "", `?trade=${encodeURIComponent(trade.id)}`);
       renderList();
     });
     $("trade-list").append(button);
@@ -302,7 +298,7 @@ function swingChart(trade) {
   const weeks = trade.weeks;
   const values = weeks.flatMap((week) => [a, b].map((side) => side.weekly_points[String(week)] ?? 0));
   const step = 10;
-  const max = Math.max(step, Math.ceil(Math.max(...values) / step) * step + step);
+  const max = Math.max(step, Math.ceil(Math.max(...values) / step) * step);
   const width = 640, height = 260, left = 46, right = 12, top = 26, bottom = 44;
   const plotWidth = width - left - right, plotHeight = height - top - bottom;
   const y = (value) => top + plotHeight - (value / max) * plotHeight;
@@ -369,6 +365,7 @@ function renderDetail(trade) {
   $("detail-league").textContent = `${trade.league_label.toUpperCase()} LEAGUE`;
   $("source-note").classList.toggle("hidden", trade.league.source !== "reconstructed");
   $("source-note").textContent = "ESPN's activity feed is members-only for this league, so this trade was rebuilt from accepted-trade records and roster history. Players who were later dropped or traded again may be missing.";
+  $("receipts-scope").textContent = trade.league.receipts_enabled ? "PREMIER CHANNELS ONLY" : "NOT IMPORTED";
   $("trade-sides").replaceChildren();
   for (const side of trade.sides) {
     const card = node("div", "side-card");
@@ -434,6 +431,27 @@ function renderDetail(trade) {
     }
   }
 
+  const receipts = $("receipts");
+  receipts.replaceChildren();
+  if (!trade.league.receipts_enabled) {
+    receipts.append(node("p", "empty-state", `Discord receipts are limited to Premier channels. ${trade.league_label} chat is excluded by the project's data scope.`));
+  } else if (!trade.receipts.length) {
+    receipts.append(node("p", "empty-state", archive.discord_imported
+      ? "No Premier-channel messages mentioned these players within 48 hours of this trade."
+      : "No Discord messages imported. To add dated Premier League receipts, pass a local JSON export to the refresh script."));
+  }
+  for (const receipt of trade.receipts) {
+    const box = node("div", "receipt");
+    const meta = node("div", "receipt-meta");
+    meta.append(node("span", "", `${receipt.author} · #${receipt.channel}`), node("span", "", timeFormat.format(new Date(receipt.sent_at))));
+    const link = node("a", "", "View message ↗");
+    link.href = receipt.url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    meta.append(link);
+    box.append(node("p", "", receipt.content), meta);
+    receipts.append(box);
+  }
 }
 
 function renderImpact(trade) {
@@ -508,29 +526,22 @@ async function load() {
     $("season-badge").textContent = `${seasons.join(" / ")} SEASON`;
     const summaries = archive.leagues.map((league) => `${league.label} ${league.trades.length} trades · ${league.completed_weeks.length} completed weeks`);
     $("context-bar").textContent = `Lana Straw · trades from ${archive.first_trade_date || "2026-08-30"} · ${summaries.join(" · ")} · refreshed ${timeFormat.format(new Date(archive.generated_at))}`;
-    if ($("workspace")) {
-      for (const league of archive.leagues) {
-        const option = node("option", "", league.label);
-        option.value = league.key;
-        $("league-filter").append(option);
-      }
-      $("league-filter").value = "";
+    for (const league of archive.leagues) {
+      const option = node("option", "", league.label);
+      option.value = league.key;
+      $("league-filter").append(option);
+    }
+    $("league-filter").value = "";
+    renderTeamOptions();
+    $("league-filter").addEventListener("change", () => {
       renderTeamOptions();
-      $("league-filter").addEventListener("change", () => {
-        renderTeamOptions();
-        updateBrand();
-        renderList();
-      });
-      $("team-filter").addEventListener("change", renderList);
-      const requestedTrade = new URLSearchParams(window.location.search).get("trade");
-      if (requestedTrade && archive.trades.some((trade) => trade.id === requestedTrade)) selectedId = requestedTrade;
-      $("workspace").classList.remove("hidden");
+      updateBrand();
       renderList();
-    }
-    if ($("leaderboards")) {
-      $("leaderboards").classList.remove("hidden");
-      renderLeaderboards();
-    }
+    });
+    $("team-filter").addEventListener("change", renderList);
+    $("workspace").classList.remove("hidden");
+    $("leaderboards").classList.remove("hidden");
+    renderList();
   } catch (error) {
     $("context-bar").textContent = "Snapshot unavailable";
     $("error").textContent = `${error.message} Run generate.py, then serve this folder using python3 -m http.server (opening the file directly cannot fetch JSON).`;

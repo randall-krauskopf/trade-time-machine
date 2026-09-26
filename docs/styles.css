@@ -30,7 +30,6 @@ h1 { margin: 20px 0 15px; font-size: clamp(46px, 5vw, 76px); letter-spacing: -.0
 h1 em { color: #d47743; font-style: normal; }
 .hero-description { max-width: 610px; margin: 0; color: #58675a; line-height: 1.7; font-size: 15px; }
 .hero-tagline { margin: 15px 0 0; color: #193b2d; font-size: 13px; font-style: italic; font-weight: 700; }
-.archive-hero { padding-bottom: 42px; }
 .hero-stamp { flex: 0 0 179px; align-self: center; display: flex; flex-direction: column; justify-content: space-between; transform: rotate(8deg); width: 179px; height: 156px; padding: 20px; border: 2px solid #d47743; border-radius: 4px; color: #bd6838; font: 700 23px/1.1 'Avenir Next', sans-serif; letter-spacing: -.06em; }
 .hero-stamp small { font: 700 9px 'Avenir Next',sans-serif; letter-spacing: .18em; }
 .context-bar { display: flex; align-items: center; min-height: 54px; color: #677768; font-size: 12px; border-bottom: 1px solid #c9d0c2; }
@@ -64,7 +63,7 @@ select { width: 100%; margin-bottom: 19px; padding: 12px 13px; background: #fffe
 .player-list { list-style: none; margin: 0; padding: 0; }
 .player-list li { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid #ebeee7; font-size: 13px; font-weight: 600; }
 .player-list span:last-child { flex: 0 0 auto; color: #829184; font-size: 11px; font-weight: 500; }
-.score-section, .impact-section { margin-top: 43px; }
+.score-section, .receipts-section, .impact-section { margin-top: 43px; }
 .impact-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .impact-card { padding: 21px; background: #e8eee4; border-radius: 6px; }
 .impact-card:last-child { background: #f4e9df; }
@@ -122,6 +121,10 @@ select { width: 100%; margin-bottom: 19px; padding: 12px 13px; background: #fffe
 .week-table th:not(:first-child), .week-table td:not(:first-child) { text-align: right; }
 .method-note { margin: 17px 0 0; max-width: 760px; color: #758377; line-height: 1.6; font-size: 11px; }
 .empty-state { padding: 24px; background: #f0f1e8; border: 1px dashed #c6d0bc; border-radius: 6px; color: #647367; font-size: 13px; line-height: 1.6; }
+.receipt { padding: 18px 20px; margin-bottom: 10px; background: #fffefa; border-left: 3px solid #d67a43; border-radius: 0 5px 5px 0; }
+.receipt p { margin-bottom: 12px; font-size: 13px; line-height: 1.65; white-space: pre-wrap; overflow-wrap: anywhere; }
+.receipt-meta { display: flex; flex-wrap: wrap; gap: 10px; color: #768578; font-size: 11px; }
+.receipt-meta a { color: #356b4c; font-weight: 700; }
 .leaderboards { padding: 34px 0 38px; border-bottom: 1px solid #c9d0c2; }
 .alternate-standings { padding: 32px 0 38px; border-bottom: 1px solid #c9d0c2; }
 .alternate-league + .alternate-league { margin-top: 24px; }
