@@ -38,6 +38,11 @@ function normalize(data) {
   return {...data, leagues, trades};
 }
 
+function updateBrand() {
+  const option = $("league-filter").selectedOptions[0];
+  $("brand-league").textContent = `/ ${(option.value ? option.textContent : "All leagues").toUpperCase()}`;
+}
+
 function renderTeamOptions() {
   const league = $("league-filter").value;
   const current = $("team-filter").value;
@@ -66,6 +71,13 @@ function filteredTrades() {
 
 function selectTrade(id) {
   selectedId = id;
+  if (!filteredTrades().some((trade) => trade.id === id)) {
+    // Leaderboards ignore filters, so clear them when the chosen trade is hidden.
+    $("league-filter").value = "";
+    $("team-filter").value = "";
+    renderTeamOptions();
+    updateBrand();
+  }
   renderList();
   $("detail-panel").scrollIntoView({behavior: "smooth", block: "start"});
 }
@@ -127,10 +139,11 @@ const LEADERBOARDS = [
   },
 ];
 
-function renderLeaderboards(trades) {
+function renderLeaderboards() {
+  const trades = archive.trades;
   const content = $("leaderboard-content");
   content.replaceChildren();
-  const groups = $("league-filter").value
+  const groups = archive.leagues.length === 1
     ? [{label: null, trades}]
     : archive.leagues.map((league) => ({label: league.label, trades: trades.filter((trade) => trade.league_key === league.key)}));
   for (const group of groups) {
@@ -181,13 +194,13 @@ function renderList() {
   if (!trades.length) {
     $("trade-list").append(node("p", "empty-state", "No trades match these filters."));
     $("detail-panel").classList.add("hidden");
-    renderLeaderboards(trades);
+    renderLeaderboards();
     return;
   }
   if (!trades.some((trade) => trade.id === selectedId)) {
     selectedId = (trades.find((trade) => trade.weeks.length) || trades[0]).id;
   }
-  renderLeaderboards(trades);
+  renderLeaderboards();
   for (const trade of trades) {
     const button = node("button", `trade-item${selectedId === trade.id ? " active" : ""}`);
     button.type = "button";
@@ -205,6 +218,97 @@ function renderList() {
   }
   $("detail-panel").classList.remove("hidden");
   renderDetail(trades.find((trade) => trade.id === selectedId));
+}
+
+const SVG_NS = "http://www.w3.org/2000/svg";
+
+function svg(tag, attributes = {}, text) {
+  const element = document.createElementNS(SVG_NS, tag);
+  for (const [key, value] of Object.entries(attributes)) element.setAttribute(key, String(value));
+  if (text !== undefined) element.textContent = String(text);
+  return element;
+}
+
+function leadStory(trade) {
+  // Track the cumulative leader to find weeks where the lead changed hands.
+  const [a, b] = trade.sides;
+  let totals = [0, 0];
+  let leader = null;
+  const flips = [];
+  for (const week of trade.weeks) {
+    const points = [a, b].map((side) => side.weekly_points[String(week)]);
+    if (points.some((value) => value === null || value === undefined)) return {flips, leader: null, incomplete: true};
+    totals = totals.map((total, index) => total + points[index]);
+    const current = totals[0] === totals[1] ? null : totals[0] > totals[1] ? 0 : 1;
+    if (current !== null && leader !== null && current !== leader) flips.push({week, to: trade.sides[current]});
+    if (current !== null) leader = current;
+  }
+  return {flips, leader: leader === null ? null : trade.sides[leader], incomplete: false};
+}
+
+function swingChart(trade) {
+  const [a, b] = trade.sides;
+  const weeks = trade.weeks;
+  const values = weeks.flatMap((week) => [a, b].map((side) => side.weekly_points[String(week)] ?? 0));
+  const step = 10;
+  const max = Math.max(step, Math.ceil(Math.max(...values) / step) * step);
+  const width = 640, height = 260, left = 46, right = 12, top = 26, bottom = 44;
+  const plotWidth = width - left - right, plotHeight = height - top - bottom;
+  const y = (value) => top + plotHeight - (value / max) * plotHeight;
+  const story = leadStory(trade);
+
+  const figure = node("figure", "swing-chart");
+  const legend = node("div", "chart-legend");
+  for (const [index, side] of [a, b].entries()) {
+    const key = node("span", `chart-key side-${index}`);
+    key.append(node("i"), node("span", "", side.team));
+    legend.append(key);
+  }
+  const label = `Weekly points received: ${weeks.map((week) => `Week ${week}, ${a.team} ${formatPoints(a.weekly_points[String(week)])}, ${b.team} ${formatPoints(b.weekly_points[String(week)])}`).join("; ")}.`;
+  const chart = svg("svg", {viewBox: `0 0 ${width} ${height}`, role: "img", "aria-label": label, class: "chart-svg"});
+  for (let tick = 0; tick <= max; tick += max / 4) {
+    chart.append(
+      svg("line", {x1: left, x2: width - right, y1: y(tick), y2: y(tick), class: "chart-grid"}),
+      svg("text", {x: left - 8, y: y(tick) + 5, class: "chart-axis", "text-anchor": "end"}, Math.round(tick))
+    );
+  }
+  const group = plotWidth / weeks.length;
+  const barWidth = Math.min(56, group * 0.3);
+  const flipWeeks = new Set(story.flips.map((flip) => flip.week));
+  weeks.forEach((week, index) => {
+    const center = left + group * index + group / 2;
+    if (week === trade.trade_week) {
+      chart.append(svg("rect", {x: left + group * index + 4, y: top, width: group - 8, height: plotHeight, class: "chart-trade-week"}));
+    }
+    [a, b].forEach((side, sideIndex) => {
+      const value = side.weekly_points[String(week)];
+      const x = center + (sideIndex === 0 ? -barWidth - 3 : 3);
+      if (value === null || value === undefined) {
+        chart.append(svg("text", {x: x + barWidth / 2, y: y(0) - 6, class: "chart-value", "text-anchor": "middle"}, "—"));
+        return;
+      }
+      const bar = svg("rect", {x, y: y(value), width: barWidth, height: Math.max(y(0) - y(value), 1), rx: 3, class: `chart-bar side-${sideIndex}`});
+      bar.append(svg("title", {}, `${side.team}, Week ${week}: ${formatPoints(value)} pts`));
+      chart.append(bar, svg("text", {x: x + barWidth / 2, y: y(value) - 6, class: "chart-value", "text-anchor": "middle"}, formatPoints(value)));
+    });
+    const weekLabel = `Week ${week}${week === trade.trade_week ? "*" : ""}${flipWeeks.has(week) ? " ⇄" : ""}`;
+    chart.append(svg("text", {x: center, y: height - 16, class: `chart-axis chart-week${flipWeeks.has(week) ? " chart-flip" : ""}`, "text-anchor": "middle"}, weekLabel));
+  });
+  chart.append(svg("line", {x1: left, x2: width - right, y1: y(0), y2: y(0), class: "chart-baseline"}));
+
+  let summary;
+  if (story.incomplete) summary = "Some weekly scores are unavailable, so the lead can't be tracked.";
+  else if (story.flips.length) summary = story.flips.map((flip) => `Lead flipped to ${flip.to.team} in Week ${flip.week}.`).join(" ") + ` ${story.leader.team} leads now.`;
+  else if (story.leader) summary = weeks.length === 1 ? `${story.leader.team} leads after one week.` : `${story.leader.team} has led every week.`;
+  else summary = "Dead even so far.";
+  const markers = [
+    story.flips.length ? "⇄ = cumulative lead changed" : null,
+    trade.trade_week !== null && trade.trade_week !== undefined ? "* = trade week (shaded)" : null,
+  ].filter(Boolean);
+  const caption = node("figcaption", "chart-caption", summary);
+  if (markers.length) caption.append(node("span", "chart-markers", markers.join(" · ")));
+  figure.append(legend, chart, caption);
+  return figure;
 }
 
 function renderDetail(trade) {
@@ -255,7 +359,7 @@ function renderDetail(trade) {
       card.append(breakdown);
       grid.append(card);
     }
-    score.append(grid);
+    score.append(grid, swingChart(trade));
     const table = node("table", "week-table");
     const head = node("thead");
     const headers = node("tr");
@@ -320,7 +424,7 @@ async function load() {
     renderTeamOptions();
     $("league-filter").addEventListener("change", () => {
       renderTeamOptions();
-      $("brand-league").textContent = `/ ${($("league-filter").selectedOptions[0].value ? $("league-filter").selectedOptions[0].textContent : "All leagues").toUpperCase()}`;
+      updateBrand();
       renderList();
     });
     $("team-filter").addEventListener("change", renderList);

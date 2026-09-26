@@ -72,6 +72,23 @@ select { width: 100%; margin-bottom: 19px; padding: 12px 13px; background: #fffe
 .score-breakdown { margin: 16px 0 0; padding: 0; list-style: none; }
 .score-breakdown li { display: flex; justify-content: space-between; gap: 10px; padding: 7px 0; border-top: 1px solid #d7dfd1; font-size: 11px; }
 .score-breakdown strong { white-space: nowrap; }
+.swing-chart { margin: 18px 0 0; padding: 18px 18px 12px; background: #fffefa; border: 1px solid #dce4d5; border-radius: 7px; }
+.chart-legend { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 6px; font-size: 11px; font-weight: 700; color: #4b5d4f; }
+.chart-key { display: inline-flex; align-items: center; gap: 7px; }
+.chart-key i { width: 11px; height: 11px; border-radius: 3px; background: #377758; }
+.chart-key.side-1 i { background: #d47c49; }
+.chart-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.chart-grid { stroke: #e7ebe2; stroke-width: 1; }
+.chart-baseline { stroke: #b9c3b3; stroke-width: 1; }
+.chart-axis { fill: #7b897c; font-size: 15px; }
+.chart-week { font-weight: 700; fill: #4b5d4f; }
+.chart-flip { fill: #bd6838; }
+.chart-value { fill: #384b3c; font-size: 15px; font-weight: 700; }
+.chart-bar.side-0 { fill: #377758; }
+.chart-bar.side-1 { fill: #d47c49; }
+.chart-trade-week { fill: #f4efe4; }
+.chart-caption { margin-top: 6px; color: #5f6f62; font-size: 12px; font-weight: 600; }
+.chart-markers { display: block; margin-top: 4px; color: #879487; font-size: 10px; font-weight: 500; }
 .week-table { width: 100%; margin-top: 15px; border-collapse: collapse; color: #384b3c; font-size: 12px; }
 .week-table th { padding: 11px 6px; border-bottom: 1px solid #c9d0c2; text-align: left; color: #758575; font-size: 10px; letter-spacing: .08em; }
 .week-table td { padding: 11px 6px; border-bottom: 1px solid #e1e6db; }

@@ -6,13 +6,17 @@ This is a **hypothetical hold** for each individual deal: the received players r
 
 ## Leaderboards
 
-The top of the page ranks trades (top 3 per board, per league under "All leagues") and follows the league/team filters:
+The top of the page ranks trades (top 3 per board, per league under "All leagues") , always across all trades regardless of the league/team filters:
 
 - **Biggest swing**: absolute difference between each side's hypothetical-hold totals across all eligible weeks.
 - **Most players exchanged**: total players received by both sides (newest first on ties).
 - **Fastest regret**: difference in the first eligible week only; `*` marks when that week is the trade week.
 
-Trades without a completed eligible week are left off the points boards. Clicking an entry opens the trade.
+Trades without a completed eligible week are left off the points boards. Clicking an entry opens the trade, clearing the filters if they would hide it.
+
+## Weekly swing chart
+
+Each trade's detail panel includes a dependency-free SVG bar chart of each side's received-player points per eligible week. The trade week is shaded and marked `*`. A `⇄` marks a week where the **cumulative** leader changed, and the caption summarises who leads. The week table below remains the accessible text version; the chart also has a full `aria-label`.
 
 ## Champeens data source
 
