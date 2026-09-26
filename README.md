@@ -4,6 +4,16 @@ Local, **read-only** proof of concept for the 2026 Lana Straw **Premier** (ESPN 
 
 This is a **hypothetical hold** for each individual deal: the received players remain credited to their original recipient for all subsequent eligible weeks, even if that manager later trades them to someone else. The later trade also appears separately as its own hypothetical hold. **The trade week is included once complete even when the trade occurred during that week** (for example, a Thursday evening trade counts that week's final scores). It is labeled in the table because player points could have been scored *before* the trade. Totals across trades therefore overlap and must **not** be added together as manager season totals. Points include bench performances and do not measure actual points earned by a manager, replacement value, lineup changes, playoff odds, or future draft dollars/FAAB included in a deal. No winner is declared.
 
+## Leaderboards
+
+The top of the page ranks trades (top 3 per board, per league under "All leagues") and follows the league/team filters:
+
+- **Biggest swing**: absolute difference between each side's hypothetical-hold totals across all eligible weeks.
+- **Most players exchanged**: total players received by both sides (newest first on ties).
+- **Fastest regret**: difference in the first eligible week only; `*` marks when that week is the trade week.
+
+Trades without a completed eligible week are left off the points boards. Clicking an entry opens the trade.
+
 ## Champeens data source
 
 ESPN's activity feed (`recent_activity`) is members-only, and the configured ESPN account can read Champeens but is not a member. For that league the generator rebuilds trades from accepted-trade records (`mTransactions2`) plus roster history (`mRoster`): players currently on a roster with an acquisition type of `TRADE` at the accepted (or, for trades under league review, the next executed) timestamp, and direct team-to-team roster moves during that scoring period that aren't explained by a waiver or free-agent add. **Players later dropped or traded again can be missing**, and an accepted trade whose players can't be recovered is skipped. The UI labels these trades as reconstructed. Checked against Premier's real feed, this method found every trade with no wrong players; it missed one player each in four trades.
