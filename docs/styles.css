@@ -14,6 +14,11 @@ button:focus-visible, select:focus-visible, a:focus-visible { outline: 3px solid
 .brand { display: flex; align-items: center; gap: 13px; font: 700 13px 'Avenir Next',sans-serif; letter-spacing: .11em; }
 .brand-mark { display: grid; place-items: center; width: 29px; height: 29px; color: #fff; background: #193b2d; border-radius: 7px; font-size: 20px; letter-spacing: 0; }
 .brand-muted { color: #879187; }
+.site-nav { display: flex; gap: 6px; margin-left: auto; margin-right: 18px; }
+.site-nav a { padding: 8px 12px; border-radius: 4px; color: #425547; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
+.site-nav a:hover { background: #e6eadf; }
+.site-nav a[aria-current="page"] { color: #fff; background: #193b2d; }
+.alternate-filter { min-width: 190px; } .alternate-filter select { margin-bottom: 0; }
 .season-badge { padding: 8px 11px; border: 1px solid #cdd5c5; border-radius: 4px; color: #425547; font-size: 10px; font-weight: 700; letter-spacing: .12em; }
 .hero { display: flex; justify-content: space-between; gap: 30px; padding: 68px 0 55px; border-bottom: 1px solid #c9d0c2; }
 .hero-copy { max-width: 750px; }
@@ -120,6 +125,17 @@ select { width: 100%; margin-bottom: 19px; padding: 12px 13px; background: #fffe
 .receipt-meta { display: flex; flex-wrap: wrap; gap: 10px; color: #768578; font-size: 11px; }
 .receipt-meta a { color: #356b4c; font-weight: 700; }
 .leaderboards { padding: 34px 0 38px; border-bottom: 1px solid #c9d0c2; }
+.alternate-standings { padding: 32px 0 38px; border-bottom: 1px solid #c9d0c2; }
+.alternate-league + .alternate-league { margin-top: 24px; }
+.alternate-league h3 { margin: 0 0 5px; font-size: 18px; }
+.alternate-summary { margin: 0 0 12px; color: #687e6c; font-size: 11px; }
+.alternate-scroll { overflow-x: auto; }
+.alternate-table { width: 100%; min-width: 850px; border-collapse: collapse; font-size: 12px; font-variant-numeric: tabular-nums; }
+.alternate-table caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.alternate-table th, .alternate-table td { padding: 9px 7px; border-bottom: 1px solid #d8e1d4; text-align: right; white-space: nowrap; }
+.alternate-table th:first-child { text-align: left; }
+.alternate-table thead th { color: #6c806e; font-size: 10px; letter-spacing: .04em; }
+.alternate-table tbody tr:nth-child(odd) { background: #f3f5ef; }
 .leaderboards .section-heading h2 { margin: 7px 0 0; font-size: 24px; letter-spacing: -.05em; }
 .leaderboard-row + .leaderboard-row { margin-top: 22px; }
 .leaderboard-league { margin: 0 0 10px; color: #8a5d3d; font-size: 10px; font-weight: 700; letter-spacing: .14em; }
@@ -147,4 +163,4 @@ footer { display: flex; flex-wrap: wrap; gap: 10px; padding: 28px 0 40px; border
   .trade-item { flex: 0 0 220px; scroll-snap-align: start; }
   .detail-panel { padding: 28px 0 40px; } .detail-intro { padding: 29px 0 26px; } .detail-topline { font-size: 10px; }
 }
-@media (max-width: 500px) { .trade-sides, .score-grid, .impact-grid { grid-template-columns: 1fr; } .season-badge { font-size: 8px; } }
+@media (max-width: 500px) { .trade-sides, .score-grid, .impact-grid { grid-template-columns: 1fr; } .season-badge { display: none; } .site-nav { margin-right: 0; } .site-nav a { padding: 7px 8px; font-size: 9px; } }

@@ -7,7 +7,7 @@ import unittest
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
-from generate import GUILD_ID, add_matchup_impact, build_snapshot, parse_discord_export, reconstruct_trades, refill_lineup, week_start
+from generate import GUILD_ID, add_matchup_impact, alternate_standings, build_snapshot, optimal_lineup_points, parse_discord_export, reconstruct_trades, refill_lineup, week_start
 
 
 def player(player_id, name, week_points):
@@ -22,9 +22,11 @@ class FakeLeague:
     def __init__(self, traded_at, players, additional_trades=None):
         self.year = 2026
         self.current_week = 3
-        self.settings = SimpleNamespace(name="Test Premier")
+        self.settings = SimpleNamespace(name="Test Premier", position_slot_counts={"WR": 1})
         left = SimpleNamespace(team_id=2, team_name="All Gold")
         right = SimpleNamespace(team_id=10, team_name="Boom Baum")
+        self.teams = [left, right]
+        self.espn_request = SimpleNamespace(league_get=lambda params: {"transactions": []})
         self.trade = SimpleNamespace(
             date=int(traded_at.timestamp() * 1000),
             actions=[
@@ -231,6 +233,76 @@ class RefillLineupTest(unittest.TestCase):
         outcome = refill_lineup(starters, [], {1}, sent)
         self.assertEqual(outcome["score"], 20)
         self.assertIsNone(outcome["replacements"][0]["name"])
+
+
+class AlternateStandingsTest(unittest.TestCase):
+    def test_optimal_lineup_respects_dedicated_and_flex_slots(self):
+        players = [
+            lineup_player(1, "BE", 20, 0, ["RB", "RB/WR/TE"]),
+            lineup_player(2, "BE", 30, 0, ["RB/WR/TE"]),
+            lineup_player(3, "BE", 25, 0, ["WR", "RB/WR/TE"]),
+            lineup_player(4, "BE", 40, 0, ["WR"]),
+        ]
+        self.assertEqual(optimal_lineup_points(players, ["RB", "WR", "RB/WR/TE"]), 90)
+        self.assertEqual(optimal_lineup_points(players[:1], ["RB", "WR"]), 20)
+        self.assertEqual(optimal_lineup_points([lineup_player(5, "BE", -3, 0, ["D/ST"])], ["D/ST"]), -3)
+
+    def test_rewinds_trade_but_respects_later_waiver_acquisition(self):
+        original = SimpleNamespace(team_id=1, team_name="Original")
+        recipient = SimpleNamespace(team_id=2, team_name="Recipient")
+        traded = box_entry(100, "Traded", "WR", 25, 10, ["WR"])
+        qb_a = box_entry(101, "QB A", "QB", 10, 8, ["QB"])
+        qb_b = box_entry(201, "QB B", "QB", 10, 8, ["QB"])
+        league = SimpleNamespace(
+            year=2026, current_week=3, teams=[original, recipient],
+            settings=SimpleNamespace(position_slot_counts={"QB": 1, "WR": 1, "BE": 4, "IR": 1}),
+            box_scores=lambda week: [SimpleNamespace(
+                home_team=original, away_team=recipient, home_score=10, away_score=35,
+                home_lineup=[qb_a], away_lineup=[qb_b, traded],
+            )],
+        )
+        waiver = {
+            "id": "waiver", "type": "WAIVER", "status": "EXECUTED",
+            "processDate": int((week_start(2026, 2) + timedelta(hours=1)).timestamp() * 1000),
+            "items": [{"type": "ADD", "playerId": 100, "toTeamId": 2}],
+        }
+        league.espn_request = SimpleNamespace(league_get=lambda params: {
+            "transactions": [waiver] if params["scoringPeriodId"] == 2 else [],
+        })
+        trade = {
+            "traded_at": (week_start(2026, 1) - timedelta(days=1)).isoformat(),
+            "sides": [
+                {"team_id": 1, "sent": [{"id": 100}]},
+                {"team_id": 2, "sent": [{"id": 200}]},
+            ],
+        }
+        standings = alternate_standings(league, [trade])
+        a, b = standings["teams"]
+        self.assertEqual(standings["weeks"], [
+            {"week": 1, "rewound_players": 1}, {"week": 2, "rewound_players": 0},
+        ])
+        self.assertEqual((a["actual_wins"], a["alternate_wins"], a["alternate_losses"]), (0, 1, 1))
+        self.assertEqual((a["optimal_actual_points"], a["alternate_points"]), (20, 45))
+        self.assertEqual((b["alternate_points"], b["actual_points"]), (45, 70))
+
+    def test_no_trades_preserves_optimal_current_roster_results(self):
+        home = SimpleNamespace(team_id=1, team_name="Home")
+        away = SimpleNamespace(team_id=2, team_name="Away")
+        league = SimpleNamespace(
+            year=2026, current_week=2, teams=[home, away],
+            settings=SimpleNamespace(position_slot_counts={"QB": 1}),
+            espn_request=SimpleNamespace(league_get=lambda params: {"transactions": []}),
+            box_scores=lambda week: [SimpleNamespace(
+                home_team=home, away_team=away, home_score=3, away_score=6,
+                home_lineup=[box_entry(1, "Starter", "QB", 3, 0, ["QB"]), box_entry(2, "Bench", "BE", 9, 0, ["QB"])],
+                away_lineup=[box_entry(3, "Opponent", "QB", 6, 0, ["QB"])],
+            )],
+        )
+        standings = alternate_standings(league, [])
+        home_row = standings["teams"][0]
+        self.assertEqual((home_row["actual_losses"], home_row["optimal_actual_wins"]), (1, 1))
+        self.assertEqual(home_row["wins_change"], 0)
+        self.assertEqual(home_row["alternate_points"], home_row["optimal_actual_points"])
 
 
 def box_entry(player_id, name, slot, points, projected, eligible):

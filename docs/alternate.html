@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Alternate Universe · Trade Time Machine</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23193b2d'/%3E%3Ctext x='10' y='46' font-size='43' fill='white'%3E%E2%86%94%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./alternate.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="masthead">
+      <div class="brand"><span class="brand-mark">↔</span><span>LANA STRAW <span class="brand-muted" id="brand-league">/ ALL LEAGUES</span></span></div>
+      <nav class="site-nav" aria-label="Pages">
+        <a href="./">Trades</a>
+        <a href="./alternate.html" aria-current="page">Alternate Universe</a>
+      </nav>
+      <span class="season-badge" id="season-badge">2026 SEASON</span>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="live-dot"></span> THE ALTERNATE UNIVERSE</p>
+          <h1 id="title">What if <em>nobody traded?</em></h1>
+          <p class="hero-description">Replay the real schedule with the known trades undone. Both hypothetical columns use the best-scoring eligible lineup each week, so comparing them isolates roster changes from coaching decisions.</p>
+        </div>
+      </section>
+
+      <div class="context-bar" id="context-bar" aria-live="polite">Loading standings…</div>
+      <div id="error" class="error hidden" role="alert"></div>
+
+      <section class="alternate-standings hidden" id="alternate-standings" aria-labelledby="alternate-title">
+        <div class="section-heading">
+          <div><p class="eyebrow">COMPLETED WEEKS</p><h2 id="alternate-title">Alternate standings</h2></div>
+          <div class="alternate-filter">
+            <label class="filter-label" for="league-filter">LEAGUE</label>
+            <select id="league-filter" autocomplete="off"><option value="">All leagues</option></select>
+          </div>
+        </div>
+        <div id="alternate-content"></div>
+        <p class="method-note">Real = ESPN's actual starters. Current optimal = best possible lineup from each week's actual roster. No trades = best possible lineup after moving known traded players back to their pre-trade owner, while keeping real waiver and free-agent pickups. Δ wins compares <strong>no trades</strong> to <strong>current optimal</strong> (ties count as half a win). This hindsight experiment does not model roster limits, injury choices, or the moves managers would actually make; trade-week changes may not reflect lineup locks. Champeens trades are reconstructed and can be incomplete.</p>
+      </section>
+    </main>
+    <footer>ESPN BOX SCORES + TRADE HISTORY <span>·</span> READ-ONLY PROTOTYPE <span>·</span> NOT REAL STANDINGS</footer>
+  </div>
+</body>
+</html>

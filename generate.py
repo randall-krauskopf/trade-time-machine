@@ -328,6 +328,134 @@ def box_player(player: Any) -> dict[str, Any]:
     }
 
 
+def optimal_lineup_points(players: list[dict[str, Any]], slots: list[str]) -> float:
+    """Maximize actual points while assigning each player to at most one eligible slot."""
+    best = {0: 0.0}
+    for player in players:
+        eligible = [index for index, slot in enumerate(slots) if slot in player["eligible"]]
+        for mask, points in list(best.items()):
+            for index in eligible:
+                bit = 1 << index
+                if mask & bit:
+                    continue
+                candidate = points + player["points"]
+                if candidate > best.get(mask | bit, float("-inf")):
+                    best[mask | bit] = candidate
+    fullest = max(mask.bit_count() for mask in best)
+    return round(max(points for mask, points in best.items() if mask.bit_count() == fullest), 2)
+
+
+def alternate_standings(league: Any, trades: list[dict[str, Any]]) -> dict[str, Any]:
+    """Rewind known trade transfers in weekly rosters, preserving actual waiver/FA moves."""
+    cutoff = datetime.combine(FIRST_TRADE_DATE, datetime.min.time(), LEAGUE_TIMEZONE)
+    slots = [
+        slot for slot, count in league.settings.position_slot_counts.items()
+        if slot not in STARTER_EXCLUDED_SLOTS | {"ER", ""}
+        for _ in range(count)
+    ]
+    events: dict[int, list[tuple[datetime, str, int]]] = {}
+    for trade in trades:
+        traded_at = datetime.fromisoformat(trade["traded_at"])
+        for side in trade["sides"]:
+            for player in side["sent"]:
+                events.setdefault(player["id"], []).append((traded_at, "trade", side["team_id"]))
+    # ESPN's executed waiver/FA records tell us when a player entered a new ownership chain.
+    transactions: dict[str, dict[str, Any]] = {}
+    for period in range(int(league.current_week) + 1):
+        data = league.espn_request.league_get(params={"view": "mTransactions2", "scoringPeriodId": period})
+        for transaction in data.get("transactions", []):
+            transactions.setdefault(transaction["id"], transaction)
+    for transaction in transactions.values():
+        if transaction.get("type") not in {"WAIVER", "FREEAGENT"} or transaction.get("status") != "EXECUTED":
+            continue
+        timestamp = transaction.get("processDate") or transaction.get("proposedDate")
+        if not timestamp:
+            raise ValueError(f"Executed acquisition {transaction['id']} has no timestamp.")
+        when = datetime.fromtimestamp(timestamp / 1000, timezone.utc)
+        if when < cutoff:
+            continue
+        for item in transaction.get("items", []):
+            if item.get("type") == "ADD" and item.get("playerId") is not None:
+                events.setdefault(item["playerId"], []).append((when, "add", item["toTeamId"]))
+    for history in events.values():
+        history.sort(key=lambda event: event[0])
+
+    teams = {team.team_id: team.team_name.strip() for team in league.teams}
+    standings = {
+        team_id: {"team_id": team_id, "team": name, "actual_wins": 0, "actual_losses": 0,
+                  "actual_ties": 0, "actual_points": 0.0, "alternate_wins": 0,
+                  "alternate_losses": 0, "alternate_ties": 0, "alternate_points": 0.0,
+                  "optimal_actual_wins": 0, "optimal_actual_losses": 0,
+                  "optimal_actual_ties": 0, "optimal_actual_points": 0.0}
+        for team_id, name in teams.items()
+    }
+    week_details = []
+    for week in range(1, int(league.current_week)):
+        end = week_start(league.year, week + 1)
+        boxes = league.box_scores(week)
+        rosters: dict[int, dict[int, dict[str, Any]]] = {}
+        matchups = []
+        for box in boxes:
+            home_id, away_id = box.home_team.team_id, box.away_team.team_id
+            if home_id not in teams or away_id not in teams:
+                raise ValueError(f"Week {week} box score has an unknown team.")
+            matchups.append((home_id, away_id, float(box.home_score), float(box.away_score)))
+            for team_id, lineup in ((home_id, box.home_lineup), (away_id, box.away_lineup)):
+                if team_id in rosters:
+                    raise ValueError(f"Week {week} has duplicate box scores for team {team_id}.")
+                rosters[team_id] = {player.playerId: box_player(player) for player in lineup}
+        if set(rosters) != set(teams):
+            raise ValueError(f"Week {week} is missing box scores for some teams.")
+        alternates = {team_id: dict(roster) for team_id, roster in rosters.items()}
+        moves = 0
+        for player_id, history in events.items():
+            actual_owner = next((team_id for team_id, roster in rosters.items() if player_id in roster), None)
+            if actual_owner is None:
+                continue
+            origin = None
+            has_trade = False
+            for when, kind, owner in history:
+                if when >= end:
+                    break
+                if kind == "add":
+                    origin, has_trade = owner, False
+                elif origin is None:
+                    origin, has_trade = owner, True
+                else:
+                    has_trade = True
+            if has_trade and origin in alternates and actual_owner != origin:
+                alternates[origin][player_id] = alternates[actual_owner].pop(player_id)
+                moves += 1
+        optimal_actual_scores = {
+            team_id: optimal_lineup_points(list(roster.values()), slots)
+            for team_id, roster in rosters.items()
+        }
+        alternate_scores = {
+            team_id: optimal_lineup_points(list(roster.values()), slots)
+            for team_id, roster in alternates.items()
+        }
+        for team_id, roster in rosters.items():
+            standings[team_id]["optimal_actual_points"] += optimal_actual_scores[team_id]
+            standings[team_id]["alternate_points"] += alternate_scores[team_id]
+        for home, away, home_score, away_score in matchups:
+            for team_id, score, rival, rival_score in (
+                (home, home_score, away, away_score), (away, away_score, home, home_score)
+            ):
+                row = standings[team_id]
+                row["actual_points"] += score
+                row[f"actual_{'wins' if score > rival_score else 'losses' if score < rival_score else 'ties'}"] += 1
+                optimal_score = optimal_actual_scores[team_id]
+                row[f"optimal_actual_{'wins' if optimal_score > optimal_actual_scores[rival] else 'losses' if optimal_score < optimal_actual_scores[rival] else 'ties'}"] += 1
+                alt_score = alternate_scores[team_id]
+                row[f"alternate_{'wins' if alt_score > alternate_scores[rival] else 'losses' if alt_score < alternate_scores[rival] else 'ties'}"] += 1
+        week_details.append({"week": week, "rewound_players": moves})
+    for row in standings.values():
+        for key in ("actual_points", "alternate_points", "optimal_actual_points"):
+            row[key] = round(row[key], 2)
+        row["wins_change"] = (row["alternate_wins"] + row["alternate_ties"] / 2) - (row["optimal_actual_wins"] + row["optimal_actual_ties"] / 2)
+    return {"weeks": week_details, "teams": list(standings.values()), "source": "weekly_box_scores"}
+
+
 def add_matchup_impact(league: Any, trades: list[dict[str, Any]], players_by_id: dict[int, Any]) -> None:
     """Attach real-lineup matchup impact to each trade side, using weekly box scores."""
     box_cache: dict[int, dict[int, dict[str, Any]]] = {}
@@ -566,6 +694,9 @@ def build_snapshot(league: Any, messages: list[dict[str, Any]]) -> dict[str, Any
 
     if hasattr(league, "box_scores"):
         add_matchup_impact(league, trades, players_by_id)
+        standings = alternate_standings(league, trades)
+    else:
+        standings = None
 
     return {
         "league": league.settings.name,
@@ -574,6 +705,7 @@ def build_snapshot(league: Any, messages: list[dict[str, Any]]) -> dict[str, Any
         "completed_weeks": completed_weeks,
         "first_trade_date": FIRST_TRADE_DATE.isoformat(),
         "trades": trades,
+        "alternate_standings": standings,
         "source": source,
         "discord_imported": bool(messages),
     }

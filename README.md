@@ -14,6 +14,12 @@ The top of the page ranks trades (top 3 per board, per league under "All leagues
 
 Trades without a completed eligible week are left off the points boards. Clicking an entry opens the trade, clearing the filters if they would hide it.
 
+## Alternate Universe standings (2026 experiment)
+
+The site has two pages linked from the header: **Trades** (`docs/index.html`: leaderboards, archive, and trade detail) and **Alternate Universe** (`docs/alternate.html`, rendered by `docs/alternate.js`). The Alternate Universe page replays the completed Premier and Champeens matchups. It shows three records and points-for totals per team: **Real** uses the actual ESPN box-score starting lineup; **Current optimal** chooses the best-scoring legal starters from that week's actual roster; **No trades** chooses the best-scoring legal starters after moving known post-August-30 traded players back to the team that first sent them. The optimizer uses the league's active roster slots and each player's ESPN eligibility, assigning a player at most once. Wins/losses/ties use the actual schedule (ties count as half a win). **Δ wins compares No trades with Current optimal**, not with Real, so it separates modeled roster changes from the benefit of optimizing lineups. That page has its own league selector (independent of the Trades page filters), and no data from the current unfinished week is included.
+
+This is **not a reconstructed Aug 30 roster or a prediction**: the model starts from each week's actual box-score roster, keeps actual waiver and free-agent acquisitions (which reset a traded player's baseline ownership), and rewinds only players in recovered trade records. Unrostered players stay out; it does not enforce roster size or model hypothetical cuts, future waiver choices, injuries, lineup locks, or whether an owner would have started the optimal lineup. A midweek transaction can therefore affect that whole scoring week. Champeens' trade reconstruction may miss movements and is labeled accordingly. Do not treat these standings as actual standings or a trade verdict.
+
 ## Matchup impact
 
 Each trade's detail panel opens with **matchup impact**, built from ESPN box scores (real lineups) for both leagues:
