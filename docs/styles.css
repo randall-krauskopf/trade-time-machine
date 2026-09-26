@@ -29,6 +29,7 @@ h1, h2, h3 { font-family: 'Avenir Next',sans-serif; }
 h1 { margin: 20px 0 15px; font-size: clamp(46px, 5vw, 76px); letter-spacing: -.075em; line-height: 1.04; }
 h1 em { color: #d47743; font-style: normal; }
 .hero-description { max-width: 610px; margin: 0; color: #58675a; line-height: 1.7; font-size: 15px; }
+.hero-tagline { margin: 15px 0 0; color: #193b2d; font-size: 13px; font-style: italic; font-weight: 700; }
 .hero-stamp { flex: 0 0 179px; align-self: center; display: flex; flex-direction: column; justify-content: space-between; transform: rotate(8deg); width: 179px; height: 156px; padding: 20px; border: 2px solid #d47743; border-radius: 4px; color: #bd6838; font: 700 23px/1.1 'Avenir Next', sans-serif; letter-spacing: -.06em; }
 .hero-stamp small { font: 700 9px 'Avenir Next',sans-serif; letter-spacing: .18em; }
 .context-bar { display: flex; align-items: center; min-height: 54px; color: #677768; font-size: 12px; border-bottom: 1px solid #c9d0c2; }
