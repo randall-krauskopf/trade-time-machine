@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-26T13:40:32.001285+00:00",
+  "generated_at": "2026-09-26T18:30:42.826035+00:00",
   "first_trade_date": "2026-08-30",
   "discord_imported": false,
   "leagues": [
     {
       "league": "Lana Straw",
       "season": 2026,
-      "generated_at": "2026-09-26T13:40:27.698086+00:00",
+      "generated_at": "2026-09-26T18:30:38.320466+00:00",
       "completed_weeks": [
         1,
         2
@@ -1432,7 +1432,7 @@
     {
       "league": "Lana Straw Champeens League",
       "season": 2026,
-      "generated_at": "2026-09-26T13:40:32.001225+00:00",
+      "generated_at": "2026-09-26T18:30:42.825924+00:00",
       "completed_weeks": [
         1,
         2
