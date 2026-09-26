@@ -59,6 +59,14 @@ def week_start(year: int, week: int) -> datetime:
     return datetime.combine(start, datetime.min.time(), LEAGUE_TIMEZONE)
 
 
+def transaction_week(year: int, traded_at: datetime) -> int:
+    """Bucket transactions into game weeks that turn over Tuesday at midnight."""
+    week = 1
+    while traded_at >= week_start(year, week + 1):
+        week += 1
+    return week
+
+
 def parse_discord_export(path: Path | None) -> list[dict[str, Any]]:
     if path is None:
         return []
@@ -686,6 +694,7 @@ def build_snapshot(league: Any, messages: list[dict[str, Any]]) -> dict[str, Any
         trades.append({
             "id": f"{activity.date}-{'-'.join(str(side['team_id']) for side in team_sides)}",
             "traded_at": traded_at.isoformat(),
+            "transaction_week": transaction_week(league.year, traded_at),
             "weeks": weeks,
             "trade_week": trade_week,
             "sides": team_sides,

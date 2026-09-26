@@ -66,10 +66,11 @@ function updateBrand() {
 
 function renderTeamOptions() {
   const league = $("league-filter").value;
+  const week = $("week-filter").value;
   const current = $("team-filter").value;
   const showLeague = !league && archive.leagues.length > 1;
   const teams = new Map(archive.trades
-    .filter((trade) => !league || trade.league_key === league)
+    .filter((trade) => (!league || trade.league_key === league) && (!week || String(trade.transaction_week) === week))
     .flatMap((trade) => trade.sides.map((side) => [teamKey(trade, side), showLeague ? `${side.team} (${trade.league_label})` : side.team])));
   const all = node("option", "", "All teams");
   all.value = "";
@@ -84,9 +85,11 @@ function renderTeamOptions() {
 
 function filteredTrades() {
   const league = $("league-filter").value;
+  const week = $("week-filter").value;
   const team = $("team-filter").value;
   return archive.trades.filter((trade) =>
     (!league || trade.league_key === league)
+    && (!week || String(trade.transaction_week) === week)
     && (!team || trade.sides.some((side) => teamKey(trade, side) === team)));
 }
 
@@ -99,6 +102,7 @@ function selectTrade(id) {
   if (!filteredTrades().some((trade) => trade.id === id)) {
     // Leaderboards ignore filters, so clear them when the chosen trade is hidden.
     $("league-filter").value = "";
+    $("week-filter").value = "";
     $("team-filter").value = "";
     renderTeamOptions();
     updateBrand();
@@ -515,10 +519,21 @@ async function load() {
         $("league-filter").append(option);
       }
       $("league-filter").value = "";
+      const weeks = [...new Set(archive.trades.map((trade) => trade.transaction_week))].sort((a, b) => a - b);
+      for (const week of weeks) {
+        const option = node("option", "", `Week ${week}`);
+        option.value = String(week);
+        $("week-filter").append(option);
+      }
+      $("week-filter").value = "";
       renderTeamOptions();
       $("league-filter").addEventListener("change", () => {
         renderTeamOptions();
         updateBrand();
+        renderList();
+      });
+      $("week-filter").addEventListener("change", () => {
+        renderTeamOptions();
         renderList();
       });
       $("team-filter").addEventListener("change", renderList);

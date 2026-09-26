@@ -7,7 +7,7 @@ import unittest
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
-from generate import GUILD_ID, add_matchup_impact, alternate_standings, build_snapshot, optimal_lineup_points, parse_discord_export, reconstruct_trades, refill_lineup, week_start
+from generate import GUILD_ID, add_matchup_impact, alternate_standings, build_snapshot, optimal_lineup_points, parse_discord_export, reconstruct_trades, refill_lineup, transaction_week, week_start
 
 
 def player(player_id, name, week_points):
@@ -74,6 +74,13 @@ class SnapshotTests(unittest.TestCase):
         trade = build_snapshot(league, [])["trades"][0]
         self.assertEqual(trade["weeks"], [2])
         self.assertEqual(trade["trade_week"], 2)
+
+    def test_transaction_weeks_turn_over_tuesday_morning(self):
+        chicago = ZoneInfo("America/Chicago")
+        tuesday = week_start(2026, 2)
+        self.assertEqual(transaction_week(2026, tuesday - timedelta(seconds=1)), 1)
+        self.assertEqual(transaction_week(2026, tuesday), 2)
+        self.assertEqual(transaction_week(2026, week_start(2026, 3)), 3)
 
     def test_trade_after_last_completed_week_has_no_final_scores(self):
         league = FakeLeague(week_start(2026, 3) + timedelta(hours=2), self.players)
