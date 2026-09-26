@@ -139,7 +139,7 @@ select { width: 100%; margin-bottom: 19px; padding: 12px 13px; background: #fffe
 .leaderboards .section-heading h2 { margin: 7px 0 0; font-size: 24px; letter-spacing: -.05em; }
 .leaderboard-row + .leaderboard-row { margin-top: 22px; }
 .leaderboard-league { margin: 0 0 10px; color: #8a5d3d; font-size: 10px; font-weight: 700; letter-spacing: .14em; }
-.leaderboard-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.leaderboard-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .leaderboard-card { padding: 20px; background: #fffefa; border: 1px solid #dce4d5; border-radius: 7px; }
 .leaderboard-card h3 { margin: 0 0 5px; font-size: 18px; letter-spacing: -.04em; }
 .leaderboard-caption { margin: 0 0 12px; color: #718071; font-size: 11px; line-height: 1.5; }
@@ -150,6 +150,8 @@ select { width: 100%; margin-bottom: 19px; padding: 12px 13px; background: #fffe
 .leaderboard-entry::before { content: counter(rank); flex: 0 0 22px; height: 22px; display: grid; place-items: center; border-radius: 50%; background: #e1e7d8; color: #355746; font-size: 11px; font-weight: 700; }
 .leaderboard-list li:first-child .leaderboard-entry::before { background: #d47743; color: #fff; }
 .leaderboard-entry:hover, .leaderboard-entry.active { background: #eef2e9; }
+.leaderboard-entry.static { cursor: default; }
+.leaderboard-entry.static:hover { background: none; }
 .leaderboard-text { flex: 1; min-width: 0; }
 .leaderboard-teams { display: block; font-size: 12px; font-weight: 700; line-height: 1.35; }
 .leaderboard-detail { display: block; margin-top: 2px; color: #768578; font-size: 10px; line-height: 1.4; }

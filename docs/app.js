@@ -3,6 +3,7 @@
 const $ = (id) => document.getElementById(id);
 const dateFormat = new Intl.DateTimeFormat("en-US", {month: "short", day: "numeric", year: "numeric", timeZone: "America/Chicago"});
 const timeFormat = new Intl.DateTimeFormat("en-US", {month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit", timeZone: "America/Chicago", timeZoneName: "short"});
+const dateKeyFormat = new Intl.DateTimeFormat("en-CA", {year: "numeric", month: "2-digit", day: "2-digit", timeZone: "America/Chicago"});
 let archive = null;
 let selectedId = null;
 
@@ -34,12 +35,19 @@ function teamKey(trade, side) {
   return `${trade.league_key}:${side.team_id}`;
 }
 
+function centralDateKey(timestamp) {
+  const parts = Object.fromEntries(dateKeyFormat.formatToParts(new Date(timestamp)).map(({type, value}) => [type, value]));
+  return `${parts.year}-${parts.month}-${parts.day}`;
+}
+
 function normalize(data) {
   const leagues = Array.isArray(data.leagues)
     ? data.leagues
     : [{...data, key: "premier", label: "Premier", receipts_enabled: true}];
+  const firstTradeDate = data.first_trade_date || "2026-08-30";
   for (const league of leagues) {
     if (!Array.isArray(league.trades)) throw new Error(`data.json is missing trades for ${league.label || "a league"}.`);
+    league.trades = league.trades.filter((trade) => centralDateKey(trade.traded_at) >= firstTradeDate);
   }
   const trades = leagues.flatMap((league) => league.trades.map((trade) => ({
     ...trade,
@@ -102,6 +110,22 @@ function swing(trade, [a, b]) {
 }
 
 const LEADERBOARDS = [
+  {
+    title: "Most active traders",
+    caption: "Managers with the most completed deals.",
+    rank(trades) {
+      const counts = new Map();
+      for (const trade of trades) {
+        for (const side of trade.sides) counts.set(side.team, (counts.get(side.team) || 0) + 1);
+      }
+      return [...counts.entries()]
+        .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+        .map(([team, count]) => ({
+          team,
+          value: `${count} trade${count === 1 ? "" : "s"}`,
+        }));
+    },
+  },
   {
     title: "Matchup movers",
     caption: "Most matchup results the deal changed (tiebreak: lineup points).",
@@ -182,16 +206,17 @@ function renderLeaderboards() {
         const list = node("ol", "leaderboard-list");
         for (const entry of entries) {
           const item = node("li");
-          const button = node("button", `leaderboard-entry${entry.trade.id === selectedId ? " active" : ""}`);
-          button.type = "button";
-          button.setAttribute("aria-label", `${entry.trade.sides.map((side) => side.team).join(" and ")}, ${entry.value}. Open trade.`);
+          const button = node(entry.trade ? "button" : "div", `leaderboard-entry${entry.trade && entry.trade.id === selectedId ? " active" : ""}${entry.trade ? "" : " static"}`);
+          if (entry.trade) {
+            button.type = "button";
+            button.setAttribute("aria-label", `${entry.trade.sides.map((side) => side.team).join(" and ")}, ${entry.value}. Open trade.`);
+          }
           const text = node("span", "leaderboard-text");
-          text.append(
-            node("span", "leaderboard-teams", entry.trade.sides.map((side) => side.team).join(" ↔ ")),
-            node("span", "leaderboard-detail", `${dateFormat.format(new Date(entry.trade.traded_at))} · ${entry.detail}`)
-          );
+          text.append(node("span", "leaderboard-teams", entry.trade ? entry.trade.sides.map((side) => side.team).join(" ↔ ") : entry.team));
+          const detail = entry.trade ? `${dateFormat.format(new Date(entry.trade.traded_at))} · ${entry.detail}` : entry.detail;
+          if (detail) text.append(node("span", "leaderboard-detail", detail));
           button.append(text, node("strong", "leaderboard-value", entry.value));
-          button.addEventListener("click", () => selectTrade(entry.trade.id));
+          if (entry.trade) button.addEventListener("click", () => selectTrade(entry.trade.id));
           item.append(button);
           list.append(item);
         }

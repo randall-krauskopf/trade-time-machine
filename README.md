@@ -8,6 +8,7 @@ This is a **hypothetical hold** for each individual deal: the received players r
 
 The top of the page ranks trades (top 3 per board, per league under "All leagues") , always across all trades regardless of the league/team filters:
 
+- **Most active traders**: managers ranked by the number of completed deals they participated in, using the same inclusive August 30 Central-time cutoff as the archive.
 - **Matchup movers**: total real results flipped by the trade (both sides), then the largest net lineup-point change; the detail shows who gained the most wins.
 - **Most players exchanged**: total players received by both sides (newest first on ties).
 - **Fastest regret**: difference in the first eligible week only; `*` marks when that week is the trade week.
