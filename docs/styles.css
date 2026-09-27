@@ -20,8 +20,9 @@ button:focus-visible, select:focus-visible, a:focus-visible { outline: 3px solid
 .site-nav a[aria-current="page"] { color: #fff; background: #193b2d; }
 .alternate-filter { min-width: 190px; } .alternate-filter select { margin-bottom: 0; }
 .weekly-moves { padding: 34px 0 42px; }
+.weekly-heading { flex-wrap: wrap; }
 .weekly-heading h2 { margin: 7px 0 0; font-size: 24px; letter-spacing: -.05em; }
-.weekly-filters { display: grid; grid-template-columns: repeat(3, minmax(140px, 190px)); gap: 12px; }
+.weekly-filters { display: grid; flex: 0 0 auto; width: min(100%, 700px); grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .weekly-filters select { margin-bottom: 0; }
 .weekly-intro { max-width: 820px; margin: 0 0 24px; color: #536759; font-size: 13px; line-height: 1.65; }
 .weekly-league + .weekly-league { margin-top: 32px; }
@@ -176,9 +177,10 @@ footer { display: flex; flex-wrap: wrap; gap: 10px; padding: 28px 0 40px; border
 @media (max-width: 900px) { .app-shell { padding: 0 24px; } .hero-stamp { display: none; } .workspace { grid-template-columns: 240px minmax(0,1fr); } .leaderboard-grid, .weekly-grid { grid-template-columns: 1fr; } .detail-panel { padding-left: 23px; } }
 @media (max-width: 700px) {
   .app-shell { padding: 0 17px; } .masthead { flex-wrap: wrap; height: auto; min-height: 65px; padding: 10px 0; } .brand { font-size: 11px; } .season-badge { display: none; } .site-nav { order: 3; width: 100%; justify-content: center; margin: 7px 0 0; } .hero { padding: 47px 0 40px; }
+  .weekly-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .workspace { display: block; } .trade-list-panel { border-right: 0; border-bottom: 1px solid #c9d0c2; padding: 28px 0; }
   .trade-list { flex-direction: row; overflow-x: auto; padding-bottom: 7px; scroll-snap-type: x proximity; }
   .trade-item { flex: 0 0 220px; scroll-snap-align: start; }
   .detail-panel { padding: 28px 0 40px; } .detail-intro { padding: 29px 0 26px; } .detail-topline { font-size: 10px; }
 }
-@media (max-width: 500px) { .trade-sides, .score-grid, .weekly-changes, .weekly-matchup { grid-template-columns: 1fr; } .site-nav a { padding: 7px 6px; font-size: 8px; } .weekly-heading { align-items: flex-start; flex-direction: column; } .weekly-filters { width: 100%; grid-template-columns: 1fr 1fr; } .weekly-card-top { display: block; } .weekly-impact { margin-bottom: 14px; text-align: left; } .weekly-matchup > div + div { border-left: 0; border-top: 1px solid #e1e6da; } }
+@media (max-width: 500px) { .trade-sides, .score-grid, .weekly-changes, .weekly-matchup { grid-template-columns: 1fr; } .site-nav a { padding: 7px 6px; font-size: 8px; } .weekly-heading { align-items: flex-start; flex-direction: column; } .weekly-filters { width: 100%; grid-template-columns: 1fr; } .weekly-card-top { display: block; } .weekly-impact { margin-bottom: 14px; text-align: left; } .weekly-matchup > div + div { border-left: 0; border-top: 1px solid #e1e6da; } }
