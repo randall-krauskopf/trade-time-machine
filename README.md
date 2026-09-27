@@ -9,36 +9,26 @@ This is a **hypothetical hold** for each individual deal: the received players r
 The top of the page ranks trades (top 3 per board, per league under "All leagues") , always across all trades regardless of the league/team filters:
 
 - **Most active traders**: managers ranked by the number of completed deals they participated in, using the same inclusive August 30 Central-time cutoff as the archive.
-- **Matchup movers**: total real results flipped by the trade (both sides), then the largest net lineup-point change; the detail shows who gained the most wins.
 - **Most players exchanged**: total players received by both sides (newest first on ties).
 - **Fastest regret**: difference in the first eligible week only; `*` marks when that week is the trade week.
 
 Trades without a completed eligible week are left off the points boards. Clicking a trade ranking opens that deal directly on the Archive page.
 
+The site has four pages linked from the header: **Leaderboards** (`docs/index.html`), **Archive** (`docs/archive.html`: filters and trade detail), **Weekly Moves** (`docs/weekly.html`: manager-week trade bundles), and **Alternate Universe** (`docs/alternate.html`, rendered by `docs/alternate.js`). Leaderboard and Weekly Moves trade links open the selected deal directly on the Archive page. The Alternate Universe page replays the completed Premier and Champeens matchups.
+
+## Weekly Roster Moves (prototype)
+
+The Weekly Moves page is the app's canonical matchup-outcome model. It combines every trade a manager completed within the same Tuesday-to-Tuesday game week. Players acquired and then traded away within that interval cancel from the net roster diff. It compares the manager's actual weekly score and result with a projection-selected lineup that undoes the week's net trade changes; if the opponent also traded that week, the opponent's bundle is undone too. Actual waiver and free-agent choices remain in place.
+
+This is a reconstruction, not an exact pair of historical Tuesday roster snapshots: ESPN weekly box-score rosters provide the ending roster evidence and accepted trades provide the diff. Weeks without a completed box score are excluded. The page labels this limitation and links back to every underlying trade.
+
+The Archive no longer calculates whether an individual trade flipped a matchup. It retains the exchange, raw received-player points, and weekly swing chart as descriptive context; isolating one trade is misleading when a manager completes several deals in the same week.
+
 ## Alternate Universe standings (2026 experiment)
 
-The site has three pages linked from the header: **Leaderboards** (`docs/index.html`), **Archive** (`docs/archive.html`: filters and trade detail), and **Alternate Universe** (`docs/alternate.html`, rendered by `docs/alternate.js`). Leaderboard trade links open the selected deal directly on the Archive page. The Alternate Universe page replays the completed Premier and Champeens matchups. It shows three records and points-for totals per team: **Real** uses the actual ESPN box-score starting lineup; **Current optimal** chooses the best-scoring legal starters from that week's actual roster; **No trades** chooses the best-scoring legal starters after moving known post-August-30 traded players back to the team that first sent them. The optimizer uses the league's active roster slots and each player's ESPN eligibility, assigning a player at most once. Wins/losses/ties use the actual schedule (ties count as half a win). **Δ wins compares No trades with Current optimal**, not with Real, so it separates modeled roster changes from the benefit of optimizing lineups. That page has its own league selector (independent of the Trades page filters), and no data from the current unfinished week is included.
+It shows three records and points-for totals per team: **Real** uses the actual ESPN box-score starting lineup; **Current optimal** chooses the best-scoring legal starters from that week's actual roster; **No trades** chooses the best-scoring legal starters after moving known post-August-30 traded players back to the team that first sent them. The optimizer uses the league's active roster slots and each player's ESPN eligibility, assigning a player at most once. Wins/losses/ties use the actual schedule (ties count as half a win). **Δ wins compares No trades with Current optimal**, not with Real, so it separates modeled roster changes from the benefit of optimizing lineups. That page has its own league selector, and no data from the current unfinished week is included.
 
 This is **not a reconstructed Aug 30 roster or a prediction**: the model starts from each week's actual box-score roster, keeps actual waiver and free-agent acquisitions (which reset a traded player's baseline ownership), and rewinds only players in recovered trade records. Unrostered players stay out; it does not enforce roster size or model hypothetical cuts, future waiver choices, injuries, lineup locks, or whether an owner would have started the optimal lineup. A midweek transaction can therefore affect that whole scoring week. Champeens' trade reconstruction may miss movements and is labeled accordingly. Do not treat these standings as actual standings or a trade verdict.
-
-## Matchup impact
-
-Each trade's detail panel opens with **matchup impact**, built from ESPN box scores (real lineups) for both leagues:
-
-- **Started vs benched**: points the received players scored in the lineup vs on the bench.
-- **No-trade alternate**: received starters are removed, and each vacated slot (dedicated slots before flex) is filled with the eligible bench or traded-away player with the highest ESPN **projection** for that week, so the choice doesn't use hindsight. A traded-away player can also replace a remaining starter projected lower. Actual points are then summed.
-- **Re-scored matchup**: the real score and opponent score are compared with the alternate. When the opponent was the trade partner, both sides are re-run. A changed W/L/T is a **flipped result**; **wins added** sums real minus alternate results (W=1, T=0.5, L=0).
-- The trade week is only counted if the received players already appear in that week's lineups.
-
-The card says **No results flipped** when none changed. **0 net wins** can instead mean that results *did* flip but gains and losses canceled out; a tie can produce a half-win. Win totals are shown without decimals unless a half-win is involved.
-
-Assumptions: managers don't always start their best players, so the refill is an estimate; unrelated waiver moves and drops aren't undone (all traded-away players are added back); a slot with no eligible replacement scores 0; Champeens reconstruction gaps carry over. It's a what-if, not a verdict.
-
-When a player received in the original exchange is later **traded again by that recipient**, matchup impact for **both original sides** stops at the first such re-trade. The detail names the player and last counted week. A midweek re-trade's week is included only when that player's box-score lineup still belongs to the original recipient and not the new recipient; ambiguous or missing lineups stop at the preceding week. Ordinary waiver moves and lineup changes don't trigger this cutoff. Reconstruction gaps in Champeens can hide a re-trade, so the cutoff can only use trades in the snapshot. **Raw Player Points does not stop**: its hypothetical hold continues independently.
-
-Scoring Week 1 begins the Thursday after Labor Day; subsequent ESPN scoring weeks begin Tuesday in league time, after Monday Night Football. A Tuesday trade therefore cannot count the previous week's raw points or matchup.
-
-The older **raw player points** section (formerly the "hypothetical hold") remains below for context.
 
 ## Weekly swing chart
 

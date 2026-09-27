@@ -1,18 +1,102 @@
 {
-  "generated_at": "2026-09-26T18:36:40.540295+00:00",
+  "generated_at": "2026-09-27T11:29:53.768039+00:00",
   "first_trade_date": "2026-08-30",
   "discord_imported": false,
   "leagues": [
     {
       "league": "Lana Straw",
       "season": 2026,
-      "generated_at": "2026-09-26T18:36:36.051438+00:00",
+      "generated_at": "2026-09-27T11:29:49.197103+00:00",
       "completed_weeks": [
         1,
         2
       ],
       "first_trade_date": "2026-08-30",
       "trades": [
+        {
+          "id": "1790459702494-9-10",
+          "traded_at": "2026-09-26T21:55:02.494000+00:00",
+          "transaction_week": 3,
+          "weeks": [],
+          "trade_week": null,
+          "sides": [
+            {
+              "team_id": 9,
+              "team": "Jackin' Goff",
+              "sent": [
+                {
+                  "id": 4685720,
+                  "name": "Bryce Young"
+                },
+                {
+                  "id": 4427366,
+                  "name": "Breece Hall"
+                },
+                {
+                  "id": 4869645,
+                  "name": "Caleb Douglas"
+                }
+              ],
+              "received": [
+                {
+                  "id": 16800,
+                  "name": "Davante Adams",
+                  "weeks": {}
+                },
+                {
+                  "id": 4429059,
+                  "name": "Woody Marks",
+                  "weeks": {}
+                },
+                {
+                  "id": 4431611,
+                  "name": "Caleb Williams",
+                  "weeks": {}
+                }
+              ],
+              "weekly_points": {},
+              "total_points": null
+            },
+            {
+              "team_id": 10,
+              "team": "Boom Baum",
+              "sent": [
+                {
+                  "id": 16800,
+                  "name": "Davante Adams"
+                },
+                {
+                  "id": 4429059,
+                  "name": "Woody Marks"
+                },
+                {
+                  "id": 4431611,
+                  "name": "Caleb Williams"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4685720,
+                  "name": "Bryce Young",
+                  "weeks": {}
+                },
+                {
+                  "id": 4427366,
+                  "name": "Breece Hall",
+                  "weeks": {}
+                },
+                {
+                  "id": 4869645,
+                  "name": "Caleb Douglas",
+                  "weeks": {}
+                }
+              ],
+              "weekly_points": {},
+              "total_points": null
+            }
+          ],
+          "receipts": []
+        },
         {
           "id": "1790282630618-10-12",
           "traded_at": "2026-09-24T20:43:50.618000+00:00",
@@ -64,13 +148,7 @@
                 }
               ],
               "weekly_points": {},
-              "total_points": null,
-              "impact": {
-                "weeks": {},
-                "wins_added": null,
-                "net_points": null,
-                "flips": 0
-              }
+              "total_points": null
             },
             {
               "team_id": 12,
@@ -116,17 +194,10 @@
                 }
               ],
               "weekly_points": {},
-              "total_points": null,
-              "impact": {
-                "weeks": {},
-                "wins_added": null,
-                "net_points": null,
-                "flips": 0
-              }
+              "total_points": null
             }
           ],
-          "receipts": [],
-          "impact_cutoff": null
+          "receipts": []
         },
         {
           "id": "1789694404218-6-12",
@@ -184,60 +255,7 @@
               "weekly_points": {
                 "2": 28.2
               },
-              "total_points": 28.2,
-              "impact": {
-                "weeks": {
-                  "2": {
-                    "started_points": 28.2,
-                    "benched_points": 0,
-                    "started": [
-                      {
-                        "name": "Chris Olave",
-                        "slot": "WR",
-                        "points": 18.6
-                      },
-                      {
-                        "name": "Bijan Robinson",
-                        "slot": "RB",
-                        "points": 9.6
-                      }
-                    ],
-                    "replacements": [
-                      {
-                        "slot": "WR",
-                        "name": "Davante Adams",
-                        "points": 36.5,
-                        "replaced": null
-                      },
-                      {
-                        "slot": "RB",
-                        "name": "Javonte Williams",
-                        "points": 6.5,
-                        "replaced": null
-                      },
-                      {
-                        "slot": "RB/WR/TE",
-                        "name": "Garrett Wilson",
-                        "points": 14.2,
-                        "replaced": "Pat Bryant"
-                      }
-                    ],
-                    "score": 144.62,
-                    "alt_score": 172.02,
-                    "net_points": -27.4,
-                    "opponent": "The Scott Ramsays",
-                    "opponent_is_partner": false,
-                    "opponent_score": 76.68,
-                    "opponent_alt_score": 76.68,
-                    "result": "W",
-                    "alt_result": "W",
-                    "flipped": false
-                  }
-                },
-                "wins_added": 0.0,
-                "net_points": -27.4,
-                "flips": 0
-              }
+              "total_points": 28.2
             },
             {
               "team_id": 12,
@@ -289,77 +307,10 @@
               "weekly_points": {
                 "2": 65.2
               },
-              "total_points": 65.2,
-              "impact": {
-                "weeks": {
-                  "2": {
-                    "started_points": 57.2,
-                    "benched_points": 8.0,
-                    "started": [
-                      {
-                        "name": "Garrett Wilson",
-                        "slot": "WR",
-                        "points": 14.2
-                      },
-                      {
-                        "name": "Davante Adams",
-                        "slot": "RB/WR/TE",
-                        "points": 36.5
-                      },
-                      {
-                        "name": "Javonte Williams",
-                        "slot": "RB",
-                        "points": 6.5
-                      }
-                    ],
-                    "replacements": [
-                      {
-                        "slot": "WR",
-                        "name": "Chris Olave",
-                        "points": 18.6,
-                        "replaced": null
-                      },
-                      {
-                        "slot": "RB",
-                        "name": "Bijan Robinson",
-                        "points": 9.6,
-                        "replaced": null
-                      },
-                      {
-                        "slot": "RB/WR/TE",
-                        "name": "Kenny Gainwell",
-                        "points": 3.0,
-                        "replaced": null
-                      }
-                    ],
-                    "score": 112.32,
-                    "alt_score": 86.32,
-                    "net_points": 26.0,
-                    "opponent": "Boom Baum",
-                    "opponent_is_partner": false,
-                    "opponent_score": 89.22,
-                    "opponent_alt_score": 89.22,
-                    "result": "W",
-                    "alt_result": "L",
-                    "flipped": true
-                  }
-                },
-                "wins_added": 1.0,
-                "net_points": 26.0,
-                "flips": 1
-              }
+              "total_points": 65.2
             }
           ],
-          "receipts": [],
-          "impact_cutoff": {
-            "player_id": 16800,
-            "player": "Davante Adams",
-            "team": "Shiny Hineys",
-            "team_id": 12,
-            "to_team_id": 10,
-            "traded_at": "2026-09-24T20:43:50.618000+00:00",
-            "last_week": 2
-          }
+          "receipts": []
         },
         {
           "id": "1789515588236-1-5",
@@ -413,60 +364,7 @@
               "weekly_points": {
                 "2": 22.5
               },
-              "total_points": 22.5,
-              "impact": {
-                "weeks": {
-                  "2": {
-                    "started_points": 19.6,
-                    "benched_points": 2.9,
-                    "started": [
-                      {
-                        "name": "Jaylen Waddle",
-                        "slot": "WR",
-                        "points": 18.8
-                      },
-                      {
-                        "name": "Colston Loveland",
-                        "slot": "TE",
-                        "points": 0.8
-                      }
-                    ],
-                    "replacements": [
-                      {
-                        "slot": "WR",
-                        "name": "Rashee Rice",
-                        "points": 10.3,
-                        "replaced": null
-                      },
-                      {
-                        "slot": "TE",
-                        "name": "George Kittle",
-                        "points": 16.0,
-                        "replaced": null
-                      },
-                      {
-                        "slot": "RB/WR/TE",
-                        "name": "Jaylen Warren",
-                        "points": 8.7,
-                        "replaced": "Stefon Diggs"
-                      }
-                    ],
-                    "score": 78.5,
-                    "alt_score": 74.7,
-                    "net_points": 3.8,
-                    "opponent": "Backdoor Heat",
-                    "opponent_is_partner": true,
-                    "opponent_score": 119.36,
-                    "opponent_alt_score": 127.76,
-                    "result": "L",
-                    "alt_result": "L",
-                    "flipped": false
-                  }
-                },
-                "wins_added": 0.0,
-                "net_points": 3.8,
-                "flips": 0
-              }
+              "total_points": 22.5
             },
             {
               "team_id": 5,
@@ -511,58 +409,10 @@
               "weekly_points": {
                 "2": 19.9
               },
-              "total_points": 19.9,
-              "impact": {
-                "weeks": {
-                  "2": {
-                    "started_points": 11.2,
-                    "benched_points": 8.7,
-                    "started": [
-                      {
-                        "name": "Rashee Rice",
-                        "slot": "WR",
-                        "points": 10.3
-                      },
-                      {
-                        "name": "Dallas Goedert",
-                        "slot": "TE",
-                        "points": 0.9
-                      }
-                    ],
-                    "replacements": [
-                      {
-                        "slot": "WR",
-                        "name": "Jaylen Waddle",
-                        "points": 18.8,
-                        "replaced": null
-                      },
-                      {
-                        "slot": "TE",
-                        "name": "Colston Loveland",
-                        "points": 0.8,
-                        "replaced": null
-                      }
-                    ],
-                    "score": 119.36,
-                    "alt_score": 127.76,
-                    "net_points": -8.4,
-                    "opponent": "Fart Toot Squeek",
-                    "opponent_is_partner": true,
-                    "opponent_score": 78.5,
-                    "opponent_alt_score": 74.7,
-                    "result": "W",
-                    "alt_result": "W",
-                    "flipped": false
-                  }
-                },
-                "wins_added": 0.0,
-                "net_points": -8.4,
-                "flips": 0
-              }
+              "total_points": 19.9
             }
           ],
-          "receipts": [],
-          "impact_cutoff": null
+          "receipts": []
         },
         {
           "id": "1789511455399-6-9",
@@ -594,49 +444,7 @@
               "weekly_points": {
                 "2": 5.8
               },
-              "total_points": 5.8,
-              "impact": {
-                "weeks": {
-                  "2": {
-                    "started_points": 5.8,
-                    "benched_points": 0,
-                    "started": [
-                      {
-                        "name": "Isaiah Likely",
-                        "slot": "TE",
-                        "points": 5.8
-                      }
-                    ],
-                    "replacements": [
-                      {
-                        "slot": "TE",
-                        "name": null,
-                        "points": 0.0,
-                        "replaced": null
-                      },
-                      {
-                        "slot": "RB/WR/TE",
-                        "name": "Kyle Monangai",
-                        "points": 6.8,
-                        "replaced": "Pat Bryant"
-                      }
-                    ],
-                    "score": 144.62,
-                    "alt_score": 144.02,
-                    "net_points": 0.6,
-                    "opponent": "The Scott Ramsays",
-                    "opponent_is_partner": false,
-                    "opponent_score": 76.68,
-                    "opponent_alt_score": 76.68,
-                    "result": "W",
-                    "alt_result": "W",
-                    "flipped": false
-                  }
-                },
-                "wins_added": 0.0,
-                "net_points": 0.6,
-                "flips": 0
-              }
+              "total_points": 5.8
             },
             {
               "team_id": 9,
@@ -659,41 +467,10 @@
               "weekly_points": {
                 "2": 6.8
               },
-              "total_points": 6.8,
-              "impact": {
-                "weeks": {
-                  "2": {
-                    "started_points": 0,
-                    "benched_points": 6.8,
-                    "started": [],
-                    "replacements": [
-                      {
-                        "slot": "RB/WR/TE",
-                        "name": "Isaiah Likely",
-                        "points": 5.8,
-                        "replaced": "Kaelon Black"
-                      }
-                    ],
-                    "score": 81.58,
-                    "alt_score": 84.88,
-                    "net_points": -3.3,
-                    "opponent": "The Guy Next Door",
-                    "opponent_is_partner": false,
-                    "opponent_score": 89.76,
-                    "opponent_alt_score": 89.76,
-                    "result": "L",
-                    "alt_result": "L",
-                    "flipped": false
-                  }
-                },
-                "wins_added": 0.0,
-                "net_points": -3.3,
-                "flips": 0
-              }
+              "total_points": 6.8
             }
           ],
-          "receipts": [],
-          "impact_cutoff": null
+          "receipts": []
         },
         {
           "id": "1789455749347-7-10",
@@ -736,43 +513,7 @@
               "weekly_points": {
                 "2": 6.9
               },
-              "total_points": 6.9,
-              "impact": {
-                "weeks": {
-                  "2": {
-                    "started_points": 6.9,
-                    "benched_points": 0,
-                    "started": [
-                      {
-                        "name": "Drake London",
-                        "slot": "WR",
-                        "points": 6.9
-                      }
-                    ],
-                    "replacements": [
-                      {
-                        "slot": "WR",
-                        "name": "Tetairoa McMillan",
-                        "points": 13.6,
-                        "replaced": null
-                      }
-                    ],
-                    "score": 89.76,
-                    "alt_score": 96.46,
-                    "net_points": -6.7,
-                    "opponent": "Jackin' Goff",
-                    "opponent_is_partner": false,
-                    "opponent_score": 81.58,
-                    "opponent_alt_score": 81.58,
-                    "result": "W",
-                    "alt_result": "W",
-                    "flipped": false
-                  }
-                },
-                "wins_added": 0.0,
-                "net_points": -6.7,
-                "flips": 0
-              }
+              "total_points": 6.9
             },
             {
               "team_id": 10,
@@ -806,58 +547,10 @@
               "weekly_points": {
                 "2": 20.82
               },
-              "total_points": 20.82,
-              "impact": {
-                "weeks": {
-                  "2": {
-                    "started_points": 20.82,
-                    "benched_points": 0,
-                    "started": [
-                      {
-                        "name": "Caleb Williams",
-                        "slot": "QB",
-                        "points": 7.22
-                      },
-                      {
-                        "name": "Tetairoa McMillan",
-                        "slot": "WR",
-                        "points": 13.6
-                      }
-                    ],
-                    "replacements": [
-                      {
-                        "slot": "QB",
-                        "name": "Brock Purdy",
-                        "points": 30.48,
-                        "replaced": null
-                      },
-                      {
-                        "slot": "WR",
-                        "name": "Drake London",
-                        "points": 6.9,
-                        "replaced": null
-                      }
-                    ],
-                    "score": 89.22,
-                    "alt_score": 105.78,
-                    "net_points": -16.56,
-                    "opponent": "Shiny Hineys",
-                    "opponent_is_partner": false,
-                    "opponent_score": 112.32,
-                    "opponent_alt_score": 112.32,
-                    "result": "L",
-                    "alt_result": "L",
-                    "flipped": false
-                  }
-                },
-                "wins_added": 0.0,
-                "net_points": -16.56,
-                "flips": 0
-              }
+              "total_points": 20.82
             }
           ],
-          "receipts": [],
-          "impact_cutoff": null
+          "receipts": []
         },
         {
           "id": "1788301181201-3-10",
@@ -908,60 +601,7 @@
                 "1": 16.3,
                 "2": 30.5
               },
-              "total_points": 46.8,
-              "impact": {
-                "weeks": {
-                  "1": {
-                    "started_points": 16.3,
-                    "benched_points": 0,
-                    "started": [
-                      {
-                        "name": "Ja'Marr Chase",
-                        "slot": "WR",
-                        "points": 2.2
-                      },
-                      {
-                        "name": "Cam Skattebo",
-                        "slot": "RB",
-                        "points": 14.1
-                      }
-                    ],
-                    "replacements": [
-                      {
-                        "slot": "WR",
-                        "name": "Drake London",
-                        "points": 4.5,
-                        "replaced": null
-                      },
-                      {
-                        "slot": "RB",
-                        "name": "Jeremiyah Love",
-                        "points": 12.0,
-                        "replaced": null
-                      },
-                      {
-                        "slot": "RB/WR/TE",
-                        "name": "Michael Pittman Jr.",
-                        "points": 7.3,
-                        "replaced": "Courtland Sutton"
-                      }
-                    ],
-                    "score": 124.06,
-                    "alt_score": 129.46,
-                    "net_points": -5.4,
-                    "opponent": "The Little Bread Boi",
-                    "opponent_is_partner": false,
-                    "opponent_score": 98.3,
-                    "opponent_alt_score": 98.3,
-                    "result": "W",
-                    "alt_result": "W",
-                    "flipped": false
-                  }
-                },
-                "wins_added": 0.0,
-                "net_points": -5.4,
-                "flips": 0
-              }
+              "total_points": 46.8
             },
             {
               "team_id": 10,
@@ -1006,77 +646,10 @@
                 "1": 23.8,
                 "2": 12.9
               },
-              "total_points": 36.7,
-              "impact": {
-                "weeks": {
-                  "1": {
-                    "started_points": 23.8,
-                    "benched_points": 0,
-                    "started": [
-                      {
-                        "name": "Michael Pittman Jr.",
-                        "slot": "RB/WR/TE",
-                        "points": 7.3
-                      },
-                      {
-                        "name": "Drake London",
-                        "slot": "WR",
-                        "points": 4.5
-                      },
-                      {
-                        "name": "Jeremiyah Love",
-                        "slot": "RB/WR/TE",
-                        "points": 12.0
-                      }
-                    ],
-                    "replacements": [
-                      {
-                        "slot": "WR",
-                        "name": "Ja'Marr Chase",
-                        "points": 2.2,
-                        "replaced": null
-                      },
-                      {
-                        "slot": "RB/WR/TE",
-                        "name": "Cam Skattebo",
-                        "points": 14.1,
-                        "replaced": null
-                      },
-                      {
-                        "slot": "RB/WR/TE",
-                        "name": "Aaron Jones Sr.",
-                        "points": 10.0,
-                        "replaced": null
-                      }
-                    ],
-                    "score": 98.8,
-                    "alt_score": 101.3,
-                    "net_points": -2.5,
-                    "opponent": "Diamond Dogs",
-                    "opponent_is_partner": false,
-                    "opponent_score": 134.86,
-                    "opponent_alt_score": 134.86,
-                    "result": "L",
-                    "alt_result": "L",
-                    "flipped": false
-                  }
-                },
-                "wins_added": 0.0,
-                "net_points": -2.5,
-                "flips": 0
-              }
+              "total_points": 36.7
             }
           ],
-          "receipts": [],
-          "impact_cutoff": {
-            "player_id": 4426502,
-            "player": "Drake London",
-            "team": "Boom Baum",
-            "team_id": 10,
-            "to_team_id": 7,
-            "traded_at": "2026-09-15T07:02:29.347000+00:00",
-            "last_week": 1
-          }
+          "receipts": []
         },
         {
           "id": "1788209266583-4-10",
@@ -1135,13 +708,7 @@
                 "1": 69.6,
                 "2": 15.4
               },
-              "total_points": 85.0,
-              "impact": {
-                "weeks": {},
-                "wins_added": null,
-                "net_points": null,
-                "flips": 0
-              }
+              "total_points": 85.0
             },
             {
               "team_id": 10,
@@ -1190,25 +757,10 @@
                 "1": 16.7,
                 "2": 40.5
               },
-              "total_points": 57.2,
-              "impact": {
-                "weeks": {},
-                "wins_added": null,
-                "net_points": null,
-                "flips": 0
-              }
+              "total_points": 57.2
             }
           ],
-          "receipts": [],
-          "impact_cutoff": {
-            "player_id": 4362628,
-            "player": "Ja'Marr Chase",
-            "team": "Boom Baum",
-            "team_id": 10,
-            "to_team_id": 3,
-            "traded_at": "2026-09-01T22:19:41.201000+00:00",
-            "last_week": null
-          }
+          "receipts": []
         }
       ],
       "alternate_standings": {
@@ -1344,7 +896,7 @@
           },
           {
             "team_id": 8,
-            "team": "The Little Bread Boi",
+            "team": "H-Town Holy Rollers",
             "actual_wins": 0,
             "actual_losses": 2,
             "actual_ties": 0,
@@ -1430,6 +982,645 @@
         ],
         "source": "weekly_box_scores"
       },
+      "weekly_roster_moves": {
+        "rows": [
+          {
+            "week": 1,
+            "team_id": 3,
+            "team": "Texas Tornado's Bush",
+            "trade_count": 1,
+            "trade_ids": [
+              "1788301181201-3-10"
+            ],
+            "received": [
+              {
+                "id": 4362628,
+                "name": "Ja'Marr Chase"
+              },
+              {
+                "id": 4696981,
+                "name": "Cam Skattebo"
+              }
+            ],
+            "sent": [
+              {
+                "id": 4035687,
+                "name": "Michael Pittman Jr."
+              },
+              {
+                "id": 4426502,
+                "name": "Drake London"
+              },
+              {
+                "id": 4870808,
+                "name": "Jeremiyah Love"
+              }
+            ],
+            "actual_score": 124.06,
+            "alternate_score": 129.46,
+            "net_points": -5.4,
+            "opponent": "H-Town Holy Rollers",
+            "opponent_score": 98.3,
+            "opponent_alternate_score": 98.3,
+            "result": "W",
+            "alternate_result": "W",
+            "flipped": false,
+            "replacements": [
+              {
+                "slot": "WR",
+                "name": "Drake London",
+                "points": 4.5,
+                "replaced": null
+              },
+              {
+                "slot": "RB",
+                "name": "Jeremiyah Love",
+                "points": 12.0,
+                "replaced": null
+              },
+              {
+                "slot": "RB/WR/TE",
+                "name": "Michael Pittman Jr.",
+                "points": 7.3,
+                "replaced": "Courtland Sutton"
+              }
+            ],
+            "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
+          },
+          {
+            "week": 1,
+            "team_id": 10,
+            "team": "Boom Baum",
+            "trade_count": 2,
+            "trade_ids": [
+              "1788301181201-3-10",
+              "1788209266583-4-10"
+            ],
+            "received": [
+              {
+                "id": 3042519,
+                "name": "Aaron Jones Sr."
+              },
+              {
+                "id": 4035687,
+                "name": "Michael Pittman Jr."
+              },
+              {
+                "id": 4426502,
+                "name": "Drake London"
+              },
+              {
+                "id": 4429059,
+                "name": "Woody Marks"
+              },
+              {
+                "id": 4870808,
+                "name": "Jeremiyah Love"
+              }
+            ],
+            "sent": [
+              {
+                "id": 3126486,
+                "name": "Deebo Samuel Sr."
+              },
+              {
+                "id": 4035538,
+                "name": "David Montgomery"
+              },
+              {
+                "id": 4262921,
+                "name": "Justin Jefferson"
+              },
+              {
+                "id": 4696981,
+                "name": "Cam Skattebo"
+              }
+            ],
+            "actual_score": 98.8,
+            "alternate_score": 143.7,
+            "net_points": -44.9,
+            "opponent": "Diamond Dogs",
+            "opponent_score": 134.86,
+            "opponent_alternate_score": 92.36,
+            "result": "L",
+            "alternate_result": "W",
+            "flipped": true,
+            "replacements": [
+              {
+                "slot": "WR",
+                "name": "Justin Jefferson",
+                "points": 27.2,
+                "replaced": null
+              },
+              {
+                "slot": "RB/WR/TE",
+                "name": "Cam Skattebo",
+                "points": 14.1,
+                "replaced": null
+              },
+              {
+                "slot": "RB/WR/TE",
+                "name": "David Montgomery",
+                "points": 27.4,
+                "replaced": null
+              }
+            ],
+            "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
+          },
+          {
+            "week": 1,
+            "team_id": 4,
+            "team": "Diamond Dogs",
+            "trade_count": 1,
+            "trade_ids": [
+              "1788209266583-4-10"
+            ],
+            "received": [
+              {
+                "id": 3126486,
+                "name": "Deebo Samuel Sr."
+              },
+              {
+                "id": 4035538,
+                "name": "David Montgomery"
+              },
+              {
+                "id": 4262921,
+                "name": "Justin Jefferson"
+              }
+            ],
+            "sent": [
+              {
+                "id": 3042519,
+                "name": "Aaron Jones Sr."
+              },
+              {
+                "id": 4362628,
+                "name": "Ja'Marr Chase"
+              },
+              {
+                "id": 4429059,
+                "name": "Woody Marks"
+              }
+            ],
+            "actual_score": 134.86,
+            "alternate_score": 92.36,
+            "net_points": 42.5,
+            "opponent": "Boom Baum",
+            "opponent_score": 98.8,
+            "opponent_alternate_score": 143.7,
+            "result": "W",
+            "alternate_result": "L",
+            "flipped": true,
+            "replacements": [
+              {
+                "slot": "WR",
+                "name": "Ja'Marr Chase",
+                "points": 2.2,
+                "replaced": null
+              },
+              {
+                "slot": "RB/WR/TE",
+                "name": "Malik Nabers",
+                "points": 9.9,
+                "replaced": null
+              }
+            ],
+            "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
+          },
+          {
+            "week": 2,
+            "team_id": 6,
+            "team": "The Kickers n Jigba",
+            "trade_count": 2,
+            "trade_ids": [
+              "1789694404218-6-12",
+              "1789511455399-6-9"
+            ],
+            "received": [
+              {
+                "id": 4361050,
+                "name": "Isaiah Likely"
+              },
+              {
+                "id": 4361370,
+                "name": "Chris Olave"
+              },
+              {
+                "id": 4426385,
+                "name": "Zach Charbonnet"
+              },
+              {
+                "id": 4430807,
+                "name": "Bijan Robinson"
+              }
+            ],
+            "sent": [
+              {
+                "id": 16800,
+                "name": "Davante Adams"
+              },
+              {
+                "id": 4361579,
+                "name": "Javonte Williams"
+              },
+              {
+                "id": 4569618,
+                "name": "Garrett Wilson"
+              },
+              {
+                "id": 4608686,
+                "name": "Kyle Monangai"
+              },
+              {
+                "id": 4685247,
+                "name": "Braelon Allen"
+              }
+            ],
+            "actual_score": 144.62,
+            "alternate_score": 169.72,
+            "net_points": -25.1,
+            "opponent": "The Scott Ramsays",
+            "opponent_score": 76.68,
+            "opponent_alternate_score": 76.68,
+            "result": "W",
+            "alternate_result": "W",
+            "flipped": false,
+            "replacements": [
+              {
+                "slot": "TE",
+                "name": null,
+                "points": 0.0,
+                "replaced": null
+              },
+              {
+                "slot": "WR",
+                "name": "Davante Adams",
+                "points": 36.5,
+                "replaced": null
+              },
+              {
+                "slot": "RB",
+                "name": "Javonte Williams",
+                "points": 6.5,
+                "replaced": null
+              },
+              {
+                "slot": "RB/WR/TE",
+                "name": "Garrett Wilson",
+                "points": 14.2,
+                "replaced": "Pat Bryant"
+              },
+              {
+                "slot": "RB/WR/TE",
+                "name": "Kyle Monangai",
+                "points": 6.8,
+                "replaced": "Jakobi Meyers"
+              }
+            ],
+            "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
+          },
+          {
+            "week": 2,
+            "team_id": 12,
+            "team": "Shiny Hineys",
+            "trade_count": 1,
+            "trade_ids": [
+              "1789694404218-6-12"
+            ],
+            "received": [
+              {
+                "id": 16800,
+                "name": "Davante Adams"
+              },
+              {
+                "id": 4361579,
+                "name": "Javonte Williams"
+              },
+              {
+                "id": 4569618,
+                "name": "Garrett Wilson"
+              },
+              {
+                "id": 4685247,
+                "name": "Braelon Allen"
+              }
+            ],
+            "sent": [
+              {
+                "id": 4361370,
+                "name": "Chris Olave"
+              },
+              {
+                "id": 4426385,
+                "name": "Zach Charbonnet"
+              },
+              {
+                "id": 4430807,
+                "name": "Bijan Robinson"
+              }
+            ],
+            "actual_score": 112.32,
+            "alternate_score": 86.32,
+            "net_points": 26.0,
+            "opponent": "Boom Baum",
+            "opponent_score": 89.22,
+            "opponent_alternate_score": 105.78,
+            "result": "W",
+            "alternate_result": "L",
+            "flipped": true,
+            "replacements": [
+              {
+                "slot": "WR",
+                "name": "Chris Olave",
+                "points": 18.6,
+                "replaced": null
+              },
+              {
+                "slot": "RB",
+                "name": "Bijan Robinson",
+                "points": 9.6,
+                "replaced": null
+              },
+              {
+                "slot": "RB/WR/TE",
+                "name": "Kenny Gainwell",
+                "points": 3.0,
+                "replaced": null
+              }
+            ],
+            "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
+          },
+          {
+            "week": 2,
+            "team_id": 1,
+            "team": "Fart Toot Squeek",
+            "trade_count": 1,
+            "trade_ids": [
+              "1789515588236-1-5"
+            ],
+            "received": [
+              {
+                "id": 4372016,
+                "name": "Jaylen Waddle"
+              },
+              {
+                "id": 4373626,
+                "name": "Tyler Allgeier"
+              },
+              {
+                "id": 4723086,
+                "name": "Colston Loveland"
+              }
+            ],
+            "sent": [
+              {
+                "id": 3121023,
+                "name": "Dallas Goedert"
+              },
+              {
+                "id": 4428331,
+                "name": "Rashee Rice"
+              },
+              {
+                "id": 4569987,
+                "name": "Jaylen Warren"
+              }
+            ],
+            "actual_score": 78.5,
+            "alternate_score": 74.7,
+            "net_points": 3.8,
+            "opponent": "Backdoor Heat",
+            "opponent_score": 119.36,
+            "opponent_alternate_score": 127.76,
+            "result": "L",
+            "alternate_result": "L",
+            "flipped": false,
+            "replacements": [
+              {
+                "slot": "WR",
+                "name": "Rashee Rice",
+                "points": 10.3,
+                "replaced": null
+              },
+              {
+                "slot": "TE",
+                "name": "George Kittle",
+                "points": 16.0,
+                "replaced": null
+              },
+              {
+                "slot": "RB/WR/TE",
+                "name": "Jaylen Warren",
+                "points": 8.7,
+                "replaced": "Stefon Diggs"
+              }
+            ],
+            "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
+          },
+          {
+            "week": 2,
+            "team_id": 5,
+            "team": "Backdoor Heat",
+            "trade_count": 1,
+            "trade_ids": [
+              "1789515588236-1-5"
+            ],
+            "received": [
+              {
+                "id": 3121023,
+                "name": "Dallas Goedert"
+              },
+              {
+                "id": 4428331,
+                "name": "Rashee Rice"
+              },
+              {
+                "id": 4569987,
+                "name": "Jaylen Warren"
+              }
+            ],
+            "sent": [
+              {
+                "id": 4372016,
+                "name": "Jaylen Waddle"
+              },
+              {
+                "id": 4373626,
+                "name": "Tyler Allgeier"
+              },
+              {
+                "id": 4723086,
+                "name": "Colston Loveland"
+              }
+            ],
+            "actual_score": 119.36,
+            "alternate_score": 127.76,
+            "net_points": -8.4,
+            "opponent": "Fart Toot Squeek",
+            "opponent_score": 78.5,
+            "opponent_alternate_score": 74.7,
+            "result": "W",
+            "alternate_result": "W",
+            "flipped": false,
+            "replacements": [
+              {
+                "slot": "WR",
+                "name": "Jaylen Waddle",
+                "points": 18.8,
+                "replaced": null
+              },
+              {
+                "slot": "TE",
+                "name": "Colston Loveland",
+                "points": 0.8,
+                "replaced": null
+              }
+            ],
+            "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
+          },
+          {
+            "week": 2,
+            "team_id": 9,
+            "team": "Jackin' Goff",
+            "trade_count": 1,
+            "trade_ids": [
+              "1789511455399-6-9"
+            ],
+            "received": [
+              {
+                "id": 4608686,
+                "name": "Kyle Monangai"
+              }
+            ],
+            "sent": [
+              {
+                "id": 4361050,
+                "name": "Isaiah Likely"
+              }
+            ],
+            "actual_score": 81.58,
+            "alternate_score": 84.88,
+            "net_points": -3.3,
+            "opponent": "The Guy Next Door",
+            "opponent_score": 89.76,
+            "opponent_alternate_score": 96.46,
+            "result": "L",
+            "alternate_result": "L",
+            "flipped": false,
+            "replacements": [
+              {
+                "slot": "RB/WR/TE",
+                "name": "Isaiah Likely",
+                "points": 5.8,
+                "replaced": "Kaelon Black"
+              }
+            ],
+            "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
+          },
+          {
+            "week": 2,
+            "team_id": 7,
+            "team": "The Guy Next Door",
+            "trade_count": 1,
+            "trade_ids": [
+              "1789455749347-7-10"
+            ],
+            "received": [
+              {
+                "id": 4426502,
+                "name": "Drake London"
+              },
+              {
+                "id": 5081397,
+                "name": "Dylan Sampson"
+              }
+            ],
+            "sent": [
+              {
+                "id": 4431611,
+                "name": "Caleb Williams"
+              },
+              {
+                "id": 4685472,
+                "name": "Tetairoa McMillan"
+              }
+            ],
+            "actual_score": 89.76,
+            "alternate_score": 96.46,
+            "net_points": -6.7,
+            "opponent": "Jackin' Goff",
+            "opponent_score": 81.58,
+            "opponent_alternate_score": 84.88,
+            "result": "W",
+            "alternate_result": "W",
+            "flipped": false,
+            "replacements": [
+              {
+                "slot": "WR",
+                "name": "Tetairoa McMillan",
+                "points": 13.6,
+                "replaced": null
+              }
+            ],
+            "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
+          },
+          {
+            "week": 2,
+            "team_id": 10,
+            "team": "Boom Baum",
+            "trade_count": 1,
+            "trade_ids": [
+              "1789455749347-7-10"
+            ],
+            "received": [
+              {
+                "id": 4431611,
+                "name": "Caleb Williams"
+              },
+              {
+                "id": 4685472,
+                "name": "Tetairoa McMillan"
+              }
+            ],
+            "sent": [
+              {
+                "id": 4426502,
+                "name": "Drake London"
+              },
+              {
+                "id": 5081397,
+                "name": "Dylan Sampson"
+              }
+            ],
+            "actual_score": 89.22,
+            "alternate_score": 105.78,
+            "net_points": -16.56,
+            "opponent": "Shiny Hineys",
+            "opponent_score": 112.32,
+            "opponent_alternate_score": 86.32,
+            "result": "L",
+            "alternate_result": "W",
+            "flipped": true,
+            "replacements": [
+              {
+                "slot": "QB",
+                "name": "Brock Purdy",
+                "points": 30.48,
+                "replaced": null
+              },
+              {
+                "slot": "WR",
+                "name": "Drake London",
+                "points": 6.9,
+                "replaced": null
+              }
+            ],
+            "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
+          }
+        ],
+        "source": "weekly_trade_bundles"
+      },
       "source": "activity",
       "discord_imported": false,
       "key": "premier",
@@ -1439,7 +1630,7 @@
     {
       "league": "Lana Straw Champeens League",
       "season": 2026,
-      "generated_at": "2026-09-26T18:36:40.540226+00:00",
+      "generated_at": "2026-09-27T11:29:53.767966+00:00",
       "completed_weeks": [
         1,
         2
@@ -1470,13 +1661,7 @@
                 }
               ],
               "weekly_points": {},
-              "total_points": null,
-              "impact": {
-                "weeks": {},
-                "wins_added": null,
-                "net_points": null,
-                "flips": 0
-              }
+              "total_points": null
             },
             {
               "team_id": 9,
@@ -1495,17 +1680,10 @@
                 }
               ],
               "weekly_points": {},
-              "total_points": null,
-              "impact": {
-                "weeks": {},
-                "wins_added": null,
-                "net_points": null,
-                "flips": 0
-              }
+              "total_points": null
             }
           ],
-          "receipts": [],
-          "impact_cutoff": null
+          "receipts": []
         },
         {
           "id": "1788272081062-9-10",
@@ -1564,122 +1742,7 @@
                 "1": 53.1,
                 "2": 33.6
               },
-              "total_points": 86.7,
-              "impact": {
-                "weeks": {
-                  "1": {
-                    "started_points": 53.1,
-                    "benched_points": 0,
-                    "started": [
-                      {
-                        "name": "Javonte Williams",
-                        "slot": "RB",
-                        "points": 21.7
-                      },
-                      {
-                        "name": "Ashton Jeanty",
-                        "slot": "RB",
-                        "points": 30.7
-                      },
-                      {
-                        "name": "Jaylen Waddle",
-                        "slot": "WR",
-                        "points": 0.7
-                      }
-                    ],
-                    "replacements": [
-                      {
-                        "slot": "RB",
-                        "name": "De'Von Achane",
-                        "points": 8.6,
-                        "replaced": null
-                      },
-                      {
-                        "slot": "RB",
-                        "name": "Chris Brooks",
-                        "points": 2.9,
-                        "replaced": null
-                      },
-                      {
-                        "slot": "WR",
-                        "name": "Tetairoa McMillan",
-                        "points": 8.0,
-                        "replaced": null
-                      },
-                      {
-                        "slot": "RB/WR/TE",
-                        "name": "A.J. Brown",
-                        "points": 4.1,
-                        "replaced": "Rashid Shaheed"
-                      }
-                    ],
-                    "score": 95.1,
-                    "alt_score": 64.7,
-                    "net_points": 30.4,
-                    "opponent": "OKC Schlegstas",
-                    "opponent_is_partner": false,
-                    "opponent_score": 91.62,
-                    "opponent_alt_score": 91.62,
-                    "result": "W",
-                    "alt_result": "L",
-                    "flipped": true
-                  },
-                  "2": {
-                    "started_points": 33.6,
-                    "benched_points": 0,
-                    "started": [
-                      {
-                        "name": "Javonte Williams",
-                        "slot": "RB",
-                        "points": 6.5
-                      },
-                      {
-                        "name": "Ashton Jeanty",
-                        "slot": "RB",
-                        "points": 8.3
-                      },
-                      {
-                        "name": "Jaylen Waddle",
-                        "slot": "WR",
-                        "points": 18.8
-                      }
-                    ],
-                    "replacements": [
-                      {
-                        "slot": "RB",
-                        "name": "De'Von Achane",
-                        "points": 10.8,
-                        "replaced": null
-                      },
-                      {
-                        "slot": "RB",
-                        "name": "Chris Brooks",
-                        "points": 3.1,
-                        "replaced": null
-                      },
-                      {
-                        "slot": "WR",
-                        "name": "Tetairoa McMillan",
-                        "points": 13.6,
-                        "replaced": null
-                      }
-                    ],
-                    "score": 76.1,
-                    "alt_score": 70.0,
-                    "net_points": 6.1,
-                    "opponent": "Neaux Gold, All Glory",
-                    "opponent_is_partner": false,
-                    "opponent_score": 73.52,
-                    "opponent_alt_score": 73.52,
-                    "result": "W",
-                    "alt_result": "L",
-                    "flipped": true
-                  }
-                },
-                "wins_added": 2.0,
-                "net_points": 36.5,
-                "flips": 2
-              }
+              "total_points": 86.7
             },
             {
               "team_id": 10,
@@ -1728,129 +1791,10 @@
                 "1": 20.7,
                 "2": 24.4
               },
-              "total_points": 45.1,
-              "impact": {
-                "weeks": {
-                  "1": {
-                    "started_points": 20.7,
-                    "benched_points": 0,
-                    "started": [
-                      {
-                        "name": "De'Von Achane",
-                        "slot": "RB/WR/TE",
-                        "points": 8.6
-                      },
-                      {
-                        "name": "A.J. Brown",
-                        "slot": "WR",
-                        "points": 4.1
-                      },
-                      {
-                        "name": "Tetairoa McMillan",
-                        "slot": "WR",
-                        "points": 8.0
-                      }
-                    ],
-                    "replacements": [
-                      {
-                        "slot": "WR",
-                        "name": "Jaylen Waddle",
-                        "points": 0.7,
-                        "replaced": null
-                      },
-                      {
-                        "slot": "WR",
-                        "name": "Michael Pittman Jr.",
-                        "points": 7.3,
-                        "replaced": null
-                      },
-                      {
-                        "slot": "RB/WR/TE",
-                        "name": "Ashton Jeanty",
-                        "points": 30.7,
-                        "replaced": null
-                      },
-                      {
-                        "slot": "RB/WR/TE",
-                        "name": "Javonte Williams",
-                        "points": 21.7,
-                        "replaced": "Parker Washington"
-                      }
-                    ],
-                    "score": 128.46,
-                    "alt_score": 151.36,
-                    "net_points": -22.9,
-                    "opponent": "Jordan's Trainers",
-                    "opponent_is_partner": false,
-                    "opponent_score": 91.12,
-                    "opponent_alt_score": 91.12,
-                    "result": "W",
-                    "alt_result": "W",
-                    "flipped": false
-                  },
-                  "2": {
-                    "started_points": 24.4,
-                    "benched_points": 0,
-                    "started": [
-                      {
-                        "name": "De'Von Achane",
-                        "slot": "RB",
-                        "points": 10.8
-                      },
-                      {
-                        "name": "Tetairoa McMillan",
-                        "slot": "WR",
-                        "points": 13.6
-                      }
-                    ],
-                    "replacements": [
-                      {
-                        "slot": "RB",
-                        "name": "Ashton Jeanty",
-                        "points": 8.3,
-                        "replaced": null
-                      },
-                      {
-                        "slot": "WR",
-                        "name": "Jaylen Waddle",
-                        "points": 18.8,
-                        "replaced": null
-                      },
-                      {
-                        "slot": "RB/WR/TE",
-                        "name": "Javonte Williams",
-                        "points": 6.5,
-                        "replaced": "Colston Loveland"
-                      }
-                    ],
-                    "score": 112.72,
-                    "alt_score": 121.12,
-                    "net_points": -8.4,
-                    "opponent": "Amburgers",
-                    "opponent_is_partner": false,
-                    "opponent_score": 122.28,
-                    "opponent_alt_score": 122.28,
-                    "result": "L",
-                    "alt_result": "L",
-                    "flipped": false
-                  }
-                },
-                "wins_added": 0.0,
-                "net_points": -31.3,
-                "flips": 0
-              }
+              "total_points": 45.1
             }
           ],
-          "receipts": [],
-          "impact_cutoff": {
-            "player_id": 4890973,
-            "player": "Ashton Jeanty",
-            "team": "Madison Beer",
-            "team_id": 9,
-            "to_team_id": 8,
-            "traded_at": "2026-09-25T03:05:29.049000+00:00",
-            "last_week": 2
-          }
+          "receipts": []
         },
         {
           "id": "1789092607492-11-12",
@@ -1885,46 +1829,7 @@
                 "1": 4.0,
                 "2": 8.0
               },
-              "total_points": 12.0,
-              "impact": {
-                "weeks": {
-                  "1": {
-                    "started_points": 0,
-                    "benched_points": 4.0,
-                    "started": [],
-                    "replacements": [],
-                    "score": 133.46,
-                    "alt_score": 133.46,
-                    "net_points": 0.0,
-                    "opponent": "Jerry GM + Jerry Owner",
-                    "opponent_is_partner": false,
-                    "opponent_score": 135.16,
-                    "opponent_alt_score": 135.16,
-                    "result": "L",
-                    "alt_result": "L",
-                    "flipped": false
-                  },
-                  "2": {
-                    "started_points": 0,
-                    "benched_points": 8.0,
-                    "started": [],
-                    "replacements": [],
-                    "score": 73.52,
-                    "alt_score": 73.52,
-                    "net_points": 0.0,
-                    "opponent": "Madison Beer",
-                    "opponent_is_partner": false,
-                    "opponent_score": 76.1,
-                    "opponent_alt_score": 76.1,
-                    "result": "L",
-                    "alt_result": "L",
-                    "flipped": false
-                  }
-                },
-                "wins_added": 0.0,
-                "net_points": 0.0,
-                "flips": 0
-              }
+              "total_points": 12.0
             },
             {
               "team_id": 12,
@@ -1949,50 +1854,10 @@
                 "1": 0.0,
                 "2": 13.3
               },
-              "total_points": 13.3,
-              "impact": {
-                "weeks": {
-                  "1": {
-                    "started_points": 0,
-                    "benched_points": 0.0,
-                    "started": [],
-                    "replacements": [],
-                    "score": 122.24,
-                    "alt_score": 122.24,
-                    "net_points": 0.0,
-                    "opponent": "Chase Is My Leader",
-                    "opponent_is_partner": false,
-                    "opponent_score": 95.3,
-                    "opponent_alt_score": 95.3,
-                    "result": "W",
-                    "alt_result": "W",
-                    "flipped": false
-                  },
-                  "2": {
-                    "started_points": 0,
-                    "benched_points": 13.3,
-                    "started": [],
-                    "replacements": [],
-                    "score": 122.28,
-                    "alt_score": 122.28,
-                    "net_points": 0.0,
-                    "opponent": "Cowboys September Dreams",
-                    "opponent_is_partner": false,
-                    "opponent_score": 112.72,
-                    "opponent_alt_score": 112.72,
-                    "result": "W",
-                    "alt_result": "W",
-                    "flipped": false
-                  }
-                },
-                "wins_added": 0.0,
-                "net_points": 0.0,
-                "flips": 0
-              }
+              "total_points": 13.3
             }
           ],
-          "receipts": [],
-          "impact_cutoff": null
+          "receipts": []
         }
       ],
       "alternate_standings": {
@@ -2213,6 +2078,221 @@
           }
         ],
         "source": "weekly_box_scores"
+      },
+      "weekly_roster_moves": {
+        "rows": [
+          {
+            "week": 1,
+            "team_id": 9,
+            "team": "Madison Beer",
+            "trade_count": 1,
+            "trade_ids": [
+              "1788272081062-9-10"
+            ],
+            "received": [
+              {
+                "id": 4361579,
+                "name": "Javonte Williams"
+              },
+              {
+                "id": 4372016,
+                "name": "Jaylen Waddle"
+              },
+              {
+                "id": 4890973,
+                "name": "Ashton Jeanty"
+              }
+            ],
+            "sent": [
+              {
+                "id": 4047646,
+                "name": "A.J. Brown"
+              },
+              {
+                "id": 4429160,
+                "name": "De'Von Achane"
+              },
+              {
+                "id": 4685472,
+                "name": "Tetairoa McMillan"
+              }
+            ],
+            "actual_score": 95.1,
+            "alternate_score": 64.7,
+            "net_points": 30.4,
+            "opponent": "OKC Schlegstas",
+            "opponent_score": 91.62,
+            "opponent_alternate_score": 91.62,
+            "result": "W",
+            "alternate_result": "L",
+            "flipped": true,
+            "replacements": [
+              {
+                "slot": "RB",
+                "name": "De'Von Achane",
+                "points": 8.6,
+                "replaced": null
+              },
+              {
+                "slot": "RB",
+                "name": "Chris Brooks",
+                "points": 2.9,
+                "replaced": null
+              },
+              {
+                "slot": "WR",
+                "name": "Tetairoa McMillan",
+                "points": 8.0,
+                "replaced": null
+              },
+              {
+                "slot": "RB/WR/TE",
+                "name": "A.J. Brown",
+                "points": 4.1,
+                "replaced": "Rashid Shaheed"
+              }
+            ],
+            "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
+          },
+          {
+            "week": 1,
+            "team_id": 10,
+            "team": "Cowboys September Dreams",
+            "trade_count": 1,
+            "trade_ids": [
+              "1788272081062-9-10"
+            ],
+            "received": [
+              {
+                "id": 4047646,
+                "name": "A.J. Brown"
+              },
+              {
+                "id": 4429160,
+                "name": "De'Von Achane"
+              },
+              {
+                "id": 4685472,
+                "name": "Tetairoa McMillan"
+              }
+            ],
+            "sent": [
+              {
+                "id": 4361579,
+                "name": "Javonte Williams"
+              },
+              {
+                "id": 4372016,
+                "name": "Jaylen Waddle"
+              },
+              {
+                "id": 4890973,
+                "name": "Ashton Jeanty"
+              }
+            ],
+            "actual_score": 128.46,
+            "alternate_score": 151.36,
+            "net_points": -22.9,
+            "opponent": "Jordan's Trainers",
+            "opponent_score": 91.12,
+            "opponent_alternate_score": 91.12,
+            "result": "W",
+            "alternate_result": "W",
+            "flipped": false,
+            "replacements": [
+              {
+                "slot": "WR",
+                "name": "Jaylen Waddle",
+                "points": 0.7,
+                "replaced": null
+              },
+              {
+                "slot": "WR",
+                "name": "Michael Pittman Jr.",
+                "points": 7.3,
+                "replaced": null
+              },
+              {
+                "slot": "RB/WR/TE",
+                "name": "Ashton Jeanty",
+                "points": 30.7,
+                "replaced": null
+              },
+              {
+                "slot": "RB/WR/TE",
+                "name": "Javonte Williams",
+                "points": 21.7,
+                "replaced": "Parker Washington"
+              }
+            ],
+            "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
+          },
+          {
+            "week": 1,
+            "team_id": 11,
+            "team": "Neaux Gold, All Glory",
+            "trade_count": 1,
+            "trade_ids": [
+              "1789092607492-11-12"
+            ],
+            "received": [
+              {
+                "id": 4685247,
+                "name": "Braelon Allen"
+              }
+            ],
+            "sent": [
+              {
+                "id": 4702555,
+                "name": "Jonah Coleman"
+              }
+            ],
+            "actual_score": 133.46,
+            "alternate_score": 133.46,
+            "net_points": 0.0,
+            "opponent": "Jerry GM + Jerry Owner",
+            "opponent_score": 135.16,
+            "opponent_alternate_score": 135.16,
+            "result": "L",
+            "alternate_result": "L",
+            "flipped": false,
+            "replacements": [],
+            "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
+          },
+          {
+            "week": 1,
+            "team_id": 12,
+            "team": "Amburgers",
+            "trade_count": 1,
+            "trade_ids": [
+              "1789092607492-11-12"
+            ],
+            "received": [
+              {
+                "id": 4702555,
+                "name": "Jonah Coleman"
+              }
+            ],
+            "sent": [
+              {
+                "id": 4685247,
+                "name": "Braelon Allen"
+              }
+            ],
+            "actual_score": 122.24,
+            "alternate_score": 122.24,
+            "net_points": 0.0,
+            "opponent": "Chase Is My Leader",
+            "opponent_score": 95.3,
+            "opponent_alternate_score": 95.3,
+            "result": "W",
+            "alternate_result": "W",
+            "flipped": false,
+            "replacements": [],
+            "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
+          }
+        ],
+        "source": "weekly_trade_bundles"
       },
       "source": "reconstructed",
       "discord_imported": false,

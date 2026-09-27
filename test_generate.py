@@ -7,7 +7,7 @@ import unittest
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
-from generate import GUILD_ID, add_matchup_impact, alternate_standings, build_snapshot, optimal_lineup_points, parse_discord_export, reconstruct_trades, refill_lineup, transaction_week, week_start
+from generate import GUILD_ID, add_matchup_impact, alternate_standings, build_snapshot, optimal_lineup_points, parse_discord_export, reconstruct_trades, refill_lineup, transaction_week, week_start, weekly_roster_moves
 
 
 def player(player_id, name, week_points):
@@ -134,8 +134,8 @@ class SnapshotTests(unittest.TestCase):
         earlier = next(trade for trade in trades if trade["traded_at"] == first.astimezone(timezone.utc).isoformat())
         self.assertEqual(earlier["sides"][0]["received"][0]["weeks"]["2"], 13.6)
         self.assertEqual(earlier["sides"][0]["total_points"], 13.6)
-        self.assertEqual(list(earlier["sides"][0]["impact"]["weeks"]), ["1"])
-        self.assertEqual(earlier["impact_cutoff"]["last_week"], 1)
+        self.assertNotIn("impact_cutoff", earlier)
+        self.assertTrue(all("impact" not in side for side in earlier["sides"]))
 
     def test_discord_filter_and_proximity(self):
         with tempfile.TemporaryDirectory() as folder:
@@ -439,6 +439,63 @@ class MatchupImpactTest(unittest.TestCase):
         self.assertEqual(gold["flips"], 1)
         self.assertEqual(week["started_points"], 30)
 
+
+class WeeklyRosterMovesTest(unittest.TestCase):
+    def test_bundles_same_week_trades_and_cancels_intermediate_players(self):
+        manager = SimpleNamespace(team_id=1, team_name="Manager")
+        opponent = SimpleNamespace(team_id=2, team_name="Opponent")
+        third = SimpleNamespace(team_id=3, team_name="Third")
+        league = SimpleNamespace(
+            year=2026,
+            current_week=2,
+            box_scores=lambda week: [SimpleNamespace(
+                home_team=manager,
+                away_team=opponent,
+                home_score=100,
+                away_score=95,
+                home_lineup=[
+                    box_entry(300, "Final WR", "WR", 30, 14, ["WR"]),
+                    box_entry(400, "QB", "QB", 70, 20, ["QB"]),
+                    box_entry(500, "Bench WR", "BE", 5, 8, ["WR"]),
+                ],
+                away_lineup=[box_entry(600, "Opponent QB", "QB", 95, 20, ["QB"])],
+            )],
+        )
+        trades = [
+            {
+                "id": "one", "transaction_week": 1,
+                "sides": [
+                    {"team_id": 1, "team": "Manager", "received": [{"id": 200, "name": "Middle WR"}], "sent": [{"id": 100, "name": "Original WR"}]},
+                    {"team_id": 2, "team": "Opponent", "received": [{"id": 100, "name": "Original WR"}], "sent": [{"id": 200, "name": "Middle WR"}]},
+                ],
+            },
+            {
+                "id": "two", "transaction_week": 1,
+                "sides": [
+                    {"team_id": 1, "team": "Manager", "received": [{"id": 300, "name": "Final WR"}], "sent": [{"id": 200, "name": "Middle WR"}]},
+                    {"team_id": 3, "team": "Third", "received": [{"id": 200, "name": "Middle WR"}], "sent": [{"id": 300, "name": "Final WR"}]},
+                ],
+            },
+        ]
+        players = {
+            100: SimpleNamespace(
+                playerId=100, name="Original WR", eligibleSlots=["WR"],
+                stats={1: {"points": 10, "projected_points": 12}},
+            ),
+        }
+        row = next(
+            row for row in weekly_roster_moves(league, trades, players)["rows"]
+            if row["team_id"] == 1
+        )
+        self.assertEqual(row["trade_count"], 2)
+        self.assertEqual(row["received"], [{"id": 300, "name": "Final WR"}])
+        self.assertEqual(row["sent"], [{"id": 100, "name": "Original WR"}])
+        self.assertEqual(row["alternate_score"], 80)
+        self.assertEqual(row["net_points"], 20)
+        self.assertEqual((row["alternate_result"], row["result"], row["flipped"]), ("L", "W", True))
+
+
+class MatchupImpactContinuationTest(unittest.TestCase):
     def test_trade_week_skipped_when_lineups_predate_trade(self):
         left = SimpleNamespace(team_id=2, team_name="All Gold")
         right = SimpleNamespace(team_id=10, team_name="Boom Baum")

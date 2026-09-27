@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Weekly Roster Moves · Trade Time Machine</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23193b2d'/%3E%3Ctext x='10' y='46' font-size='43' fill='white'%3E%E2%86%94%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./weekly.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="masthead">
+      <div class="brand"><span class="brand-mark">↔</span><span>LANA STRAW <span class="brand-muted" id="brand-league">/ ALL LEAGUES</span></span></div>
+      <nav class="site-nav" aria-label="Pages">
+        <a href="./">Leaderboards</a>
+        <a href="./archive.html">Archive</a>
+        <a href="./weekly.html" aria-current="page">Weekly Moves</a>
+        <a href="./alternate.html">Alternate Universe</a>
+      </nav>
+      <span class="season-badge" id="season-badge">2026 SEASON</span>
+    </header>
+
+    <main>
+      <section class="hero archive-hero" aria-labelledby="title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="live-dot"></span> TUESDAY TO TUESDAY</p>
+          <h1 id="title">Weekly <em>Roster Moves.</em></h1>
+          <p class="hero-description">Grade a manager’s combined trades as one weekly decision instead of pretending each overlapping deal happened in isolation.</p>
+        </div>
+      </section>
+
+      <div class="context-bar" id="context-bar" aria-live="polite">Loading weekly moves…</div>
+      <div id="error" class="error hidden" role="alert"></div>
+
+      <section class="weekly-moves hidden" id="weekly-moves" aria-labelledby="weekly-title">
+        <div class="section-heading weekly-heading">
+          <div><p class="eyebrow">COMPLETED GAME WEEKS</p><h2 id="weekly-title">Manager-week trade bundles</h2></div>
+          <div class="weekly-filters">
+            <div><label class="filter-label" for="league-filter">LEAGUE</label><select id="league-filter"><option value="">All leagues</option></select></div>
+            <div><label class="filter-label" for="week-filter">GAME WEEK</label><select id="week-filter"><option value="">All completed weeks</option></select></div>
+          </div>
+        </div>
+        <p class="weekly-intro">Players traded in and back out during the same week cancel from the net roster diff. Actual waiver and free-agent choices remain in the real roster; only that manager’s combined trades are undone. When the opponent also traded that week, their bundle is undone too.</p>
+        <div id="weekly-content"></div>
+        <p class="method-note">Prototype reconstruction: ESPN weekly box-score rosters stand in for the ending Tuesday snapshot, while accepted trades provide the Tuesday-to-Tuesday diff. This is not yet an exact historical roster ledger. The no-trade lineup uses ESPN projections to choose replacements, then scores those players using actual results.</p>
+      </section>
+    </main>
+    <footer>ESPN BOX SCORES + WEEKLY TRADE BUNDLES <span>·</span> READ-ONLY PROTOTYPE <span>·</span> NOT A VERDICT</footer>
+  </div>
+</body>
+</html>

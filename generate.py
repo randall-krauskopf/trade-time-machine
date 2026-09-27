@@ -614,6 +614,116 @@ def add_matchup_impact(league: Any, trades: list[dict[str, Any]], players_by_id:
             cutoff["last_week"] = max(counted) if counted else None
 
 
+def weekly_roster_moves(
+    league: Any, trades: list[dict[str, Any]], players_by_id: dict[int, Any]
+) -> dict[str, Any]:
+    """Grade each manager's combined trade activity within a Tuesday-to-Tuesday week."""
+    rows = []
+    for week in range(1, int(league.current_week)):
+        weekly_trades = [trade for trade in trades if trade["transaction_week"] == week]
+        if not weekly_trades:
+            continue
+        bundles: dict[int, dict[str, Any]] = {}
+        for trade in weekly_trades:
+            for side in trade["sides"]:
+                bundle = bundles.setdefault(side["team_id"], {
+                    "team_id": side["team_id"], "team": side["team"], "trade_ids": [],
+                    "received": {}, "sent": {},
+                })
+                bundle["trade_ids"].append(trade["id"])
+                bundle["received"].update({player["id"]: player["name"] for player in side["received"]})
+                bundle["sent"].update({player["id"]: player["name"] for player in side["sent"]})
+
+        boxes: dict[int, dict[str, Any]] = {}
+        for box in league.box_scores(week):
+            for team, lineup, score, opponent in (
+                (box.home_team, box.home_lineup, box.home_score, box.away_team),
+                (box.away_team, box.away_lineup, box.away_score, box.home_team),
+            ):
+                if not hasattr(team, "team_id"):
+                    continue
+                players = [box_player(player) for player in lineup]
+                boxes[team.team_id] = {
+                    "score": round(float(score), 2),
+                    "opponent_id": getattr(opponent, "team_id", None),
+                    "opponent": opponent.team_name.strip() if hasattr(opponent, "team_name") else None,
+                    "starters": [player for player in players if player["slot"] not in STARTER_EXCLUDED_SLOTS],
+                    "bench": [player for player in players if player["slot"] == "BE"],
+                }
+
+        def player_for_week(player_id: int, name: str) -> dict[str, Any]:
+            for box in boxes.values():
+                for rostered in box["starters"] + box["bench"]:
+                    if rostered["id"] == player_id:
+                        return {key: value for key, value in rostered.items() if key != "slot"}
+            info = players_by_id.get(player_id)
+            stats = getattr(info, "stats", {}).get(week) if info else None
+            stats = stats if isinstance(stats, dict) else {}
+            return {
+                "id": player_id,
+                "name": name,
+                "points": round(float(stats.get("points") or 0), 2),
+                "projected": round(float(stats.get("projected_points") or 0), 2),
+                "eligible": list(getattr(info, "eligibleSlots", []) or []),
+            }
+
+        alternates = {}
+        for team_id, bundle in bundles.items():
+            box = boxes.get(team_id)
+            if box is None:
+                continue
+            received_ids = set(bundle["received"]) - set(bundle["sent"])
+            sent_ids = set(bundle["sent"]) - set(bundle["received"])
+            alternate = refill_lineup(
+                box["starters"], box["bench"], received_ids,
+                [player_for_week(player_id, bundle["sent"][player_id]) for player_id in sent_ids],
+            )
+            alternates[team_id] = {
+                "alternate": alternate,
+                "received_ids": received_ids,
+                "sent_ids": sent_ids,
+            }
+
+        for team_id, bundle in bundles.items():
+            box = boxes.get(team_id)
+            alternate = alternates.get(team_id)
+            if box is None or alternate is None or box["opponent_id"] not in boxes:
+                continue
+            opponent_box = boxes[box["opponent_id"]]
+            opponent_alt = alternates.get(box["opponent_id"], {}).get(
+                "alternate", {"score": opponent_box["score"]}
+            )["score"]
+            actual_result = result(box["score"], opponent_box["score"])
+            alternate_result = result(alternate["alternate"]["score"], opponent_alt)
+            rows.append({
+                "week": week,
+                "team_id": team_id,
+                "team": bundle["team"],
+                "trade_count": len(set(bundle["trade_ids"])),
+                "trade_ids": bundle["trade_ids"],
+                "received": [
+                    {"id": player_id, "name": bundle["received"][player_id]}
+                    for player_id in sorted(alternate["received_ids"])
+                ],
+                "sent": [
+                    {"id": player_id, "name": bundle["sent"][player_id]}
+                    for player_id in sorted(alternate["sent_ids"])
+                ],
+                "actual_score": box["score"],
+                "alternate_score": alternate["alternate"]["score"],
+                "net_points": round(box["score"] - alternate["alternate"]["score"], 2),
+                "opponent": box["opponent"],
+                "opponent_score": opponent_box["score"],
+                "opponent_alternate_score": opponent_alt,
+                "result": actual_result,
+                "alternate_result": alternate_result,
+                "flipped": actual_result != alternate_result,
+                "replacements": alternate["alternate"]["replacements"],
+                "snapshot_status": "reconstructed_from_trades_and_weekly_box_score",
+            })
+    return {"rows": rows, "source": "weekly_trade_bundles"}
+
+
 def build_snapshot(league: Any, messages: list[dict[str, Any]]) -> dict[str, Any]:
     cutoff = datetime.combine(FIRST_TRADE_DATE, datetime.min.time(), LEAGUE_TIMEZONE)
     try:
@@ -702,10 +812,11 @@ def build_snapshot(league: Any, messages: list[dict[str, Any]]) -> dict[str, Any
         })
 
     if hasattr(league, "box_scores"):
-        add_matchup_impact(league, trades, players_by_id)
         standings = alternate_standings(league, trades)
+        roster_moves = weekly_roster_moves(league, trades, players_by_id)
     else:
         standings = None
+        roster_moves = None
 
     return {
         "league": league.settings.name,
@@ -715,6 +826,7 @@ def build_snapshot(league: Any, messages: list[dict[str, Any]]) -> dict[str, Any
         "first_trade_date": FIRST_TRADE_DATE.isoformat(),
         "trades": trades,
         "alternate_standings": standings,
+        "weekly_roster_moves": roster_moves,
         "source": source,
         "discord_imported": bool(messages),
     }
