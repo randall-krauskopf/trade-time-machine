@@ -33,9 +33,41 @@ function resultBadge(value) {
   return node("span", `result-badge ${value.toLowerCase()}`, value);
 }
 
+const RESULT_WINS = {W: 1, T: 0.5, L: 0};
+
+function outcomeClass(row) {
+  const actual = RESULT_WINS[row.result];
+  const alternate = RESULT_WINS[row.alternate_result];
+  if (actual === undefined || alternate === undefined) {
+    throw new Error(`Invalid weekly result for ${row.team}, Week ${row.week}.`);
+  }
+  return actual > alternate ? "clutch" : actual < alternate ? "oof" : "";
+}
+
+function renderTeamOptions() {
+  const selected = $("team-filter").value;
+  const leagueFilter = $("league-filter").value;
+  const teams = new Map();
+  for (const league of leagues.filter((entry) => !leagueFilter || entry.key === leagueFilter)) {
+    for (const row of league.weekly_roster_moves?.rows || []) {
+      teams.set(`${league.key}:${row.team_id}`, `${row.team}${leagueFilter ? "" : ` (${league.label})`}`);
+    }
+  }
+  const all = node("option", "", "All managers");
+  all.value = "";
+  $("team-filter").replaceChildren(all);
+  for (const [key, label] of [...teams].sort((a, b) => a[1].localeCompare(b[1]))) {
+    const option = node("option", "", label);
+    option.value = key;
+    $("team-filter").append(option);
+  }
+  $("team-filter").value = teams.has(selected) ? selected : "";
+}
+
 function render() {
   const leagueFilter = $("league-filter").value;
   const weekFilter = $("week-filter").value;
+  const teamFilter = $("team-filter").value;
   const option = $("league-filter").selectedOptions[0];
   $("brand-league").textContent = `/ ${(leagueFilter ? option.textContent : "All leagues").toUpperCase()}`;
   const content = $("weekly-content");
@@ -43,7 +75,8 @@ function render() {
   let rendered = 0;
   for (const league of leagues.filter((entry) => !leagueFilter || entry.key === leagueFilter)) {
     const rows = (league.weekly_roster_moves?.rows || [])
-      .filter((row) => !weekFilter || String(row.week) === weekFilter)
+      .filter((row) => (!weekFilter || String(row.week) === weekFilter)
+        && (!teamFilter || `${league.key}:${row.team_id}` === teamFilter))
       .sort((a, b) => a.week - b.week || b.trade_count - a.trade_count || a.team.localeCompare(b.team));
     if (!rows.length) continue;
     rendered += rows.length;
@@ -51,12 +84,14 @@ function render() {
     section.append(node("h3", "", `${league.label} · ${league.season}`));
     const grid = node("div", "weekly-grid");
     for (const row of rows) {
-      const card = node("article", `weekly-card${row.flipped ? " flipped" : ""}`);
+      const outcome = outcomeClass(row);
+      const card = node("article", `weekly-card${outcome ? ` ${outcome}` : ""}`);
       const top = node("div", "weekly-card-top");
       const identity = node("div");
       identity.append(node("p", "eyebrow", `WEEK ${row.week} · ${row.trade_count} TRADE${row.trade_count === 1 ? "" : "S"}`), node("h4", "", row.team));
-      const impact = node("div", `weekly-impact ${row.net_points > 0 ? "positive" : row.net_points < 0 ? "negative" : ""}`);
-      impact.append(node("strong", "", `${signed(row.net_points)} pts`), node("span", "", row.flipped ? `${row.alternate_result} → ${row.result}` : "Result unchanged"));
+      if (outcome) identity.append(node("span", `weekly-outcome ${outcome}`, outcome === "clutch" ? "Clutch" : "Oof"));
+      const impact = node("div", "weekly-impact");
+      impact.append(node("strong", "", `${signed(row.net_points)} pts`), node("span", "", outcome ? `${row.alternate_result} → ${row.result}` : "Result unchanged"));
       top.append(identity, impact);
       const changes = node("div", "weekly-changes");
       changes.append(playerList("NET TRADED IN", row.received, "in"), playerList("NET TRADED OUT", row.sent, "out"));
@@ -106,8 +141,28 @@ async function load() {
       option.value = String(week);
       $("week-filter").append(option);
     }
-    $("league-filter").addEventListener("change", render);
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("league") && !leagues.some((league) => league.key === params.get("league"))) {
+      throw new Error("The requested league is not in this snapshot.");
+    }
+    $("league-filter").value = params.get("league") || "";
+    renderTeamOptions();
+    if (params.has("team") && ![...$("team-filter").options].some((option) => option.value === params.get("team"))) {
+      throw new Error("The requested manager is not in this snapshot.");
+    }
+    $("team-filter").value = params.get("team") || "";
+    if (params.has("week")) {
+      if (![...$("week-filter").options].some((option) => option.value === params.get("week"))) {
+        throw new Error("The requested game week is not in this snapshot.");
+      }
+      $("week-filter").value = params.get("week");
+    }
+    $("league-filter").addEventListener("change", () => {
+      renderTeamOptions();
+      render();
+    });
     $("week-filter").addEventListener("change", render);
+    $("team-filter").addEventListener("change", render);
     $("weekly-moves").classList.remove("hidden");
     render();
   } catch (error) {

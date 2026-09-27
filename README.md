@@ -9,6 +9,7 @@ This is a **hypothetical hold** for each individual deal: the received players r
 The top of the page ranks trades (top 3 per board, per league under "All leagues") , always across all trades regardless of the league/team filters:
 
 - **Most active traders**: managers ranked by the number of completed deals they participated in, using the same inclusive August 30 Central-time cutoff as the archive.
+- **Wins Traded For / Wins Traded Away**: rank managers by the matchup results their combined weekly trades improved or worsened versus the no-weekly-trades alternate. A W counts as 1, a tie as 0.5, and an L as 0; unchanged results do not count. A manager can appear on both boards in different weeks. Rankings link to that manager's Weekly Moves cards.
 - **Most players exchanged**: total players received by both sides (newest first on ties).
 - **Fastest regret**: difference in the first eligible week only; `*` marks when that week is the trade week.
 
@@ -18,7 +19,9 @@ The site has four pages linked from the header: **Leaderboards** (`docs/index.ht
 
 ## Weekly Roster Moves (prototype)
 
-The Weekly Moves page is the app's canonical matchup-outcome model. It combines every trade a manager completed within the same Tuesday-to-Tuesday game week. Players acquired and then traded away within that interval cancel from the net roster diff. It compares the manager's actual weekly score and result with a projection-selected lineup that undoes the week's net trade changes; if the opponent also traded that week, the opponent's bundle is undone too. Actual waiver and free-agent choices remain in place.
+The Weekly Moves page is the app's canonical matchup-outcome model. It combines every trade a manager completed within the same Tuesday-to-Tuesday game week. Players acquired and then traded away within that interval cancel from the net roster diff. It compares the manager's actual weekly score and result with a projection-selected lineup that undoes the week's net trade changes; if the opponent also traded that week, the opponent's bundle is undone too. Actual waiver and free-agent choices remain in place. League, game-week, and manager filters let you inspect the results behind the leaderboard totals.
+
+Cards mark an improved result relative to the no-weekly-trades model as **Clutch** (green), and a worsened result as **Oof** (red); unchanged results have no badge. The adjacent W/L/T arrow shows the modeled result transition. Point differences alone do not determine the badge, since an opponent's weekly moves can also change the outcome.
 
 This is a reconstruction, not an exact pair of historical Tuesday roster snapshots: ESPN weekly box-score rosters provide the ending roster evidence and accepted trades provide the diff. Weeks without a completed box score are excluded. The page labels this limitation and links back to every underlying trade.
 

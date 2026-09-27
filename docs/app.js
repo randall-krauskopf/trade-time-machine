@@ -110,6 +110,29 @@ function swing(trade, [a, b]) {
   return {value: Math.abs(a - b), leader: a === b ? null : leader, trailer};
 }
 
+const RESULT_WINS = {W: 1, T: 0.5, L: 0};
+
+function rankWeeklyOutcomes(league, direction) {
+  const managers = new Map();
+  for (const row of league.weekly_roster_moves?.rows || []) {
+    const change = RESULT_WINS[row.result] - RESULT_WINS[row.alternate_result];
+    if (!Number.isFinite(change)) throw new Error(`Invalid weekly result for ${row.team}, Week ${row.week}.`);
+    if (direction * change <= 0) continue;
+    const manager = managers.get(row.team_id) || {team: row.team, team_id: row.team_id, wins: 0, weeks: []};
+    manager.wins += Math.abs(change);
+    manager.weeks.push(row.week);
+    managers.set(row.team_id, manager);
+  }
+  return [...managers.values()]
+    .sort((a, b) => b.wins - a.wins || a.team.localeCompare(b.team))
+    .map((manager) => ({
+      team: manager.team,
+      value: `${manager.wins} ${manager.wins === 1 ? "win" : "wins"}`,
+      detail: `Week${manager.weeks.length === 1 ? "" : "s"} ${manager.weeks.sort((a, b) => a - b).join(", ")}`,
+      href: `./weekly.html?league=${encodeURIComponent(league.key)}&team=${encodeURIComponent(`${league.key}:${manager.team_id}`)}`,
+    }));
+}
+
 const LEADERBOARDS = [
   {
     title: "Most active traders",
@@ -125,6 +148,20 @@ const LEADERBOARDS = [
           team,
           value: `${count} trade${count === 1 ? "" : "s"}`,
         }));
+    },
+  },
+  {
+    title: "Wins Traded For",
+    caption: "Weekly trade bundles that improved matchup results.",
+    rank(trades, league) {
+      return rankWeeklyOutcomes(league, 1);
+    },
+  },
+  {
+    title: "Wins Traded Away",
+    caption: "Weekly trade bundles that worsened matchup results.",
+    rank(trades, league) {
+      return rankWeeklyOutcomes(league, -1);
     },
   },
   {
@@ -167,8 +204,8 @@ function renderLeaderboards() {
   const content = $("leaderboard-content");
   content.replaceChildren();
   const groups = archive.leagues.length === 1
-    ? [{label: null, trades}]
-    : archive.leagues.map((league) => ({label: league.label, trades: trades.filter((trade) => trade.league_key === league.key)}));
+    ? [{label: null, league: archive.leagues[0], trades}]
+    : archive.leagues.map((league) => ({label: league.label, league, trades: trades.filter((trade) => trade.league_key === league.key)}));
   for (const group of groups) {
     const row = node("div", "leaderboard-row");
     if (group.label) row.append(node("p", "leaderboard-league", `${group.label.toUpperCase()} LEAGUE`));
@@ -176,14 +213,15 @@ function renderLeaderboards() {
     for (const board of LEADERBOARDS) {
       const card = node("article", "leaderboard-card");
       card.append(node("h3", "", board.title), node("p", "leaderboard-caption", board.caption));
-      const entries = board.rank(group.trades).slice(0, 3);
+      const entries = board.rank(group.trades, group.league).slice(0, 3);
       if (!entries.length) {
-        card.append(node("p", "leaderboard-empty", "No eligible trades yet."));
+        card.append(node("p", "leaderboard-empty", board.title.startsWith("Wins Traded") ? "No results changed yet." : "No eligible trades yet."));
       } else {
         const list = node("ol", "leaderboard-list");
         for (const entry of entries) {
           const item = node("li");
-          const button = node(entry.trade ? "button" : "div", `leaderboard-entry${entry.trade && entry.trade.id === selectedId ? " active" : ""}${entry.trade ? "" : " static"}`);
+          const button = node(entry.href ? "a" : entry.trade ? "button" : "div", `leaderboard-entry${entry.trade && entry.trade.id === selectedId ? " active" : ""}${entry.trade || entry.href ? "" : " static"}`);
+          if (entry.href) button.href = entry.href;
           if (entry.trade) {
             button.type = "button";
             button.setAttribute("aria-label", `${entry.trade.sides.map((side) => side.team).join(" and ")}, ${entry.value}. Open trade.`);
@@ -204,7 +242,7 @@ function renderLeaderboards() {
     row.append(grid);
     content.append(row);
   }
-  const notes = ["Points boards use raw player points, including bench weeks. * = trade week, which may include points scored before the deal. Matchup outcomes are evaluated by manager-week on Weekly Moves. Not verdicts."];
+  const notes = ["Wins gained/lost compare actual matchup results with the no-weekly-trades scenario, bundled by manager and week (ties count as half a win). Unchanged results do not count. Points boards use raw player points, including bench weeks; * = trade week, which may include points scored before the deal. Not verdicts."];
   if (trades.some((trade) => trade.league.source === "reconstructed")) {
     notes.push("Champeens trades are reconstructed from roster history and may omit players who were later dropped or re-traded.");
   }

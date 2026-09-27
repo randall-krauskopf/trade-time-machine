@@ -21,20 +21,22 @@ button:focus-visible, select:focus-visible, a:focus-visible { outline: 3px solid
 .alternate-filter { min-width: 190px; } .alternate-filter select { margin-bottom: 0; }
 .weekly-moves { padding: 34px 0 42px; }
 .weekly-heading h2 { margin: 7px 0 0; font-size: 24px; letter-spacing: -.05em; }
-.weekly-filters { display: grid; grid-template-columns: repeat(2, minmax(150px, 190px)); gap: 12px; }
+.weekly-filters { display: grid; grid-template-columns: repeat(3, minmax(140px, 190px)); gap: 12px; }
 .weekly-filters select { margin-bottom: 0; }
 .weekly-intro { max-width: 820px; margin: 0 0 24px; color: #536759; font-size: 13px; line-height: 1.65; }
 .weekly-league + .weekly-league { margin-top: 32px; }
 .weekly-league > h3 { margin: 0 0 12px; color: #8a5d3d; font-size: 11px; letter-spacing: .13em; text-transform: uppercase; }
 .weekly-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-.weekly-card { padding: 21px; background: #fffefa; border: 1px solid #dce4d5; border-top: 3px solid #6f8d78; border-radius: 7px; }
-.weekly-card.flipped { border-top-color: #d47743; }
-.weekly-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
-.weekly-card h4 { margin: 7px 0 18px; font-size: 23px; letter-spacing: -.05em; }
+.weekly-card { padding: 21px; background: #fffefa; border: 1px solid #dce4d5; border-top: 3px solid #b9c3b3; border-radius: 7px; }
+.weekly-card.clutch { border-top-color: #377758; }
+.weekly-card.oof { border-top-color: #a8432f; }
+.weekly-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 18px; }
+.weekly-card h4 { margin: 7px 0 10px; font-size: 23px; letter-spacing: -.05em; }
+.weekly-outcome { display: inline-block; padding: 5px 9px; border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.weekly-outcome.clutch { color: #22552c; background: #dcebdd; }
+.weekly-outcome.oof { color: #8a3121; background: #f5ddd4; }
 .weekly-impact { flex: 0 0 auto; text-align: right; }
 .weekly-impact strong { display: block; color: #35483a; font-size: 23px; letter-spacing: -.04em; }
-.weekly-impact.positive strong { color: #2f6b3a; }
-.weekly-impact.negative strong { color: #a8432f; }
 .weekly-impact span { display: block; margin-top: 3px; color: #718071; font-size: 10px; font-weight: 700; }
 .weekly-changes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 .weekly-players { padding: 13px; background: #eef2e9; border-radius: 5px; }
@@ -160,6 +162,7 @@ select { width: 100%; margin-bottom: 19px; padding: 12px 13px; background: #fffe
 .leaderboard-list { margin: 0; padding: 0; list-style: none; counter-reset: rank; }
 .leaderboard-list li { counter-increment: rank; border-top: 1px solid #ebeee7; }
 .leaderboard-entry { display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px 4px; text-align: left; background: none; border: 0; border-radius: 4px; color: inherit; cursor: pointer; }
+a.leaderboard-entry { text-decoration: none; }
 .leaderboard-entry::before { content: counter(rank); flex: 0 0 22px; height: 22px; display: grid; place-items: center; border-radius: 50%; background: #e1e7d8; color: #355746; font-size: 11px; font-weight: 700; }
 .leaderboard-list li:first-child .leaderboard-entry::before { background: #d47743; color: #fff; }
 .leaderboard-entry:hover, .leaderboard-entry.active { background: #eef2e9; }
