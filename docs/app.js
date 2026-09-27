@@ -104,13 +104,32 @@ function selectTrade(id) {
   $("detail-panel").scrollIntoView({behavior: "smooth", block: "start"});
 }
 
-function swing(trade, [a, b]) {
-  if (a === null || a === undefined || b === null || b === undefined) return null;
-  const [leader, trailer] = a >= b ? [trade.sides[0], trade.sides[1]] : [trade.sides[1], trade.sides[0]];
-  return {value: Math.abs(a - b), leader: a === b ? null : leader, trailer};
+function weeklyHref(league, row, includeWeek = false) {
+  const params = new URLSearchParams({
+    league: league.key,
+    team: `${league.key}:${row.team_id}`,
+  });
+  if (includeWeek) params.set("week", row.week);
+  return `./weekly.html?${params}`;
 }
 
 const RESULT_WINS = {W: 1, T: 0.5, L: 0};
+
+function rankWeeklySwings(league) {
+  return (league.weekly_roster_moves?.rows || [])
+    .filter((row) => {
+      if (!Number.isFinite(row.net_points)) throw new Error(`Invalid weekly point swing for ${row.team}, Week ${row.week}.`);
+      return row.net_points !== 0;
+    })
+    .sort((a, b) => Math.abs(b.net_points) - Math.abs(a.net_points)
+      || a.week - b.week || a.team.localeCompare(b.team) || String(a.team_id).localeCompare(String(b.team_id)))
+    .map((row) => ({
+      team: row.team,
+      value: `${formatSigned(row.net_points, 2)} pts`,
+      detail: `Week ${row.week} · ${row.alternate_result === row.result ? "Result unchanged" : `${row.alternate_result} → ${row.result}`}`,
+      href: weeklyHref(league, row, true),
+    }));
+}
 
 function rankWeeklyOutcomes(league, direction) {
   const managers = new Map();
@@ -129,7 +148,7 @@ function rankWeeklyOutcomes(league, direction) {
       team: manager.team,
       value: `${manager.wins} ${manager.wins === 1 ? "win" : "wins"}`,
       detail: `Week${manager.weeks.length === 1 ? "" : "s"} ${manager.weeks.sort((a, b) => a - b).join(", ")}`,
-      href: `./weekly.html?league=${encodeURIComponent(league.key)}&team=${encodeURIComponent(`${league.key}:${manager.team_id}`)}`,
+      href: weeklyHref(league, manager),
     }));
 }
 
@@ -179,22 +198,10 @@ const LEADERBOARDS = [
     },
   },
   {
-    title: "Fastest regret",
-    caption: "Biggest gap after just the first completed week.",
-    rank(trades) {
-      return trades
-        .filter((trade) => trade.weeks.length)
-        .map((trade) => {
-          const week = trade.weeks[0];
-          return {trade, week, result: swing(trade, trade.sides.map((side) => side.weekly_points[String(week)]))};
-        })
-        .filter(({result}) => result)
-        .sort((a, b) => b.result.value - a.result.value)
-        .map(({trade, week, result}) => ({
-          trade,
-          value: `${result.value.toFixed(2)} pts`,
-          detail: `${result.leader ? `${result.leader.team} ahead` : "Dead even"} · Week ${week}${week === trade.trade_week ? "*" : ""}`,
-        }));
+    title: "Biggest Roster Swings",
+    caption: "Biggest weekly matchup point swings, for better or worse.",
+    rank(trades, league) {
+      return rankWeeklySwings(league);
     },
   },
 ];
@@ -215,7 +222,7 @@ function renderLeaderboards() {
       card.append(node("h3", "", board.title), node("p", "leaderboard-caption", board.caption));
       const entries = board.rank(group.trades, group.league).slice(0, 3);
       if (!entries.length) {
-        card.append(node("p", "leaderboard-empty", board.title.startsWith("Wins Traded") ? "No results changed yet." : "No eligible trades yet."));
+        card.append(node("p", "leaderboard-empty", board.title.startsWith("Wins Traded") ? "No results changed yet." : board.title === "Biggest Roster Swings" ? "No weekly point swings yet." : "No eligible trades yet."));
       } else {
         const list = node("ol", "leaderboard-list");
         for (const entry of entries) {
@@ -242,7 +249,7 @@ function renderLeaderboards() {
     row.append(grid);
     content.append(row);
   }
-  const notes = ["Wins gained/lost compare actual matchup results with the no-weekly-trades scenario, bundled by manager and week (ties count as half a win). Unchanged results do not count. Points boards use raw player points, including bench weeks; * = trade week, which may include points scored before the deal. Not verdicts."];
+  const notes = ["Wins Traded For/Away compare actual matchup results with the no-weekly-trades scenario, bundled by manager and week (ties count as half a win). Unchanged results do not count. Biggest Roster Swings ranks the largest absolute manager-week point swings (actual minus no-weekly-trades), including swings that did not change the result. Not verdicts."];
   if (trades.some((trade) => trade.league.source === "reconstructed")) {
     notes.push("Champeens trades are reconstructed from roster history and may omit players who were later dropped or re-traded.");
   }

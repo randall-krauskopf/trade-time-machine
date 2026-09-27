@@ -11,9 +11,9 @@ The top of the page ranks trades (top 3 per board, per league under "All leagues
 - **Most active traders**: managers ranked by the number of completed deals they participated in, using the same inclusive August 30 Central-time cutoff as the archive.
 - **Wins Traded For / Wins Traded Away**: rank managers by the matchup results their combined weekly trades improved or worsened versus the no-weekly-trades alternate. A W counts as 1, a tie as 0.5, and an L as 0; unchanged results do not count. A manager can appear on both boards in different weeks. Rankings link to that manager's Weekly Moves cards.
 - **Most players exchanged**: total players received by both sides (newest first on ties).
-- **Fastest regret**: difference in the first eligible week only; `*` marks when that week is the trade week.
+- **Biggest Roster Swings**: the largest absolute point swings for a manager's completed weekly trade bundle, comparing actual matchup points with the modeled no-weekly-trades lineup. Signed values show whether the manager scored more or fewer points; a matchup result need not change. Each entry links to that specific manager-week on Weekly Moves.
 
-Trades without a completed eligible week are left off the points boards. Clicking a trade ranking opens that deal directly on the Archive page.
+Weekly rankings include only completed manager-weeks. Clicking a trade ranking opens that deal directly on the Archive page.
 
 The site has four pages linked from the header: **Leaderboards** (`docs/index.html`), **Archive** (`docs/archive.html`: filters and trade detail), **Weekly Moves** (`docs/weekly.html`: manager-week trade bundles), and **Alternate Universe** (`docs/alternate.html`, rendered by `docs/alternate.js`). Leaderboard and Weekly Moves trade links open the selected deal directly on the Archive page. The Alternate Universe page replays the completed Premier and Champeens matchups.
 
