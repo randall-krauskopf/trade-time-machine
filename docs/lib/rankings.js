@@ -32,6 +32,37 @@ export function rankMostActiveTraders(trades) {
     .map(([team, count]) => ({team, rankScore: count, value: countOf(count, "trade")}));
 }
 
+/**
+ * Holding Steady: managers with the fewest completed deals, including those
+ * with none. The full team list comes from the league's standings, since
+ * managers who never traded don't appear in any trade. Managers tied on a
+ * count share one entry (zero-trade ties are common), so entries rank 1, 2, 3
+ * by distinct trade count and the detail line says how many are tied.
+ */
+export function rankFewestTrades(trades, league) {
+  const teams = league?.alternate_standings?.teams || [];
+  const counts = new Map(teams.map((team) => [team.team_id, 0]));
+  for (const trade of trades) {
+    for (const side of trade.sides) {
+      if (counts.has(side.team_id)) counts.set(side.team_id, counts.get(side.team_id) + 1);
+    }
+  }
+  const groups = new Map();
+  for (const team of teams) {
+    const count = counts.get(team.team_id);
+    groups.set(count, [...(groups.get(count) || []), team.team]);
+  }
+  return [...groups.entries()]
+    .sort((a, b) => a[0] - b[0])
+    .map(([count, names]) => ({
+      team: names.sort((a, b) => a.localeCompare(b)).join(" · "),
+      rankScore: count,
+      value: countOf(count, "trade"),
+      detail: names.length > 1 ? `${names.length} managers tied` : undefined,
+      managerCount: names.length,
+    }));
+}
+
 export function rankMostPlayersExchanged(trades) {
   return trades
     .map((trade) => ({trade, count: playersExchanged(trade)}))
@@ -96,6 +127,18 @@ export const LEADERBOARDS = [
     rank: (trades) => rankMostActiveTraders(trades),
   },
   {
+    title: "Holding Steady",
+    caption: "Managers with the fewest completed deals, zero included.",
+    empty: "No team list available.",
+    rank: (trades, league) => rankFewestTrades(trades, league),
+  },
+  {
+    title: "Most players exchanged",
+    caption: "Blockbusters by total players changing hands.",
+    empty: "No eligible trades yet.",
+    rank: (trades) => rankMostPlayersExchanged(trades),
+  },
+  {
     title: "Wins Traded For",
     caption: "Weekly trade bundles that improved matchup results.",
     empty: "No results changed yet.",
@@ -106,12 +149,6 @@ export const LEADERBOARDS = [
     caption: "Weekly trade bundles that worsened matchup results.",
     empty: "No results changed yet.",
     rank: (trades, league) => rankWeeklyOutcomes(league, -1),
-  },
-  {
-    title: "Most players exchanged",
-    caption: "Blockbusters by total players changing hands.",
-    empty: "No eligible trades yet.",
-    rank: (trades) => rankMostPlayersExchanged(trades),
   },
   {
     title: "Biggest Roster Swings",

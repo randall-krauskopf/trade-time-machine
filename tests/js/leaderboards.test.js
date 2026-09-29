@@ -3,7 +3,7 @@ import fs from "node:fs";
 import test from "node:test";
 
 import {
-  LEADERBOARDS, competitionRanks, rankMostActiveTraders, rankMostPlayersExchanged, rankWeeklyOutcomes, rankWeeklySwings,
+  LEADERBOARDS, competitionRanks, rankFewestTrades, rankMostActiveTraders, rankMostPlayersExchanged, rankWeeklyOutcomes, rankWeeklySwings,
 } from "../../docs/lib/rankings.js";
 import {normalizeSnapshot} from "../../docs/lib/snapshot.js";
 
@@ -131,5 +131,40 @@ test("every board ranks the real snapshot without errors and has an empty-state 
       const ranks = competitionRanks(board.rank(trades, league)).map((entry) => entry.rank);
       assert.deepEqual(ranks, [...ranks].sort((a, b) => a - b), `${board.title} ranks are ordered`);
     }
+  }
+});
+
+test("Holding Steady ranks the fewest trades, counting managers who never traded", () => {
+  const league = {alternate_standings: {teams: [
+    {team_id: 1, team: "Alpha"}, {team_id: 2, team: "Bravo"}, {team_id: 3, team: "Charlie"},
+    {team_id: 4, team: "Delta"}, {team_id: 5, team: "Echo"},
+  ]}};
+  const trades = [
+    {sides: [{team_id: 1, team: "Alpha"}, {team_id: 2, team: "Bravo"}]},
+    {sides: [{team_id: 1, team: "Alpha"}, {team_id: 3, team: "Charlie"}]},
+  ];
+  const ranked = competitionRanks(rankFewestTrades(trades, league));
+  assert.deepEqual(ranked.map(({rank, team, value, detail}) => [rank, team, value, detail]), [
+    [1, "Delta · Echo", "0 trades", "2 managers tied"],
+    [2, "Bravo · Charlie", "1 trade", "2 managers tied"],
+    [3, "Alpha", "2 trades", undefined],
+  ]);
+});
+
+test("Holding Steady matches managers by team ID, not name, and needs a team list", () => {
+  const league = {alternate_standings: {teams: [{team_id: 1, team: "Renamed"}, {team_id: 2, team: "Bravo"}]}};
+  const trades = [{sides: [{team_id: 1, team: "Old Name"}, {team_id: 9, team: "Other league"}]}];
+  assert.deepEqual(rankFewestTrades(trades, league).map(({team, rankScore}) => [team, rankScore]), [["Bravo", 0], ["Renamed", 1]]);
+  assert.deepEqual(rankFewestTrades(trades, {}), []);
+});
+
+test("Holding Steady on the real snapshot accounts for every manager", () => {
+  const snapshot = normalizeSnapshot(JSON.parse(fs.readFileSync(snapshotPath, "utf8")));
+  for (const league of snapshot.leagues) {
+    const trades = snapshot.trades.filter((trade) => trade.league_key === league.key);
+    const entries = rankFewestTrades(trades, league);
+    assert.equal(entries.reduce((total, entry) => total + entry.managerCount, 0), league.alternate_standings.teams.length);
+    const sideCount = trades.reduce((total, trade) => total + trade.sides.length, 0);
+    assert.equal(entries.reduce((total, entry) => total + entry.managerCount * entry.rankScore, 0), sideCount);
   }
 });
