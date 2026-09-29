@@ -4,37 +4,20 @@
 from __future__ import annotations
 
 import argparse
-from dataclasses import replace
+from dataclasses import dataclass
 from datetime import date, datetime, timedelta, timezone
 import json
 import os
 from pathlib import Path
 import re
-import sys
 from types import SimpleNamespace
 from typing import Any
 from zoneinfo import ZoneInfo
 
+from espn_api.football import League
+from espn_api.requests.espn_requests import ESPNAccessDenied
 
 HERE = Path(__file__).resolve().parent
-# The ESPN helper library and private .env live in the AI-playground repo.
-SCRIPTS = Path(os.environ.get(
-    "FF_SCRIPTS_DIR", HERE.parent / "AI-playground" / "fantasy-football-league" / "scripts"
-)).expanduser().resolve()
-sys.path.insert(0, str(SCRIPTS / "src"))
-
-from ff_espn.client import build_league  # noqa: E402
-from ff_espn.config import LeagueConfig  # noqa: E402
-from espn_api.requests.espn_requests import ESPNAccessDenied  # noqa: E402
-
-
-PREMIER_LEAGUE_ID = 1851323
-CHAMPEENS_LEAGUE_ID = 1695026336
-# Discord receipts are only attached to Premier; Champeens channels are out of scope.
-LEAGUES = (
-    {"key": "premier", "label": "Premier", "league_id": PREMIER_LEAGUE_ID, "receipts": True},
-    {"key": "champeens", "label": "Champeens", "league_id": CHAMPEENS_LEAGUE_ID, "receipts": False},
-)
 GUILD_ID = 1160416084235661426
 CHANNELS = {
     1160416085326188555: "general",
@@ -48,6 +31,63 @@ LEAGUE_TIMEZONE = ZoneInfo("America/Chicago")
 FIRST_TRADE_DATE = date(2026, 8, 30)
 ACQUISITION_TOLERANCE_MS = 60_000
 REVIEW_WINDOW_MS = 3 * 24 * 60 * 60 * 1000
+
+
+@dataclass(frozen=True)
+class GeneratorConfig:
+    season_year: int
+    first_trade_date: date
+    leagues: list[dict[str, Any]]
+
+
+def load_config(path: Path) -> GeneratorConfig:
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(data, dict):
+        raise ValueError("Generator config must be a JSON object.")
+    year = data.get("season_year")
+    if type(year) is not int or not 2000 <= year <= 2100:
+        raise ValueError("season_year must be an integer between 2000 and 2100.")
+    try:
+        first_trade_date = date.fromisoformat(data["first_trade_date"])
+    except (KeyError, TypeError, ValueError) as exc:
+        raise ValueError("first_trade_date must be an ISO date (YYYY-MM-DD).") from exc
+    if first_trade_date.year != year:
+        raise ValueError("first_trade_date must fall in season_year.")
+    leagues = data.get("leagues")
+    if not isinstance(leagues, list) or not leagues:
+        raise ValueError("leagues must be a nonempty array.")
+    keys = set()
+    for league in leagues:
+        if not isinstance(league, dict) or not isinstance(league.get("key"), str) or not league["key"].strip():
+            raise ValueError("Each league needs a nonempty key.")
+        if league["key"] in keys:
+            raise ValueError(f"Duplicate league key: {league['key']}.")
+        keys.add(league["key"])
+        if not isinstance(league.get("label"), str) or not league["label"].strip():
+            raise ValueError(f"League {league['key']} needs a nonempty label.")
+        if type(league.get("league_id")) is not int or league["league_id"] <= 0:
+            raise ValueError(f"League {league['key']} needs a positive numeric league_id.")
+        if type(league.get("receipts")) is not bool:
+            raise ValueError(f"League {league['key']} needs a boolean receipts setting.")
+    return GeneratorConfig(year, first_trade_date, leagues)
+
+
+def load_credentials(path: Path) -> dict[str, str]:
+    credentials = {key: os.environ[key] for key in ("ESPN_S2", "SWID") if os.environ.get(key)}
+    if path.exists():
+        for line in path.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            key, separator, value = line.partition("=")
+            key = key.strip()
+            if separator and key in {"ESPN_S2", "SWID"} and key not in credentials:
+                value = value.strip().strip("\"'")
+                if value:
+                    credentials[key] = value
+    if len(credentials) == 1:
+        raise ValueError("Provide both ESPN_S2 and SWID for a private league, or neither for public leagues.")
+    return credentials
 
 
 def week_start(year: int, week: int) -> datetime:
@@ -353,9 +393,11 @@ def optimal_lineup_points(players: list[dict[str, Any]], slots: list[str]) -> fl
     return round(max(points for mask, points in best.items() if mask.bit_count() == fullest), 2)
 
 
-def alternate_standings(league: Any, trades: list[dict[str, Any]]) -> dict[str, Any]:
+def alternate_standings(
+    league: Any, trades: list[dict[str, Any]], first_trade_date: date = FIRST_TRADE_DATE
+) -> dict[str, Any]:
     """Rewind known trade transfers in weekly rosters, preserving actual waiver/FA moves."""
-    cutoff = datetime.combine(FIRST_TRADE_DATE, datetime.min.time(), LEAGUE_TIMEZONE)
+    cutoff = datetime.combine(first_trade_date, datetime.min.time(), LEAGUE_TIMEZONE)
     slots = [
         slot for slot, count in league.settings.position_slot_counts.items()
         if slot not in STARTER_EXCLUDED_SLOTS | {"ER", ""}
@@ -724,8 +766,10 @@ def weekly_roster_moves(
     return {"rows": rows, "source": "weekly_trade_bundles"}
 
 
-def build_snapshot(league: Any, messages: list[dict[str, Any]]) -> dict[str, Any]:
-    cutoff = datetime.combine(FIRST_TRADE_DATE, datetime.min.time(), LEAGUE_TIMEZONE)
+def build_snapshot(
+    league: Any, messages: list[dict[str, Any]], first_trade_date: date = FIRST_TRADE_DATE
+) -> dict[str, Any]:
+    cutoff = datetime.combine(first_trade_date, datetime.min.time(), LEAGUE_TIMEZONE)
     try:
         league_activities = activities(league)
         source = "activity"
@@ -812,7 +856,7 @@ def build_snapshot(league: Any, messages: list[dict[str, Any]]) -> dict[str, Any
         })
 
     if hasattr(league, "box_scores"):
-        standings = alternate_standings(league, trades)
+        standings = alternate_standings(league, trades, first_trade_date)
         roster_moves = weekly_roster_moves(league, trades, players_by_id)
     else:
         standings = None
@@ -823,7 +867,7 @@ def build_snapshot(league: Any, messages: list[dict[str, Any]]) -> dict[str, Any
         "season": league.year,
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "completed_weeks": completed_weeks,
-        "first_trade_date": FIRST_TRADE_DATE.isoformat(),
+        "first_trade_date": first_trade_date.isoformat(),
         "trades": trades,
         "alternate_standings": standings,
         "weekly_roster_moves": roster_moves,
@@ -834,21 +878,28 @@ def build_snapshot(league: Any, messages: list[dict[str, Any]]) -> dict[str, Any
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--config", type=Path, default=HERE / "generator.json",
+                        help="League IDs, season year, and inclusive Central-time cutoff (default: generator.json).")
+    parser.add_argument("--env-file", type=Path, default=HERE / ".env",
+                        help="Local ESPN_S2 and SWID credentials (default: .env); environment variables take precedence.")
     parser.add_argument("--discord-export", type=Path, help="Optional local JSON export of discord_messages.")
     parser.add_argument("--output", type=Path, default=HERE / "docs" / "data.json")
     args = parser.parse_args()
-    config = LeagueConfig.from_env(SCRIPTS / ".env")
+    config = load_config(args.config)
+    credentials = load_credentials(args.env_file)
     messages = parse_discord_export(args.discord_export)
     leagues = []
-    for spec in LEAGUES:
-        league = build_league(replace(config, league_id=spec["league_id"]))
-        snapshot = build_snapshot(league, messages if spec["receipts"] else [])
+    for spec in config.leagues:
+        league = League(league_id=spec["league_id"], year=config.season_year, **{
+            key.lower(): credentials[key] for key in ("ESPN_S2", "SWID") if key in credentials
+        })
+        snapshot = build_snapshot(league, messages if spec["receipts"] else [], config.first_trade_date)
         snapshot.update(key=spec["key"], label=spec["label"], receipts_enabled=spec["receipts"])
         leagues.append(snapshot)
         print(f"{spec['label']}: {len(snapshot['trades'])} trades")
     output = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        "first_trade_date": FIRST_TRADE_DATE.isoformat(),
+        "first_trade_date": config.first_trade_date.isoformat(),
         "discord_imported": bool(messages),
         "leagues": leagues,
     }

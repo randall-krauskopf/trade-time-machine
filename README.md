@@ -19,7 +19,7 @@ The site has four pages linked from the header: **Leaderboards** (`docs/index.ht
 
 ## Weekly Roster Moves (prototype)
 
-The Weekly Moves page is the app's canonical matchup-outcome model. It combines every trade a manager completed within the same Tuesday-to-Tuesday game week. Players acquired and then traded away within that interval cancel from the net roster diff. It compares the manager's actual weekly score and result with a projection-selected lineup that undoes the week's net trade changes; if the opponent also traded that week, the opponent's bundle is undone too. Actual waiver and free-agent choices remain in place. League, game-week, and manager filters let you inspect the results behind the leaderboard totals.
+The Weekly Moves page is the app's canonical matchup-outcome model. It combines every trade a manager completed within the same Tuesday-to-Tuesday game week. Players acquired and then traded away within that interval cancel from the net roster diff. It compares the manager's actual weekly score and result with a projection-selected lineup that undoes the week's net trade changes; if the opponent also traded that week, the opponent's bundle is undone too. Actual waiver and free-agent choices remain in place. League, game-week, and manager filters let you inspect the results behind the leaderboard totals. Manager-week cards show the newest weeks first by default, with a week-order control to switch to oldest first.
 
 Cards mark an improved result relative to the no-weekly-trades model as **Clutch** (green), and a worsened result as **Oof** (red); unchanged results have no badge. The adjacent W/L/T arrow shows the modeled result transition. Point differences alone do not determine the badge, since an opponent's weekly moves can also change the outcome.
 
@@ -47,15 +47,18 @@ Published with GitHub Pages at <https://randall-krauskopf.github.io/trade-time-m
 
 ## Refresh the snapshot
 
-The generator reuses the ESPN helper library and private `.env` from the `AI-playground` repo (`fantasy-football-league/scripts`). It expects that repo to be checked out next to this one; otherwise set `FF_SCRIPTS_DIR` to the `scripts` folder.
+The generator runs independently of other checkouts. It needs Python 3.10+ and the `espn-api` dependency in this repo's `requirements.txt`. Set the season, league IDs, labels, and inclusive trade cutoff in `generator.json`; the league's Tuesday week boundary and cutoff are interpreted in **America/Chicago**. Keys should be unique because they identify each league in the generated data. The `receipts` flag applies only when a local Discord export is explicitly supplied (and the importer currently recognizes Premier's channels only). To use another configuration file, pass `--config path/to/config.json`.
 
 ```bash
 cd trade-time-machine
-../AI-playground/fantasy-football-league/scripts/.venv/bin/python generate.py
-git add docs/data.json && git commit -m "Refresh trade snapshot" && git push
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+test -e .env || cp .env.example .env
+# Add your ESPN_S2 and SWID to .env if a league is private.
+.venv/bin/python generate.py
 ```
 
-Credentials are read from `scripts/.env` and **never written** into the snapshot. To preview locally, run `python3 -m http.server 8000 --directory docs` and open <http://localhost:8000/> (opening the file directly cannot fetch JSON).
+You can instead set `ESPN_S2` and `SWID` as environment variables (both are required together for private leagues); environment variables override `.env`. Use `--env-file path/to/file` for a different local credentials file, and `--output path/to/file.json` to avoid replacing `docs/data.json`. The default output is `docs/data.json`. Credentials are never written into the snapshot, and `.env` and `.venv` are git-ignored. To preview locally, run `python3 -m http.server 8000 --directory docs` and open <http://localhost:8000/> (opening the file directly cannot fetch JSON).
 
 ## Discord receipts (deferred)
 
@@ -64,7 +67,8 @@ The Archive does not display Discord content. `generate.py` retains an experimen
 ## Checks
 
 ```bash
-../AI-playground/fantasy-football-league/scripts/.venv/bin/python -m unittest -v test_generate.py
+.venv/bin/python -m unittest -v test_generate.py
+node --test test_leaderboards.cjs test_weekly_outcomes.cjs
 ```
 
 The scoring window includes the trade week once completed, but excludes the week currently in progress. Week boundaries assume the NFL season starts on the Thursday after Labor Day (September 10 in 2026); check this assumption if reusing the prototype in a later season. Missing player scores are shown as unavailable, not zero. ESPN `recent_activity` pages are fetched until exhausted; non-trade transactions are ignored.

@@ -1,0 +1,8 @@
+{
+  "season_year": 2026,
+  "first_trade_date": "2026-08-30",
+  "leagues": [
+    {"key": "premier", "label": "Premier", "league_id": 1851323, "receipts": true},
+    {"key": "champeens", "label": "Champeens", "league_id": 1695026336, "receipts": false}
+  ]
+}
