@@ -148,7 +148,9 @@ function rankWeeklyOutcomes(league, direction) {
     .map((manager) => ({
       team: manager.team,
       rankScore: manager.wins,
-      value: `${manager.wins} ${manager.wins === 1 ? "win" : "wins"}`,
+      value: direction > 0
+        ? `${manager.wins} ${manager.wins === 1 ? "win" : "wins"}`
+        : `${manager.wins} ${manager.wins === 1 ? "loss" : "losses"}`,
       detail: `Week${manager.weeks.length === 1 ? "" : "s"} ${manager.weeks.sort((a, b) => a - b).join(", ")}`,
       href: weeklyHref(league, manager),
     }));
@@ -266,7 +268,7 @@ function renderLeaderboards() {
     row.append(grid);
     content.append(row);
   }
-  const notes = ["Wins Traded For/Away compare actual matchup results with the no-weekly-trades scenario, bundled by manager and week (ties count as half a win). Unchanged results do not count. Biggest Roster Swings ranks the largest absolute manager-week point swings (actual minus no-weekly-trades), including swings that did not change the result. Not verdicts."];
+  const notes = ["Wins Traded For/Away compare actual matchup results with the no-weekly-trades scenario, bundled by manager and week (ties count as half a win or loss). Unchanged results do not count. Biggest Roster Swings ranks the largest absolute manager-week point swings (actual minus no-weekly-trades), including swings that did not change the result. Not verdicts."];
   if (trades.some((trade) => trade.league.source === "reconstructed")) {
     notes.push("Champeens trades are reconstructed from roster history and may omit players who were later dropped or re-traded.");
   }

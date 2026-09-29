@@ -39,9 +39,9 @@ test("sums gains and losses separately, counts ties as half a win, and ignores u
     ["Charlie", "1 win", "Week 1"],
   ]);
   assert.deepEqual(Array.from(losses, (entry) => [entry.value, entry.href]), [
-    ["1 win", "./weekly.html?league=premier&team=premier%3A2"],
-    ["0.5 wins", "./weekly.html?league=premier&team=premier%3A1"],
-    ["0.5 wins", "./weekly.html?league=premier&team=premier%3A3"],
+    ["1 loss", "./weekly.html?league=premier&team=premier%3A2"],
+    ["0.5 losses", "./weekly.html?league=premier&team=premier%3A1"],
+    ["0.5 losses", "./weekly.html?league=premier&team=premier%3A3"],
   ]);
 });
 
