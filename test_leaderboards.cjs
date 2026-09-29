@@ -6,7 +6,20 @@ const vm = require("node:vm");
 
 const root = __dirname;
 const script = fs.readFileSync(path.join(root, "docs/app.js"), "utf8").replace(/\nload\(\);\s*$/, "");
-const {rankWeeklyOutcomes, rankWeeklySwings} = vm.runInNewContext(`${script}\n({rankWeeklyOutcomes, rankWeeklySwings})`, {Intl, URLSearchParams});
+const {competitionRanks, rankWeeklyOutcomes, rankWeeklySwings} = vm.runInNewContext(`${script}\n({competitionRanks, rankWeeklyOutcomes, rankWeeklySwings})`, {Intl, URLSearchParams});
+
+test("ties share competition ranks without implying an arbitrary order", () => {
+  const entries = competitionRanks([
+    {team: "Alpha", rankScore: 2},
+    {team: "Bravo", rankScore: 1},
+    {team: "Charlie", rankScore: 1},
+    {team: "Delta", rankScore: 0.5},
+  ]);
+  assert.deepEqual(Array.from(entries, ({team, rank}) => [team, rank]), [
+    ["Alpha", 1], ["Bravo", 2], ["Charlie", 2], ["Delta", 4],
+  ]);
+  assert.throws(() => competitionRanks([{team: "Bad", rankScore: NaN}]), /Invalid leaderboard score/);
+});
 
 test("sums gains and losses separately, counts ties as half a win, and ignores unchanged results", () => {
   const rows = [

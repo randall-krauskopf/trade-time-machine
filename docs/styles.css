@@ -160,12 +160,12 @@ select { width: 100%; margin-bottom: 19px; padding: 12px 13px; background: #fffe
 .leaderboard-card h3 { margin: 0 0 5px; font-size: 18px; letter-spacing: -.04em; }
 .leaderboard-caption { margin: 0 0 12px; color: #718071; font-size: 11px; line-height: 1.5; }
 .leaderboard-empty { margin: 0; color: #7b897c; font-size: 12px; }
-.leaderboard-list { margin: 0; padding: 0; list-style: none; counter-reset: rank; }
-.leaderboard-list li { counter-increment: rank; border-top: 1px solid #ebeee7; }
+.leaderboard-list { margin: 0; padding: 0; list-style: none; }
+.leaderboard-list li { border-top: 1px solid #ebeee7; }
 .leaderboard-entry { display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px 4px; text-align: left; background: none; border: 0; border-radius: 4px; color: inherit; cursor: pointer; }
 a.leaderboard-entry { text-decoration: none; }
-.leaderboard-entry::before { content: counter(rank); flex: 0 0 22px; height: 22px; display: grid; place-items: center; border-radius: 50%; background: #e1e7d8; color: #355746; font-size: 11px; font-weight: 700; }
-.leaderboard-list li:first-child .leaderboard-entry::before { background: #d47743; color: #fff; }
+.leaderboard-entry::before { content: attr(data-rank); flex: 0 0 22px; height: 22px; display: grid; place-items: center; border-radius: 50%; background: #e1e7d8; color: #355746; font-size: 11px; font-weight: 700; }
+.leaderboard-entry.rank-first::before { background: #d47743; color: #fff; }
 .leaderboard-entry:hover, .leaderboard-entry.active { background: #eef2e9; }
 .leaderboard-entry.static { cursor: default; }
 .leaderboard-entry.static:hover { background: none; }

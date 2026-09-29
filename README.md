@@ -8,6 +8,8 @@ This is a **hypothetical hold** for each individual deal: the received players r
 
 The top of the page ranks trades (top 3 per board, per league under "All leagues") , always across all trades regardless of the league/team filters:
 
+Tied values share the same competition rank (for example, `1, 1, 1`; the next distinct value would be `4`) rather than being assigned an arbitrary order.
+
 - **Most active traders**: managers ranked by the number of completed deals they participated in, using the same inclusive August 30 Central-time cutoff as the archive.
 - **Wins Traded For / Wins Traded Away**: rank managers by the matchup results their combined weekly trades improved or worsened versus the no-weekly-trades alternate. A W counts as 1, a tie as 0.5, and an L as 0; unchanged results do not count. A manager can appear on both boards in different weeks. Rankings link to that manager's Weekly Moves cards.
 - **Most players exchanged**: total players received by both sides (newest first on ties).

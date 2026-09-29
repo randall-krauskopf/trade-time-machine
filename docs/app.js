@@ -125,6 +125,7 @@ function rankWeeklySwings(league) {
       || a.week - b.week || a.team.localeCompare(b.team) || String(a.team_id).localeCompare(String(b.team_id)))
     .map((row) => ({
       team: row.team,
+      rankScore: Math.abs(row.net_points),
       value: `${formatSigned(row.net_points, 2)} pts`,
       detail: `Week ${row.week} · ${row.alternate_result === row.result ? "Result unchanged" : `${row.alternate_result} → ${row.result}`}`,
       href: weeklyHref(league, row, true),
@@ -146,10 +147,22 @@ function rankWeeklyOutcomes(league, direction) {
     .sort((a, b) => b.wins - a.wins || a.team.localeCompare(b.team))
     .map((manager) => ({
       team: manager.team,
+      rankScore: manager.wins,
       value: `${manager.wins} ${manager.wins === 1 ? "win" : "wins"}`,
       detail: `Week${manager.weeks.length === 1 ? "" : "s"} ${manager.weeks.sort((a, b) => a - b).join(", ")}`,
       href: weeklyHref(league, manager),
     }));
+}
+
+function competitionRanks(entries) {
+  let previousScore;
+  let rank = 0;
+  return entries.map((entry, index) => {
+    if (!Number.isFinite(entry.rankScore)) throw new Error(`Invalid leaderboard score for ${entry.team || "an entry"}.`);
+    if (index === 0 || entry.rankScore !== previousScore) rank = index + 1;
+    previousScore = entry.rankScore;
+    return {...entry, rank};
+  });
 }
 
 const LEADERBOARDS = [
@@ -165,6 +178,7 @@ const LEADERBOARDS = [
         .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
         .map(([team, count]) => ({
           team,
+          rankScore: count,
           value: `${count} trade${count === 1 ? "" : "s"}`,
         }));
     },
@@ -192,6 +206,7 @@ const LEADERBOARDS = [
         .sort((a, b) => b.count - a.count || Date.parse(b.trade.traded_at) - Date.parse(a.trade.traded_at))
         .map(({trade, count}) => ({
           trade,
+          rankScore: count,
           value: `${count} players`,
           detail: trade.sides.map((side) => `${side.received.length} to ${side.team}`).join(" · "),
         }));
@@ -220,7 +235,7 @@ function renderLeaderboards() {
     for (const board of LEADERBOARDS) {
       const card = node("article", "leaderboard-card");
       card.append(node("h3", "", board.title), node("p", "leaderboard-caption", board.caption));
-      const entries = board.rank(group.trades, group.league).slice(0, 3);
+      const entries = competitionRanks(board.rank(group.trades, group.league)).slice(0, 3);
       if (!entries.length) {
         card.append(node("p", "leaderboard-empty", board.title.startsWith("Wins Traded") ? "No results changed yet." : board.title === "Biggest Roster Swings" ? "No weekly point swings yet." : "No eligible trades yet."));
       } else {
@@ -228,6 +243,8 @@ function renderLeaderboards() {
         for (const entry of entries) {
           const item = node("li");
           const button = node(entry.href ? "a" : entry.trade ? "button" : "div", `leaderboard-entry${entry.trade && entry.trade.id === selectedId ? " active" : ""}${entry.trade || entry.href ? "" : " static"}`);
+          button.dataset.rank = entry.rank;
+          if (entry.rank === 1) button.classList.add("rank-first");
           if (entry.href) button.href = entry.href;
           if (entry.trade) {
             button.type = "button";
