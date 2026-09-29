@@ -1,12 +1,13 @@
-const assert = require("node:assert/strict");
-const fs = require("node:fs");
-const path = require("node:path");
-const test = require("node:test");
-const vm = require("node:vm");
+import assert from "node:assert/strict";
+import fs from "node:fs";
+import test from "node:test";
 
-const root = __dirname;
-const script = fs.readFileSync(path.join(root, "docs/app.js"), "utf8").replace(/\nload\(\);\s*$/, "");
-const {competitionRanks, rankWeeklyOutcomes, rankWeeklySwings} = vm.runInNewContext(`${script}\n({competitionRanks, rankWeeklyOutcomes, rankWeeklySwings})`, {Intl, URLSearchParams});
+import {
+  LEADERBOARDS, competitionRanks, rankMostActiveTraders, rankMostPlayersExchanged, rankWeeklyOutcomes, rankWeeklySwings,
+} from "../../docs/lib/rankings.js";
+import {normalizeSnapshot} from "../../docs/lib/snapshot.js";
+
+const snapshotPath = new URL("../../docs/data.json", import.meta.url);
 
 test("ties share competition ranks without implying an arbitrary order", () => {
   const entries = competitionRanks([
@@ -82,7 +83,7 @@ test("ranks absolute weekly point swings regardless of result change or trade co
 });
 
 test("snapshot's largest swings come from weekly bundles in each league", () => {
-  const {leagues} = JSON.parse(fs.readFileSync(path.join(root, "docs/data.json"), "utf8"));
+  const {leagues} = JSON.parse(fs.readFileSync(snapshotPath, "utf8"));
   for (const league of leagues) {
     const ranked = rankWeeklySwings(league);
     const rows = league.weekly_roster_moves.rows.filter((row) => row.net_points !== 0);
@@ -91,5 +92,44 @@ test("snapshot's largest swings come from weekly bundles in each league", () => 
     const href = new URL(ranked[0].href, "https://example.test/");
     assert.equal(href.searchParams.get("league"), league.key);
     assert.ok(rows.some((row) => href.searchParams.get("team") === `${league.key}:${row.team_id}` && href.searchParams.get("week") === String(row.week)));
+  }
+});
+
+test("most active traders count each side of a deal once per team", () => {
+  const trades = [
+    {sides: [{team: "Beta"}, {team: "Alpha"}]},
+    {sides: [{team: "Alpha"}, {team: "Charlie"}]},
+  ];
+  assert.deepEqual(rankMostActiveTraders(trades).map(({team, value}) => [team, value]), [
+    ["Alpha", "2 trades"], ["Beta", "1 trade"], ["Charlie", "1 trade"],
+  ]);
+});
+
+test("blockbusters rank by players exchanged, newest first on ties", () => {
+  const trade = (id, tradedAt, counts) => ({
+    id, traded_at: tradedAt,
+    sides: counts.map((count, index) => ({team: `T${index}`, received: Array(count).fill({})})),
+  });
+  const ranked = rankMostPlayersExchanged([
+    trade("old", "2026-09-01T00:00:00Z", [1, 1]),
+    trade("big", "2026-09-02T00:00:00Z", [2, 1]),
+    trade("new", "2026-09-03T00:00:00Z", [1, 1]),
+  ]);
+  assert.deepEqual(ranked.map(({trade, value, detail}) => [trade.id, value, detail]), [
+    ["big", "3 players", "2 to T0 · 1 to T1"],
+    ["new", "2 players", "1 to T0 · 1 to T1"],
+    ["old", "2 players", "1 to T0 · 1 to T1"],
+  ]);
+});
+
+test("every board ranks the real snapshot without errors and has an empty-state message", () => {
+  const snapshot = normalizeSnapshot(JSON.parse(fs.readFileSync(snapshotPath, "utf8")));
+  for (const league of snapshot.leagues) {
+    const trades = snapshot.trades.filter((trade) => trade.league_key === league.key);
+    for (const board of LEADERBOARDS) {
+      assert.ok(board.empty, `${board.title} needs an empty message`);
+      const ranks = competitionRanks(board.rank(trades, league)).map((entry) => entry.rank);
+      assert.deepEqual(ranks, [...ranks].sort((a, b) => a - b), `${board.title} ranks are ordered`);
+    }
   }
 });

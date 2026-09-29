@@ -17,7 +17,7 @@ Tied values share the same competition rank (for example, `1, 1, 1`; the next di
 
 Weekly rankings include only completed manager-weeks. Clicking a trade ranking opens that deal directly on the Archive page.
 
-The site has four pages linked from the header: **Leaderboards** (`docs/index.html`), **Archive** (`docs/archive.html`: filters and trade detail), **Weekly Moves** (`docs/weekly.html`: manager-week trade bundles), and **Alternate Universe** (`docs/alternate.html`, rendered by `docs/alternate.js`). Leaderboard and Weekly Moves trade links open the selected deal directly on the Archive page. The Alternate Universe page replays the completed Premier and Champeens matchups.
+The site has four pages linked from the header: **Leaderboards** (`docs/index.html`), **Archive** (`docs/archive.html`: filters and trade detail), **Weekly Moves** (`docs/weekly.html`: manager-week trade bundles), and **Alternate Universe** (`docs/alternate.html`). Each page loads one ES module from `docs/pages/`, and shared code lives in `docs/lib/`; see `AGENTS.md` for the code layout. Leaderboard and Weekly Moves trade links open the selected deal directly on the Archive page. The Alternate Universe page replays the completed Premier and Champeens matchups.
 
 ## Weekly Roster Moves (prototype)
 
@@ -49,7 +49,7 @@ Published with GitHub Pages at <https://randall-krauskopf.github.io/trade-time-m
 
 ## Refresh the snapshot
 
-The generator runs independently of other checkouts. It needs Python 3.10+ and the `espn-api` dependency in this repo's `requirements.txt`. Set the season, league IDs, labels, and inclusive trade cutoff in `generator.json`; the league's Tuesday week boundary and cutoff are interpreted in **America/Chicago**. Keys should be unique because they identify each league in the generated data. The `receipts` flag applies only when a local Discord export is explicitly supplied (and the importer currently recognizes Premier's channels only). To use another configuration file, pass `--config path/to/config.json`.
+The generator (`trade_time_machine/`, run with `generate.py` or `python -m trade_time_machine`) runs independently of other checkouts. It needs Python 3.12+ and the `espn-api` dependency in this repo's `requirements.txt`. Set the season, league IDs, labels, and inclusive trade cutoff in `generator.json`; the league's Tuesday week boundary and cutoff are interpreted in **America/Chicago**. Keys should be unique because they identify each league in the generated data. The `receipts` flag applies only when a local Discord export is explicitly supplied; the optional `discord` section lists the server (`guild_id`) and the allowlisted channel IDs (as strings) the importer accepts. To use another configuration file, pass `--config path/to/config.json`.
 
 ```bash
 cd trade-time-machine
@@ -60,17 +60,24 @@ test -e .env || cp .env.example .env
 .venv/bin/python generate.py
 ```
 
-You can instead set `ESPN_S2` and `SWID` as environment variables (both are required together for private leagues); environment variables override `.env`. Use `--env-file path/to/file` for a different local credentials file, and `--output path/to/file.json` to avoid replacing `docs/data.json`. The default output is `docs/data.json`. Credentials are never written into the snapshot, and `.env` and `.venv` are git-ignored. To preview locally, run `python3 -m http.server 8000 --directory docs` and open <http://localhost:8000/> (opening the file directly cannot fetch JSON).
+You can instead set `ESPN_S2` and `SWID` as environment variables (both are required together for private leagues); environment variables override `.env`. Use `--env-file path/to/file` for a different local credentials file, and `--output path/to/file.json` to avoid replacing `docs/data.json`. The default output is `docs/data.json`. Credentials are never written into the snapshot, and `.env` and `.venv` are git-ignored. To preview locally, run `npm run serve` (or `python3 -m http.server 8000 --directory docs`) and open <http://localhost:8000/>. The pages are ES modules and fetch JSON, so opening the files directly from disk (`file://`) will not work.
 
 ## Discord receipts (deferred)
 
-The Archive does not display Discord content. `generate.py` retains an experimental local-export importer as groundwork, but publishing receipts is deferred in `ToDo.md` until the league approves the privacy and consent model. Never commit credentials, message exports, or private channel content.
+The Archive does not display Discord content. `trade_time_machine/receipts.py` retains an experimental local-export importer as groundwork, but publishing receipts is deferred in `ToDo.md` until the league approves the privacy and consent model. Never commit credentials, message exports, or private channel content.
 
 ## Checks
 
 ```bash
-.venv/bin/python -m unittest -v test_generate.py
-node --test test_leaderboards.cjs test_weekly_outcomes.cjs
+.venv/bin/python -m pip install -r requirements-dev.txt
+npm ci && npx playwright install chromium
+
+npm test              # Python unit, golden-snapshot, and data-contract tests + JS unit tests
+npm run test:smoke    # Playwright: every page loads, deep links resolve, bad schema versions are explained
+npm run coverage      # Python branch coverage (minimum 95%) and JS coverage
+npm run lint          # ruff
 ```
+
+GitHub Actions runs lint, unit, and smoke tests on every push and pull request. `docs/data.json` must match `schema/data.schema.json`; `AGENTS.md` describes how to change that contract and refresh the golden fixture.
 
 The scoring window includes the trade week once completed, but excludes the week currently in progress. Week boundaries assume the NFL season starts on the Thursday after Labor Day (September 10 in 2026); check this assumption if reusing the prototype in a later season. Missing player scores are shown as unavailable, not zero. ESPN `recent_activity` pages are fetched until exhausted; non-trade transactions are ignored.

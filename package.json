@@ -1,0 +1,20 @@
+{
+  "name": "trade-time-machine",
+  "private": true,
+  "description": "Read-only fantasy football trade archive for the Lana Straw leagues.",
+  "type": "module",
+  "scripts": {
+    "test": "npm run test:py && npm run test:js",
+    "test:py": ".venv/bin/python -m unittest discover -s tests -t . -q",
+    "test:js": "node --test \"tests/js/*.test.*\"",
+    "test:smoke": "playwright test",
+    "coverage": "npm run coverage:py && npm run coverage:js",
+    "coverage:py": ".venv/bin/python -m coverage run -m unittest discover -s tests -t . -q && .venv/bin/python -m coverage report",
+    "coverage:js": "node --test --experimental-test-coverage --test-coverage-include=\"docs/**/*.js\" \"tests/js/*.test.js\"",
+    "lint": ".venv/bin/python -m ruff check . && .venv/bin/python -m ruff format --check .",
+    "serve": ".venv/bin/python -m http.server 8000 --directory docs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0"
+  }
+}

@@ -1,11 +1,8 @@
-const assert = require("node:assert/strict");
-const fs = require("node:fs");
-const path = require("node:path");
-const test = require("node:test");
-const vm = require("node:vm");
+import assert from "node:assert/strict";
+import test from "node:test";
 
-const script = fs.readFileSync(path.join(__dirname, "docs/weekly.js"), "utf8").replace(/\nload\(\);\s*$/, "");
-const {outcomeClass, sortWeeklyRows} = vm.runInNewContext(`${script}\n({outcomeClass, sortWeeklyRows})`, {Intl});
+import {RESULT_WINS, outcomeClass, winsGained} from "../../docs/lib/results.js";
+import {describeReplacements, sortWeeklyRows, weeklyHref, weeklyRows} from "../../docs/lib/weekly-moves.js";
 
 test("badges follow matchup results, including ties, rather than point swing", () => {
   const row = {team: "Manager", week: 1, net_points: -10};
@@ -35,4 +32,25 @@ test("weekly cards default to newest first and can be reversed", () => {
     [1, "Zulu"], [3, "Charlie"], [2, "Beta"], [3, "Alpha"], [3, "Bravo"],
   ]);
   assert.throws(() => sortWeeklyRows(rows, "sideways"), /Invalid week order/);
+});
+
+test("wins gained treats a tie as half a win", () => {
+  assert.equal(RESULT_WINS.T, 0.5);
+  assert.equal(winsGained({result: "W", alternate_result: "T"}), 0.5);
+  assert.equal(winsGained({result: "L", alternate_result: "W"}), -1);
+});
+
+test("weekly links carry league, manager, and optional week", () => {
+  const league = {key: "premier"};
+  assert.equal(weeklyHref(league, {team_id: 4, week: 2}), "./weekly.html?league=premier&team=premier%3A4");
+  assert.equal(weeklyHref(league, {team_id: 4, week: 2}, true), "./weekly.html?league=premier&team=premier%3A4&week=2");
+  assert.deepEqual(weeklyRows({}), []);
+});
+
+test("replacement summaries name the slot, the player, and who they displaced", () => {
+  assert.equal(describeReplacements([
+    {slot: "RB", name: "Bench Back", replaced: null},
+    {slot: "WR", name: "Old Friend", replaced: "Rookie"},
+    {slot: "TE", name: null, replaced: null},
+  ]), "RB: Bench Back · WR: Old Friend over Rookie · TE: no eligible player");
 });

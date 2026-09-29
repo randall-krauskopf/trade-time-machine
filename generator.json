@@ -4,5 +4,15 @@
   "leagues": [
     {"key": "premier", "label": "Premier", "league_id": 1851323, "receipts": true},
     {"key": "champeens", "label": "Champeens", "league_id": 1695026336, "receipts": false}
-  ]
+  ],
+  "discord": {
+    "guild_id": "1160416084235661426",
+    "channels": {
+      "1160416085326188555": "general",
+      "1160416085326188556": "nfl-chat",
+      "1281464082809098260": "lspl-only-chat",
+      "1160416085326188557": "trade-talk",
+      "1278801017726570617": "espn-ffl-bot-premier"
+    }
+  }
 }
