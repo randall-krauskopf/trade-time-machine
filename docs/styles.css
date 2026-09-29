@@ -22,7 +22,7 @@ button:focus-visible, select:focus-visible, a:focus-visible { outline: 3px solid
 .weekly-moves { padding: 34px 0 42px; }
 .weekly-heading { flex-wrap: wrap; }
 .weekly-heading h2 { margin: 7px 0 0; font-size: 24px; letter-spacing: -.05em; }
-.weekly-filters { display: grid; flex: 0 0 auto; width: min(100%, 700px); grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.weekly-filters { display: grid; flex: 0 0 auto; width: min(100%, 900px); grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .weekly-filters select { margin-bottom: 0; }
 .weekly-intro { max-width: 820px; margin: 0 0 24px; color: #536759; font-size: 13px; line-height: 1.65; }
 .weekly-league + .weekly-league { margin-top: 32px; }

@@ -44,6 +44,13 @@ function outcomeClass(row) {
   return actual > alternate ? "clutch" : actual < alternate ? "oof" : "";
 }
 
+function sortWeeklyRows(rows, direction = "desc") {
+  if (!["asc", "desc"].includes(direction)) throw new Error(`Invalid week order: ${direction}.`);
+  const weekDirection = direction === "desc" ? -1 : 1;
+  return [...rows].sort((a, b) => weekDirection * (a.week - b.week)
+    || b.trade_count - a.trade_count || a.team.localeCompare(b.team));
+}
+
 function renderTeamOptions() {
   const selected = $("team-filter").value;
   const leagueFilter = $("league-filter").value;
@@ -68,16 +75,19 @@ function render() {
   const leagueFilter = $("league-filter").value;
   const weekFilter = $("week-filter").value;
   const teamFilter = $("team-filter").value;
+  const weekOrder = $("week-order").value;
   const option = $("league-filter").selectedOptions[0];
   $("brand-league").textContent = `/ ${(leagueFilter ? option.textContent : "All leagues").toUpperCase()}`;
   const content = $("weekly-content");
   content.replaceChildren();
   let rendered = 0;
   for (const league of leagues.filter((entry) => !leagueFilter || entry.key === leagueFilter)) {
-    const rows = (league.weekly_roster_moves?.rows || [])
-      .filter((row) => (!weekFilter || String(row.week) === weekFilter)
-        && (!teamFilter || `${league.key}:${row.team_id}` === teamFilter))
-      .sort((a, b) => a.week - b.week || b.trade_count - a.trade_count || a.team.localeCompare(b.team));
+    const rows = sortWeeklyRows(
+      (league.weekly_roster_moves?.rows || []).filter((row) =>
+        (!weekFilter || String(row.week) === weekFilter)
+        && (!teamFilter || `${league.key}:${row.team_id}` === teamFilter)),
+      weekOrder,
+    );
     if (!rows.length) continue;
     rendered += rows.length;
     const section = node("section", "weekly-league");
@@ -135,7 +145,7 @@ async function load() {
       option.value = league.key;
       $("league-filter").append(option);
     }
-    const weeks = [...new Set(leagues.flatMap((league) => (league.weekly_roster_moves?.rows || []).map((row) => row.week)))].sort((a, b) => a - b);
+    const weeks = [...new Set(leagues.flatMap((league) => (league.weekly_roster_moves?.rows || []).map((row) => row.week)))].sort((a, b) => b - a);
     for (const week of weeks) {
       const option = node("option", "", `Week ${week}`);
       option.value = String(week);
@@ -163,6 +173,7 @@ async function load() {
     });
     $("week-filter").addEventListener("change", render);
     $("team-filter").addEventListener("change", render);
+    $("week-order").addEventListener("change", render);
     $("weekly-moves").classList.remove("hidden");
     render();
   } catch (error) {
