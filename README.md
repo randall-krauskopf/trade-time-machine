@@ -18,6 +18,12 @@ Tied values share the same competition rank (for example, `1, 1, 1`; the next di
 
 Weekly rankings include only completed manager-weeks. Clicking a trade ranking opens that deal directly on the Archive page.
 
+Below the leaderboards, **Trade charts** show three per-league charts (`docs/lib/charts.js` computes the data; `docs/lib/leaderboard-charts.js` draws it):
+
+- **Trades per week**: completed deals per game week, including quiet weeks as zero; the week in progress is marked with `*`.
+- **Trade partners**: a heatmap of how many deals each pair of managers has made, including managers who have not traded.
+- **Net roster swing**: each manager's summed Weekly Moves point swing (actual minus the no-weekly-trades lineup) across verified manager-weeks; rows link to that manager's Weekly Moves cards.
+
 The site has four pages linked from the header: **Leaderboards** (`docs/index.html`), **Archive** (`docs/archive.html`: filters and trade detail), **Weekly Moves** (`docs/weekly.html`: manager-week trade bundles), and **Alternate Universe** (`docs/alternate.html`). Each page loads one ES module from `docs/pages/`, and shared code lives in `docs/lib/`; see `AGENTS.md` for the code layout. Leaderboard and Weekly Moves trade links open the selected deal directly on the Archive page. The Alternate Universe page replays the completed Premier and Champeens matchups.
 
 ## Weekly Roster Moves (prototype)
@@ -66,6 +72,48 @@ You can instead set `ESPN_S2` and `SWID` as environment variables (both are requ
 ## Discord receipts (deferred)
 
 The Archive does not display Discord content. `trade_time_machine/receipts.py` retains an experimental local-export importer as groundwork, but publishing receipts is deferred in `ToDo.md` until the league approves the privacy and consent model. Never commit credentials, message exports, or private channel content.
+
+## Historical Supabase transform (read-only)
+
+`trade_time_machine/historical.py` translates historical Supabase rows into the current `data.json` schema. By default it produces an **Archive-only** snapshot (`alternate_standings` and `weekly_roster_moves` are `null`). It also includes the full team-season list so Holding Steady counts zero-trade managers. Received-player points come from `league_roster_entries`; an unavailable player-week stays `null`, never zero.
+
+For completed historical seasons, scored weeks come from roster rows with non-null points rather than `league_seasons.weeks_total` (which covers only the regular season). Historical records that show player movement in only one direction keep the empty sent/received list on the other side; the database does not describe any non-player compensation. Do not treat the result as a complete accounting of draft picks or cash.
+
+Database access is deliberately narrower than a normal Supabase client:
+
+- `trade_time_machine/supabase_source.py` has fixed `SELECT` queries and no write method.
+- The connection must report the exact role `supabase_read_only_user`.
+- Extraction starts with `BEGIN READ ONLY` and rejects the session unless `transaction_read_only` is `on`.
+- Queries run one table at a time to avoid the temporary-disk failure found during the audit.
+- The CLI has no default output under `docs/`, so an audit cannot replace the published snapshot accidentally.
+
+If you have a direct database URL, copy `historical-2025.example.json`, replace `REPLACE_WITH_VERIFIED_2025_CUTOFF` with the verified draft-correction cutoff, and put the direct read-only PostgreSQL URL in the ignored `.env` as `SUPABASE_DATABASE_URL`. Then run:
+
+```bash
+.venv/bin/python -m trade_time_machine.historical_cli \
+  --config historical-2025.json \
+  --output trade-time-machine-2025.json
+```
+
+If access is available only through the Supabase MCP server, no password is needed:
+
+1. Run each SELECT in `historical-2025-queries.sql` separately. They are read-only and each returns one `data` JSON array.
+2. Create `historical-2025-raw/` in the repo root; it is Git-ignored.
+3. Copy each result array into the matching filename: `leagues.json`, `seasons.json`, `teams.json`, `team_seasons.json`, `trades.json`, and `roster_entries.json`.
+4. Run the same transform with `--input`; without `--with-weekly`, this path does not read `.env` or connect to Supabase:
+
+```bash
+.venv/bin/python -m trade_time_machine.historical_cli \
+  --config historical-2025.json \
+  --input historical-2025-raw \
+  --output trade-time-machine-2025.json
+```
+
+The offline input may also be one JSON object whose keys are those six filenames without `.json`. The local config, raw export, and transformed snapshot are Git-ignored; do not force-add the raw export, which contains internal database UUIDs. The transformed output omits them.
+
+To add verified historical Weekly Moves and the matchup-based leaderboards, rerun either command above with `--with-weekly`. This opt-in step reads the 2025 leagues from ESPN using `ESPN_S2` and `SWID` from the ignored `.env` (or the environment), but still makes **no Supabase connection** when `--input` is used. It verifies ESPN team IDs and box-score totals, reconstructs no-trade lineups from historical projections, and omits a manager-week when a departed player's actual points, projection, or eligibility cannot be verified. If an opponent also traded that week, an uncertain opponent outcome is omitted as well. The `weekly_roster_moves.omitted` list identifies excluded `{week, team_id}` pairs; weekly leaderboards are partial when it is nonempty. `alternate_standings` remains unavailable. The snapshot remains local and ignored; do not copy it into `docs/` without separately reviewing a publication plan.
+
+The transform recalculates `transaction_week` from the UTC timestamp using the app's Central-time calendar instead of trusting Supabase's stored `week`. Public trade IDs remain `timestamp-team1-team2`; Supabase UUIDs are never published. Validate and review the output before considering any season for the site.
 
 ## Checks
 

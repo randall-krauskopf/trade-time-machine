@@ -34,13 +34,13 @@ export function rankMostActiveTraders(trades) {
 
 /**
  * Holding Steady: managers with the fewest completed deals, including those
- * with none. The full team list comes from the league's standings, since
- * managers who never traded don't appear in any trade. Managers tied on a
+ * with none. The full team list comes from the historical team-season list
+ * or the current league's standings. Managers tied on a
  * count share one entry (zero-trade ties are common), so entries rank 1, 2, 3
  * by distinct trade count and the detail line says how many are tied.
  */
 export function rankFewestTrades(trades, league) {
-  const teams = league?.alternate_standings?.teams || [];
+  const teams = league?.teams || league?.alternate_standings?.teams || [];
   const counts = new Map(teams.map((team) => [team.team_id, 0]));
   for (const trade of trades) {
     for (const side of trade.sides) {

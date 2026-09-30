@@ -173,8 +173,42 @@ a.leaderboard-entry { text-decoration: none; }
 .leaderboard-teams { display: block; font-size: 12px; font-weight: 700; line-height: 1.35; }
 .leaderboard-detail { display: block; margin-top: 2px; color: #768578; font-size: 10px; line-height: 1.4; }
 .leaderboard-value { flex: 0 0 auto; font-size: 12px; white-space: nowrap; }
+.trade-charts { padding: 34px 0 38px; border-bottom: 1px solid #c9d0c2; }
+.trade-charts .section-heading h2 { margin: 7px 0 0; font-size: 24px; letter-spacing: -.05em; }
+.chart-grid-layout { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.chart-card { min-width: 0; padding: 20px; background: #fffefa; border: 1px solid #dce4d5; border-radius: 7px; }
+.chart-card h3 { margin: 0 0 5px; font-size: 18px; letter-spacing: -.04em; }
+.chart-figure { margin: 0; }
+.chart-partners { grid-column: 1 / -1; }
+.chart-partners .heatmap { margin: 0 auto; }
+.chart-area { fill: #377758; opacity: .12; }
+.chart-line { fill: none; stroke: #377758; stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.chart-point { fill: #fffefa; stroke: #377758; stroke-width: 3; }
+.chart-point.pending { stroke: #d47743; stroke-dasharray: 3 2; }
+.chart-summary { margin: 12px 0 0; color: #5f6f62; font-size: 12px; font-weight: 600; }
+.bar-chart { display: grid; gap: 2px; }
+.bar-row { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) 82px; align-items: center; gap: 10px; padding: 7px 4px; border-top: 1px solid #ebeee7; border-radius: 4px; color: inherit; text-decoration: none; }
+a.bar-row:hover { background: #eef2e9; }
+.bar-label { min-width: 0; }
+.bar-track { position: relative; height: 12px; background: #eef1e9; border-radius: 3px; overflow: hidden; }
+.bar-fill { position: absolute; top: 0; bottom: 0; left: 0; width: var(--size); background: #377758; border-radius: 3px; }
+.bar-value { text-align: right; font-size: 12px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.diverging .bar-track { background: linear-gradient(to right, #eef1e9 calc(50% - 1px), #b9c3b3 calc(50% - 1px), #b9c3b3 calc(50% + 1px), #eef1e9 calc(50% + 1px)); }
+.diverging .bar-fill { left: 50%; width: calc(var(--size) / 2); border-radius: 0 3px 3px 0; }
+.diverging .negative .bar-fill { left: auto; right: 50%; background: #d47743; border-radius: 3px 0 0 3px; }
+.diverging .negative .bar-value { color: #a9582b; }
+.heatmap-scroll { overflow-x: auto; }
+.heatmap { border-collapse: separate; border-spacing: 3px; font-size: 11px; font-variant-numeric: tabular-nums; }
+.heatmap caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.heatmap thead th { width: 28px; color: #6c806e; font-size: 10px; text-align: center; }
+.heatmap-team { max-width: 170px; padding-right: 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: left; font-weight: 700; }
+.heatmap-index { display: inline-block; min-width: 18px; margin-right: 5px; color: #7b897c; font-weight: 500; }
+.heatmap td { width: 28px; height: 28px; text-align: center; border-radius: 4px; background: #f3f5ef; color: #384b3c; font-weight: 700; }
+.heatmap td.heatmap-hit { background: color-mix(in srgb, #d47743 calc(20% + var(--heat) * 80%), #fffefa); color: #2c2c24; }
+.heatmap td.heatmap-self { background: none; color: #b9c3b3; }
+.heatmap td.heatmap-corner { background: none; }
 footer { display: flex; flex-wrap: wrap; gap: 10px; padding: 28px 0 40px; border-top: 1px solid #c9d0c2; color: #899789; font-size: 10px; font-weight: 700; letter-spacing: .1em; }
-@media (max-width: 900px) { .app-shell { padding: 0 24px; } .hero-stamp { display: none; } .workspace { grid-template-columns: 240px minmax(0,1fr); } .leaderboard-grid, .weekly-grid { grid-template-columns: 1fr; } .detail-panel { padding-left: 23px; } }
+@media (max-width: 900px) { .app-shell { padding: 0 24px; } .hero-stamp { display: none; } .workspace { grid-template-columns: 240px minmax(0,1fr); } .leaderboard-grid, .weekly-grid, .chart-grid-layout { grid-template-columns: 1fr; } .detail-panel { padding-left: 23px; } }
 @media (max-width: 700px) {
   .app-shell { padding: 0 17px; } .masthead { flex-wrap: wrap; height: auto; min-height: 65px; padding: 10px 0; } .brand { font-size: 11px; } .season-badge { display: none; } .site-nav { order: 3; width: 100%; justify-content: center; margin: 7px 0 0; } .hero { padding: 47px 0 40px; }
   .weekly-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }

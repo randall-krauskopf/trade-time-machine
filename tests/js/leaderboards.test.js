@@ -168,3 +168,10 @@ test("Holding Steady on the real snapshot accounts for every manager", () => {
     assert.equal(entries.reduce((total, entry) => total + entry.managerCount * entry.rankScore, 0), sideCount);
   }
 });
+
+test("Holding Steady works without alternate standings for historical seasons", () => {
+  const league = {teams: [{team_id: 1, team: "No Deals"}, {team_id: 2, team: "Trader"}], alternate_standings: null};
+  const trades = [{sides: [{team_id: 2, team: "Trader"}, {team_id: 3, team: "Other"}]}];
+  assert.deepEqual(rankFewestTrades(trades, league).map(({team, rankScore}) => [team, rankScore]),
+    [["No Deals", 0], ["Trader", 1]]);
+});

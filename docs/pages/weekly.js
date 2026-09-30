@@ -141,7 +141,8 @@ async function main() {
     leagues = data.leagues || [];
     showSeasons(leagues);
     const bundleCount = leagues.reduce((sum, league) => sum + weeklyRows(league).length, 0);
-    showContext([`${bundleCount} manager-week trade bundles`], data.generated_at);
+    const omitted = leagues.reduce((total, league) => total + (league.weekly_roster_moves?.omitted?.length || 0), 0);
+    showContext([`${bundleCount} manager-week trade bundles${omitted ? ` · ${omitted} excluded (incomplete historical inputs)` : ""}`], data.generated_at);
     addLeagueOptions($("league-filter"), leagues);
     const weeks = [...new Set(leagues.flatMap((league) => weeklyRows(league).map((row) => row.week)))].sort((a, b) => b - a);
     appendOptions($("week-filter"), weeks.map((week) => [String(week), `Week ${week}`]));

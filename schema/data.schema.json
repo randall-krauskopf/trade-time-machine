@@ -41,6 +41,18 @@
         "completed_weeks": {"type": "array", "items": {"$ref": "#/$defs/week"}},
         "first_trade_date": {"$ref": "#/$defs/isoDate"},
         "trades": {"type": "array", "items": {"$ref": "#/$defs/trade"}},
+        "teams": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["team_id", "team"],
+            "properties": {
+              "team_id": {"type": "integer"},
+              "team": {"type": "string"}
+            }
+          }
+        },
         "alternate_standings": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/alternateStandings"}]},
         "weekly_roster_moves": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/weeklyRosterMoves"}]},
         "source": {"enum": ["activity", "reconstructed"]},
@@ -160,7 +172,16 @@
       "required": ["rows", "source"],
       "properties": {
         "source": {"const": "weekly_trade_bundles"},
-        "rows": {"type": "array", "items": {"$ref": "#/$defs/weeklyRow"}}
+        "rows": {"type": "array", "items": {"$ref": "#/$defs/weeklyRow"}},
+        "omitted": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["week", "team_id"],
+            "properties": {"week": {"$ref": "#/$defs/week"}, "team_id": {"type": "integer"}}
+          }
+        }
       }
     },
     "weeklyRow": {

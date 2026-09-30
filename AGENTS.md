@@ -27,7 +27,7 @@ There is no server, database, or build step at runtime. Every push to `main` rep
 | `trade_time_machine/` | The generator package. `__init__.py` lists the pipeline stages in order. |
 | `schema/data.schema.json` | The JSON Schema for `docs/data.json`: the contract between the generator and the site. |
 | `docs/*.html` | Four pages, each loading a single `<script type="module">`. |
-| `docs/lib/` | Shared frontend modules. Everything except `dom.js`, `page.js` and `swing-chart.js` is pure and can be imported in Node tests. |
+| `docs/lib/` | Shared frontend modules. Everything except `dom.js`, `page.js`, `swing-chart.js` and `leaderboard-charts.js` is pure and can be imported in Node tests. |
 | `docs/pages/` | One entry script per page. These modules own the DOM and the page state. |
 | `tests/test_*.py` | Python unit tests, one file per module, plus the golden-snapshot and data-contract tests. |
 | `tests/fixtures/` | `fake_espn.py` (a deterministic fake league), `builders.py` (small test-data builders), and `data.expected.json` (the golden output). |
@@ -76,6 +76,7 @@ CI (`.github/workflows/test.yml`) runs lint, `npm test` and the smoke tests on e
 | Change | Where to edit |
 | --- | --- |
 | New season or cutoff | `generator.json` (`season_year`, `first_trade_date`) |
+| Historical season data | `supabase_source.py` (fixed read-only extraction), `historical.py` (pure transform), `historical_weekly.py` (opt-in ESPN enrichment), and a reviewed historical config |
 | New league | `generator.json` `leagues`; `key` must be unique and stable, since it prefixes trade IDs and URLs |
 | New leaderboard | Add a ranker and a `LEADERBOARDS` entry in `docs/lib/rankings.js`, with a test in `tests/js/leaderboards.test.js` |
 | New field in `data.json` | Model in `models.py`, then producer, then `schema/data.schema.json`, then the golden fixture, then the frontend (see "Changing the data contract") |
@@ -104,6 +105,9 @@ A refactor must not change `tests/fixtures/data.expected.json`. If the golden te
 - **Unknown values are never zero.** Missing scores stay `null` and render as `—`.
 - **Discord snowflakes are strings,** because they exceed JavaScript's safe integer range.
 - **The site is read-only and public.** Never put credentials, Discord exports or private data in `docs/` or commit them. `.env`, `discord-export.json` and `supabase-schema.sql` are git-ignored.
+- **Historical Supabase access is read-only by construction.** Use only `supabase_read_only_user`; the source rejects other roles and non-read-only transactions. Never add a generic SQL or mutation method.
+- **MCP-only historical imports use local JSON.** Run `historical-2025-queries.sql`, keep the six raw arrays in the ignored `historical-2025-raw/` directory, and pass that directory with `historical_cli --input`. This mode never opens a database connection.
+- **Historical Weekly Moves is opt-in and partial.** `historical_cli --with-weekly` reads ESPN box scores and free agents, requires explicit historical projections for departed players absent from box rosters, and records uncertain manager-weeks (including dependent opponent outcomes) in `weekly_roster_moves.omitted`. Do not publish the ignored 2025 snapshot or interpret partial leaderboards as complete.
 - **Trade IDs are league-prefixed in the frontend** (`premier-<id>`) and are part of the public URLs (`archive.html?trade=`, `weekly.html?league&team&week`). Don't change their format without a redirect plan (see `ToDo.md` #17).
 
 ## Glossary

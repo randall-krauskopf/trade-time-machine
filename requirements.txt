@@ -1,1 +1,2 @@
 espn-api>=0.45.0,<1
+psycopg[binary]>=3.2,<4

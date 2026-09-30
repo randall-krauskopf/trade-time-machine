@@ -56,6 +56,23 @@ test("archive keeps the URL in sync with the selected trade", async ({page}) => 
   expect(new URL(page.url()).searchParams.get("trade")).toBeTruthy();
 });
 
+test("leaderboard charts render for every league", async ({page}) => {
+  const errors = collectErrors(page);
+  await page.goto("/index.html");
+  await expect(page.locator("#trade-charts")).toBeVisible();
+  await expect(page.locator("#trade-charts .chart-card")).toHaveCount(3 * snapshot.leagues.length);
+  await expect(page.locator(".chart-trades-per-week svg").first()).toBeVisible();
+  await expect(page.locator("#chart-note")).toContainText("Trade partners");
+  expect(errors).toEqual([]);
+});
+
+test("leaderboard charts stay hidden for an unsupported snapshot", async ({page}) => {
+  await page.route("**/data.json", (route) => route.fulfill({json: {...snapshot, schema_version: 999}}));
+  await page.goto("/index.html");
+  await expect(page.locator("#error")).toBeVisible();
+  await expect(page.locator("#trade-charts")).toBeHidden();
+});
+
 test("leaderboard entries open the archive", async ({page}) => {
   await page.goto("/index.html");
   await page.locator("button.leaderboard-entry").first().click();
