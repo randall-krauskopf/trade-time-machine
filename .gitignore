@@ -7,6 +7,9 @@
 !.env.example
 discord-export.json
 supabase-schema.sql
+historical-2025.json
+historical-2025-raw/
+trade-time-machine-2025.json
 
 # Python
 .venv/
