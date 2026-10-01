@@ -155,6 +155,13 @@ select { width: 100%; margin-bottom: 19px; padding: 12px 13px; background: #fffe
 .leaderboards .section-heading h2 { margin: 7px 0 0; font-size: 24px; letter-spacing: -.05em; }
 .leaderboard-row + .leaderboard-row { margin-top: 22px; }
 .leaderboard-league { margin: 0 0 10px; color: #8a5d3d; font-size: 10px; font-weight: 700; letter-spacing: .14em; }
+.collapsible > summary.leaderboard-league { display: flex; align-items: center; gap: 8px; width: fit-content; cursor: pointer; list-style: none; user-select: none; }
+.collapsible > summary.leaderboard-league::-webkit-details-marker { display: none; }
+.collapsible > summary.leaderboard-league::before { content: ""; width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translate(-2px, -2px); transition: transform .15s ease; }
+.collapsible:not([open]) > summary.leaderboard-league::before { transform: rotate(-45deg); }
+.collapsible:not([open]) > summary.leaderboard-league { margin-bottom: 0; }
+.collapsible > summary.leaderboard-league:hover { color: #b8612c; }
+.collapsible > summary.leaderboard-league:focus-visible { outline: 2px solid #b8612c; outline-offset: 3px; border-radius: 2px; }
 .leaderboard-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .leaderboard-card { padding: 20px; background: #fffefa; border: 1px solid #dce4d5; border-radius: 7px; }
 .leaderboard-card h3 { margin: 0 0 5px; font-size: 18px; letter-spacing: -.04em; }

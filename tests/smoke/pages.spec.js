@@ -73,6 +73,20 @@ test("leaderboard charts stay hidden for an unsupported snapshot", async ({page}
   await expect(page.locator("#trade-charts")).toBeHidden();
 });
 
+test("leaderboard league sections collapse and expand", async ({page}) => {
+  test.skip(snapshot.leagues.length < 2, "Collapsible sections appear only with multiple leagues.");
+  await page.goto("/index.html");
+  const section = page.locator("#leaderboard-content details.collapsible").first();
+  const grid = section.locator(".leaderboard-grid");
+  await expect(page.locator("#leaderboard-content details.collapsible")).toHaveCount(snapshot.leagues.length);
+  await expect(page.locator("#chart-content details.collapsible")).toHaveCount(snapshot.leagues.length);
+  await expect(grid).toBeVisible();
+  await section.locator("summary").click();
+  await expect(grid).toBeHidden();
+  await section.locator("summary").click();
+  await expect(grid).toBeVisible();
+});
+
 test("leaderboard entries open the archive", async ({page}) => {
   await page.goto("/index.html");
   await page.locator("button.leaderboard-entry").first().click();

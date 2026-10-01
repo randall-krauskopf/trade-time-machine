@@ -18,7 +18,7 @@ Tied values share the same competition rank (for example, `1, 1, 1`; the next di
 - **Most Traded Player**: players moved in at least two completed deals, with the path of teams they passed through (most trades first, then most recently traded). Each entry opens that player's latest deal on the Archive page.
 - **Left on the Bench**: the most points a manager left on the bench in a single completed week, i.e. the best possible lineup from that week's roster (excluding IR) minus the starters' actual points. The detail names the top-scoring bench player. The generator stores these per manager-week under `alternate_standings.weeks[].lineups`; leagues without that data (such as historical snapshots) show an empty board.
 
-Weekly rankings include only completed manager-weeks. Clicking a trade ranking opens that deal directly on the Archive page.
+When the snapshot has more than one league, each league's leaderboards and charts sit in a collapsible section (open by default); click the league name to collapse or expand it. Weekly rankings include only completed manager-weeks. Clicking a trade ranking opens that deal directly on the Archive page.
 
 Below the leaderboards, **Trade charts** show three per-league charts (`docs/lib/charts.js` computes the data; `docs/lib/leaderboard-charts.js` draws it):
 

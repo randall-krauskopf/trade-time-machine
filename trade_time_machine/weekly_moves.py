@@ -19,10 +19,18 @@ TeamWeek = dict[str, Any]
 """One team's box score: score, opponent_id, opponent name, starters, bench."""
 
 
-def weekly_roster_moves(league: Any, trades: list[Trade], players_by_id: dict[int, EspnPlayer]) -> WeeklyRosterMoves:
+def weekly_roster_moves(
+    league: Any,
+    trades: list[Trade],
+    players_by_id: dict[int, EspnPlayer],
+    *,
+    unavailable_team_weeks: set[tuple[int, int]] | None = None,
+    weeks: list[int] | None = None,
+) -> WeeklyRosterMoves:
     """Grade each manager's combined trade activity within a Tuesday-to-Tuesday week."""
     rows: list[WeeklyRow] = []
-    for week in completed_weeks(league):
+    omitted = []
+    for week in weeks if weeks is not None else completed_weeks(league):
         weekly_trades = [trade for trade in trades if trade["transaction_week"] == week]
         if not weekly_trades:
             continue
@@ -31,12 +39,20 @@ def weekly_roster_moves(league: Any, trades: list[Trade], players_by_id: dict[in
         alternates = {
             team_id: _no_trade_lineup(bundle, boxes[team_id], boxes, players_by_id, week)
             for team_id, bundle in bundles.items()
-            if team_id in boxes
+            if team_id in boxes and (week, team_id) not in (unavailable_team_weeks or set())
         }
         for team_id, bundle in bundles.items():
             box = boxes.get(team_id)
             alternate = alternates.get(team_id)
-            if box is None or alternate is None or box["opponent_id"] not in boxes:
+            opponent_id = box["opponent_id"] if box else None
+            if (
+                box is None
+                or alternate is None
+                or opponent_id not in boxes
+                or (week, opponent_id) in (unavailable_team_weeks or set())
+            ):
+                if unavailable_team_weeks is not None:
+                    omitted.append({"week": week, "team_id": team_id})
                 continue
             opponent_box = boxes[box["opponent_id"]]
             opponent_alternate = alternates.get(box["opponent_id"], {}).get(
@@ -72,7 +88,10 @@ def weekly_roster_moves(league: Any, trades: list[Trade], players_by_id: dict[in
                     "snapshot_status": "reconstructed_from_trades_and_weekly_box_score",
                 }
             )
-    return {"rows": rows, "source": "weekly_trade_bundles"}
+    result: WeeklyRosterMoves = {"rows": rows, "source": "weekly_trade_bundles"}
+    if unavailable_team_weeks is not None:
+        result["omitted"] = omitted
+    return result
 
 
 def bundle_trades(weekly_trades: list[Trade]) -> dict[int, dict[str, Any]]:
