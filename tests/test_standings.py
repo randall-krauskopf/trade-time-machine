@@ -4,7 +4,7 @@ import unittest
 
 from tests.fixtures.builders import box_entry
 from trade_time_machine.game_weeks import week_start
-from trade_time_machine.standings import alternate_standings
+from trade_time_machine.standings import alternate_standings, lineup_gap
 
 
 class AlternateStandingsTest(unittest.TestCase):
@@ -52,7 +52,7 @@ class AlternateStandingsTest(unittest.TestCase):
         standings = alternate_standings(league, [trade], date(2026, 8, 30))
         a, b = standings["teams"]
         self.assertEqual(
-            standings["weeks"],
+            [{"week": week["week"], "rewound_players": week["rewound_players"]} for week in standings["weeks"]],
             [
                 {"week": 1, "rewound_players": 1},
                 {"week": 2, "rewound_players": 0},
@@ -139,8 +139,47 @@ class BoxScoreValidationTest(unittest.TestCase):
             alternate_standings(self.league("normal", [undated]), [], date(2026, 8, 30))
         preseason = {**undated, "processDate": 1_000, "items": [{"type": "ADD", "playerId": 1, "toTeamId": 2}]}
         standings = alternate_standings(self.league("normal", [preseason]), [], date(2026, 8, 30))
-        self.assertEqual(standings["weeks"], [{"week": 1, "rewound_players": 0}])
+        self.assertEqual([(week["week"], week["rewound_players"]) for week in standings["weeks"]], [(1, 0)])
         self.assertEqual(standings["teams"][0]["actual_ties"], 1)
+
+
+class LineupGapTest(unittest.TestCase):
+    @staticmethod
+    def player(player_id, slot, points, eligible):
+        return {
+            "id": player_id,
+            "name": f"P{player_id}",
+            "slot": slot,
+            "points": points,
+            "projected": 0,
+            "eligible": eligible,
+        }
+
+    def test_points_left_compare_best_lineup_with_actual_starters_and_ignore_ir(self):
+        roster = {
+            1: self.player(1, "QB", 10, ["QB"]),
+            2: self.player(2, "WR", 4, ["WR", "RB/WR/TE"]),
+            3: self.player(3, "RB/WR/TE", 3, ["RB", "RB/WR/TE"]),
+            4: self.player(4, "BE", 20, ["WR", "RB/WR/TE"]),
+            5: self.player(5, "BE", 20, ["QB"]),
+            6: self.player(6, "IR", 50, ["RB", "RB/WR/TE"]),
+        }
+        gap = lineup_gap(7, "Team", roster, ["QB", "WR", "RB/WR/TE"])
+        self.assertEqual(
+            gap,
+            {
+                "team_id": 7,
+                "team": "Team",
+                "actual_points": 17.0,
+                "optimal_points": 44.0,
+                "points_left": 27.0,
+                "top_bench": {"id": 4, "name": "P4", "points": 20},
+            },
+        )
+
+    def test_perfect_lineup_without_bench_leaves_nothing(self):
+        gap = lineup_gap(1, "Team", {1: self.player(1, "QB", 9.5, ["QB"])}, ["QB"])
+        self.assertEqual((gap["points_left"], gap["top_bench"]), (0.0, None))
 
 
 if __name__ == "__main__":

@@ -5,9 +5,9 @@
 // decides ties, `value` is the display text. Entries with `trade` open the
 // archive; entries with `href` link elsewhere.
 
-import {countOf, formatSigned} from "./format.js";
+import {countOf, formatPoints, formatSigned} from "./format.js";
 import {winsGained} from "./results.js";
-import {playersExchanged} from "./trades.js";
+import {archiveHref, playersExchanged} from "./trades.js";
 import {weeklyHref, weeklyRows} from "./weekly-moves.js";
 
 /** Standard competition ranking ("1224"): tied scores share a rank and the next rank is skipped. */
@@ -118,6 +118,61 @@ export function rankWeeklySwings(league) {
     }));
 }
 
+/**
+ * Most Traded Player: players moved in at least two completed deals, with the
+ * path between managers. Entries open the player's most recent trade.
+ */
+export function rankMostTradedPlayers(trades) {
+  const players = new Map();
+  const ordered = [...trades].sort((a, b) => Date.parse(a.traded_at) - Date.parse(b.traded_at) || a.id.localeCompare(b.id));
+  for (const trade of ordered) {
+    for (const side of trade.sides) {
+      const receiver = trade.sides.find((other) => other !== side);
+      for (const player of side.sent) {
+        const entry = players.get(player.id) || {name: player.name, path: [side.team], trades: []};
+        if (entry.path.at(-1) !== side.team) entry.path.push(side.team);
+        entry.path.push(receiver.team);
+        entry.trades.push(trade);
+        players.set(player.id, entry);
+      }
+    }
+  }
+  return [...players.values()]
+    .filter((player) => player.trades.length > 1)
+    .sort((a, b) => b.trades.length - a.trades.length
+      || Date.parse(b.trades.at(-1).traded_at) - Date.parse(a.trades.at(-1).traded_at) || a.name.localeCompare(b.name))
+    .map((player) => ({
+      team: player.name,
+      rankScore: player.trades.length,
+      value: countOf(player.trades.length, "trade"),
+      detail: player.path.join(" → "),
+      href: archiveHref(player.trades.at(-1).id),
+    }));
+}
+
+/** All manager-week lineup gaps (best possible lineup minus actual starters). */
+export function lineupGaps(league) {
+  return (league?.alternate_standings?.weeks || [])
+    .flatMap((week) => (week.lineups || []).map((lineup) => ({...lineup, week: week.week})));
+}
+
+/** Left on the Bench: manager-weeks with the most points stranded on the bench. */
+export function rankPointsLeftOnBench(league) {
+  return lineupGaps(league)
+    .filter((row) => {
+      if (!Number.isFinite(row.points_left)) throw new Error(`Invalid bench points for ${row.team}, Week ${row.week}.`);
+      return row.points_left > 0;
+    })
+    .sort((a, b) => b.points_left - a.points_left || a.week - b.week || a.team.localeCompare(b.team))
+    .map((row) => ({
+      team: row.team,
+      rankScore: row.points_left,
+      value: `${formatPoints(row.points_left)} pts`,
+      detail: `Week ${row.week} · ${formatPoints(row.actual_points)} of ${formatPoints(row.optimal_points)} possible`
+        + (row.top_bench ? ` · ${row.top_bench.name} sat with ${formatPoints(row.top_bench.points)}` : ""),
+    }));
+}
+
 /** Board definitions in display order. `rank(trades, league)` gets one league's trades. */
 export const LEADERBOARDS = [
   {
@@ -155,6 +210,18 @@ export const LEADERBOARDS = [
     caption: "Biggest weekly matchup point swings, for better or worse.",
     empty: "No weekly point swings yet.",
     rank: (trades, league) => rankWeeklySwings(league),
+  },
+  {
+    title: "Most Traded Player",
+    caption: "Players moved in two or more deals, and the path they took.",
+    empty: "No player has been traded twice yet.",
+    rank: (trades) => rankMostTradedPlayers(trades),
+  },
+  {
+    title: "Left on the Bench",
+    caption: "Most points a manager's best possible lineup beat their actual starters in one week.",
+    empty: "No weekly lineup data available.",
+    rank: (trades, league) => rankPointsLeftOnBench(league),
   },
 ];
 

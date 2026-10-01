@@ -8,7 +8,7 @@ espn_api objects both fit.
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Any, Literal, Protocol, TypedDict
+from typing import Any, Literal, NotRequired, Protocol, TypedDict
 
 MatchupResult = Literal["W", "L", "T"]
 
@@ -145,8 +145,29 @@ class StandingsRow(TypedDict):
     wins_change: float
 
 
+class BenchPlayer(TypedDict):
+    id: int
+    name: str
+    points: float
+
+
+class LineupGap(TypedDict):
+    team_id: int
+    team: str
+    actual_points: float
+    optimal_points: float
+    points_left: float
+    top_bench: BenchPlayer | None
+
+
+class AlternateWeek(TypedDict):
+    week: int
+    rewound_players: int
+    lineups: list[LineupGap]
+
+
 class AlternateStandings(TypedDict):
-    weeks: list[dict[str, int]]
+    weeks: list[AlternateWeek]
     teams: list[StandingsRow]
     source: Literal["weekly_box_scores"]
 
@@ -175,6 +196,17 @@ class WeeklyRow(TypedDict):
 class WeeklyRosterMoves(TypedDict):
     rows: list[WeeklyRow]
     source: Literal["weekly_trade_bundles"]
+    omitted: NotRequired[list[OmittedWeeklyRow]]
+
+
+class OmittedWeeklyRow(TypedDict):
+    week: int
+    team_id: int
+
+
+class HistoricalTeam(TypedDict):
+    team_id: int
+    team: str
 
 
 class LeagueSnapshot(TypedDict, total=False):
@@ -192,3 +224,4 @@ class LeagueSnapshot(TypedDict, total=False):
     key: str
     label: str
     receipts_enabled: bool
+    teams: list[HistoricalTeam]

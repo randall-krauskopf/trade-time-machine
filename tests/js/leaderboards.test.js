@@ -4,6 +4,7 @@ import test from "node:test";
 
 import {
   LEADERBOARDS, competitionRanks, rankFewestTrades, rankMostActiveTraders, rankMostPlayersExchanged, rankWeeklyOutcomes, rankWeeklySwings,
+  lineupGaps, rankMostTradedPlayers, rankPointsLeftOnBench,
 } from "../../docs/lib/rankings.js";
 import {normalizeSnapshot} from "../../docs/lib/snapshot.js";
 
@@ -174,4 +175,41 @@ test("Holding Steady works without alternate standings for historical seasons", 
   const trades = [{sides: [{team_id: 2, team: "Trader"}, {team_id: 3, team: "Other"}]}];
   assert.deepEqual(rankFewestTrades(trades, league).map(({team, rankScore}) => [team, rankScore]),
     [["No Deals", 0], ["Trader", 1]]);
+});
+
+test("Most Traded Player follows each player's path and skips one-time moves", () => {
+  const deal = (id, tradedAt, [a, sentA], [b, sentB]) => ({
+    id, traded_at: tradedAt,
+    sides: [{team_id: a, team: `T${a}`, sent: sentA}, {team_id: b, team: `T${b}`, sent: sentB}],
+  });
+  const star = {id: 10, name: "Star"};
+  const trades = [
+    deal("third", "2026-09-20T00:00:00Z", [3, [star]], [4, [{id: 30, name: "Other"}]]),
+    deal("first", "2026-09-01T00:00:00Z", [1, [star]], [2, [{id: 20, name: "Once"}]]),
+    deal("second", "2026-09-10T00:00:00Z", [2, [star, {id: 21, name: "Twice"}]], [3, []]),
+    deal("fourth", "2026-09-21T00:00:00Z", [3, [{id: 21, name: "Twice"}]], [1, []]),
+  ];
+  assert.deepEqual(rankMostTradedPlayers(trades).map(({team, value, detail, href}) => [team, value, detail, href]), [
+    ["Star", "3 trades", "T1 → T2 → T3 → T4", "./archive.html?trade=third"],
+    ["Twice", "2 trades", "T2 → T3 → T1", "./archive.html?trade=fourth"],
+  ]);
+  assert.deepEqual(rankMostTradedPlayers(trades.slice(1, 2)), []);
+});
+
+test("Left on the Bench ranks manager-weeks by points stranded on the bench", () => {
+  const lineup = (team_id, points_left, top_bench = null) => ({
+    team_id, team: `T${team_id}`, actual_points: 100, optimal_points: 100 + points_left, points_left, top_bench,
+  });
+  const league = {alternate_standings: {weeks: [
+    {week: 1, rewound_players: 0, lineups: [lineup(1, 12.5, {id: 9, name: "Sleeper", points: 20}), lineup(2, 0)]},
+    {week: 2, rewound_players: 0, lineups: [lineup(2, 30)]},
+    {week: 3, rewound_players: 0},
+  ]}};
+  assert.equal(lineupGaps(league).length, 3);
+  assert.deepEqual(rankPointsLeftOnBench(league).map(({team, value, detail}) => [team, value, detail]), [
+    ["T2", "30.00 pts", "Week 2 · 100.00 of 130.00 possible"],
+    ["T1", "12.50 pts", "Week 1 · 100.00 of 112.50 possible · Sleeper sat with 20.00"],
+  ]);
+  assert.deepEqual(rankPointsLeftOnBench({alternate_standings: null}), []);
+  assert.throws(() => rankPointsLeftOnBench({alternate_standings: {weeks: [{week: 1, lineups: [lineup(1, NaN)]}]}}), /Invalid bench points/);
 });

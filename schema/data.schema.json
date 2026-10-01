@@ -131,7 +131,36 @@
             "type": "object",
             "additionalProperties": false,
             "required": ["week", "rewound_players"],
-            "properties": {"week": {"$ref": "#/$defs/week"}, "rewound_players": {"type": "integer", "minimum": 0}}
+            "properties": {
+              "week": {"$ref": "#/$defs/week"},
+              "rewound_players": {"type": "integer", "minimum": 0},
+              "lineups": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["team_id", "team", "actual_points", "optimal_points", "points_left", "top_bench"],
+                  "properties": {
+                    "team_id": {"type": "integer"},
+                    "team": {"type": "string", "minLength": 1},
+                    "actual_points": {"type": "number"},
+                    "optimal_points": {"type": "number"},
+                    "points_left": {"type": "number", "minimum": 0},
+                    "top_bench": {
+                      "oneOf": [
+                        {"type": "null"},
+                        {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "required": ["id", "name", "points"],
+                          "properties": {"id": {"type": "integer"}, "name": {"type": "string"}, "points": {"type": "number"}}
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "teams": {

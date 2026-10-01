@@ -8,7 +8,7 @@ import {normalizeSnapshot, tradeContext} from "../lib/snapshot.js";
 import {LEADERBOARD_TOP_N, LEADERBOARDS, competitionRanks} from "../lib/rankings.js";
 import {archiveHref, tradeTeams} from "../lib/trades.js";
 
-const METHOD_NOTE = "Wins Traded For/Away compare actual matchup results with the no-weekly-trades scenario, bundled by manager and week (ties count as half a win or loss). Unchanged results do not count. Biggest Roster Swings ranks the largest absolute manager-week point swings (actual minus no-weekly-trades), including swings that did not change the result. Not verdicts.";
+const METHOD_NOTE = "Wins Traded For/Away compare actual matchup results with the no-weekly-trades scenario, bundled by manager and week (ties count as half a win or loss). Unchanged results do not count. Biggest Roster Swings ranks the largest absolute manager-week point swings (actual minus no-weekly-trades), including swings that did not change the result. Most Traded Player counts players moved in two or more deals. Left on the Bench is the best possible lineup from that week's roster (IR excluded) minus the starters' actual points. Not verdicts.";
 const CHART_NOTE = "Trades per week counts completed deals by game week. Trade partners counts deals between each pair of managers. Net roster swing sums each manager's weekly point swing (actual minus the no-weekly-trades lineup) across verified manager-weeks.";
 const RECONSTRUCTED_NOTE = "Champeens trades are reconstructed from roster history and may omit players who were later dropped or re-traded.";
 

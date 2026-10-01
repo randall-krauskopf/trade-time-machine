@@ -15,6 +15,8 @@ Tied values share the same competition rank (for example, `1, 1, 1`; the next di
 - **Wins Traded For / Wins Traded Away**: rank managers by the matchup results their combined weekly trades improved or worsened versus the no-weekly-trades alternate. A W counts as 1, a tie as 0.5, and an L as 0; unchanged results do not count. Wins Traded For shows the count as wins and Wins Traded Away as losses (e.g. "0.5 losses" for a W→T). A manager can appear on both boards in different weeks. Rankings link to that manager's Weekly Moves cards.
 - **Most players exchanged**: total players received by both sides (newest first on ties).
 - **Biggest Roster Swings**: the largest absolute point swings for a manager's completed weekly trade bundle, comparing actual matchup points with the modeled no-weekly-trades lineup. Signed values show whether the manager scored more or fewer points; a matchup result need not change. Each entry links to that specific manager-week on Weekly Moves.
+- **Most Traded Player**: players moved in at least two completed deals, with the path of teams they passed through (most trades first, then most recently traded). Each entry opens that player's latest deal on the Archive page.
+- **Left on the Bench**: the most points a manager left on the bench in a single completed week, i.e. the best possible lineup from that week's roster (excluding IR) minus the starters' actual points. The detail names the top-scoring bench player. The generator stores these per manager-week under `alternate_standings.weeks[].lineups`; leagues without that data (such as historical snapshots) show an empty board.
 
 Weekly rankings include only completed manager-weeks. Clicking a trade ranking opens that deal directly on the Archive page.
 

@@ -10,6 +10,10 @@ For each completed week:
    not muddy the comparison, and replay every matchup.
 
 `wins_change` = alternate wins - optimal actual wins, with ties counting as half.
+
+Each week also records every manager's *lineup gap*: the best possible score
+from that week's actual starters and bench (IR excluded) minus the points
+their starters actually scored, i.e. the points left on the bench.
 """
 
 from __future__ import annotations
@@ -19,8 +23,15 @@ from typing import Any, Literal
 
 from .espn_source import fetch_transactions, is_executed_acquisition
 from .game_weeks import completed_weeks, from_epoch_ms, local_midnight, week_start
-from .lineups import box_player, matchup_result, optimal_lineup_points, starting_slots
-from .models import AlternateStandings, LineupPlayer, StandingsRow, Trade
+from .lineups import (
+    BENCH_SLOT,
+    STARTER_EXCLUDED_SLOTS,
+    box_player,
+    matchup_result,
+    optimal_lineup_points,
+    starting_slots,
+)
+from .models import AlternateStandings, LineupGap, LineupPlayer, StandingsRow, Trade
 
 OwnershipEvent = tuple[datetime, Literal["trade", "add"], int]
 """(when, kind, team). For "trade" the team is the *sender*; for "add" the acquiring team."""
@@ -56,7 +67,8 @@ def alternate_standings(league: Any, trades: list[Trade], first_trade_date: date
                 _record(row, "actual", matchup_result(score, rival_score))
                 _record(row, "optimal_actual", matchup_result(optimal_actual[team_id], optimal_actual[rival]))
                 _record(row, "alternate", matchup_result(alternate[team_id], alternate[rival]))
-        week_details.append({"week": week, "rewound_players": rewound})
+        lineups = [lineup_gap(team_id, teams[team_id], rosters[team_id], slots) for team_id in sorted(rosters)]
+        week_details.append({"week": week, "rewound_players": rewound, "lineups": lineups})
     for row in standings.values():
         for key in ("actual_points", "alternate_points", "optimal_actual_points"):
             row[key] = round(row[key], 2)
@@ -64,6 +76,24 @@ def alternate_standings(league: Any, trades: list[Trade], first_trade_date: date
             row["optimal_actual_wins"] + row["optimal_actual_ties"] / 2
         )
     return {"weeks": week_details, "teams": list(standings.values()), "source": "weekly_box_scores"}
+
+
+def lineup_gap(team_id: int, team: str, roster: Roster, slots: list[str]) -> LineupGap:
+    """Points a manager left on the bench: best possible lineup minus the starters' actual points."""
+    players = list(roster.values())
+    starters = [player for player in players if player["slot"] not in STARTER_EXCLUDED_SLOTS]
+    actual = round(sum(float(player["points"]) for player in starters), 2)
+    optimal = optimal_lineup_points([player for player in players if player["slot"] != "IR"], slots)
+    bench = [player for player in players if player["slot"] == BENCH_SLOT]
+    top = max(bench, key=lambda player: (player["points"], -player["id"]), default=None)
+    return {
+        "team_id": team_id,
+        "team": team,
+        "actual_points": actual,
+        "optimal_points": optimal,
+        "points_left": max(0.0, round(optimal - actual, 2)),
+        "top_bench": {"id": top["id"], "name": top["name"], "points": top["points"]} if top else None,
+    }
 
 
 def ownership_events(league: Any, trades: list[Trade], cutoff: datetime) -> dict[int, list[OwnershipEvent]]:
