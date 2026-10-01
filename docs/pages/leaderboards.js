@@ -63,14 +63,23 @@ function omittedWeeks(snapshot) {
   return snapshot.leagues.reduce((total, league) => total + (league.weekly_roster_moves?.omitted?.length || 0), 0);
 }
 
+function leagueRow(group, className, content) {
+  if (!group.label) {
+    const row = node("div", className);
+    row.append(content);
+    return row;
+  }
+  const row = node("details", `${className} collapsible`);
+  row.open = true;
+  row.append(node("summary", "leaderboard-league", `${group.label.toUpperCase()} LEAGUE`), content);
+  return row;
+}
+
 function renderCharts(snapshot) {
   const content = $("chart-content");
   content.replaceChildren();
   for (const group of leagueGroups(snapshot)) {
-    const row = node("div", "leaderboard-row chart-row");
-    if (group.label) row.append(node("p", "leaderboard-league", `${group.label.toUpperCase()} LEAGUE`));
-    row.append(leagueCharts(group.trades, group.league));
-    content.append(row);
+    content.append(leagueRow(group, "leaderboard-row chart-row", leagueCharts(group.trades, group.league)));
   }
   const notes = [CHART_NOTE];
   const omitted = omittedWeeks(snapshot);
@@ -82,12 +91,9 @@ function renderLeaderboards(snapshot) {
   const content = $("leaderboard-content");
   content.replaceChildren();
   for (const group of leagueGroups(snapshot)) {
-    const row = node("div", "leaderboard-row");
-    if (group.label) row.append(node("p", "leaderboard-league", `${group.label.toUpperCase()} LEAGUE`));
     const grid = node("div", "leaderboard-grid");
     for (const board of LEADERBOARDS) grid.append(leaderboardCard(board, group.trades, group.league));
-    row.append(grid);
-    content.append(row);
+    content.append(leagueRow(group, "leaderboard-row", grid));
   }
   const notes = [METHOD_NOTE];
   const omitted = omittedWeeks(snapshot);
