@@ -262,11 +262,95 @@
         "weeks": [
           {
             "week": 1,
-            "rewound_players": 2
+            "rewound_players": 2,
+            "lineups": [
+              {
+                "team_id": 1,
+                "team": "All Gold",
+                "actual_points": 58.4,
+                "optimal_points": 58.4,
+                "points_left": 0.0,
+                "top_bench": {
+                  "id": 401,
+                  "name": "Bench RB One",
+                  "points": 4.0
+                }
+              },
+              {
+                "team_id": 2,
+                "team": "Boom Baum",
+                "actual_points": 48.6,
+                "optimal_points": 48.6,
+                "points_left": 0.0,
+                "top_bench": {
+                  "id": 402,
+                  "name": "Bench WR Two",
+                  "points": 6.6
+                }
+              },
+              {
+                "team_id": 3,
+                "team": "Shiny Hineys",
+                "actual_points": 53.3,
+                "optimal_points": 53.3,
+                "points_left": 0.0,
+                "top_bench": null
+              },
+              {
+                "team_id": 4,
+                "team": "Cowboys",
+                "actual_points": 40.8,
+                "optimal_points": 40.8,
+                "points_left": 0.0,
+                "top_bench": null
+              }
+            ]
           },
           {
             "week": 2,
-            "rewound_players": 5
+            "rewound_players": 5,
+            "lineups": [
+              {
+                "team_id": 1,
+                "team": "All Gold",
+                "actual_points": 43.2,
+                "optimal_points": 51.1,
+                "points_left": 7.9,
+                "top_bench": {
+                  "id": 201,
+                  "name": "RB Alpha",
+                  "points": 14.0
+                }
+              },
+              {
+                "team_id": 2,
+                "team": "Boom Baum",
+                "actual_points": 52.7,
+                "optimal_points": 60.6,
+                "points_left": 7.9,
+                "top_bench": {
+                  "id": 499,
+                  "name": "Waiver WR",
+                  "points": 11.1
+                }
+              },
+              {
+                "team_id": 3,
+                "team": "Shiny Hineys",
+                "actual_points": 44.2,
+                "optimal_points": 44.2,
+                "points_left": 0.0,
+                "top_bench": null
+              },
+              {
+                "team_id": 4,
+                "team": "Cowboys",
+                "actual_points": 75.7,
+                "optimal_points": 75.7,
+                "points_left": 0.0,
+                "top_bench": null
+              }
+            ]
           }
         ],
         "teams": [
