@@ -26,8 +26,8 @@ There is no server, database, or build step at runtime. Every push to `main` rep
 | `generator.json` | Season, first trade date (the cutoff), leagues, and the optional Discord allowlist. |
 | `trade_time_machine/` | The generator package. `__init__.py` lists the pipeline stages in order. |
 | `schema/data.schema.json` | The JSON Schema for `docs/data.json`: the contract between the generator and the site. |
-| `docs/*.html` | Four pages, each loading a single `<script type="module">`. |
-| `docs/lib/` | Shared frontend modules. Everything except `dom.js`, `page.js`, `swing-chart.js` and `leaderboard-charts.js` is pure and can be imported in Node tests. |
+| `docs/*.html` | Five pages, each loading a single `<script type="module">`. |
+| `docs/lib/` | Shared frontend modules. Everything except `dom.js`, `page.js`, `swing-chart.js`, `leaderboard-charts.js` and `league-sections.js` is pure and can be imported in Node tests. |
 | `docs/pages/` | One entry script per page. These modules own the DOM and the page state. |
 | `tests/test_*.py` | Python unit tests, one file per module, plus the golden-snapshot and data-contract tests. |
 | `tests/fixtures/` | `fake_espn.py` (a deterministic fake league), `builders.py` (small test-data builders), and `data.expected.json` (the golden output). |
@@ -52,6 +52,7 @@ Two modules are shared across stages: `game_weeks.py` (calendar rules) and `line
 - `lib/snapshot.js` checks `schema_version`, then flattens every league's trades into a single list, newest first, with league-prefixed IDs.
 - `lib/trades.js`, `lib/rankings.js`, `lib/weekly-moves.js`, `lib/results.js` and `lib/format.js` are pure data functions.
 - `lib/page.js` handles fetching, header badges, league options and error display. `lib/dom.js` has the element builders.
+- `lib/league-sections.js` shares league grouping and collapsible section rendering between Leaderboards and Trade Charts.
 - Each `pages/*.js` module reads the URL, renders the page, and wires up its filters. Page state never leaves its own module.
 
 ## Commands

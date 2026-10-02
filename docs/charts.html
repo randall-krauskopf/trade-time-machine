@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <title>Trade Time Machine · Lana Straw</title>
+  <title>Trade Charts · Lana Straw</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23193b2d'/%3E%3Ctext x='10' y='46' font-size='43' fill='white'%3E%E2%86%94%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="./styles.css">
-  <script type="module" src="./pages/leaderboards.js"></script>
+  <script type="module" src="./pages/charts.js"></script>
 </head>
 <body>
   <div class="app-shell">
     <header class="masthead">
       <div class="brand"><span class="brand-mark">↔</span><span>LANA STRAW <span class="brand-muted" id="brand-league">/ ALL LEAGUES</span></span></div>
       <nav class="site-nav" aria-label="Pages">
-        <a href="./" aria-current="page">Leaderboards</a>
-        <a href="./charts.html">Trade Charts</a>
+        <a href="./">Leaderboards</a>
+        <a href="./charts.html" aria-current="page">Trade Charts</a>
         <a href="./weekly.html">Weekly Moves</a>
         <a href="./archive.html">Archive</a>
         <a href="./alternate.html">Alternate Universe</a>
@@ -27,8 +27,8 @@
       <section class="hero" aria-labelledby="title">
         <div class="hero-copy">
           <p class="eyebrow"><span class="live-dot"></span> THE TRADE TIME MACHINE</p>
-          <h1 id="title">Trade <em>Time Machine.</em></h1>
-          <p class="hero-description">Every deal has a story. Rewind to the moment it happened, then see whether it actually swung matchups in the weeks that followed.</p>
+          <h1 id="title">Trade <em>Charts.</em></h1>
+          <p class="hero-description">Follow the weekly deal count, spot frequent trade partners, and see how roster moves changed each manager’s points.</p>
           <p class="hero-tagline">Just because you’re moving doesn’t mean you’re going anywhere.</p>
         </div>
         <div class="hero-stamp" aria-hidden="true"><span>THE DEAL<br>IS DONE.</span><small>PREMIER + CHAMPEENS</small></div>
@@ -37,15 +37,14 @@
       <div class="context-bar" id="context-bar" aria-live="polite">Loading league history…</div>
       <div id="error" class="error hidden" role="alert"></div>
 
-      <section class="leaderboards hidden" id="leaderboards" aria-labelledby="leaderboards-title">
+      <section class="trade-charts hidden" id="trade-charts" aria-labelledby="trade-charts-title">
         <div class="section-heading">
-          <div><p class="eyebrow">00 / THE HALL OF FAME (AND SHAME)</p><h2 id="leaderboards-title">Trade leaderboards</h2></div>
-          <span class="scope-note">ALL LEAGUE ACTIVITY · OUTCOME RANKINGS OPEN WEEKLY MOVES</span>
+          <div><p class="eyebrow">01 / BY THE NUMBERS</p><h2 id="trade-charts-title">Trade charts</h2></div>
+          <span class="scope-note">VOLUME · PARTNERS · WEEKLY SWING</span>
         </div>
-        <div id="leaderboard-content"></div>
-        <p class="method-note" id="leaderboard-note"></p>
+        <div id="chart-content"></div>
+        <p class="method-note" id="chart-note"></p>
       </section>
-
     </main>
     <footer>ESPN ACTIVITY + WEEKLY PLAYER POINTS <span>·</span> READ-ONLY LOCAL PROTOTYPE <span>·</span> NO WINNER DECLARED</footer>
   </div>

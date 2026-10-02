@@ -14,7 +14,7 @@ button:focus-visible, select:focus-visible, a:focus-visible { outline: 3px solid
 .brand { display: flex; align-items: center; gap: 13px; font: 700 13px 'Avenir Next',sans-serif; letter-spacing: .11em; }
 .brand-mark { display: grid; place-items: center; width: 29px; height: 29px; color: #fff; background: #193b2d; border-radius: 7px; font-size: 20px; letter-spacing: 0; }
 .brand-muted { color: #879187; }
-.site-nav { display: flex; gap: 6px; margin-left: auto; margin-right: 18px; }
+.site-nav { display: flex; flex-wrap: wrap; gap: 6px; margin-left: auto; margin-right: 18px; }
 .site-nav a { padding: 8px 12px; border-radius: 4px; color: #425547; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
 .site-nav a:hover { background: #e6eadf; }
 .site-nav a[aria-current="page"] { color: #fff; background: #193b2d; }
@@ -215,7 +215,7 @@ a.bar-row:hover { background: #eef2e9; }
 .heatmap td.heatmap-self { background: none; color: #b9c3b3; }
 .heatmap td.heatmap-corner { background: none; }
 footer { display: flex; flex-wrap: wrap; gap: 10px; padding: 28px 0 40px; border-top: 1px solid #c9d0c2; color: #899789; font-size: 10px; font-weight: 700; letter-spacing: .1em; }
-@media (max-width: 900px) { .app-shell { padding: 0 24px; } .hero-stamp { display: none; } .workspace { grid-template-columns: 240px minmax(0,1fr); } .leaderboard-grid, .weekly-grid, .chart-grid-layout { grid-template-columns: 1fr; } .detail-panel { padding-left: 23px; } }
+@media (max-width: 900px) { .app-shell { padding: 0 24px; } .masthead { flex-wrap: wrap; height: auto; min-height: 65px; padding: 10px 0; } .site-nav { order: 3; width: 100%; justify-content: center; margin: 7px 0 0; } .hero-stamp { display: none; } .workspace { grid-template-columns: 240px minmax(0,1fr); } .leaderboard-grid, .weekly-grid, .chart-grid-layout { grid-template-columns: 1fr; } .detail-panel { padding-left: 23px; } }
 @media (max-width: 700px) {
   .app-shell { padding: 0 17px; } .masthead { flex-wrap: wrap; height: auto; min-height: 65px; padding: 10px 0; } .brand { font-size: 11px; } .season-badge { display: none; } .site-nav { order: 3; width: 100%; justify-content: center; margin: 7px 0 0; } .hero { padding: 47px 0 40px; }
   .weekly-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }

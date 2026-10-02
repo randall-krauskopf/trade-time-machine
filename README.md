@@ -20,13 +20,13 @@ Tied values share the same competition rank (for example, `1, 1, 1`; the next di
 
 When the snapshot has more than one league, each league's leaderboards and charts sit in a collapsible section (open by default); click the league name to collapse or expand it. Weekly rankings include only completed manager-weeks. Clicking a trade ranking opens that deal directly on the Archive page.
 
-Below the leaderboards, **Trade charts** show three per-league charts (`docs/lib/charts.js` computes the data; `docs/lib/leaderboard-charts.js` draws it):
+The dedicated **Trade Charts** page (`docs/charts.html`), immediately after Leaderboards in the header navigation, shows three per-league charts (`docs/lib/charts.js` computes the data; `docs/lib/leaderboard-charts.js` draws it):
 
 - **Trades per week**: completed deals per game week, including quiet weeks as zero; the week in progress is marked with `*`.
 - **Trade partners**: a heatmap of how many deals each pair of managers has made, including managers who have not traded.
 - **Net roster swing**: each manager's summed Weekly Moves point swing (actual minus the no-weekly-trades lineup) across verified manager-weeks; rows link to that manager's Weekly Moves cards.
 
-The site has four pages linked from the header: **Leaderboards** (`docs/index.html`), **Archive** (`docs/archive.html`: filters and trade detail), **Weekly Moves** (`docs/weekly.html`: manager-week trade bundles), and **Alternate Universe** (`docs/alternate.html`). Each page loads one ES module from `docs/pages/`, and shared code lives in `docs/lib/`; see `AGENTS.md` for the code layout. Leaderboard and Weekly Moves trade links open the selected deal directly on the Archive page. The Alternate Universe page replays the completed Premier and Champeens matchups.
+The site has five pages linked from the header: **Leaderboards** (`docs/index.html`), **Trade Charts** (`docs/charts.html`), **Weekly Moves** (`docs/weekly.html`: manager-week trade bundles), **Archive** (`docs/archive.html`: filters and trade detail), and **Alternate Universe** (`docs/alternate.html`). Each page loads one ES module from `docs/pages/`, and shared code lives in `docs/lib/`; see `AGENTS.md` for the code layout. Leaderboard and Weekly Moves trade links open the selected deal directly on the Archive page. The Alternate Universe page replays the completed Premier and Champeens matchups.
 
 ## Weekly Roster Moves (prototype)
 

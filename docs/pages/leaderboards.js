@@ -2,14 +2,13 @@
 
 import {$, node} from "../lib/dom.js";
 import {dateFormat} from "../lib/format.js";
-import {leagueCharts} from "../lib/leaderboard-charts.js";
+import {leagueGroups, leagueRow, omittedWeeks} from "../lib/league-sections.js";
 import {fetchSnapshot, showContext, showLoadError, showSeasons} from "../lib/page.js";
 import {normalizeSnapshot, tradeContext} from "../lib/snapshot.js";
 import {LEADERBOARD_TOP_N, LEADERBOARDS, competitionRanks} from "../lib/rankings.js";
 import {archiveHref, tradeTeams} from "../lib/trades.js";
 
 const METHOD_NOTE = "Wins Traded For/Away compare actual matchup results with the no-weekly-trades scenario, bundled by manager and week (ties count as half a win or loss). Unchanged results do not count. Biggest Roster Swings ranks the largest absolute manager-week point swings (actual minus no-weekly-trades), including swings that did not change the result. Most Traded Player counts players moved in two or more deals. Left on the Bench is the best possible lineup from that week's roster (IR excluded) minus the starters' actual points. Not verdicts.";
-const CHART_NOTE = "Trades per week counts completed deals by game week. Trade partners counts deals between each pair of managers. Net roster swing sums each manager's weekly point swing (actual minus the no-weekly-trades lineup) across verified manager-weeks.";
 const RECONSTRUCTED_NOTE = "Champeens trades are reconstructed from roster history and may omit players who were later dropped or re-traded.";
 
 function leaderboardEntry(entry) {
@@ -51,42 +50,6 @@ function leaderboardCard(board, trades, league) {
   return card;
 }
 
-function leagueGroups(snapshot) {
-  return snapshot.leagues.length === 1
-    ? [{label: null, league: snapshot.leagues[0], trades: snapshot.trades}]
-    : snapshot.leagues.map((league) => ({
-      label: league.label, league, trades: snapshot.trades.filter((trade) => trade.league_key === league.key),
-    }));
-}
-
-function omittedWeeks(snapshot) {
-  return snapshot.leagues.reduce((total, league) => total + (league.weekly_roster_moves?.omitted?.length || 0), 0);
-}
-
-function leagueRow(group, className, content) {
-  if (!group.label) {
-    const row = node("div", className);
-    row.append(content);
-    return row;
-  }
-  const row = node("details", `${className} collapsible`);
-  row.open = true;
-  row.append(node("summary", "leaderboard-league", `${group.label.toUpperCase()} LEAGUE`), content);
-  return row;
-}
-
-function renderCharts(snapshot) {
-  const content = $("chart-content");
-  content.replaceChildren();
-  for (const group of leagueGroups(snapshot)) {
-    content.append(leagueRow(group, "leaderboard-row chart-row", leagueCharts(group.trades, group.league)));
-  }
-  const notes = [CHART_NOTE];
-  const omitted = omittedWeeks(snapshot);
-  if (omitted) notes.push(`${omitted} manager-week outcomes with unverifiable lineup inputs are excluded from net roster swing.`);
-  $("chart-note").textContent = notes.join(" ");
-}
-
 function renderLeaderboards(snapshot) {
   const content = $("leaderboard-content");
   content.replaceChildren();
@@ -109,8 +72,6 @@ async function main() {
     showContext(tradeContext(snapshot), snapshot.generated_at);
     $("leaderboards").classList.remove("hidden");
     renderLeaderboards(snapshot);
-    renderCharts(snapshot);
-    $("trade-charts").classList.remove("hidden");
   } catch (error) {
     showLoadError(error);
   }
