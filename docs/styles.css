@@ -14,6 +14,14 @@ button:focus-visible, select:focus-visible, a:focus-visible { outline: 3px solid
 .brand { display: flex; align-items: center; gap: 13px; font: 700 13px 'Avenir Next',sans-serif; letter-spacing: .11em; }
 .brand-mark { display: grid; place-items: center; width: 29px; height: 29px; color: #fff; background: #193b2d; border-radius: 7px; font-size: 20px; letter-spacing: 0; }
 .brand-muted { color: #879187; }
+.weekly-final-lineup { margin-top: 16px; border-top: 1px solid #dce4d5; padding-top: 12px; }
+.weekly-final-lineup > summary { cursor: pointer; color: #193b2d; font-size: 12px; font-weight: 700; }
+.weekly-final-lineup > summary:focus-visible { outline: 2px solid #b8612c; outline-offset: 3px; }
+.weekly-final-lineup .leaderboard-caption { margin-top: 12px; }
+.weekly-lineup-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.weekly-lineup-table caption { text-align: left; font-weight: 700; padding: 12px 0 6px; }
+.weekly-lineup-table th, .weekly-lineup-table td { text-align: left; padding: 7px 4px; border-bottom: 1px solid #dce4d5; overflow-wrap: anywhere; }
+.weekly-lineup-table th:last-child, .weekly-lineup-table td:last-child { text-align: right; white-space: nowrap; }
 .site-nav { display: flex; flex-wrap: wrap; gap: 6px; margin-left: auto; margin-right: 18px; }
 .site-nav a { padding: 8px 12px; border-radius: 4px; color: #425547; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
 .site-nav a:hover { background: #e6eadf; }

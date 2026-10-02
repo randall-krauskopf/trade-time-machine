@@ -33,6 +33,8 @@ The site has five pages linked from the header: **Leaderboards** (`docs/index.ht
 
 ## Weekly Roster Moves (prototype)
 
+Each card has a collapsed **Final lineup** disclosure showing the actual end-of-week box-score roster, player slots, and points, grouped into Starters, Bench, and IR. Starters appear in QB, RB, WR, TE, RB/WR/TE, K order, with any other starter slots afterward. Bench and IR points are not part of the matchup score. The generator stores these players under `weekly_roster_moves.rows[].final_lineup`; older snapshots without the field explicitly show that the lineup is unavailable.
+
 The Weekly Moves page is the app's canonical matchup-outcome model. It combines every trade a manager completed within the same Tuesday-to-Tuesday game week. Players acquired and then traded away within that interval cancel from the net roster diff. It compares the manager's actual weekly score and result with a projection-selected lineup that undoes the week's net trade changes; if the opponent also traded that week, the opponent's bundle is undone too. Actual waiver and free-agent choices remain in place. League, game-week, and manager filters let you inspect the results behind the leaderboard totals. Manager-week cards show the newest weeks first by default, with a week-order control to switch to oldest first.
 
 Cards mark an improved result relative to the no-weekly-trades model as **Clutch** (green), and a worsened result as **Oof** (red); unchanged results have no badge. The adjacent W/L/T arrow shows the modeled result transition. Point differences alone do not determine the badge, since an opponent's weekly moves can also change the outcome.

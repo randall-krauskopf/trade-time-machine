@@ -22,6 +22,7 @@ class WeeklyRosterMovesTest(unittest.TestCase):
                         box_entry(300, "Final WR", "WR", 30, 14, ["WR"]),
                         box_entry(400, "QB", "QB", 70, 20, ["QB"]),
                         box_entry(500, "Bench WR", "BE", 5, 8, ["WR"]),
+                        box_entry(700, "Injured WR", "IR", 0, 0, ["WR"]),
                     ],
                     away_lineup=[box_entry(600, "Opponent QB", "QB", 95, 20, ["QB"])],
                 )
@@ -80,6 +81,15 @@ class WeeklyRosterMovesTest(unittest.TestCase):
         self.assertEqual(row["alternate_score"], 80)
         self.assertEqual(row["net_points"], 20)
         self.assertEqual((row["alternate_result"], row["result"], row["flipped"]), ("L", "W", True))
+        self.assertEqual(
+            row["final_lineup"],
+            [
+                {"id": 300, "name": "Final WR", "slot": "WR", "points": 30.0},
+                {"id": 400, "name": "QB", "slot": "QB", "points": 70.0},
+                {"id": 500, "name": "Bench WR", "slot": "BE", "points": 5.0},
+                {"id": 700, "name": "Injured WR", "slot": "IR", "points": 0.0},
+            ],
+        )
 
     def test_quiet_weeks_and_byes_produce_no_rows(self):
         manager = SimpleNamespace(team_id=1, team_name="Manager")

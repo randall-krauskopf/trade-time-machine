@@ -2,13 +2,14 @@
 // URL params: league=<key>, team=<key>:<team_id>, week=<n> (all validated).
 
 import {$, fillSelect, hasOption, appendOptions, node} from "../lib/dom.js";
-import {formatSigned} from "../lib/format.js";
+import {formatPoints, formatSigned} from "../lib/format.js";
 import {addLeagueOptions, fetchSnapshot, showContext, showLoadError, showSelectedLeague, showSeasons} from "../lib/page.js";
 import {outcomeClass} from "../lib/results.js";
 import {archiveHref, archiveTradeId} from "../lib/trades.js";
 import {describeReplacements, sortWeeklyRows, weeklyRows} from "../lib/weekly-moves.js";
 
 const OUTCOME_LABEL = {clutch: "Clutch", oof: "Oof"};
+const STARTER_SLOT_ORDER = ["QB", "RB", "WR", "TE", "RB/WR/TE", "K"];
 
 let leagues = [];
 
@@ -53,6 +54,49 @@ function scoreLine(label, score, opponentScore, result) {
   return line;
 }
 
+function finalLineup(row) {
+  const details = node("details", "weekly-final-lineup");
+  details.append(node("summary", "", "Final lineup"));
+  if (!row.final_lineup) {
+    details.append(node("p", "weekly-none", "Final lineup unavailable in this snapshot."));
+    return details;
+  }
+  details.append(node("p", "leaderboard-caption", "Actual end-of-week roster and player points. Bench and IR points do not count toward the matchup score."));
+  const slotOrder = (slot) => {
+    const index = STARTER_SLOT_ORDER.indexOf(slot);
+    return index === -1 ? STARTER_SLOT_ORDER.length : index;
+  };
+  const starters = row.final_lineup
+    .filter((player) => !["BE", "IR"].includes(player.slot))
+    .sort((a, b) => slotOrder(a.slot) - slotOrder(b.slot));
+  for (const [label, players] of [
+    ["Starters", starters],
+    ["Bench", row.final_lineup.filter((player) => player.slot === "BE")],
+    ["IR", row.final_lineup.filter((player) => player.slot === "IR")],
+  ]) {
+    if (!players.length) continue;
+    const table = node("table", "weekly-lineup-table");
+    table.append(node("caption", "", label));
+    const head = node("thead");
+    const headings = node("tr");
+    for (const title of ["Slot", "Player", "Points"]) {
+      const cell = node("th", "", title);
+      cell.scope = "col";
+      headings.append(cell);
+    }
+    head.append(headings);
+    const body = node("tbody");
+    for (const player of players) {
+      const tr = node("tr");
+      tr.append(node("td", "", player.slot), node("td", "", player.name), node("td", "", formatPoints(player.points)));
+      body.append(tr);
+    }
+    table.append(head, body);
+    details.append(table);
+  }
+  return details;
+}
+
 function weeklyCard(league, row) {
   const outcome = outcomeClass(row);
   const card = node("article", `weekly-card${outcome ? ` ${outcome}` : ""}`);
@@ -87,7 +131,7 @@ function weeklyCard(league, row) {
     link.href = archiveHref(archiveTradeId(league, id));
     links.append(link);
   });
-  card.append(links);
+  card.append(finalLineup(row), links);
   return card;
 }
 

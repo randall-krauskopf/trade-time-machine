@@ -85,6 +85,7 @@ def weekly_roster_moves(
                     "alternate_result": alternate_result,
                     "flipped": actual_result != alternate_result,
                     "replacements": alternate["alternate"]["replacements"],
+                    "final_lineup": box["final_lineup"],
                     "snapshot_status": "reconstructed_from_trades_and_weekly_box_score",
                 }
             )
@@ -132,6 +133,7 @@ def team_weeks(league: Any, week: int) -> dict[int, TeamWeek]:
                 "opponent": opponent.team_name.strip() if hasattr(opponent, "team_name") else None,
                 "starters": [player for player in players if player["slot"] not in STARTER_EXCLUDED_SLOTS],
                 "bench": [player for player in players if player["slot"] == BENCH_SLOT],
+                "final_lineup": [{key: player[key] for key in ("id", "name", "slot", "points")} for player in players],
             }
     return boxes
 

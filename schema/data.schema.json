@@ -252,6 +252,20 @@
         "result": {"$ref": "#/$defs/result"},
         "alternate_result": {"$ref": "#/$defs/result"},
         "flipped": {"type": "boolean"},
+        "final_lineup": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "name", "slot", "points"],
+            "properties": {
+              "id": {"type": "integer"},
+              "name": {"type": "string"},
+              "slot": {"type": "string"},
+              "points": {"$ref": "#/$defs/points"}
+            }
+          }
+        },
         "replacements": {
           "type": "array",
           "items": {

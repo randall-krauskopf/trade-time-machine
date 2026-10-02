@@ -193,6 +193,54 @@ test("weekly deep link filters to one manager-week and order can be reversed", a
   await expect(page.locator("#week-order")).toHaveValue("asc");
 });
 
+test("weekly final lineup shows every player and score and toggles with the keyboard", async ({page}) => {
+  const league = snapshot.leagues.find((item) => item.weekly_roster_moves.rows.length);
+  const row = league.weekly_roster_moves.rows[0];
+  await page.goto(`/weekly.html?league=${league.key}&team=${encodeURIComponent(`${league.key}:${row.team_id}`)}&week=${row.week}`);
+  const details = page.locator(".weekly-final-lineup");
+  await expect(details).toHaveCount(1);
+  await expect(details.locator("table").first()).toBeHidden();
+  await details.locator("summary").focus();
+  await page.keyboard.press("Enter");
+  const players = [
+    ...row.final_lineup.filter((player) => !["BE", "IR"].includes(player.slot))
+      .sort((a, b) => {
+        const order = ["QB", "RB", "WR", "TE", "RB/WR/TE", "K"];
+        const priority = (slot) => order.includes(slot) ? order.indexOf(slot) : order.length;
+        return priority(a.slot) - priority(b.slot);
+      }),
+    ...row.final_lineup.filter((player) => player.slot === "BE"),
+    ...row.final_lineup.filter((player) => player.slot === "IR"),
+  ];
+  await expect(details.locator("tbody tr")).toHaveCount(players.length);
+  for (let index = 0; index < players.length; index++) {
+    const player = players[index];
+    await expect(details.locator("tbody tr").nth(index).locator("td")).toHaveText([player.slot, player.name, player.points.toFixed(2)]);
+  }
+  await page.setViewportSize({width: 375, height: 900});
+  for (const table of await details.locator("table").all()) {
+    const bounds = await table.boundingBox();
+    expect(bounds.x).toBeGreaterThanOrEqual(0);
+    expect(bounds.x + bounds.width).toBeLessThanOrEqual(375);
+  }
+  await details.locator("summary").focus();
+  await page.keyboard.press("Enter");
+  await expect(details.locator("table").first()).toBeHidden();
+});
+
+test("weekly final lineup reports unavailable data in older snapshots", async ({page}) => {
+  const old = structuredClone(snapshot);
+  for (const league of old.leagues) {
+    for (const row of league.weekly_roster_moves.rows) delete row.final_lineup;
+  }
+  await page.route("**/data.json", (route) => route.fulfill({json: old}));
+  await page.goto("/weekly.html");
+  const details = page.locator(".weekly-final-lineup").first();
+  await details.locator("summary").click();
+  await expect(details).toContainText("Final lineup unavailable in this snapshot.");
+  await expect(page.locator("#error")).toBeHidden();
+});
+
 test("alternate standings follow the league filter", async ({page}) => {
   await page.goto("/alternate.html");
   await page.selectOption("#league-filter", firstLeague.key);

@@ -498,6 +498,38 @@
                 "replaced": "WR Echo"
               }
             ],
+            "final_lineup": [
+              {
+                "id": 101,
+                "name": "QB Alpha",
+                "slot": "QB",
+                "points": 20.5
+              },
+              {
+                "id": 202,
+                "name": "RB Bravo",
+                "slot": "RB",
+                "points": 17.3
+              },
+              {
+                "id": 305,
+                "name": "WR Echo",
+                "slot": "WR",
+                "points": 12.2
+              },
+              {
+                "id": 201,
+                "name": "RB Alpha",
+                "slot": "RB/WR/TE",
+                "points": 8.4
+              },
+              {
+                "id": 401,
+                "name": "Bench RB One",
+                "slot": "BE",
+                "points": 4.0
+              }
+            ],
             "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
           },
           {
@@ -543,6 +575,38 @@
                 "replaced": "RB Foxtrot"
               }
             ],
+            "final_lineup": [
+              {
+                "id": 102,
+                "name": "QB Bravo",
+                "slot": "QB",
+                "points": 12.0
+              },
+              {
+                "id": 206,
+                "name": "RB Foxtrot",
+                "slot": "RB",
+                "points": 9.0
+              },
+              {
+                "id": 301,
+                "name": "WR Alpha",
+                "slot": "WR",
+                "points": 19.9
+              },
+              {
+                "id": 302,
+                "name": "WR Bravo",
+                "slot": "RB/WR/TE",
+                "points": 7.7
+              },
+              {
+                "id": 402,
+                "name": "Bench WR Two",
+                "slot": "BE",
+                "points": 6.6
+              }
+            ],
             "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
           },
           {
@@ -580,6 +644,38 @@
                 "name": "RB Alpha",
                 "points": 14.0,
                 "replaced": null
+              }
+            ],
+            "final_lineup": [
+              {
+                "id": 101,
+                "name": "QB Alpha",
+                "slot": "QB",
+                "points": 15.2
+              },
+              {
+                "id": 202,
+                "name": "RB Bravo",
+                "slot": "RB",
+                "points": 6.1
+              },
+              {
+                "id": 305,
+                "name": "WR Echo",
+                "slot": "WR",
+                "points": 6.4
+              },
+              {
+                "id": 404,
+                "name": "Bench RB Four",
+                "slot": "RB/WR/TE",
+                "points": 15.5
+              },
+              {
+                "id": 201,
+                "name": "RB Alpha",
+                "slot": "BE",
+                "points": 14.0
               }
             ],
             "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
@@ -622,6 +718,32 @@
                 "replaced": null
               }
             ],
+            "final_lineup": [
+              {
+                "id": 103,
+                "name": "QB Charlie",
+                "slot": "QB",
+                "points": 9.6
+              },
+              {
+                "id": 203,
+                "name": "RB Charlie",
+                "slot": "RB",
+                "points": 13.3
+              },
+              {
+                "id": 403,
+                "name": "Bench WR Three",
+                "slot": "WR",
+                "points": 8.8
+              },
+              {
+                "id": 401,
+                "name": "Bench RB One",
+                "slot": "RB/WR/TE",
+                "points": 12.5
+              }
+            ],
             "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
           },
           {
@@ -659,6 +781,32 @@
                 "name": "Bench RB Four",
                 "points": 15.5,
                 "replaced": null
+              }
+            ],
+            "final_lineup": [
+              {
+                "id": 104,
+                "name": "QB Delta",
+                "slot": "QB",
+                "points": 19.9
+              },
+              {
+                "id": 204,
+                "name": "RB Delta",
+                "slot": "RB",
+                "points": 21.7
+              },
+              {
+                "id": 304,
+                "name": "WR Delta",
+                "slot": "WR",
+                "points": 10.1
+              },
+              {
+                "id": 303,
+                "name": "WR Charlie",
+                "slot": "RB/WR/TE",
+                "points": 24.0
               }
             ],
             "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"

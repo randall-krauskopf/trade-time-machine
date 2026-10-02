@@ -180,6 +180,13 @@ class AlternateStandings(TypedDict):
     source: Literal["weekly_box_scores"]
 
 
+class FinalLineupPlayer(TypedDict):
+    id: int
+    name: str
+    slot: str
+    points: float
+
+
 class WeeklyRow(TypedDict):
     week: int
     team_id: int
@@ -198,6 +205,7 @@ class WeeklyRow(TypedDict):
     alternate_result: MatchupResult
     flipped: bool
     replacements: list[Replacement]
+    final_lineup: NotRequired[list[FinalLineupPlayer]]
     snapshot_status: Literal["reconstructed_from_trades_and_weekly_box_score"]
 
 
