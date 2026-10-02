@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-01T13:42:58.339186+00:00",
+  "generated_at": "2026-10-02T11:41:39.416724+00:00",
   "first_trade_date": "2026-08-30",
   "discord_imported": false,
   "leagues": [
     {
       "league": "Lana Straw",
       "season": 2026,
-      "generated_at": "2026-10-01T13:42:53.941403+00:00",
+      "generated_at": "2026-10-02T11:41:33.637994+00:00",
       "completed_weeks": [
         1,
         2,
@@ -1382,6 +1382,44 @@
                   "points": 3.3
                 }
               }
+            ],
+            "matchups": [
+              {
+                "home_team_id": 2,
+                "away_team_id": 9,
+                "home_score": 145.76,
+                "away_score": 124.76
+              },
+              {
+                "home_team_id": 7,
+                "away_team_id": 11,
+                "home_score": 91.52,
+                "away_score": 99.54
+              },
+              {
+                "home_team_id": 8,
+                "away_team_id": 3,
+                "home_score": 98.3,
+                "away_score": 124.06
+              },
+              {
+                "home_team_id": 6,
+                "away_team_id": 1,
+                "home_score": 179.86,
+                "away_score": 136.9
+              },
+              {
+                "home_team_id": 4,
+                "away_team_id": 10,
+                "home_score": 134.86,
+                "away_score": 98.8
+              },
+              {
+                "home_team_id": 5,
+                "away_team_id": 12,
+                "home_score": 90.5,
+                "away_score": 93.56
+              }
             ]
           },
           {
@@ -1532,6 +1570,44 @@
                   "points": 18.18
                 }
               }
+            ],
+            "matchups": [
+              {
+                "home_team_id": 7,
+                "away_team_id": 9,
+                "home_score": 89.76,
+                "away_score": 81.58
+              },
+              {
+                "home_team_id": 8,
+                "away_team_id": 2,
+                "home_score": 119.98,
+                "away_score": 152.14
+              },
+              {
+                "home_team_id": 6,
+                "away_team_id": 11,
+                "home_score": 144.62,
+                "away_score": 76.68
+              },
+              {
+                "home_team_id": 4,
+                "away_team_id": 3,
+                "home_score": 90.6,
+                "away_score": 113.38
+              },
+              {
+                "home_team_id": 5,
+                "away_team_id": 1,
+                "home_score": 119.36,
+                "away_score": 78.5
+              },
+              {
+                "home_team_id": 10,
+                "away_team_id": 12,
+                "home_score": 89.22,
+                "away_score": 112.32
+              }
             ]
           },
           {
@@ -1681,6 +1757,44 @@
                   "name": "Harold Fannin Jr.",
                   "points": 20.6
                 }
+              }
+            ],
+            "matchups": [
+              {
+                "home_team_id": 8,
+                "away_team_id": 9,
+                "home_score": 116.06,
+                "away_score": 90.44
+              },
+              {
+                "home_team_id": 6,
+                "away_team_id": 7,
+                "home_score": 136.82,
+                "away_score": 121.22
+              },
+              {
+                "home_team_id": 2,
+                "away_team_id": 4,
+                "home_score": 110.68,
+                "away_score": 75.84
+              },
+              {
+                "home_team_id": 5,
+                "away_team_id": 11,
+                "home_score": 104.54,
+                "away_score": 106.88
+              },
+              {
+                "home_team_id": 12,
+                "away_team_id": 3,
+                "home_score": 91.68,
+                "away_score": 99.74
+              },
+              {
+                "home_team_id": 10,
+                "away_team_id": 1,
+                "home_score": 122.08,
+                "away_score": 113.96
               }
             ]
           }
@@ -2841,7 +2955,7 @@
     {
       "league": "Lana Straw Champeens League",
       "season": 2026,
-      "generated_at": "2026-10-01T13:42:58.339133+00:00",
+      "generated_at": "2026-10-02T11:41:39.416659+00:00",
       "completed_weeks": [
         1,
         2,
@@ -2849,6 +2963,72 @@
       ],
       "first_trade_date": "2026-08-30",
       "trades": [
+        {
+          "id": "1790868821313-8-10",
+          "traded_at": "2026-10-01T15:33:41.313000+00:00",
+          "transaction_week": 4,
+          "weeks": [],
+          "trade_week": null,
+          "sides": [
+            {
+              "team_id": 8,
+              "team": "Jerry GM + Jerry Owner",
+              "sent": [
+                {
+                  "id": 4890973,
+                  "name": "Ashton Jeanty"
+                },
+                {
+                  "id": 3915511,
+                  "name": "Joe Burrow"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4685472,
+                  "name": "Tetairoa McMillan",
+                  "weeks": {}
+                },
+                {
+                  "id": 3918298,
+                  "name": "Josh Allen",
+                  "weeks": {}
+                }
+              ],
+              "weekly_points": {},
+              "total_points": null
+            },
+            {
+              "team_id": 10,
+              "team": "Cowboys September Nightmares",
+              "sent": [
+                {
+                  "id": 4685472,
+                  "name": "Tetairoa McMillan"
+                },
+                {
+                  "id": 3918298,
+                  "name": "Josh Allen"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4890973,
+                  "name": "Ashton Jeanty",
+                  "weeks": {}
+                },
+                {
+                  "id": 3915511,
+                  "name": "Joe Burrow",
+                  "weeks": {}
+                }
+              ],
+              "weekly_points": {},
+              "total_points": null
+            }
+          ],
+          "receipts": []
+        },
         {
           "id": "1788272081062-9-10",
           "traded_at": "2026-09-01T14:14:41.062000+00:00",
@@ -2869,12 +3049,12 @@
                   "name": "A.J. Brown"
                 },
                 {
-                  "id": 4685472,
-                  "name": "Tetairoa McMillan"
-                },
-                {
                   "id": 4429160,
                   "name": "De'Von Achane"
+                },
+                {
+                  "id": 4685472,
+                  "name": "Tetairoa McMillan"
                 }
               ],
               "received": [
@@ -2941,21 +3121,21 @@
                   }
                 },
                 {
-                  "id": 4685472,
-                  "name": "Tetairoa McMillan",
-                  "weeks": {
-                    "1": 8.0,
-                    "2": 13.6,
-                    "3": 2.7
-                  }
-                },
-                {
                   "id": 4429160,
                   "name": "De'Von Achane",
                   "weeks": {
                     "1": 8.6,
                     "2": 10.8,
                     "3": 1.7
+                  }
+                },
+                {
+                  "id": 4685472,
+                  "name": "Tetairoa McMillan",
+                  "weeks": {
+                    "1": 8.0,
+                    "2": 13.6,
+                    "3": 2.7
                   }
                 }
               ],
@@ -3246,6 +3426,44 @@
                   "points": 9.9
                 }
               }
+            ],
+            "matchups": [
+              {
+                "home_team_id": 12,
+                "away_team_id": 7,
+                "home_score": 122.24,
+                "away_score": 95.3
+              },
+              {
+                "home_team_id": 1,
+                "away_team_id": 4,
+                "home_score": 118.66,
+                "away_score": 107.8
+              },
+              {
+                "home_team_id": 2,
+                "away_team_id": 10,
+                "home_score": 91.12,
+                "away_score": 128.46
+              },
+              {
+                "home_team_id": 11,
+                "away_team_id": 8,
+                "home_score": 133.46,
+                "away_score": 135.16
+              },
+              {
+                "home_team_id": 5,
+                "away_team_id": 6,
+                "home_score": 140.1,
+                "away_score": 122.66
+              },
+              {
+                "home_team_id": 3,
+                "away_team_id": 9,
+                "home_score": 91.62,
+                "away_score": 95.1
+              }
             ]
           },
           {
@@ -3396,6 +3614,44 @@
                   "points": 13.3
                 }
               }
+            ],
+            "matchups": [
+              {
+                "home_team_id": 7,
+                "away_team_id": 4,
+                "home_score": 121.28,
+                "away_score": 94.38
+              },
+              {
+                "home_team_id": 10,
+                "away_team_id": 12,
+                "home_score": 112.72,
+                "away_score": 122.28
+              },
+              {
+                "home_team_id": 8,
+                "away_team_id": 1,
+                "home_score": 107.38,
+                "away_score": 132.98
+              },
+              {
+                "home_team_id": 6,
+                "away_team_id": 2,
+                "home_score": 107.5,
+                "away_score": 82.22
+              },
+              {
+                "home_team_id": 9,
+                "away_team_id": 11,
+                "home_score": 76.1,
+                "away_score": 73.52
+              },
+              {
+                "home_team_id": 3,
+                "away_team_id": 5,
+                "home_score": 90.86,
+                "away_score": 112.66
+              }
             ]
           },
           {
@@ -3545,6 +3801,44 @@
                   "name": "Brock Bowers",
                   "points": 23.6
                 }
+              }
+            ],
+            "matchups": [
+              {
+                "home_team_id": 10,
+                "away_team_id": 7,
+                "home_score": 66.76,
+                "away_score": 73.74
+              },
+              {
+                "home_team_id": 4,
+                "away_team_id": 8,
+                "home_score": 116.1,
+                "away_score": 82.14
+              },
+              {
+                "home_team_id": 12,
+                "away_team_id": 6,
+                "home_score": 162.26,
+                "away_score": 96.04
+              },
+              {
+                "home_team_id": 1,
+                "away_team_id": 9,
+                "home_score": 129.68,
+                "away_score": 68.26
+              },
+              {
+                "home_team_id": 2,
+                "away_team_id": 3,
+                "home_score": 89.26,
+                "away_score": 118.92
+              },
+              {
+                "home_team_id": 11,
+                "away_team_id": 5,
+                "home_score": 108.32,
+                "away_score": 145.28
               }
             ]
           }

@@ -160,10 +160,18 @@ class LineupGap(TypedDict):
     top_bench: BenchPlayer | None
 
 
+class ActualMatchup(TypedDict):
+    home_team_id: int
+    away_team_id: int
+    home_score: float
+    away_score: float
+
+
 class AlternateWeek(TypedDict):
     week: int
     rewound_players: int
     lineups: list[LineupGap]
+    matchups: list[ActualMatchup]
 
 
 class AlternateStandings(TypedDict):

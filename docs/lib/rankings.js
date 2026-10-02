@@ -173,6 +173,38 @@ export function rankPointsLeftOnBench(league) {
     }));
 }
 
+/** Biggest Margin of Victory: actual completed matchups, including managers who never traded. */
+export function rankBiggestMarginOfVictory(league) {
+  const teams = new Map((league?.alternate_standings?.teams || []).map((team) => [team.team_id, team.team]));
+  const entries = [];
+  for (const week of league?.alternate_standings?.weeks || []) {
+    for (const matchup of week.matchups || []) {
+      const {home_team_id: home, away_team_id: away, home_score: homeScore, away_score: awayScore} = matchup;
+      if (!Number.isFinite(homeScore) || !Number.isFinite(awayScore)) {
+        throw new Error(`Invalid matchup score for Week ${week.week}.`);
+      }
+      if (!teams.has(home) || !teams.has(away)) throw new Error(`Unknown matchup team for Week ${week.week}.`);
+      if (homeScore === awayScore) continue;
+      const homeWon = homeScore > awayScore;
+      const winner = homeWon ? home : away;
+      const loser = homeWon ? away : home;
+      const score = homeWon ? homeScore : awayScore;
+      const opponentScore = homeWon ? awayScore : homeScore;
+      const margin = Math.round((score - opponentScore) * 100) / 100;
+      entries.push({
+        team: teams.get(winner),
+        rankScore: margin,
+        value: `${formatPoints(margin)} pts`,
+        detail: `Week ${week.week} · vs ${teams.get(loser)} · ${formatPoints(score)}–${formatPoints(opponentScore)}`,
+        week: week.week,
+        team_id: winner,
+      });
+    }
+  }
+  return entries.sort((a, b) => b.rankScore - a.rankScore || a.week - b.week
+    || a.team.localeCompare(b.team) || a.team_id - b.team_id);
+}
+
 /** Board definitions in display order. `rank(trades, league)` gets one league's trades. */
 export const LEADERBOARDS = [
   {
@@ -222,6 +254,12 @@ export const LEADERBOARDS = [
     caption: "Most points a manager's best possible lineup beat their actual starters in one week.",
     empty: "No weekly lineup data available.",
     rank: (trades, league) => rankPointsLeftOnBench(league),
+  },
+  {
+    title: "Biggest Margin of Victory",
+    caption: "Largest actual winning margins in completed weekly matchups, trades or no trades.",
+    empty: "No completed wins with matchup data available.",
+    rank: (trades, league) => rankBiggestMarginOfVictory(league),
   },
 ];
 

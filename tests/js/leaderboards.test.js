@@ -4,7 +4,7 @@ import test from "node:test";
 
 import {
   LEADERBOARDS, competitionRanks, rankFewestTrades, rankMostActiveTraders, rankMostPlayersExchanged, rankWeeklyOutcomes, rankWeeklySwings,
-  lineupGaps, rankMostTradedPlayers, rankPointsLeftOnBench,
+  lineupGaps, rankMostTradedPlayers, rankPointsLeftOnBench, rankBiggestMarginOfVictory,
 } from "../../docs/lib/rankings.js";
 import {normalizeSnapshot} from "../../docs/lib/snapshot.js";
 
@@ -194,6 +194,57 @@ test("Most Traded Player follows each player's path and skips one-time moves", (
     ["Twice", "2 trades", "T2 → T3 → T1", "./archive.html?trade=fourth"],
   ]);
   assert.deepEqual(rankMostTradedPlayers(trades.slice(1, 2)), []);
+});
+
+test("Biggest Margin of Victory ranks actual wins, once per matchup, without requiring trades", () => {
+  const league = {alternate_standings: {
+    teams: [{team_id: 1, team: "Alpha"}, {team_id: 2, team: "Beta"}, {team_id: 3, team: "Charlie"}],
+    weeks: [
+      {week: 1, matchups: [
+        {home_team_id: 1, away_team_id: 2, home_score: 120.2, away_score: 90.1},
+        {home_team_id: 3, away_team_id: 2, home_score: 70, away_score: 110},
+      ]},
+      {week: 2, matchups: [
+        {home_team_id: 1, away_team_id: 3, home_score: 130.3, away_score: 100.2},
+        {home_team_id: 2, away_team_id: 3, home_score: 100, away_score: 100},
+      ]},
+      {week: 3},
+    ],
+  }};
+  const before = structuredClone(league);
+  const entries = competitionRanks(rankBiggestMarginOfVictory(league));
+  assert.deepEqual(entries.map(({rank, team, value, detail}) => [rank, team, value, detail]), [
+    [1, "Beta", "40.00 pts", "Week 1 · vs Charlie · 110.00–70.00"],
+    [2, "Alpha", "30.10 pts", "Week 1 · vs Beta · 120.20–90.10"],
+    [2, "Alpha", "30.10 pts", "Week 2 · vs Charlie · 130.30–100.20"],
+  ]);
+  assert.deepEqual(league, before);
+  assert.deepEqual(rankBiggestMarginOfVictory({alternate_standings: null}), []);
+  assert.deepEqual(rankBiggestMarginOfVictory({}), []);
+});
+
+test("Biggest Margin of Victory rejects unknown scores and teams", () => {
+  const league = {alternate_standings: {
+    teams: [{team_id: 1, team: "Alpha"}, {team_id: 2, team: "Beta"}],
+    weeks: [{week: 1, matchups: [{home_team_id: 1, away_team_id: 2, home_score: null, away_score: 90}]}],
+  }};
+  assert.throws(() => rankBiggestMarginOfVictory(league), /Invalid matchup score/);
+  league.alternate_standings.weeks[0].matchups[0] = {home_team_id: 1, away_team_id: 9, home_score: 100, away_score: 90};
+  assert.throws(() => rankBiggestMarginOfVictory(league), /Unknown matchup team/);
+});
+
+test("Biggest Margin of Victory uses every completed matchup in the published snapshot", () => {
+  const snapshot = normalizeSnapshot(JSON.parse(fs.readFileSync(snapshotPath, "utf8")));
+  for (const league of snapshot.leagues) {
+    const weeks = league.alternate_standings.weeks;
+    const matchups = weeks.flatMap((week) => week.matchups);
+    assert.equal(matchups.length, weeks.length * league.alternate_standings.teams.length / 2);
+    assert.ok(weeks.every((week) => league.completed_weeks.includes(week.week)));
+    const ranked = rankBiggestMarginOfVictory(league);
+    assert.equal(ranked.length, matchups.filter((matchup) => matchup.home_score !== matchup.away_score).length);
+    const maximum = Math.max(...matchups.map((matchup) => Math.round(Math.abs(matchup.home_score - matchup.away_score) * 100) / 100));
+    assert.equal(ranked[0].rankScore, maximum);
+  }
 });
 
 test("Left on the Bench ranks manager-weeks by points stranded on the bench", () => {

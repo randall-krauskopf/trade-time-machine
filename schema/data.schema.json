@@ -134,6 +134,20 @@
             "properties": {
               "week": {"$ref": "#/$defs/week"},
               "rewound_players": {"type": "integer", "minimum": 0},
+              "matchups": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["home_team_id", "away_team_id", "home_score", "away_score"],
+                  "properties": {
+                    "home_team_id": {"type": "integer"},
+                    "away_team_id": {"type": "integer"},
+                    "home_score": {"type": "number"},
+                    "away_score": {"type": "number"}
+                  }
+                }
+              },
               "lineups": {
                 "type": "array",
                 "items": {

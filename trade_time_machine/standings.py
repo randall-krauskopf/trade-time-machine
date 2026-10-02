@@ -68,7 +68,22 @@ def alternate_standings(league: Any, trades: list[Trade], first_trade_date: date
                 _record(row, "optimal_actual", matchup_result(optimal_actual[team_id], optimal_actual[rival]))
                 _record(row, "alternate", matchup_result(alternate[team_id], alternate[rival]))
         lineups = [lineup_gap(team_id, teams[team_id], rosters[team_id], slots) for team_id in sorted(rosters)]
-        week_details.append({"week": week, "rewound_players": rewound, "lineups": lineups})
+        week_details.append(
+            {
+                "week": week,
+                "rewound_players": rewound,
+                "lineups": lineups,
+                "matchups": [
+                    {
+                        "home_team_id": home,
+                        "away_team_id": away,
+                        "home_score": home_score,
+                        "away_score": away_score,
+                    }
+                    for home, away, home_score, away_score in matchups
+                ],
+            }
+        )
     for row in standings.values():
         for key in ("actual_points", "alternate_points", "optimal_actual_points"):
             row[key] = round(row[key], 2)

@@ -304,6 +304,20 @@
                 "points_left": 0.0,
                 "top_bench": null
               }
+            ],
+            "matchups": [
+              {
+                "home_team_id": 1,
+                "away_team_id": 2,
+                "home_score": 58.4,
+                "away_score": 48.6
+              },
+              {
+                "home_team_id": 3,
+                "away_team_id": 4,
+                "home_score": 53.3,
+                "away_score": 40.8
+              }
             ]
           },
           {
@@ -349,6 +363,20 @@
                 "optimal_points": 75.7,
                 "points_left": 0.0,
                 "top_bench": null
+              }
+            ],
+            "matchups": [
+              {
+                "home_team_id": 1,
+                "away_team_id": 3,
+                "home_score": 43.2,
+                "away_score": 44.2
+              },
+              {
+                "home_team_id": 2,
+                "away_team_id": 4,
+                "home_score": 52.7,
+                "away_score": 75.7
               }
             ]
           }

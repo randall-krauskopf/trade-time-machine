@@ -90,6 +90,11 @@ class AlternateStandingsTest(unittest.TestCase):
         self.assertEqual((home_row["actual_losses"], home_row["optimal_actual_wins"]), (1, 1))
         self.assertEqual(home_row["wins_change"], 0)
         self.assertEqual(home_row["alternate_points"], home_row["optimal_actual_points"])
+        self.assertEqual(
+            standings["weeks"][0]["matchups"],
+            [{"home_team_id": 1, "away_team_id": 2, "home_score": 3.0, "away_score": 6.0}],
+        )
+        self.assertEqual([week["week"] for week in standings["weeks"]], [1])
 
 
 class BoxScoreValidationTest(unittest.TestCase):

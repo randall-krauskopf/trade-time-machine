@@ -131,6 +131,21 @@ test("charts navigation fits narrow screens", async ({page}) => {
   }
 });
 
+test("biggest winning margins render for each league", async ({page}) => {
+  await page.goto("/index.html");
+  const cards = page.locator(".leaderboard-card").filter({has: page.getByRole("heading", {name: "Biggest Margin of Victory", exact: true})});
+  await expect(cards).toHaveCount(snapshot.leagues.length);
+  for (let index = 0; index < snapshot.leagues.length; index++) {
+    const league = snapshot.leagues[index];
+    const margins = league.alternate_standings.weeks.flatMap((week) => week.matchups
+      .filter((matchup) => matchup.home_score !== matchup.away_score)
+      .map((matchup) => Math.round(Math.abs(matchup.home_score - matchup.away_score) * 100) / 100));
+    await expect(cards.nth(index).locator(".leaderboard-entry")).toHaveCount(Math.min(3, margins.length));
+    await expect(cards.nth(index).locator(".leaderboard-value").first()).toHaveText(`${Math.max(...margins).toFixed(2)} pts`);
+    await expect(cards.nth(index).locator(".leaderboard-detail").first()).toContainText("vs");
+  }
+});
+
 test("leaderboard entries open the archive", async ({page}) => {
   await page.goto("/index.html");
   await page.locator("button.leaderboard-entry").first().click();
