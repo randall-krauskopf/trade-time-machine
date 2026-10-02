@@ -186,7 +186,7 @@ a.leaderboard-entry { text-decoration: none; }
 .chart-card { min-width: 0; padding: 20px; background: #fffefa; border: 1px solid #dce4d5; border-radius: 7px; }
 .chart-card h3 { margin: 0 0 5px; font-size: 18px; letter-spacing: -.04em; }
 .chart-figure { margin: 0; }
-.chart-partners { grid-column: 1 / -1; }
+.chart-net-swing { grid-column: 1 / -1; }
 .chart-partners .heatmap { margin: 0 auto; }
 .chart-area { fill: #377758; opacity: .12; }
 .chart-line { fill: none; stroke: #377758; stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }

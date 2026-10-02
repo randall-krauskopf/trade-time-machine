@@ -163,8 +163,8 @@ export function leagueCharts(trades, league) {
   const grid = node("div", "chart-grid-layout");
   grid.append(
     tradesPerWeekChart(trades, league),
-    netWeeklySwingChart(league),
     tradePartnersChart(trades, league),
+    netWeeklySwingChart(league),
   );
   return grid;
 }

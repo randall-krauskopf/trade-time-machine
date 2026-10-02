@@ -73,6 +73,30 @@ test("trade charts render for every league on their own page", async ({page}) =>
   expect(errors).toEqual([]);
 });
 
+test("trade partners shares the top row and net roster swing spans the row below", async ({page}) => {
+  await page.setViewportSize({width: 1400, height: 1000});
+  await page.goto("/charts.html");
+  await expect(page.locator("#trade-charts")).toBeVisible();
+  for (const grid of await page.locator(".chart-grid-layout").all()) {
+    await expect(grid.locator(".chart-card h3")).toHaveText(["Trades per week", "Trade partners", "Net roster swing"]);
+    const trades = await grid.locator(".chart-trades-per-week").boundingBox();
+    const partners = await grid.locator(".chart-partners").boundingBox();
+    const swing = await grid.locator(".chart-net-swing").boundingBox();
+    expect(partners.y).toBe(trades.y);
+    expect(partners.x).toBeGreaterThan(trades.x);
+    expect(swing.y).toBeGreaterThan(trades.y + trades.height);
+    expect(swing.x).toBe(trades.x);
+    expect(swing.width).toBeCloseTo(partners.x + partners.width - trades.x, 0);
+  }
+  await page.setViewportSize({width: 375, height: 900});
+  const grid = page.locator(".chart-grid-layout").first();
+  const trades = await grid.locator(".chart-trades-per-week").boundingBox();
+  const partners = await grid.locator(".chart-partners").boundingBox();
+  const swing = await grid.locator(".chart-net-swing").boundingBox();
+  expect(partners.y).toBeGreaterThan(trades.y + trades.height);
+  expect(swing.y).toBeGreaterThan(partners.y + partners.height);
+});
+
 test("leaderboards link to charts without rendering them", async ({page}) => {
   await page.goto("/index.html");
   await expect(page.locator("#leaderboards")).toBeVisible();

@@ -23,6 +23,8 @@ When the snapshot has more than one league, each league's leaderboards and chart
 
 The dedicated **Trade Charts** page (`docs/charts.html`), immediately after Leaderboards in the header navigation, shows three per-league charts (`docs/lib/charts.js` computes the data; `docs/lib/leaderboard-charts.js` draws it):
 
+Trades per week and Trade partners sit side by side on wide screens, with Net roster swing spanning the row below. On smaller screens they stack in that order.
+
 - **Trades per week**: completed deals per game week, including quiet weeks as zero; the week in progress is marked with `*`.
 - **Trade partners**: a heatmap of how many deals each pair of managers has made, including managers who have not traded.
 - **Net roster swing**: each manager's summed Weekly Moves point swing (actual minus the no-weekly-trades lineup) across verified manager-weeks; rows link to that manager's Weekly Moves cards.
