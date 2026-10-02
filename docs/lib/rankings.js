@@ -208,24 +208,6 @@ export function rankBiggestMarginOfVictory(league) {
 /** Board definitions in display order. `rank(trades, league)` gets one league's trades. */
 export const LEADERBOARDS = [
   {
-    title: "Most active traders",
-    caption: "Managers with the most completed deals.",
-    empty: "No eligible trades yet.",
-    rank: (trades) => rankMostActiveTraders(trades),
-  },
-  {
-    title: "Holding Steady",
-    caption: "Managers with the fewest completed deals, zero included.",
-    empty: "No team list available.",
-    rank: (trades, league) => rankFewestTrades(trades, league),
-  },
-  {
-    title: "Most players exchanged",
-    caption: "Blockbusters by total players changing hands.",
-    empty: "No eligible trades yet.",
-    rank: (trades) => rankMostPlayersExchanged(trades),
-  },
-  {
     title: "Wins Traded For",
     caption: "Weekly trade bundles that improved matchup results.",
     empty: "No results changed yet.",
@@ -260,6 +242,24 @@ export const LEADERBOARDS = [
     caption: "Largest actual winning margins in completed weekly matchups, trades or no trades.",
     empty: "No completed wins with matchup data available.",
     rank: (trades, league) => rankBiggestMarginOfVictory(league),
+  },
+  {
+    title: "Most active traders",
+    caption: "Managers with the most completed deals.",
+    empty: "No eligible trades yet.",
+    rank: (trades) => rankMostActiveTraders(trades),
+  },
+  {
+    title: "Holding Steady",
+    caption: "Managers with the fewest completed deals, zero included.",
+    empty: "No team list available.",
+    rank: (trades, league) => rankFewestTrades(trades, league),
+  },
+  {
+    title: "Most players exchanged",
+    caption: "Blockbusters by total players changing hands.",
+    empty: "No eligible trades yet.",
+    rank: (trades) => rankMostPlayersExchanged(trades),
   },
 ];
 

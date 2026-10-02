@@ -10,6 +10,14 @@ import {normalizeSnapshot} from "../../docs/lib/snapshot.js";
 
 const snapshotPath = new URL("../../docs/data.json", import.meta.url);
 
+test("activity leaderboards occupy the final row", () => {
+  assert.deepEqual(LEADERBOARDS.map((board) => board.title), [
+    "Wins Traded For", "Wins Traded Away", "Biggest Roster Swings",
+    "Most Traded Player", "Left on the Bench", "Biggest Margin of Victory",
+    "Most active traders", "Holding Steady", "Most players exchanged",
+  ]);
+});
+
 test("ties share competition ranks without implying an arbitrary order", () => {
   const entries = competitionRanks([
     {team: "Alpha", rankScore: 2},
