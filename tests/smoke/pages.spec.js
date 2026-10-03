@@ -170,6 +170,22 @@ test("biggest winning margins render for each league", async ({page}) => {
   }
 });
 
+test("highest and lowest weekly scores render after the margin board", async ({page}) => {
+  await page.goto("/index.html");
+  const titles = await page.locator(".leaderboard-card h3").allTextContents();
+  const margin = titles.indexOf("Biggest Margin of Victory");
+  expect(titles.slice(margin, margin + 3)).toEqual(["Biggest Margin of Victory", "Highest Weekly Score", "Lowest Weekly Score"]);
+  for (const [title, pick] of [["Highest Weekly Score", Math.max], ["Lowest Weekly Score", Math.min]]) {
+    const cards = page.locator(".leaderboard-card").filter({has: page.getByRole("heading", {name: title, exact: true})});
+    await expect(cards).toHaveCount(snapshot.leagues.length);
+    for (let index = 0; index < snapshot.leagues.length; index++) {
+      const scores = snapshot.leagues[index].alternate_standings.weeks
+        .flatMap((week) => week.matchups.flatMap((matchup) => [matchup.home_score, matchup.away_score]));
+      await expect(cards.nth(index).locator(".leaderboard-value").first()).toHaveText(`${pick(...scores).toFixed(2)} pts`);
+    }
+  }
+});
+
 test("leaderboard entries open the archive", async ({page}) => {
   await page.goto("/index.html");
   await page.locator("button.leaderboard-entry").first().click();

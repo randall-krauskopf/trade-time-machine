@@ -205,6 +205,37 @@ export function rankBiggestMarginOfVictory(league) {
     || a.team.localeCompare(b.team) || a.team_id - b.team_id);
 }
 
+/**
+ * Highest (direction 1) or Lowest (direction −1) Weekly Score: every manager's
+ * actual score in each completed matchup, including managers who never traded.
+ */
+export function rankWeeklyScores(league, direction) {
+  const teams = new Map((league?.alternate_standings?.teams || []).map((team) => [team.team_id, team.team]));
+  const entries = [];
+  for (const week of league?.alternate_standings?.weeks || []) {
+    for (const matchup of week.matchups || []) {
+      const {home_team_id: home, away_team_id: away, home_score: homeScore, away_score: awayScore} = matchup;
+      if (!Number.isFinite(homeScore) || !Number.isFinite(awayScore)) {
+        throw new Error(`Invalid matchup score for Week ${week.week}.`);
+      }
+      if (!teams.has(home) || !teams.has(away)) throw new Error(`Unknown matchup team for Week ${week.week}.`);
+      for (const [teamId, score, opponentId, opponentScore] of [[home, homeScore, away, awayScore], [away, awayScore, home, homeScore]]) {
+        const result = score > opponentScore ? "W" : score < opponentScore ? "L" : "T";
+        entries.push({
+          team: teams.get(teamId),
+          rankScore: score,
+          value: `${formatPoints(score)} pts`,
+          detail: `Week ${week.week} · ${result} vs ${teams.get(opponentId)} · ${formatPoints(score)}–${formatPoints(opponentScore)}`,
+          week: week.week,
+          team_id: teamId,
+        });
+      }
+    }
+  }
+  return entries.sort((a, b) => direction * (b.rankScore - a.rankScore) || a.week - b.week
+    || a.team.localeCompare(b.team) || a.team_id - b.team_id);
+}
+
 /** Board definitions in display order. `rank(trades, league)` gets one league's trades. */
 export const LEADERBOARDS = [
   {
@@ -242,6 +273,18 @@ export const LEADERBOARDS = [
     caption: "Largest actual winning margins in completed weekly matchups, trades or no trades.",
     empty: "No completed wins with matchup data available.",
     rank: (trades, league) => rankBiggestMarginOfVictory(league),
+  },
+  {
+    title: "Highest Weekly Score",
+    caption: "Best actual single-week scores in completed matchups, trades or no trades.",
+    empty: "No completed matchup scores available.",
+    rank: (trades, league) => rankWeeklyScores(league, 1),
+  },
+  {
+    title: "Lowest Weekly Score",
+    caption: "Worst actual single-week scores in completed matchups, trades or no trades.",
+    empty: "No completed matchup scores available.",
+    rank: (trades, league) => rankWeeklyScores(league, -1),
   },
   {
     title: "Most active traders",

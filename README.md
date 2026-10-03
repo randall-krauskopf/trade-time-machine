@@ -18,6 +18,7 @@ Tied values share the same competition rank (for example, `1, 1, 1`; the next di
 - **Most Traded Player**: players moved in at least two completed deals, with the path of teams they passed through (most trades first, then most recently traded). Each entry opens that player's latest deal on the Archive page.
 - **Left on the Bench**: the most points a manager left on the bench in a single completed week, i.e. the best possible lineup from that week's roster (excluding IR) minus the starters' actual points. The detail names the top-scoring bench player. The generator stores these per manager-week under `alternate_standings.weeks[].lineups`; leagues without that data (such as historical snapshots) show an empty board.
 - **Biggest Margin of Victory**: the largest actual winning score differences in completed weekly matchups, including managers who made no trades. Each entry shows the winner, opponent, week, and final score; ties are excluded and the same manager can appear for multiple wins. The generator stores all actual matchups under `alternate_standings.weeks[].matchups`; snapshots without this data show an empty board rather than a partial ranking.
+- **Highest Weekly Score** and **Lowest Weekly Score**: the best and worst actual single-week scores across every completed matchup, including managers who made no trades. Each entry shows the manager, week, result, opponent, and final score; a manager can appear for multiple weeks, and tied matchups count for both teams. Both read the same `alternate_standings.weeks[].matchups` data.
 
 When the snapshot has more than one league, each league's leaderboards and charts sit in a collapsible section (open by default); click the league name to collapse or expand it. Weekly rankings include only completed manager-weeks. Clicking a trade ranking opens that deal directly on the Archive page.
 
@@ -71,10 +72,10 @@ python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
 test -e .env || cp .env.example .env
 # Add your ESPN_S2 and SWID to .env if a league is private.
-.venv/bin/python generate.py
+npm run generate      # or: .venv/bin/python generate.py
 ```
 
-You can instead set `ESPN_S2` and `SWID` as environment variables (both are required together for private leagues); environment variables override `.env`. Use `--env-file path/to/file` for a different local credentials file, and `--output path/to/file.json` to avoid replacing `docs/data.json`. The default output is `docs/data.json`. Credentials are never written into the snapshot, and `.env` and `.venv` are git-ignored. To preview locally, run `npm run serve` (or `python3 -m http.server 8000 --directory docs`) and open <http://localhost:8000/>. The pages are ES modules and fetch JSON, so opening the files directly from disk (`file://`) will not work.
+You can instead set `ESPN_S2` and `SWID` as environment variables (both are required together for private leagues); environment variables override `.env`. Use `--env-file path/to/file` for a different local credentials file, and `--output path/to/file.json` to avoid replacing `docs/data.json`. With npm, put options after `--`, e.g. `npm run generate -- --output /tmp/data.json`. The default output is `docs/data.json`. Credentials are never written into the snapshot, and `.env` and `.venv` are git-ignored. To preview locally with live reload, run `npm run dev` and open <http://localhost:3000/>; the page reloads (CSS changes inject in place) whenever anything under `docs/` changes, including a regenerated `data.json`. For a plain static server without live reload, run `python3 -m http.server 8000 --directory docs` and open <http://localhost:8000/>. The pages are ES modules and fetch JSON, so opening the files directly from disk (`file://`) will not work.
 
 ## Discord receipts (deferred)
 

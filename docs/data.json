@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-02T15:01:06.928716+00:00",
+  "generated_at": "2026-10-03T11:27:18.968660+00:00",
   "first_trade_date": "2026-08-30",
   "discord_imported": false,
   "leagues": [
     {
       "league": "Lana Straw",
       "season": 2026,
-      "generated_at": "2026-10-02T15:01:02.336823+00:00",
+      "generated_at": "2026-10-03T11:27:13.833045+00:00",
       "completed_weeks": [
         1,
         2,
@@ -15,6 +15,90 @@
       ],
       "first_trade_date": "2026-08-30",
       "trades": [
+        {
+          "id": "1790990251599-10-12",
+          "traded_at": "2026-10-03T01:17:31.599000+00:00",
+          "transaction_week": 4,
+          "weeks": [],
+          "trade_week": null,
+          "sides": [
+            {
+              "team_id": 10,
+              "team": "Boom Baum",
+              "sent": [
+                {
+                  "id": 4685382,
+                  "name": "Omarion Hampton"
+                },
+                {
+                  "id": 4887558,
+                  "name": "Emanuel Wilson"
+                },
+                {
+                  "id": 4595348,
+                  "name": "Malik Nabers"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4569603,
+                  "name": "Malik Washington",
+                  "weeks": {}
+                },
+                {
+                  "id": 4361579,
+                  "name": "Javonte Williams",
+                  "weeks": {}
+                },
+                {
+                  "id": 4429835,
+                  "name": "George Holani",
+                  "weeks": {}
+                }
+              ],
+              "weekly_points": {},
+              "total_points": null
+            },
+            {
+              "team_id": 12,
+              "team": "Shiny Hineys",
+              "sent": [
+                {
+                  "id": 4569603,
+                  "name": "Malik Washington"
+                },
+                {
+                  "id": 4361579,
+                  "name": "Javonte Williams"
+                },
+                {
+                  "id": 4429835,
+                  "name": "George Holani"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4685382,
+                  "name": "Omarion Hampton",
+                  "weeks": {}
+                },
+                {
+                  "id": 4887558,
+                  "name": "Emanuel Wilson",
+                  "weeks": {}
+                },
+                {
+                  "id": 4595348,
+                  "name": "Malik Nabers",
+                  "weeks": {}
+                }
+              ],
+              "weekly_points": {},
+              "total_points": null
+            }
+          ],
+          "receipts": []
+        },
         {
           "id": "1790822456812-4-10",
           "traded_at": "2026-10-01T02:40:56.812000+00:00",
@@ -4479,7 +4563,7 @@
     {
       "league": "Lana Straw Champeens League",
       "season": 2026,
-      "generated_at": "2026-10-02T15:01:06.928631+00:00",
+      "generated_at": "2026-10-03T11:27:18.968551+00:00",
       "completed_weeks": [
         1,
         2,
@@ -4498,10 +4582,6 @@
               "team_id": 8,
               "team": "Jerry GM + Jerry Owner",
               "sent": [
-                {
-                  "id": 4890973,
-                  "name": "Ashton Jeanty"
-                },
                 {
                   "id": 3915511,
                   "name": "Joe Burrow"
@@ -4537,13 +4617,92 @@
               ],
               "received": [
                 {
+                  "id": 3915511,
+                  "name": "Joe Burrow",
+                  "weeks": {}
+                }
+              ],
+              "weekly_points": {},
+              "total_points": null
+            }
+          ],
+          "receipts": []
+        },
+        {
+          "id": "1790975071558-2-10",
+          "traded_at": "2026-10-02T21:04:31.558000+00:00",
+          "transaction_week": 4,
+          "weeks": [],
+          "trade_week": null,
+          "sides": [
+            {
+              "team_id": 2,
+              "team": "Jordan's Trainers",
+              "sent": [
+                {
+                  "id": 3929630,
+                  "name": "Saquon Barkley"
+                },
+                {
+                  "id": 4688813,
+                  "name": "Josh Downs"
+                },
+                {
+                  "id": 4239993,
+                  "name": "Tee Higgins"
+                }
+              ],
+              "received": [
+                {
                   "id": 4890973,
                   "name": "Ashton Jeanty",
                   "weeks": {}
                 },
                 {
-                  "id": 3915511,
-                  "name": "Joe Burrow",
+                  "id": 4429096,
+                  "name": "Blake Corum",
+                  "weeks": {}
+                },
+                {
+                  "id": 4429205,
+                  "name": "Jordan Addison",
+                  "weeks": {}
+                }
+              ],
+              "weekly_points": {},
+              "total_points": null
+            },
+            {
+              "team_id": 10,
+              "team": "Cowboys September Nightmares",
+              "sent": [
+                {
+                  "id": 4890973,
+                  "name": "Ashton Jeanty"
+                },
+                {
+                  "id": 4429096,
+                  "name": "Blake Corum"
+                },
+                {
+                  "id": 4429205,
+                  "name": "Jordan Addison"
+                }
+              ],
+              "received": [
+                {
+                  "id": 3929630,
+                  "name": "Saquon Barkley",
+                  "weeks": {}
+                },
+                {
+                  "id": 4688813,
+                  "name": "Josh Downs",
+                  "weeks": {}
+                },
+                {
+                  "id": 4239993,
+                  "name": "Tee Higgins",
                   "weeks": {}
                 }
               ],

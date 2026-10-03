@@ -12,9 +12,11 @@
     "coverage:py": ".venv/bin/python -m coverage run -m unittest discover -s tests -t . -q && .venv/bin/python -m coverage report",
     "coverage:js": "node --test --experimental-test-coverage --test-coverage-include=\"docs/**/*.js\" \"tests/js/*.test.js\"",
     "lint": ".venv/bin/python -m ruff check . && .venv/bin/python -m ruff format --check .",
-    "serve": ".venv/bin/python -m http.server 8000 --directory docs"
+    "generate": ".venv/bin/python -m trade_time_machine",
+    "dev": "browser-sync start --server docs --files \"docs/**/*\" --port 8000 --no-notify --no-open --no-ui"
   },
   "devDependencies": {
-    "@playwright/test": "^1.63.0"
+    "@playwright/test": "^1.63.0",
+    "browser-sync": "^3.0.4"
   }
 }

@@ -4,7 +4,7 @@ import test from "node:test";
 
 import {
   LEADERBOARDS, competitionRanks, rankFewestTrades, rankMostActiveTraders, rankMostPlayersExchanged, rankWeeklyOutcomes, rankWeeklySwings,
-  lineupGaps, rankMostTradedPlayers, rankPointsLeftOnBench, rankBiggestMarginOfVictory,
+  lineupGaps, rankMostTradedPlayers, rankPointsLeftOnBench, rankBiggestMarginOfVictory, rankWeeklyScores,
 } from "../../docs/lib/rankings.js";
 import {normalizeSnapshot} from "../../docs/lib/snapshot.js";
 
@@ -14,6 +14,7 @@ test("activity leaderboards occupy the final row", () => {
   assert.deepEqual(LEADERBOARDS.map((board) => board.title), [
     "Wins Traded For", "Wins Traded Away", "Biggest Roster Swings",
     "Most Traded Player", "Left on the Bench", "Biggest Margin of Victory",
+    "Highest Weekly Score", "Lowest Weekly Score",
     "Most active traders", "Holding Steady", "Most players exchanged",
   ]);
 });
@@ -252,6 +253,50 @@ test("Biggest Margin of Victory uses every completed matchup in the published sn
     assert.equal(ranked.length, matchups.filter((matchup) => matchup.home_score !== matchup.away_score).length);
     const maximum = Math.max(...matchups.map((matchup) => Math.round(Math.abs(matchup.home_score - matchup.away_score) * 100) / 100));
     assert.equal(ranked[0].rankScore, maximum);
+  }
+});
+
+test("Highest and Lowest Weekly Score rank every manager's actual score, ties included", () => {
+  const league = {alternate_standings: {
+    teams: [{team_id: 1, team: "Alpha"}, {team_id: 2, team: "Beta"}, {team_id: 3, team: "Charlie"}, {team_id: 4, team: "Delta"}],
+    weeks: [
+      {week: 1, matchups: [
+        {home_team_id: 1, away_team_id: 2, home_score: 120.2, away_score: 90.1},
+        {home_team_id: 3, away_team_id: 4, home_score: 70, away_score: 70},
+      ]},
+      {week: 2, matchups: [{home_team_id: 2, away_team_id: 3, home_score: 120.2, away_score: 60.5}]},
+      {week: 3},
+    ],
+  }};
+  const before = structuredClone(league);
+  const high = competitionRanks(rankWeeklyScores(league, 1));
+  assert.deepEqual(high.slice(0, 3).map(({rank, team, value, detail}) => [rank, team, value, detail]), [
+    [1, "Alpha", "120.20 pts", "Week 1 · W vs Beta · 120.20–90.10"],
+    [1, "Beta", "120.20 pts", "Week 2 · W vs Charlie · 120.20–60.50"],
+    [3, "Beta", "90.10 pts", "Week 1 · L vs Alpha · 90.10–120.20"],
+  ]);
+  const low = competitionRanks(rankWeeklyScores(league, -1));
+  assert.deepEqual(low.slice(0, 3).map(({rank, team, value, detail}) => [rank, team, value, detail]), [
+    [1, "Charlie", "60.50 pts", "Week 2 · L vs Beta · 60.50–120.20"],
+    [2, "Charlie", "70.00 pts", "Week 1 · T vs Delta · 70.00–70.00"],
+    [2, "Delta", "70.00 pts", "Week 1 · T vs Charlie · 70.00–70.00"],
+  ]);
+  assert.equal(high.length, 6);
+  assert.deepEqual(league, before);
+  assert.deepEqual(rankWeeklyScores({}, 1), []);
+  league.alternate_standings.weeks[0].matchups[0].home_score = null;
+  assert.throws(() => rankWeeklyScores(league, 1), /Invalid matchup score/);
+  league.alternate_standings.weeks[0].matchups[0] = {home_team_id: 1, away_team_id: 9, home_score: 1, away_score: 2};
+  assert.throws(() => rankWeeklyScores(league, -1), /Unknown matchup team/);
+});
+
+test("Weekly score boards match the published snapshot's extremes", () => {
+  const snapshot = normalizeSnapshot(JSON.parse(fs.readFileSync(snapshotPath, "utf8")));
+  for (const league of snapshot.leagues) {
+    const scores = league.alternate_standings.weeks.flatMap((week) => week.matchups.flatMap((m) => [m.home_score, m.away_score]));
+    assert.equal(rankWeeklyScores(league, 1).length, scores.length);
+    assert.equal(rankWeeklyScores(league, 1)[0].rankScore, Math.max(...scores));
+    assert.equal(rankWeeklyScores(league, -1)[0].rankScore, Math.min(...scores));
   }
 });
 

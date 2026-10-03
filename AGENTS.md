@@ -65,9 +65,10 @@ npm test              # Python + JS unit tests
 npm run test:smoke    # Playwright smoke tests (starts a server for docs/)
 npm run coverage      # Python branch coverage (fails under 95%) + JS coverage
 npm run lint          # ruff check + ruff format --check
-npm run serve         # http://localhost:8000/ (ES modules need HTTP; file:// won't work)
+npm run dev           # http://localhost:3000/ with live reload on docs/ changes (ES modules need HTTP; file:// won't work)
 
-.venv/bin/python generate.py   # refresh docs/data.json from ESPN (needs .env for private leagues)
+npm run generate      # refresh docs/data.json from ESPN (needs .env for private leagues)
+                      # pass options after --, e.g. npm run generate -- --output /tmp/data.json
 ```
 
 CI (`.github/workflows/test.yml`) runs lint, `npm test` and the smoke tests on every push and pull request.
