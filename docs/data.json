@@ -1,26 +1,179 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-03T11:27:18.968660+00:00",
+  "generated_at": "2026-10-06T17:42:59.774503+00:00",
   "first_trade_date": "2026-08-30",
   "discord_imported": false,
   "leagues": [
     {
       "league": "Lana Straw",
       "season": 2026,
-      "generated_at": "2026-10-03T11:27:13.833045+00:00",
+      "generated_at": "2026-10-06T17:42:54.134207+00:00",
       "completed_weeks": [
         1,
         2,
-        3
+        3,
+        4
       ],
       "first_trade_date": "2026-08-30",
       "trades": [
         {
+          "id": "1791270143884-8-10",
+          "traded_at": "2026-10-06T07:02:23.884000+00:00",
+          "transaction_week": 5,
+          "weeks": [],
+          "trade_week": null,
+          "sides": [
+            {
+              "team_id": 8,
+              "team": "H-Town Holy Rollers",
+              "sent": [
+                {
+                  "id": 4242335,
+                  "name": "Jonathan Taylor"
+                },
+                {
+                  "id": 3915416,
+                  "name": "DJ Moore"
+                },
+                {
+                  "id": 3121422,
+                  "name": "Terry McLaurin"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4569618,
+                  "name": "Garrett Wilson",
+                  "weeks": {}
+                },
+                {
+                  "id": 4427366,
+                  "name": "Breece Hall",
+                  "weeks": {}
+                },
+                {
+                  "id": 4361579,
+                  "name": "Javonte Williams",
+                  "weeks": {}
+                }
+              ],
+              "weekly_points": {},
+              "total_points": null
+            },
+            {
+              "team_id": 10,
+              "team": "Boom Baum",
+              "sent": [
+                {
+                  "id": 4569618,
+                  "name": "Garrett Wilson"
+                },
+                {
+                  "id": 4427366,
+                  "name": "Breece Hall"
+                },
+                {
+                  "id": 4361579,
+                  "name": "Javonte Williams"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4242335,
+                  "name": "Jonathan Taylor",
+                  "weeks": {}
+                },
+                {
+                  "id": 3915416,
+                  "name": "DJ Moore",
+                  "weeks": {}
+                },
+                {
+                  "id": 3121422,
+                  "name": "Terry McLaurin",
+                  "weeks": {}
+                }
+              ],
+              "weekly_points": {},
+              "total_points": null
+            }
+          ],
+          "receipts": []
+        },
+        {
+          "id": "1791270143884-5-9",
+          "traded_at": "2026-10-06T07:02:23.884000+00:00",
+          "transaction_week": 5,
+          "weeks": [],
+          "trade_week": null,
+          "sides": [
+            {
+              "team_id": 5,
+              "team": "Backdoor Heat",
+              "sent": [
+                {
+                  "id": 4870653,
+                  "name": "KC Concepcion"
+                },
+                {
+                  "id": 4882093,
+                  "name": "Bhayshul Tuten"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4432620,
+                  "name": "Parker Washington",
+                  "weeks": {}
+                },
+                {
+                  "id": 4612826,
+                  "name": "Ladd McConkey",
+                  "weeks": {}
+                }
+              ],
+              "weekly_points": {},
+              "total_points": null
+            },
+            {
+              "team_id": 9,
+              "team": "Jackin' Goff",
+              "sent": [
+                {
+                  "id": 4432620,
+                  "name": "Parker Washington"
+                },
+                {
+                  "id": 4612826,
+                  "name": "Ladd McConkey"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4870653,
+                  "name": "KC Concepcion",
+                  "weeks": {}
+                },
+                {
+                  "id": 4882093,
+                  "name": "Bhayshul Tuten",
+                  "weeks": {}
+                }
+              ],
+              "weekly_points": {},
+              "total_points": null
+            }
+          ],
+          "receipts": []
+        },
+        {
           "id": "1790990251599-10-12",
           "traded_at": "2026-10-03T01:17:31.599000+00:00",
           "transaction_week": 4,
-          "weeks": [],
-          "trade_week": null,
+          "weeks": [
+            4
+          ],
+          "trade_week": 4,
           "sides": [
             {
               "team_id": 10,
@@ -43,21 +196,29 @@
                 {
                   "id": 4569603,
                   "name": "Malik Washington",
-                  "weeks": {}
+                  "weeks": {
+                    "4": 9.5
+                  }
                 },
                 {
                   "id": 4361579,
                   "name": "Javonte Williams",
-                  "weeks": {}
+                  "weeks": {
+                    "4": 28.8
+                  }
                 },
                 {
                   "id": 4429835,
                   "name": "George Holani",
-                  "weeks": {}
+                  "weeks": {
+                    "4": 2.5
+                  }
                 }
               ],
-              "weekly_points": {},
-              "total_points": null
+              "weekly_points": {
+                "4": 40.8
+              },
+              "total_points": 40.8
             },
             {
               "team_id": 12,
@@ -80,21 +241,29 @@
                 {
                   "id": 4685382,
                   "name": "Omarion Hampton",
-                  "weeks": {}
+                  "weeks": {
+                    "4": 12.3
+                  }
                 },
                 {
                   "id": 4887558,
                   "name": "Emanuel Wilson",
-                  "weeks": {}
+                  "weeks": {
+                    "4": 25.5
+                  }
                 },
                 {
                   "id": 4595348,
                   "name": "Malik Nabers",
-                  "weeks": {}
+                  "weeks": {
+                    "4": 21.2
+                  }
                 }
               ],
-              "weekly_points": {},
-              "total_points": null
+              "weekly_points": {
+                "4": 59.0
+              },
+              "total_points": 59.0
             }
           ],
           "receipts": []
@@ -103,8 +272,10 @@
           "id": "1790822456812-4-10",
           "traded_at": "2026-10-01T02:40:56.812000+00:00",
           "transaction_week": 4,
-          "weeks": [],
-          "trade_week": null,
+          "weeks": [
+            4
+          ],
+          "trade_week": 4,
           "sides": [
             {
               "team_id": 4,
@@ -127,21 +298,29 @@
                 {
                   "id": 4361741,
                   "name": "Brock Purdy",
-                  "weeks": {}
+                  "weeks": {
+                    "4": 21.62
+                  }
                 },
                 {
                   "id": 4871023,
                   "name": "Carnell Tate",
-                  "weeks": {}
+                  "weeks": {
+                    "4": 18.0
+                  }
                 },
                 {
                   "id": 4870808,
                   "name": "Jeremiyah Love",
-                  "weeks": {}
+                  "weeks": {
+                    "4": 6.0
+                  }
                 }
               ],
-              "weekly_points": {},
-              "total_points": null
+              "weekly_points": {
+                "4": 45.62
+              },
+              "total_points": 45.62
             },
             {
               "team_id": 10,
@@ -164,21 +343,29 @@
                 {
                   "id": 4595348,
                   "name": "Malik Nabers",
-                  "weeks": {}
+                  "weeks": {
+                    "4": 21.2
+                  }
                 },
                 {
                   "id": 3916387,
                   "name": "Lamar Jackson",
-                  "weeks": {}
+                  "weeks": {
+                    "4": 20.88
+                  }
                 },
                 {
                   "id": 4685382,
                   "name": "Omarion Hampton",
-                  "weeks": {}
+                  "weeks": {
+                    "4": 12.3
+                  }
                 }
               ],
-              "weekly_points": {},
-              "total_points": null
+              "weekly_points": {
+                "4": 54.38
+              },
+              "total_points": 54.38
             }
           ],
           "receipts": []
@@ -187,8 +374,10 @@
           "id": "1790821207729-3-10",
           "traded_at": "2026-10-01T02:20:07.729000+00:00",
           "transaction_week": 4,
-          "weeks": [],
-          "trade_week": null,
+          "weeks": [
+            4
+          ],
+          "trade_week": 4,
           "sides": [
             {
               "team_id": 3,
@@ -211,26 +400,36 @@
                 {
                   "id": 3042519,
                   "name": "Aaron Jones Sr.",
-                  "weeks": {}
+                  "weeks": {
+                    "4": 14.8
+                  }
                 },
                 {
                   "id": 4711533,
                   "name": "Ollie Gordon II",
-                  "weeks": {}
+                  "weeks": {
+                    "4": 18.0
+                  }
                 },
                 {
                   "id": 4361307,
                   "name": "Trey McBride",
-                  "weeks": {}
+                  "weeks": {
+                    "4": 6.6
+                  }
                 },
                 {
                   "id": 4697815,
                   "name": "Rachaad White",
-                  "weeks": {}
+                  "weeks": {
+                    "4": 0.0
+                  }
                 }
               ],
-              "weekly_points": {},
-              "total_points": null
+              "weekly_points": {
+                "4": 39.4
+              },
+              "total_points": 39.4
             },
             {
               "team_id": 10,
@@ -257,21 +456,29 @@
                 {
                   "id": 4696981,
                   "name": "Cam Skattebo",
-                  "weeks": {}
+                  "weeks": {
+                    "4": 7.1
+                  }
                 },
                 {
                   "id": 3117256,
                   "name": "Dalton Schultz",
-                  "weeks": {}
+                  "weeks": {
+                    "4": 1.9
+                  }
                 },
                 {
                   "id": 4258173,
                   "name": "Nico Collins",
-                  "weeks": {}
+                  "weeks": {
+                    "4": 28.3
+                  }
                 }
               ],
-              "weekly_points": {},
-              "total_points": null
+              "weekly_points": {
+                "4": 37.3
+              },
+              "total_points": 37.3
             }
           ],
           "receipts": []
@@ -280,8 +487,10 @@
           "id": "1790801927913-4-9",
           "traded_at": "2026-09-30T20:58:47.913000+00:00",
           "transaction_week": 4,
-          "weeks": [],
-          "trade_week": null,
+          "weeks": [
+            4
+          ],
+          "trade_week": 4,
           "sides": [
             {
               "team_id": 4,
@@ -296,11 +505,15 @@
                 {
                   "id": 4429059,
                   "name": "Woody Marks",
-                  "weeks": {}
+                  "weeks": {
+                    "4": 8.2
+                  }
                 }
               ],
-              "weekly_points": {},
-              "total_points": null
+              "weekly_points": {
+                "4": 8.2
+              },
+              "total_points": 8.2
             },
             {
               "team_id": 9,
@@ -315,11 +528,15 @@
                 {
                   "id": 4360569,
                   "name": "Jordan Mason",
-                  "weeks": {}
+                  "weeks": {
+                    "4": 0.0
+                  }
                 }
               ],
-              "weekly_points": {},
-              "total_points": null
+              "weekly_points": {
+                "4": 0.0
+              },
+              "total_points": 0.0
             }
           ],
           "receipts": []
@@ -328,12 +545,14 @@
           "id": "1790772413122-1-5",
           "traded_at": "2026-09-30T12:46:53.122000+00:00",
           "transaction_week": 4,
-          "weeks": [],
-          "trade_week": null,
+          "weeks": [
+            4
+          ],
+          "trade_week": 4,
           "sides": [
             {
               "team_id": 1,
-              "team": "Fart Toot Squeek",
+              "team": "The Relegated Ramsay",
               "sent": [
                 {
                   "id": 5083315,
@@ -344,11 +563,15 @@
                 {
                   "id": 4360310,
                   "name": "Trevor Lawrence",
-                  "weeks": {}
+                  "weeks": {
+                    "4": 14.08
+                  }
                 }
               ],
-              "weekly_points": {},
-              "total_points": null
+              "weekly_points": {
+                "4": 14.08
+              },
+              "total_points": 14.08
             },
             {
               "team_id": 5,
@@ -363,11 +586,15 @@
                 {
                   "id": 5083315,
                   "name": "Kenyon Sadiq",
-                  "weeks": {}
+                  "weeks": {
+                    "4": 0.0
+                  }
                 }
               ],
-              "weekly_points": {},
-              "total_points": null
+              "weekly_points": {
+                "4": 0.0
+              },
+              "total_points": 0.0
             }
           ],
           "receipts": []
@@ -376,8 +603,10 @@
           "id": "1790690742800-5-6",
           "traded_at": "2026-09-29T14:05:42.800000+00:00",
           "transaction_week": 4,
-          "weeks": [],
-          "trade_week": null,
+          "weeks": [
+            4
+          ],
+          "trade_week": 4,
           "sides": [
             {
               "team_id": 5,
@@ -392,11 +621,15 @@
                 {
                   "id": 4426385,
                   "name": "Zach Charbonnet",
-                  "weeks": {}
+                  "weeks": {
+                    "4": 0.0
+                  }
                 }
               ],
-              "weekly_points": {},
-              "total_points": null
+              "weekly_points": {
+                "4": 0.0
+              },
+              "total_points": 0.0
             },
             {
               "team_id": 6,
@@ -411,11 +644,15 @@
                 {
                   "id": 4686658,
                   "name": "Mike Washington Jr.",
-                  "weeks": {}
+                  "weeks": {
+                    "4": 2.2
+                  }
                 }
               ],
-              "weekly_points": {},
-              "total_points": null
+              "weekly_points": {
+                "4": 2.2
+              },
+              "total_points": 2.2
             }
           ],
           "receipts": []
@@ -425,7 +662,8 @@
           "traded_at": "2026-09-27T20:23:59.136000+00:00",
           "transaction_week": 3,
           "weeks": [
-            3
+            3,
+            4
           ],
           "trade_week": 3,
           "sides": [
@@ -443,14 +681,16 @@
                   "id": 4429615,
                   "name": "Zay Flowers",
                   "weeks": {
-                    "3": 12.9
+                    "3": 12.9,
+                    "4": 22.8
                   }
                 }
               ],
               "weekly_points": {
-                "3": 12.9
+                "3": 12.9,
+                "4": 22.8
               },
-              "total_points": 12.9
+              "total_points": 35.7
             },
             {
               "team_id": 6,
@@ -466,14 +706,16 @@
                   "id": 4426354,
                   "name": "George Pickens",
                   "weeks": {
-                    "3": 11.7
+                    "3": 11.7,
+                    "4": 8.5
                   }
                 }
               ],
               "weekly_points": {
-                "3": 11.7
+                "3": 11.7,
+                "4": 8.5
               },
-              "total_points": 11.7
+              "total_points": 20.2
             }
           ],
           "receipts": []
@@ -483,7 +725,8 @@
           "traded_at": "2026-09-26T21:55:02.494000+00:00",
           "transaction_week": 3,
           "weeks": [
-            3
+            3,
+            4
           ],
           "trade_week": 3,
           "sides": [
@@ -509,28 +752,32 @@
                   "id": 16800,
                   "name": "Davante Adams",
                   "weeks": {
-                    "3": 18.2
+                    "3": 18.2,
+                    "4": 5.2
                   }
                 },
                 {
                   "id": 4429059,
                   "name": "Woody Marks",
                   "weeks": {
-                    "3": 8.6
+                    "3": 8.6,
+                    "4": 8.2
                   }
                 },
                 {
                   "id": 4431611,
                   "name": "Caleb Williams",
                   "weeks": {
-                    "3": 0.0
+                    "3": 0.0,
+                    "4": 0.0
                   }
                 }
               ],
               "weekly_points": {
-                "3": 26.8
+                "3": 26.8,
+                "4": 13.4
               },
-              "total_points": 26.8
+              "total_points": 40.2
             },
             {
               "team_id": 10,
@@ -554,28 +801,32 @@
                   "id": 4685720,
                   "name": "Bryce Young",
                   "weeks": {
-                    "3": 14.14
+                    "3": 14.14,
+                    "4": 23.46
                   }
                 },
                 {
                   "id": 4427366,
                   "name": "Breece Hall",
                   "weeks": {
-                    "3": 7.0
+                    "3": 7.0,
+                    "4": 0.0
                   }
                 },
                 {
                   "id": 4869645,
                   "name": "Caleb Douglas",
                   "weeks": {
-                    "3": 0.0
+                    "3": 0.0,
+                    "4": 0.0
                   }
                 }
               ],
               "weekly_points": {
-                "3": 21.14
+                "3": 21.14,
+                "4": 23.46
               },
-              "total_points": 21.14
+              "total_points": 44.6
             }
           ],
           "receipts": []
@@ -585,7 +836,8 @@
           "traded_at": "2026-09-24T20:43:50.618000+00:00",
           "transaction_week": 3,
           "weeks": [
-            3
+            3,
+            4
           ],
           "trade_week": 3,
           "sides": [
@@ -615,35 +867,40 @@
                   "id": 16800,
                   "name": "Davante Adams",
                   "weeks": {
-                    "3": 18.2
+                    "3": 18.2,
+                    "4": 5.2
                   }
                 },
                 {
                   "id": 4371733,
                   "name": "Kenny Gainwell",
                   "weeks": {
-                    "3": 2.0
+                    "3": 2.0,
+                    "4": 9.7
                   }
                 },
                 {
                   "id": 4887558,
                   "name": "Emanuel Wilson",
                   "weeks": {
-                    "3": 1.4
+                    "3": 1.4,
+                    "4": 25.5
                   }
                 },
                 {
                   "id": 4569618,
                   "name": "Garrett Wilson",
                   "weeks": {
-                    "3": 22.7
+                    "3": 22.7,
+                    "4": 4.2
                   }
                 }
               ],
               "weekly_points": {
-                "3": 44.3
+                "3": 44.3,
+                "4": 44.6
               },
-              "total_points": 44.3
+              "total_points": 88.9
             },
             {
               "team_id": 12,
@@ -671,35 +928,40 @@
                   "id": 4428718,
                   "name": "Tre Tucker",
                   "weeks": {
-                    "3": 6.3
+                    "3": 6.3,
+                    "4": 6.4
                   }
                 },
                 {
                   "id": 4685702,
                   "name": "Quinshon Judkins",
                   "weeks": {
-                    "3": 8.9
+                    "3": 8.9,
+                    "4": 18.6
                   }
                 },
                 {
                   "id": 2973405,
                   "name": "Kalif Raymond",
                   "weeks": {
-                    "3": 18.0
+                    "3": 18.0,
+                    "4": 1.6
                   }
                 },
                 {
                   "id": 4429160,
                   "name": "De'Von Achane",
                   "weeks": {
-                    "3": 1.7
+                    "3": 1.7,
+                    "4": 0.0
                   }
                 }
               ],
               "weekly_points": {
-                "3": 34.9
+                "3": 34.9,
+                "4": 26.6
               },
-              "total_points": 34.9
+              "total_points": 61.5
             }
           ],
           "receipts": []
@@ -710,7 +972,8 @@
           "transaction_week": 2,
           "weeks": [
             2,
-            3
+            3,
+            4
           ],
           "trade_week": 2,
           "sides": [
@@ -741,7 +1004,8 @@
                   "name": "Chris Olave",
                   "weeks": {
                     "2": 18.6,
-                    "3": 16.2
+                    "3": 16.2,
+                    "4": 16.6
                   }
                 },
                 {
@@ -749,7 +1013,8 @@
                   "name": "Bijan Robinson",
                   "weeks": {
                     "2": 9.6,
-                    "3": 35.3
+                    "3": 35.3,
+                    "4": 30.2
                   }
                 },
                 {
@@ -757,15 +1022,17 @@
                   "name": "Zach Charbonnet",
                   "weeks": {
                     "2": 0.0,
-                    "3": 0.0
+                    "3": 0.0,
+                    "4": 0.0
                   }
                 }
               ],
               "weekly_points": {
                 "2": 28.2,
-                "3": 51.5
+                "3": 51.5,
+                "4": 46.8
               },
-              "total_points": 79.7
+              "total_points": 126.5
             },
             {
               "team_id": 12,
@@ -790,7 +1057,8 @@
                   "name": "Davante Adams",
                   "weeks": {
                     "2": 36.5,
-                    "3": 18.2
+                    "3": 18.2,
+                    "4": 5.2
                   }
                 },
                 {
@@ -798,7 +1066,8 @@
                   "name": "Javonte Williams",
                   "weeks": {
                     "2": 6.5,
-                    "3": 17.3
+                    "3": 17.3,
+                    "4": 28.8
                   }
                 },
                 {
@@ -806,7 +1075,8 @@
                   "name": "Braelon Allen",
                   "weeks": {
                     "2": 8.0,
-                    "3": 3.2
+                    "3": 3.2,
+                    "4": 7.7
                   }
                 },
                 {
@@ -814,15 +1084,17 @@
                   "name": "Garrett Wilson",
                   "weeks": {
                     "2": 14.2,
-                    "3": 22.7
+                    "3": 22.7,
+                    "4": 4.2
                   }
                 }
               ],
               "weekly_points": {
                 "2": 65.2,
-                "3": 61.4
+                "3": 61.4,
+                "4": 45.9
               },
-              "total_points": 126.6
+              "total_points": 172.5
             }
           ],
           "receipts": []
@@ -833,13 +1105,14 @@
           "transaction_week": 2,
           "weeks": [
             2,
-            3
+            3,
+            4
           ],
           "trade_week": 2,
           "sides": [
             {
               "team_id": 1,
-              "team": "Fart Toot Squeek",
+              "team": "The Relegated Ramsay",
               "sent": [
                 {
                   "id": 4569987,
@@ -860,7 +1133,8 @@
                   "name": "Jaylen Waddle",
                   "weeks": {
                     "2": 18.8,
-                    "3": 5.4
+                    "3": 5.4,
+                    "4": 12.0
                   }
                 },
                 {
@@ -868,7 +1142,8 @@
                   "name": "Colston Loveland",
                   "weeks": {
                     "2": 0.8,
-                    "3": 5.1
+                    "3": 5.1,
+                    "4": 8.7
                   }
                 },
                 {
@@ -876,15 +1151,17 @@
                   "name": "Tyler Allgeier",
                   "weeks": {
                     "2": 2.9,
-                    "3": 2.9
+                    "3": 2.9,
+                    "4": 11.9
                   }
                 }
               ],
               "weekly_points": {
                 "2": 22.5,
-                "3": 13.4
+                "3": 13.4,
+                "4": 32.6
               },
-              "total_points": 35.9
+              "total_points": 68.5
             },
             {
               "team_id": 5,
@@ -909,7 +1186,8 @@
                   "name": "Jaylen Warren",
                   "weeks": {
                     "2": 8.7,
-                    "3": 20.1
+                    "3": 20.1,
+                    "4": 14.1
                   }
                 },
                 {
@@ -917,7 +1195,8 @@
                   "name": "Rashee Rice",
                   "weeks": {
                     "2": 10.3,
-                    "3": 12.3
+                    "3": 12.3,
+                    "4": 0.0
                   }
                 },
                 {
@@ -925,15 +1204,17 @@
                   "name": "Dallas Goedert",
                   "weeks": {
                     "2": 0.9,
-                    "3": 0.0
+                    "3": 0.0,
+                    "4": 0.0
                   }
                 }
               ],
               "weekly_points": {
                 "2": 19.9,
-                "3": 32.4
+                "3": 32.4,
+                "4": 14.1
               },
-              "total_points": 52.3
+              "total_points": 66.4
             }
           ],
           "receipts": []
@@ -944,7 +1225,8 @@
           "transaction_week": 2,
           "weeks": [
             2,
-            3
+            3,
+            4
           ],
           "trade_week": 2,
           "sides": [
@@ -963,15 +1245,17 @@
                   "name": "Isaiah Likely",
                   "weeks": {
                     "2": 5.8,
-                    "3": 2.3
+                    "3": 2.3,
+                    "4": 10.1
                   }
                 }
               ],
               "weekly_points": {
                 "2": 5.8,
-                "3": 2.3
+                "3": 2.3,
+                "4": 10.1
               },
-              "total_points": 8.1
+              "total_points": 18.2
             },
             {
               "team_id": 9,
@@ -988,15 +1272,17 @@
                   "name": "Kyle Monangai",
                   "weeks": {
                     "2": 6.8,
-                    "3": 3.1
+                    "3": 3.1,
+                    "4": 28.5
                   }
                 }
               ],
               "weekly_points": {
                 "2": 6.8,
-                "3": 3.1
+                "3": 3.1,
+                "4": 28.5
               },
-              "total_points": 9.9
+              "total_points": 38.4
             }
           ],
           "receipts": []
@@ -1007,7 +1293,8 @@
           "transaction_week": 2,
           "weeks": [
             2,
-            3
+            3,
+            4
           ],
           "trade_week": 2,
           "sides": [
@@ -1030,7 +1317,8 @@
                   "name": "Drake London",
                   "weeks": {
                     "2": 6.9,
-                    "3": 24.9
+                    "3": 24.9,
+                    "4": 12.1
                   }
                 },
                 {
@@ -1038,15 +1326,17 @@
                   "name": "Dylan Sampson",
                   "weeks": {
                     "2": 0.0,
-                    "3": 0.0
+                    "3": 0.0,
+                    "4": 0.0
                   }
                 }
               ],
               "weekly_points": {
                 "2": 6.9,
-                "3": 24.9
+                "3": 24.9,
+                "4": 12.1
               },
-              "total_points": 31.8
+              "total_points": 43.9
             },
             {
               "team_id": 10,
@@ -1067,7 +1357,8 @@
                   "name": "Caleb Williams",
                   "weeks": {
                     "2": 7.22,
-                    "3": 0.0
+                    "3": 0.0,
+                    "4": 0.0
                   }
                 },
                 {
@@ -1075,15 +1366,17 @@
                   "name": "Tetairoa McMillan",
                   "weeks": {
                     "2": 13.6,
-                    "3": 2.7
+                    "3": 2.7,
+                    "4": 39.2
                   }
                 }
               ],
               "weekly_points": {
                 "2": 20.82,
-                "3": 2.7
+                "3": 2.7,
+                "4": 39.2
               },
-              "total_points": 23.52
+              "total_points": 62.72
             }
           ],
           "receipts": []
@@ -1095,7 +1388,8 @@
           "weeks": [
             1,
             2,
-            3
+            3,
+            4
           ],
           "trade_week": null,
           "sides": [
@@ -1123,7 +1417,8 @@
                   "weeks": {
                     "1": 2.2,
                     "2": 23.0,
-                    "3": 20.3
+                    "3": 20.3,
+                    "4": 4.2
                   }
                 },
                 {
@@ -1132,16 +1427,18 @@
                   "weeks": {
                     "1": 14.1,
                     "2": 7.5,
-                    "3": 11.5
+                    "3": 11.5,
+                    "4": 7.1
                   }
                 }
               ],
               "weekly_points": {
                 "1": 16.3,
                 "2": 30.5,
-                "3": 31.8
+                "3": 31.8,
+                "4": 11.3
               },
-              "total_points": 78.6
+              "total_points": 89.9
             },
             {
               "team_id": 10,
@@ -1163,7 +1460,8 @@
                   "weeks": {
                     "1": 7.3,
                     "2": 0.0,
-                    "3": 2.6
+                    "3": 2.6,
+                    "4": 2.5
                   }
                 },
                 {
@@ -1172,7 +1470,8 @@
                   "weeks": {
                     "1": 4.5,
                     "2": 6.9,
-                    "3": 24.9
+                    "3": 24.9,
+                    "4": 12.1
                   }
                 },
                 {
@@ -1181,16 +1480,18 @@
                   "weeks": {
                     "1": 12.0,
                     "2": 6.0,
-                    "3": 19.4
+                    "3": 19.4,
+                    "4": 6.0
                   }
                 }
               ],
               "weekly_points": {
                 "1": 23.8,
                 "2": 12.9,
-                "3": 46.9
+                "3": 46.9,
+                "4": 20.6
               },
-              "total_points": 83.6
+              "total_points": 104.2
             }
           ],
           "receipts": []
@@ -1202,7 +1503,8 @@
           "weeks": [
             1,
             2,
-            3
+            3,
+            4
           ],
           "trade_week": null,
           "sides": [
@@ -1230,7 +1532,8 @@
                   "weeks": {
                     "1": 27.2,
                     "2": 7.0,
-                    "3": 4.2
+                    "3": 4.2,
+                    "4": 0.0
                   }
                 },
                 {
@@ -1239,7 +1542,8 @@
                   "weeks": {
                     "1": 27.4,
                     "2": 3.4,
-                    "3": 5.8
+                    "3": 5.8,
+                    "4": 4.3
                   }
                 },
                 {
@@ -1248,16 +1552,18 @@
                   "weeks": {
                     "1": 15.0,
                     "2": 5.0,
-                    "3": 16.4
+                    "3": 16.4,
+                    "4": 15.5
                   }
                 }
               ],
               "weekly_points": {
                 "1": 69.6,
                 "2": 15.4,
-                "3": 26.4
+                "3": 26.4,
+                "4": 19.8
               },
-              "total_points": 111.4
+              "total_points": 131.2
             },
             {
               "team_id": 10,
@@ -1283,7 +1589,8 @@
                   "weeks": {
                     "1": 10.0,
                     "2": 11.5,
-                    "3": 11.7
+                    "3": 11.7,
+                    "4": 14.8
                   }
                 },
                 {
@@ -1292,7 +1599,8 @@
                   "weeks": {
                     "1": 4.5,
                     "2": 6.0,
-                    "3": 8.6
+                    "3": 8.6,
+                    "4": 8.2
                   }
                 },
                 {
@@ -1301,16 +1609,18 @@
                   "weeks": {
                     "1": 2.2,
                     "2": 23.0,
-                    "3": 20.3
+                    "3": 20.3,
+                    "4": 4.2
                   }
                 }
               ],
               "weekly_points": {
                 "1": 16.7,
                 "2": 40.5,
-                "3": 40.6
+                "3": 40.6,
+                "4": 27.2
               },
-              "total_points": 97.8
+              "total_points": 125.0
             }
           ],
           "receipts": []
@@ -1324,7 +1634,7 @@
             "lineups": [
               {
                 "team_id": 1,
-                "team": "Fart Toot Squeek",
+                "team": "The Relegated Ramsay",
                 "actual_points": 136.9,
                 "optimal_points": 142.6,
                 "points_left": 5.7,
@@ -1512,7 +1822,7 @@
             "lineups": [
               {
                 "team_id": 1,
-                "team": "Fart Toot Squeek",
+                "team": "The Relegated Ramsay",
                 "actual_points": 78.5,
                 "optimal_points": 108.02,
                 "points_left": 29.52,
@@ -1700,7 +2010,7 @@
             "lineups": [
               {
                 "team_id": 1,
-                "team": "Fart Toot Squeek",
+                "team": "The Relegated Ramsay",
                 "actual_points": 113.96,
                 "optimal_points": 113.96,
                 "points_left": 0.0,
@@ -1881,211 +2191,399 @@
                 "away_score": 113.96
               }
             ]
+          },
+          {
+            "week": 4,
+            "rewound_players": 48,
+            "lineups": [
+              {
+                "team_id": 1,
+                "team": "The Relegated Ramsay",
+                "actual_points": 128.98,
+                "optimal_points": 156.46,
+                "points_left": 27.48,
+                "top_bench": {
+                  "id": 4431452,
+                  "name": "Drake Maye",
+                  "points": 28.66
+                }
+              },
+              {
+                "team_id": 2,
+                "team": "All Gold, No Glory",
+                "actual_points": 107.28,
+                "optimal_points": 126.48,
+                "points_left": 19.2,
+                "top_bench": {
+                  "id": 4432577,
+                  "name": "C.J. Stroud",
+                  "points": 25.08
+                }
+              },
+              {
+                "team_id": 3,
+                "team": "Texas Tornado's Bush",
+                "actual_points": 135.7,
+                "optimal_points": 172.5,
+                "points_left": 36.8,
+                "top_bench": {
+                  "id": 4036133,
+                  "name": "T.J. Hockenson",
+                  "points": 19.4
+                }
+              },
+              {
+                "team_id": 4,
+                "team": "Diamond Dogs",
+                "actual_points": 110.54,
+                "optimal_points": 119.12,
+                "points_left": 8.58,
+                "top_bench": {
+                  "id": 4361741,
+                  "name": "Brock Purdy",
+                  "points": 21.62
+                }
+              },
+              {
+                "team_id": 5,
+                "team": "Backdoor Heat",
+                "actual_points": 118.5,
+                "optimal_points": 127.4,
+                "points_left": 8.9,
+                "top_bench": {
+                  "id": 2578570,
+                  "name": "Jacoby Brissett",
+                  "points": 10.94
+                }
+              },
+              {
+                "team_id": 6,
+                "team": "The Kickers n Jigba",
+                "actual_points": 127.22,
+                "optimal_points": 161.52,
+                "points_left": 34.3,
+                "top_bench": {
+                  "id": 4241474,
+                  "name": "Brian Robinson Jr.",
+                  "points": 25.2
+                }
+              },
+              {
+                "team_id": 7,
+                "team": "The Guy Next Door",
+                "actual_points": 113.72,
+                "optimal_points": 118.32,
+                "points_left": 4.6,
+                "top_bench": {
+                  "id": 3917315,
+                  "name": "Kyler Murray",
+                  "points": 11.48
+                }
+              },
+              {
+                "team_id": 8,
+                "team": "H-Town Holy Rollers",
+                "actual_points": 121.38,
+                "optimal_points": 141.98,
+                "points_left": 20.6,
+                "top_bench": {
+                  "id": 4431492,
+                  "name": "Roman Wilson",
+                  "points": 14.9
+                }
+              },
+              {
+                "team_id": 9,
+                "team": "Jackin' Goff",
+                "actual_points": 97.82,
+                "optimal_points": 97.82,
+                "points_left": 0.0,
+                "top_bench": {
+                  "id": 4696044,
+                  "name": "Kaelon Black",
+                  "points": 1.3
+                }
+              },
+              {
+                "team_id": 10,
+                "team": "Boom Baum",
+                "actual_points": 136.88,
+                "optimal_points": 154.56,
+                "points_left": 17.68,
+                "top_bench": {
+                  "id": 4685720,
+                  "name": "Bryce Young",
+                  "points": 23.46
+                }
+              },
+              {
+                "team_id": 11,
+                "team": "The Scott Ramsays",
+                "actual_points": 85.74,
+                "optimal_points": 103.64,
+                "points_left": 17.9,
+                "top_bench": {
+                  "id": 4572680,
+                  "name": "Tucker Kraft",
+                  "points": 13.5
+                }
+              },
+              {
+                "team_id": 12,
+                "team": "Shiny Hineys",
+                "actual_points": 135.32,
+                "optimal_points": 140.72,
+                "points_left": 5.4,
+                "top_bench": {
+                  "id": 4683062,
+                  "name": "Xavier Worthy",
+                  "points": 9.0
+                }
+              }
+            ],
+            "matchups": [
+              {
+                "home_team_id": 6,
+                "away_team_id": 9,
+                "home_score": 127.22,
+                "away_score": 97.82
+              },
+              {
+                "home_team_id": 4,
+                "away_team_id": 8,
+                "home_score": 110.54,
+                "away_score": 121.38
+              },
+              {
+                "home_team_id": 5,
+                "away_team_id": 7,
+                "home_score": 118.5,
+                "away_score": 113.72
+              },
+              {
+                "home_team_id": 12,
+                "away_team_id": 2,
+                "home_score": 135.32,
+                "away_score": 107.28
+              },
+              {
+                "home_team_id": 10,
+                "away_team_id": 11,
+                "home_score": 136.88,
+                "away_score": 85.74
+              },
+              {
+                "home_team_id": 1,
+                "away_team_id": 3,
+                "home_score": 128.98,
+                "away_score": 135.7
+              }
+            ]
           }
         ],
         "teams": [
           {
             "team_id": 1,
-            "team": "Fart Toot Squeek",
+            "team": "The Relegated Ramsay",
             "actual_wins": 0,
-            "actual_losses": 3,
+            "actual_losses": 4,
             "actual_ties": 0,
-            "actual_points": 329.36,
+            "actual_points": 458.34,
             "alternate_wins": 1,
-            "alternate_losses": 2,
+            "alternate_losses": 3,
             "alternate_ties": 0,
-            "alternate_points": 382.88,
+            "alternate_points": 535.74,
             "optimal_actual_wins": 0,
-            "optimal_actual_losses": 3,
+            "optimal_actual_losses": 4,
             "optimal_actual_ties": 0,
-            "optimal_actual_points": 364.58,
+            "optimal_actual_points": 521.04,
             "wins_change": 1.0
           },
           {
             "team_id": 2,
             "team": "All Gold, No Glory",
             "actual_wins": 3,
-            "actual_losses": 0,
+            "actual_losses": 1,
             "actual_ties": 0,
-            "actual_points": 408.58,
+            "actual_points": 515.86,
             "alternate_wins": 3,
-            "alternate_losses": 0,
+            "alternate_losses": 1,
             "alternate_ties": 0,
-            "alternate_points": 422.06,
+            "alternate_points": 548.54,
             "optimal_actual_wins": 3,
-            "optimal_actual_losses": 0,
+            "optimal_actual_losses": 1,
             "optimal_actual_ties": 0,
-            "optimal_actual_points": 422.06,
+            "optimal_actual_points": 548.54,
             "wins_change": 0.0
           },
           {
             "team_id": 3,
             "team": "Texas Tornado's Bush",
-            "actual_wins": 3,
+            "actual_wins": 4,
             "actual_losses": 0,
             "actual_ties": 0,
-            "actual_points": 337.18,
-            "alternate_wins": 2,
+            "actual_points": 472.88,
+            "alternate_wins": 3,
             "alternate_losses": 1,
             "alternate_ties": 0,
-            "alternate_points": 378.68,
-            "optimal_actual_wins": 3,
+            "alternate_points": 558.78,
+            "optimal_actual_wins": 4,
             "optimal_actual_losses": 0,
             "optimal_actual_ties": 0,
-            "optimal_actual_points": 384.88,
+            "optimal_actual_points": 557.38,
             "wins_change": -1.0
           },
           {
             "team_id": 4,
             "team": "Diamond Dogs",
             "actual_wins": 1,
-            "actual_losses": 2,
+            "actual_losses": 3,
             "actual_ties": 0,
-            "actual_points": 301.3,
+            "actual_points": 411.84,
             "alternate_wins": 1,
-            "alternate_losses": 2,
+            "alternate_losses": 3,
             "alternate_ties": 0,
-            "alternate_points": 339.66,
+            "alternate_points": 469.54,
             "optimal_actual_wins": 1,
-            "optimal_actual_losses": 2,
+            "optimal_actual_losses": 3,
             "optimal_actual_ties": 0,
-            "optimal_actual_points": 352.66,
+            "optimal_actual_points": 471.78,
             "wins_change": 0.0
           },
           {
             "team_id": 5,
             "team": "Backdoor Heat",
-            "actual_wins": 1,
+            "actual_wins": 2,
             "actual_losses": 2,
             "actual_ties": 0,
-            "actual_points": 314.4,
+            "actual_points": 432.9,
             "alternate_wins": 2,
-            "alternate_losses": 1,
+            "alternate_losses": 2,
             "alternate_ties": 0,
-            "alternate_points": 388.44,
-            "optimal_actual_wins": 2,
+            "alternate_points": 511.54,
+            "optimal_actual_wins": 3,
             "optimal_actual_losses": 1,
             "optimal_actual_ties": 0,
-            "optimal_actual_points": 390.04,
-            "wins_change": 0.0
+            "optimal_actual_points": 517.44,
+            "wins_change": -1.0
           },
           {
             "team_id": 6,
             "team": "The Kickers n Jigba",
-            "actual_wins": 3,
+            "actual_wins": 4,
             "actual_losses": 0,
             "actual_ties": 0,
-            "actual_points": 461.3,
-            "alternate_wins": 3,
+            "actual_points": 588.52,
+            "alternate_wins": 4,
             "alternate_losses": 0,
             "alternate_ties": 0,
-            "alternate_points": 515.6,
-            "optimal_actual_wins": 3,
+            "alternate_points": 696.92,
+            "optimal_actual_wins": 4,
             "optimal_actual_losses": 0,
             "optimal_actual_ties": 0,
-            "optimal_actual_points": 506.2,
+            "optimal_actual_points": 667.72,
             "wins_change": 0.0
           },
           {
             "team_id": 7,
             "team": "The Guy Next Door",
             "actual_wins": 1,
-            "actual_losses": 2,
+            "actual_losses": 3,
             "actual_ties": 0,
-            "actual_points": 302.5,
-            "alternate_wins": 1,
+            "actual_points": 416.22,
+            "alternate_wins": 2,
             "alternate_losses": 2,
             "alternate_ties": 0,
-            "alternate_points": 331.14,
+            "alternate_points": 476.56,
             "optimal_actual_wins": 1,
-            "optimal_actual_losses": 2,
+            "optimal_actual_losses": 3,
             "optimal_actual_ties": 0,
-            "optimal_actual_points": 344.54,
-            "wins_change": 0.0
+            "optimal_actual_points": 462.86,
+            "wins_change": 1.0
           },
           {
             "team_id": 8,
             "team": "H-Town Holy Rollers",
-            "actual_wins": 1,
+            "actual_wins": 2,
             "actual_losses": 2,
             "actual_ties": 0,
-            "actual_points": 334.34,
-            "alternate_wins": 1,
+            "actual_points": 455.72,
+            "alternate_wins": 2,
             "alternate_losses": 2,
             "alternate_ties": 0,
-            "alternate_points": 383.62,
-            "optimal_actual_wins": 1,
+            "alternate_points": 525.6,
+            "optimal_actual_wins": 2,
             "optimal_actual_losses": 2,
             "optimal_actual_ties": 0,
-            "optimal_actual_points": 383.62,
+            "optimal_actual_points": 525.6,
             "wins_change": 0.0
           },
           {
             "team_id": 9,
             "team": "Jackin' Goff",
             "actual_wins": 0,
-            "actual_losses": 3,
+            "actual_losses": 4,
             "actual_ties": 0,
-            "actual_points": 296.78,
+            "actual_points": 394.6,
             "alternate_wins": 0,
-            "alternate_losses": 3,
+            "alternate_losses": 4,
             "alternate_ties": 0,
-            "alternate_points": 331.78,
+            "alternate_points": 415.94,
             "optimal_actual_wins": 0,
-            "optimal_actual_losses": 3,
+            "optimal_actual_losses": 4,
             "optimal_actual_ties": 0,
-            "optimal_actual_points": 343.98,
+            "optimal_actual_points": 441.8,
             "wins_change": 0.0
           },
           {
             "team_id": 10,
             "team": "Boom Baum",
-            "actual_wins": 1,
+            "actual_wins": 2,
             "actual_losses": 2,
             "actual_ties": 0,
-            "actual_points": 310.1,
-            "alternate_wins": 2,
+            "actual_points": 446.98,
+            "alternate_wins": 3,
             "alternate_losses": 1,
             "alternate_ties": 0,
-            "alternate_points": 373.66,
-            "optimal_actual_wins": 1,
+            "alternate_points": 492.78,
+            "optimal_actual_wins": 2,
             "optimal_actual_losses": 2,
             "optimal_actual_ties": 0,
-            "optimal_actual_points": 353.36,
+            "optimal_actual_points": 507.92,
             "wins_change": 1.0
           },
           {
             "team_id": 11,
             "team": "The Scott Ramsays",
             "actual_wins": 2,
-            "actual_losses": 1,
+            "actual_losses": 2,
             "actual_ties": 0,
-            "actual_points": 283.1,
+            "actual_points": 368.84,
             "alternate_wins": 2,
-            "alternate_losses": 1,
+            "alternate_losses": 2,
             "alternate_ties": 0,
-            "alternate_points": 349.86,
+            "alternate_points": 453.5,
             "optimal_actual_wins": 2,
-            "optimal_actual_losses": 1,
+            "optimal_actual_losses": 2,
             "optimal_actual_ties": 0,
-            "optimal_actual_points": 349.86,
+            "optimal_actual_points": 453.5,
             "wins_change": 0.0
           },
           {
             "team_id": 12,
             "team": "Shiny Hineys",
-            "actual_wins": 2,
+            "actual_wins": 3,
             "actual_losses": 1,
             "actual_ties": 0,
-            "actual_points": 297.56,
-            "alternate_wins": 0,
+            "actual_points": 432.88,
+            "alternate_wins": 1,
             "alternate_losses": 3,
             "alternate_ties": 0,
-            "alternate_points": 336.32,
-            "optimal_actual_wins": 1,
+            "alternate_points": 483.24,
+            "optimal_actual_wins": 2,
             "optimal_actual_losses": 2,
             "optimal_actual_ties": 0,
-            "optimal_actual_points": 342.02,
+            "optimal_actual_points": 482.74,
             "wins_change": -1.0
           }
         ],
@@ -2971,7 +3469,7 @@
           {
             "week": 2,
             "team_id": 1,
-            "team": "Fart Toot Squeek",
+            "team": "The Relegated Ramsay",
             "trade_count": 1,
             "trade_ids": [
               "1789515588236-1-5"
@@ -3178,7 +3676,7 @@
             "actual_score": 119.36,
             "alternate_score": 127.76,
             "net_points": -8.4,
-            "opponent": "Fart Toot Squeek",
+            "opponent": "The Relegated Ramsay",
             "opponent_score": 78.5,
             "opponent_alternate_score": 74.7,
             "result": "W",
@@ -4246,7 +4744,7 @@
             "actual_score": 122.08,
             "alternate_score": 96.78,
             "net_points": 25.3,
-            "opponent": "Fart Toot Squeek",
+            "opponent": "The Relegated Ramsay",
             "opponent_score": 113.96,
             "opponent_alternate_score": 113.96,
             "result": "W",
@@ -4550,6 +5048,1327 @@
               }
             ],
             "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
+          },
+          {
+            "week": 4,
+            "team_id": 10,
+            "team": "Boom Baum",
+            "trade_count": 3,
+            "trade_ids": [
+              "1790990251599-10-12",
+              "1790822456812-4-10",
+              "1790821207729-3-10"
+            ],
+            "received": [
+              {
+                "id": 3117256,
+                "name": "Dalton Schultz"
+              },
+              {
+                "id": 3916387,
+                "name": "Lamar Jackson"
+              },
+              {
+                "id": 4258173,
+                "name": "Nico Collins"
+              },
+              {
+                "id": 4361579,
+                "name": "Javonte Williams"
+              },
+              {
+                "id": 4429835,
+                "name": "George Holani"
+              },
+              {
+                "id": 4569603,
+                "name": "Malik Washington"
+              },
+              {
+                "id": 4696981,
+                "name": "Cam Skattebo"
+              }
+            ],
+            "sent": [
+              {
+                "id": 3042519,
+                "name": "Aaron Jones Sr."
+              },
+              {
+                "id": 4361307,
+                "name": "Trey McBride"
+              },
+              {
+                "id": 4361741,
+                "name": "Brock Purdy"
+              },
+              {
+                "id": 4697815,
+                "name": "Rachaad White"
+              },
+              {
+                "id": 4711533,
+                "name": "Ollie Gordon II"
+              },
+              {
+                "id": 4870808,
+                "name": "Jeremiyah Love"
+              },
+              {
+                "id": 4871023,
+                "name": "Carnell Tate"
+              },
+              {
+                "id": 4887558,
+                "name": "Emanuel Wilson"
+              }
+            ],
+            "actual_score": 136.88,
+            "alternate_score": 141.76,
+            "net_points": -4.88,
+            "opponent": "The Scott Ramsays",
+            "opponent_score": 85.74,
+            "opponent_alternate_score": 85.74,
+            "result": "W",
+            "alternate_result": "W",
+            "flipped": false,
+            "replacements": [
+              {
+                "slot": "TE",
+                "name": "Trey McBride",
+                "points": 6.6,
+                "replaced": null
+              },
+              {
+                "slot": "RB",
+                "name": "Aaron Jones Sr.",
+                "points": 14.8,
+                "replaced": null
+              },
+              {
+                "slot": "QB",
+                "name": "Bryce Young",
+                "points": 23.46,
+                "replaced": null
+              },
+              {
+                "slot": "RB",
+                "name": "Jeremiyah Love",
+                "points": 6.0,
+                "replaced": null
+              },
+              {
+                "slot": "RB/WR/TE",
+                "name": "Emanuel Wilson",
+                "points": 25.5,
+                "replaced": null
+              },
+              {
+                "slot": "RB/WR/TE",
+                "name": "Carnell Tate",
+                "points": 18.0,
+                "replaced": null
+              }
+            ],
+            "final_lineup": [
+              {
+                "id": 4035687,
+                "name": "Michael Pittman Jr.",
+                "slot": "BE",
+                "points": 2.5
+              },
+              {
+                "id": 4685472,
+                "name": "Tetairoa McMillan",
+                "slot": "WR",
+                "points": 39.2
+              },
+              {
+                "id": 4569618,
+                "name": "Garrett Wilson",
+                "slot": "WR",
+                "points": 4.2
+              },
+              {
+                "id": 4371733,
+                "name": "Kenny Gainwell",
+                "slot": "BE",
+                "points": 9.7
+              },
+              {
+                "id": 4685720,
+                "name": "Bryce Young",
+                "slot": "BE",
+                "points": 23.46
+              },
+              {
+                "id": 4427366,
+                "name": "Breece Hall",
+                "slot": "BE",
+                "points": 0.0
+              },
+              {
+                "id": 4258173,
+                "name": "Nico Collins",
+                "slot": "RB/WR/TE",
+                "points": 28.3
+              },
+              {
+                "id": 3117256,
+                "name": "Dalton Schultz",
+                "slot": "TE",
+                "points": 1.9
+              },
+              {
+                "id": 4696981,
+                "name": "Cam Skattebo",
+                "slot": "RB",
+                "points": 7.1
+              },
+              {
+                "id": 3916387,
+                "name": "Lamar Jackson",
+                "slot": "QB",
+                "points": 20.88
+              },
+              {
+                "id": -16002,
+                "name": "Bills D/ST",
+                "slot": "D/ST",
+                "points": 1.0
+              },
+              {
+                "id": 4568263,
+                "name": "Ryan Fitzgerald",
+                "slot": "K",
+                "points": 3.0
+              },
+              {
+                "id": 4373678,
+                "name": "Khalil Shakir",
+                "slot": "BE",
+                "points": 9.7
+              },
+              {
+                "id": 4569603,
+                "name": "Malik Washington",
+                "slot": "BE",
+                "points": 9.5
+              },
+              {
+                "id": 4429835,
+                "name": "George Holani",
+                "slot": "RB/WR/TE",
+                "points": 2.5
+              },
+              {
+                "id": 4361579,
+                "name": "Javonte Williams",
+                "slot": "RB",
+                "points": 28.8
+              }
+            ],
+            "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
+          },
+          {
+            "week": 4,
+            "team_id": 12,
+            "team": "Shiny Hineys",
+            "trade_count": 1,
+            "trade_ids": [
+              "1790990251599-10-12"
+            ],
+            "received": [
+              {
+                "id": 4595348,
+                "name": "Malik Nabers"
+              },
+              {
+                "id": 4685382,
+                "name": "Omarion Hampton"
+              },
+              {
+                "id": 4887558,
+                "name": "Emanuel Wilson"
+              }
+            ],
+            "sent": [
+              {
+                "id": 4361579,
+                "name": "Javonte Williams"
+              },
+              {
+                "id": 4429835,
+                "name": "George Holani"
+              },
+              {
+                "id": 4569603,
+                "name": "Malik Washington"
+              }
+            ],
+            "actual_score": 135.32,
+            "alternate_score": 117.12,
+            "net_points": 18.2,
+            "opponent": "All Gold, No Glory",
+            "opponent_score": 107.28,
+            "opponent_alternate_score": 107.28,
+            "result": "W",
+            "alternate_result": "W",
+            "flipped": false,
+            "replacements": [
+              {
+                "slot": "WR",
+                "name": "Malik Washington",
+                "points": 9.5,
+                "replaced": null
+              },
+              {
+                "slot": "RB/WR/TE",
+                "name": "Javonte Williams",
+                "points": 28.8,
+                "replaced": null
+              },
+              {
+                "slot": "RB/WR/TE",
+                "name": "George Holani",
+                "points": 2.5,
+                "replaced": null
+              }
+            ],
+            "final_lineup": [
+              {
+                "id": 5083076,
+                "name": "Harold Fannin Jr.",
+                "slot": "TE",
+                "points": 10.2
+              },
+              {
+                "id": 4047646,
+                "name": "A.J. Brown",
+                "slot": "IR",
+                "points": 0.0
+              },
+              {
+                "id": 4047365,
+                "name": "Josh Jacobs",
+                "slot": "BE",
+                "points": 0.0
+              },
+              {
+                "id": 4429023,
+                "name": "MarShawn Lloyd",
+                "slot": "BE",
+                "points": 7.4
+              },
+              {
+                "id": 3915511,
+                "name": "Joe Burrow",
+                "slot": "QB",
+                "points": 23.72
+              },
+              {
+                "id": 4683062,
+                "name": "Xavier Worthy",
+                "slot": "BE",
+                "points": 9.0
+              },
+              {
+                "id": 4429025,
+                "name": "Quentin Johnston",
+                "slot": "BE",
+                "points": 4.5
+              },
+              {
+                "id": 4685247,
+                "name": "Braelon Allen",
+                "slot": "RB",
+                "points": 7.7
+              },
+              {
+                "id": -16016,
+                "name": "Vikings D/ST",
+                "slot": "D/ST",
+                "points": 10.0
+              },
+              {
+                "id": 4685702,
+                "name": "Quinshon Judkins",
+                "slot": "RB",
+                "points": 18.6
+              },
+              {
+                "id": 4428718,
+                "name": "Tre Tucker",
+                "slot": "BE",
+                "points": 6.4
+              },
+              {
+                "id": 4819231,
+                "name": "Kaleb Johnson",
+                "slot": "BE",
+                "points": 2.2
+              },
+              {
+                "id": 3051909,
+                "name": "Daniel Carlson",
+                "slot": "K",
+                "points": 2.5
+              },
+              {
+                "id": 4887558,
+                "name": "Emanuel Wilson",
+                "slot": "RB/WR/TE",
+                "points": 25.5
+              },
+              {
+                "id": 4685382,
+                "name": "Omarion Hampton",
+                "slot": "RB/WR/TE",
+                "points": 12.3
+              },
+              {
+                "id": 4595348,
+                "name": "Malik Nabers",
+                "slot": "WR",
+                "points": 21.2
+              },
+              {
+                "id": 5081432,
+                "name": "Antonio Williams",
+                "slot": "WR",
+                "points": 3.6
+              }
+            ],
+            "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
+          },
+          {
+            "week": 4,
+            "team_id": 4,
+            "team": "Diamond Dogs",
+            "trade_count": 2,
+            "trade_ids": [
+              "1790822456812-4-10",
+              "1790801927913-4-9"
+            ],
+            "received": [
+              {
+                "id": 4361741,
+                "name": "Brock Purdy"
+              },
+              {
+                "id": 4429059,
+                "name": "Woody Marks"
+              },
+              {
+                "id": 4870808,
+                "name": "Jeremiyah Love"
+              },
+              {
+                "id": 4871023,
+                "name": "Carnell Tate"
+              }
+            ],
+            "sent": [
+              {
+                "id": 3916387,
+                "name": "Lamar Jackson"
+              },
+              {
+                "id": 4360569,
+                "name": "Jordan Mason"
+              },
+              {
+                "id": 4595348,
+                "name": "Malik Nabers"
+              },
+              {
+                "id": 4685382,
+                "name": "Omarion Hampton"
+              }
+            ],
+            "actual_score": 110.54,
+            "alternate_score": 123.98,
+            "net_points": -13.44,
+            "opponent": "H-Town Holy Rollers",
+            "opponent_score": 121.38,
+            "opponent_alternate_score": 121.38,
+            "result": "L",
+            "alternate_result": "W",
+            "flipped": true,
+            "replacements": [
+              {
+                "slot": "WR",
+                "name": "Malik Nabers",
+                "points": 21.2,
+                "replaced": null
+              },
+              {
+                "slot": "RB",
+                "name": "Omarion Hampton",
+                "points": 12.3,
+                "replaced": null
+              },
+              {
+                "slot": "QB",
+                "name": "Lamar Jackson",
+                "points": 20.88,
+                "replaced": "Tyler Shough"
+              }
+            ],
+            "final_lineup": [
+              {
+                "id": 4038815,
+                "name": "Rico Dowdle",
+                "slot": "IR",
+                "points": 0.0
+              },
+              {
+                "id": 4431459,
+                "name": "Tyler Warren",
+                "slot": "TE",
+                "points": 6.6
+              },
+              {
+                "id": 4832955,
+                "name": "Emmett Johnson",
+                "slot": "BE",
+                "points": 1.5
+              },
+              {
+                "id": 4361432,
+                "name": "Romeo Doubs",
+                "slot": "RB/WR/TE",
+                "points": 20.8
+              },
+              {
+                "id": 4035538,
+                "name": "David Montgomery",
+                "slot": "RB",
+                "points": 4.3
+              },
+              {
+                "id": 3126486,
+                "name": "Deebo Samuel Sr.",
+                "slot": "RB/WR/TE",
+                "points": 15.5
+              },
+              {
+                "id": 4262921,
+                "name": "Justin Jefferson",
+                "slot": "BE",
+                "points": 0.0
+              },
+              {
+                "id": 4569559,
+                "name": "Devaughn Vele",
+                "slot": "WR",
+                "points": 14.4
+              },
+              {
+                "id": 4832800,
+                "name": "Denzel Boston",
+                "slot": "BE",
+                "points": 10.9
+              },
+              {
+                "id": 4360689,
+                "name": "Tyler Shough",
+                "slot": "QB",
+                "points": 16.94
+              },
+              {
+                "id": 3116406,
+                "name": "Tyreek Hill",
+                "slot": "BE",
+                "points": 0.0
+              },
+              {
+                "id": 4429059,
+                "name": "Woody Marks",
+                "slot": "BE",
+                "points": 8.2
+              },
+              {
+                "id": 4361741,
+                "name": "Brock Purdy",
+                "slot": "BE",
+                "points": 21.62
+              },
+              {
+                "id": 4871023,
+                "name": "Carnell Tate",
+                "slot": "WR",
+                "points": 18.0
+              },
+              {
+                "id": 4870808,
+                "name": "Jeremiyah Love",
+                "slot": "RB",
+                "points": 6.0
+              },
+              {
+                "id": -16014,
+                "name": "Rams D/ST",
+                "slot": "D/ST",
+                "points": 7.0
+              },
+              {
+                "id": 3150744,
+                "name": "Chase McLaughlin",
+                "slot": "K",
+                "points": 1.0
+              }
+            ],
+            "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
+          },
+          {
+            "week": 4,
+            "team_id": 3,
+            "team": "Texas Tornado's Bush",
+            "trade_count": 1,
+            "trade_ids": [
+              "1790821207729-3-10"
+            ],
+            "received": [
+              {
+                "id": 3042519,
+                "name": "Aaron Jones Sr."
+              },
+              {
+                "id": 4361307,
+                "name": "Trey McBride"
+              },
+              {
+                "id": 4697815,
+                "name": "Rachaad White"
+              },
+              {
+                "id": 4711533,
+                "name": "Ollie Gordon II"
+              }
+            ],
+            "sent": [
+              {
+                "id": 3117256,
+                "name": "Dalton Schultz"
+              },
+              {
+                "id": 4258173,
+                "name": "Nico Collins"
+              },
+              {
+                "id": 4696981,
+                "name": "Cam Skattebo"
+              }
+            ],
+            "actual_score": 135.7,
+            "alternate_score": 168.2,
+            "net_points": -32.5,
+            "opponent": "The Relegated Ramsay",
+            "opponent_score": 128.98,
+            "opponent_alternate_score": 143.56,
+            "result": "W",
+            "alternate_result": "W",
+            "flipped": false,
+            "replacements": [
+              {
+                "slot": "RB",
+                "name": "Cam Skattebo",
+                "points": 7.1,
+                "replaced": null
+              },
+              {
+                "slot": "TE",
+                "name": "T.J. Hockenson",
+                "points": 19.4,
+                "replaced": null
+              },
+              {
+                "slot": "RB/WR/TE",
+                "name": "Nico Collins",
+                "points": 28.3,
+                "replaced": "Courtland Sutton"
+              }
+            ],
+            "final_lineup": [
+              {
+                "id": 3139477,
+                "name": "Patrick Mahomes",
+                "slot": "QB",
+                "points": 19.0
+              },
+              {
+                "id": 4430737,
+                "name": "Kyren Williams",
+                "slot": "RB/WR/TE",
+                "points": 31.7
+              },
+              {
+                "id": -16026,
+                "name": "Seahawks D/ST",
+                "slot": "D/ST",
+                "points": 12.0
+              },
+              {
+                "id": 4432773,
+                "name": "Brian Thomas Jr.",
+                "slot": "BE",
+                "points": 8.7
+              },
+              {
+                "id": 4678008,
+                "name": "Jonathon Brooks",
+                "slot": "IR",
+                "points": 0.0
+              },
+              {
+                "id": 4241416,
+                "name": "Chuba Hubbard",
+                "slot": "RB",
+                "points": 26.4
+              },
+              {
+                "id": 3128429,
+                "name": "Courtland Sutton",
+                "slot": "RB/WR/TE",
+                "points": 0.9
+              },
+              {
+                "id": 4689936,
+                "name": "Jake Bates",
+                "slot": "K",
+                "points": 13.0
+              },
+              {
+                "id": 4429205,
+                "name": "Jordan Addison",
+                "slot": "WR",
+                "points": 7.1
+              },
+              {
+                "id": 4569587,
+                "name": "Wan'Dale Robinson",
+                "slot": "BE",
+                "points": 9.5
+              },
+              {
+                "id": 4362628,
+                "name": "Ja'Marr Chase",
+                "slot": "WR",
+                "points": 4.2
+              },
+              {
+                "id": 4036133,
+                "name": "T.J. Hockenson",
+                "slot": "BE",
+                "points": 19.4
+              },
+              {
+                "id": 4426338,
+                "name": "Bo Nix",
+                "slot": "BE",
+                "points": 14.56
+              },
+              {
+                "id": 4697815,
+                "name": "Rachaad White",
+                "slot": "BE",
+                "points": 0.0
+              },
+              {
+                "id": 3042519,
+                "name": "Aaron Jones Sr.",
+                "slot": "RB",
+                "points": 14.8
+              },
+              {
+                "id": 4361307,
+                "name": "Trey McBride",
+                "slot": "TE",
+                "points": 6.6
+              },
+              {
+                "id": 4711533,
+                "name": "Ollie Gordon II",
+                "slot": "BE",
+                "points": 18.0
+              }
+            ],
+            "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
+          },
+          {
+            "week": 4,
+            "team_id": 9,
+            "team": "Jackin' Goff",
+            "trade_count": 1,
+            "trade_ids": [
+              "1790801927913-4-9"
+            ],
+            "received": [
+              {
+                "id": 4360569,
+                "name": "Jordan Mason"
+              }
+            ],
+            "sent": [
+              {
+                "id": 4429059,
+                "name": "Woody Marks"
+              }
+            ],
+            "actual_score": 97.82,
+            "alternate_score": 77.52,
+            "net_points": 20.3,
+            "opponent": "The Kickers n Jigba",
+            "opponent_score": 127.22,
+            "opponent_alternate_score": 127.22,
+            "result": "L",
+            "alternate_result": "L",
+            "flipped": false,
+            "replacements": [
+              {
+                "slot": "RB",
+                "name": "Woody Marks",
+                "points": 8.2,
+                "replaced": "Kyle Monangai"
+              }
+            ],
+            "final_lineup": [
+              {
+                "id": 4362238,
+                "name": "Chase Brown",
+                "slot": "RB",
+                "points": 13.6
+              },
+              {
+                "id": 4702555,
+                "name": "Jonah Coleman",
+                "slot": "BE",
+                "points": 0.0
+              },
+              {
+                "id": 4432620,
+                "name": "Parker Washington",
+                "slot": "WR",
+                "points": 1.5
+              },
+              {
+                "id": 4685512,
+                "name": "Jadarian Price",
+                "slot": "IR",
+                "points": 0.0
+              },
+              {
+                "id": 4612826,
+                "name": "Ladd McConkey",
+                "slot": "BE",
+                "points": 0.0
+              },
+              {
+                "id": 4385690,
+                "name": "Dalton Kincaid",
+                "slot": "TE",
+                "points": 1.2
+              },
+              {
+                "id": 4701936,
+                "name": "Matthew Golden",
+                "slot": "RB/WR/TE",
+                "points": 10.2
+              },
+              {
+                "id": 4568490,
+                "name": "RJ Harvey",
+                "slot": "RB/WR/TE",
+                "points": 14.3
+              },
+              {
+                "id": 4696044,
+                "name": "Kaelon Black",
+                "slot": "BE",
+                "points": 1.3
+              },
+              {
+                "id": 4608686,
+                "name": "Kyle Monangai",
+                "slot": "RB",
+                "points": 28.5
+              },
+              {
+                "id": 4697745,
+                "name": "Tyler Loop",
+                "slot": "K",
+                "points": 7.5
+              },
+              {
+                "id": 16800,
+                "name": "Davante Adams",
+                "slot": "WR",
+                "points": 5.2
+              },
+              {
+                "id": 4431611,
+                "name": "Caleb Williams",
+                "slot": "BE",
+                "points": 0.0
+              },
+              {
+                "id": 4429676,
+                "name": "Tyler Goodson",
+                "slot": "BE",
+                "points": 1.2
+              },
+              {
+                "id": 3912547,
+                "name": "Sam Darnold",
+                "slot": "QB",
+                "points": 14.82
+              },
+              {
+                "id": 4360569,
+                "name": "Jordan Mason",
+                "slot": "BE",
+                "points": 0.0
+              },
+              {
+                "id": -16012,
+                "name": "Chiefs D/ST",
+                "slot": "D/ST",
+                "points": 1.0
+              }
+            ],
+            "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
+          },
+          {
+            "week": 4,
+            "team_id": 1,
+            "team": "The Relegated Ramsay",
+            "trade_count": 1,
+            "trade_ids": [
+              "1790772413122-1-5"
+            ],
+            "received": [
+              {
+                "id": 4360310,
+                "name": "Trevor Lawrence"
+              }
+            ],
+            "sent": [
+              {
+                "id": 5083315,
+                "name": "Kenyon Sadiq"
+              }
+            ],
+            "actual_score": 128.98,
+            "alternate_score": 143.56,
+            "net_points": -14.58,
+            "opponent": "Texas Tornado's Bush",
+            "opponent_score": 135.7,
+            "opponent_alternate_score": 168.2,
+            "result": "L",
+            "alternate_result": "L",
+            "flipped": false,
+            "replacements": [
+              {
+                "slot": "QB",
+                "name": "Drake Maye",
+                "points": 28.66,
+                "replaced": null
+              }
+            ],
+            "final_lineup": [
+              {
+                "id": 4426515,
+                "name": "Puka Nacua",
+                "slot": "WR",
+                "points": 24.2
+              },
+              {
+                "id": 4429795,
+                "name": "Jahmyr Gibbs",
+                "slot": "RB",
+                "points": 15.7
+              },
+              {
+                "id": 4431452,
+                "name": "Drake Maye",
+                "slot": "BE",
+                "points": 28.66
+              },
+              {
+                "id": 4569173,
+                "name": "Rhamondre Stevenson",
+                "slot": "RB",
+                "points": 16.9
+              },
+              {
+                "id": 16737,
+                "name": "Mike Evans",
+                "slot": "BE",
+                "points": 10.1
+              },
+              {
+                "id": 4241985,
+                "name": "J.K. Dobbins",
+                "slot": "BE",
+                "points": 6.2
+              },
+              {
+                "id": 3040151,
+                "name": "George Kittle",
+                "slot": "TE",
+                "points": 16.0
+              },
+              {
+                "id": 2976212,
+                "name": "Stefon Diggs",
+                "slot": "RB/WR/TE",
+                "points": 6.0
+              },
+              {
+                "id": 4710714,
+                "name": "De'Zhaun Stribling",
+                "slot": "IR",
+                "points": 0.0
+              },
+              {
+                "id": 4688813,
+                "name": "Josh Downs",
+                "slot": "WR",
+                "points": 3.1
+              },
+              {
+                "id": 4373626,
+                "name": "Tyler Allgeier",
+                "slot": "BE",
+                "points": 11.9
+              },
+              {
+                "id": 4372016,
+                "name": "Jaylen Waddle",
+                "slot": "RB/WR/TE",
+                "points": 12.0
+              },
+              {
+                "id": 4723086,
+                "name": "Colston Loveland",
+                "slot": "BE",
+                "points": 8.7
+              },
+              {
+                "id": -16005,
+                "name": "Browns D/ST",
+                "slot": "D/ST",
+                "points": 8.0
+              },
+              {
+                "id": 4360310,
+                "name": "Trevor Lawrence",
+                "slot": "QB",
+                "points": 14.08
+              },
+              {
+                "id": 4567104,
+                "name": "Will Reichard",
+                "slot": "K",
+                "points": 13.0
+              },
+              {
+                "id": -16004,
+                "name": "Bengals D/ST",
+                "slot": "BE",
+                "points": 4.0
+              }
+            ],
+            "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
+          },
+          {
+            "week": 4,
+            "team_id": 5,
+            "team": "Backdoor Heat",
+            "trade_count": 2,
+            "trade_ids": [
+              "1790772413122-1-5",
+              "1790690742800-5-6"
+            ],
+            "received": [
+              {
+                "id": 4426385,
+                "name": "Zach Charbonnet"
+              },
+              {
+                "id": 5083315,
+                "name": "Kenyon Sadiq"
+              }
+            ],
+            "sent": [
+              {
+                "id": 4360310,
+                "name": "Trevor Lawrence"
+              },
+              {
+                "id": 4686658,
+                "name": "Mike Washington Jr."
+              }
+            ],
+            "actual_score": 118.5,
+            "alternate_score": 113.48,
+            "net_points": 5.02,
+            "opponent": "The Guy Next Door",
+            "opponent_score": 113.72,
+            "opponent_alternate_score": 113.72,
+            "result": "W",
+            "alternate_result": "L",
+            "flipped": true,
+            "replacements": [
+              {
+                "slot": "TE",
+                "name": "Dallas Goedert",
+                "points": 0.0,
+                "replaced": null
+              },
+              {
+                "slot": "QB",
+                "name": "Trevor Lawrence",
+                "points": 14.08,
+                "replaced": "Dak Prescott"
+              }
+            ],
+            "final_lineup": [
+              {
+                "id": 4567048,
+                "name": "Kenneth Walker III",
+                "slot": "RB",
+                "points": 31.4
+              },
+              {
+                "id": 4882093,
+                "name": "Bhayshul Tuten",
+                "slot": "RB/WR/TE",
+                "points": 10.1
+              },
+              {
+                "id": 4567750,
+                "name": "Emeka Egbuka",
+                "slot": "BE",
+                "points": 2.3
+              },
+              {
+                "id": 2577417,
+                "name": "Dak Prescott",
+                "slot": "QB",
+                "points": 19.1
+              },
+              {
+                "id": 3916148,
+                "name": "Tony Pollard",
+                "slot": "RB/WR/TE",
+                "points": 12.0
+              },
+              {
+                "id": 4870653,
+                "name": "KC Concepcion",
+                "slot": "BE",
+                "points": 8.9
+              },
+              {
+                "id": 4695883,
+                "name": "Jalen Coker",
+                "slot": "BE",
+                "points": 0.0
+              },
+              {
+                "id": 4428331,
+                "name": "Rashee Rice",
+                "slot": "WR",
+                "points": 0.0
+              },
+              {
+                "id": 4569987,
+                "name": "Jaylen Warren",
+                "slot": "RB",
+                "points": 14.1
+              },
+              {
+                "id": 3121023,
+                "name": "Dallas Goedert",
+                "slot": "BE",
+                "points": 0.0
+              },
+              {
+                "id": 4360234,
+                "name": "Evan McPherson",
+                "slot": "K",
+                "points": 2.0
+              },
+              {
+                "id": 4429615,
+                "name": "Zay Flowers",
+                "slot": "WR",
+                "points": 22.8
+              },
+              {
+                "id": 4426385,
+                "name": "Zach Charbonnet",
+                "slot": "IR",
+                "points": 0.0
+              },
+              {
+                "id": 2973405,
+                "name": "Kalif Raymond",
+                "slot": "BE",
+                "points": 1.6
+              },
+              {
+                "id": -16033,
+                "name": "Ravens D/ST",
+                "slot": "D/ST",
+                "points": 7.0
+              },
+              {
+                "id": 5083315,
+                "name": "Kenyon Sadiq",
+                "slot": "TE",
+                "points": 0.0
+              },
+              {
+                "id": 2578570,
+                "name": "Jacoby Brissett",
+                "slot": "BE",
+                "points": 10.94
+              }
+            ],
+            "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
+          },
+          {
+            "week": 4,
+            "team_id": 6,
+            "team": "The Kickers n Jigba",
+            "trade_count": 1,
+            "trade_ids": [
+              "1790690742800-5-6"
+            ],
+            "received": [
+              {
+                "id": 4686658,
+                "name": "Mike Washington Jr."
+              }
+            ],
+            "sent": [
+              {
+                "id": 4426385,
+                "name": "Zach Charbonnet"
+              }
+            ],
+            "actual_score": 127.22,
+            "alternate_score": 127.22,
+            "net_points": 0.0,
+            "opponent": "Jackin' Goff",
+            "opponent_score": 97.82,
+            "opponent_alternate_score": 77.52,
+            "result": "W",
+            "alternate_result": "W",
+            "flipped": false,
+            "replacements": [],
+            "final_lineup": [
+              {
+                "id": 4430878,
+                "name": "Jaxon Smith-Njigba",
+                "slot": "WR",
+                "points": 10.1
+              },
+              {
+                "id": 3918298,
+                "name": "Josh Allen",
+                "slot": "QB",
+                "points": 19.02
+              },
+              {
+                "id": 4259545,
+                "name": "D'Andre Swift",
+                "slot": "RB",
+                "points": 6.4
+              },
+              {
+                "id": 4429013,
+                "name": "Tank Bigsby",
+                "slot": "BE",
+                "points": 5.5
+              },
+              {
+                "id": 3916433,
+                "name": "Jakobi Meyers",
+                "slot": "RB/WR/TE",
+                "points": 4.8
+              },
+              {
+                "id": 4428557,
+                "name": "Tyjae Spears",
+                "slot": "BE",
+                "points": 1.1
+              },
+              {
+                "id": 4361050,
+                "name": "Isaiah Likely",
+                "slot": "TE",
+                "points": 10.1
+              },
+              {
+                "id": 4361370,
+                "name": "Chris Olave",
+                "slot": "WR",
+                "points": 16.6
+              },
+              {
+                "id": 4430807,
+                "name": "Bijan Robinson",
+                "slot": "RB",
+                "points": 30.2
+              },
+              {
+                "id": 4241474,
+                "name": "Brian Robinson Jr.",
+                "slot": "BE",
+                "points": 25.2
+              },
+              {
+                "id": 3054850,
+                "name": "Alvin Kamara",
+                "slot": "BE",
+                "points": 20.3
+              },
+              {
+                "id": 4426354,
+                "name": "George Pickens",
+                "slot": "RB/WR/TE",
+                "points": 8.5
+              },
+              {
+                "id": 4686658,
+                "name": "Mike Washington Jr.",
+                "slot": "BE",
+                "points": 2.2
+              },
+              {
+                "id": 2576925,
+                "name": "Darren Waller",
+                "slot": "BE",
+                "points": 5.1
+              },
+              {
+                "id": -16003,
+                "name": "Bears D/ST",
+                "slot": "D/ST",
+                "points": 9.0
+              },
+              {
+                "id": 2971573,
+                "name": "Ka'imi Fairbairn",
+                "slot": "K",
+                "points": 12.5
+              }
+            ],
+            "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
           }
         ],
         "source": "weekly_trade_bundles"
@@ -4563,155 +6382,15 @@
     {
       "league": "Lana Straw Champeens League",
       "season": 2026,
-      "generated_at": "2026-10-03T11:27:18.968551+00:00",
+      "generated_at": "2026-10-06T17:42:59.774349+00:00",
       "completed_weeks": [
         1,
         2,
-        3
+        3,
+        4
       ],
       "first_trade_date": "2026-08-30",
       "trades": [
-        {
-          "id": "1790868821313-8-10",
-          "traded_at": "2026-10-01T15:33:41.313000+00:00",
-          "transaction_week": 4,
-          "weeks": [],
-          "trade_week": null,
-          "sides": [
-            {
-              "team_id": 8,
-              "team": "Jerry GM + Jerry Owner",
-              "sent": [
-                {
-                  "id": 3915511,
-                  "name": "Joe Burrow"
-                }
-              ],
-              "received": [
-                {
-                  "id": 4685472,
-                  "name": "Tetairoa McMillan",
-                  "weeks": {}
-                },
-                {
-                  "id": 3918298,
-                  "name": "Josh Allen",
-                  "weeks": {}
-                }
-              ],
-              "weekly_points": {},
-              "total_points": null
-            },
-            {
-              "team_id": 10,
-              "team": "Cowboys September Nightmares",
-              "sent": [
-                {
-                  "id": 4685472,
-                  "name": "Tetairoa McMillan"
-                },
-                {
-                  "id": 3918298,
-                  "name": "Josh Allen"
-                }
-              ],
-              "received": [
-                {
-                  "id": 3915511,
-                  "name": "Joe Burrow",
-                  "weeks": {}
-                }
-              ],
-              "weekly_points": {},
-              "total_points": null
-            }
-          ],
-          "receipts": []
-        },
-        {
-          "id": "1790975071558-2-10",
-          "traded_at": "2026-10-02T21:04:31.558000+00:00",
-          "transaction_week": 4,
-          "weeks": [],
-          "trade_week": null,
-          "sides": [
-            {
-              "team_id": 2,
-              "team": "Jordan's Trainers",
-              "sent": [
-                {
-                  "id": 3929630,
-                  "name": "Saquon Barkley"
-                },
-                {
-                  "id": 4688813,
-                  "name": "Josh Downs"
-                },
-                {
-                  "id": 4239993,
-                  "name": "Tee Higgins"
-                }
-              ],
-              "received": [
-                {
-                  "id": 4890973,
-                  "name": "Ashton Jeanty",
-                  "weeks": {}
-                },
-                {
-                  "id": 4429096,
-                  "name": "Blake Corum",
-                  "weeks": {}
-                },
-                {
-                  "id": 4429205,
-                  "name": "Jordan Addison",
-                  "weeks": {}
-                }
-              ],
-              "weekly_points": {},
-              "total_points": null
-            },
-            {
-              "team_id": 10,
-              "team": "Cowboys September Nightmares",
-              "sent": [
-                {
-                  "id": 4890973,
-                  "name": "Ashton Jeanty"
-                },
-                {
-                  "id": 4429096,
-                  "name": "Blake Corum"
-                },
-                {
-                  "id": 4429205,
-                  "name": "Jordan Addison"
-                }
-              ],
-              "received": [
-                {
-                  "id": 3929630,
-                  "name": "Saquon Barkley",
-                  "weeks": {}
-                },
-                {
-                  "id": 4688813,
-                  "name": "Josh Downs",
-                  "weeks": {}
-                },
-                {
-                  "id": 4239993,
-                  "name": "Tee Higgins",
-                  "weeks": {}
-                }
-              ],
-              "weekly_points": {},
-              "total_points": null
-            }
-          ],
-          "receipts": []
-        },
         {
           "id": "1788272081062-9-10",
           "traded_at": "2026-09-01T14:14:41.062000+00:00",
@@ -4719,7 +6398,8 @@
           "weeks": [
             1,
             2,
-            3
+            3,
+            4
           ],
           "trade_week": null,
           "sides": [
@@ -4742,21 +6422,23 @@
               ],
               "received": [
                 {
-                  "id": 4361579,
-                  "name": "Javonte Williams",
-                  "weeks": {
-                    "1": 21.7,
-                    "2": 6.5,
-                    "3": 17.3
-                  }
-                },
-                {
                   "id": 4372016,
                   "name": "Jaylen Waddle",
                   "weeks": {
                     "1": 0.7,
                     "2": 18.8,
-                    "3": 5.4
+                    "3": 5.4,
+                    "4": 12.0
+                  }
+                },
+                {
+                  "id": 4361579,
+                  "name": "Javonte Williams",
+                  "weeks": {
+                    "1": 21.7,
+                    "2": 6.5,
+                    "3": 17.3,
+                    "4": 28.8
                   }
                 },
                 {
@@ -4765,28 +6447,30 @@
                   "weeks": {
                     "1": 30.7,
                     "2": 8.3,
-                    "3": 10.8
+                    "3": 10.8,
+                    "4": 15.6
                   }
                 }
               ],
               "weekly_points": {
                 "1": 53.1,
                 "2": 33.6,
-                "3": 33.5
+                "3": 33.5,
+                "4": 56.4
               },
-              "total_points": 120.2
+              "total_points": 176.6
             },
             {
               "team_id": 10,
               "team": "Cowboys September Nightmares",
               "sent": [
                 {
-                  "id": 4361579,
-                  "name": "Javonte Williams"
-                },
-                {
                   "id": 4372016,
                   "name": "Jaylen Waddle"
+                },
+                {
+                  "id": 4361579,
+                  "name": "Javonte Williams"
                 },
                 {
                   "id": 4890973,
@@ -4800,7 +6484,8 @@
                   "weeks": {
                     "1": 4.1,
                     "2": 0.0,
-                    "3": 0.0
+                    "3": 0.0,
+                    "4": 0.0
                   }
                 },
                 {
@@ -4809,7 +6494,8 @@
                   "weeks": {
                     "1": 8.6,
                     "2": 10.8,
-                    "3": 1.7
+                    "3": 1.7,
+                    "4": 0.0
                   }
                 },
                 {
@@ -4818,16 +6504,18 @@
                   "weeks": {
                     "1": 8.0,
                     "2": 13.6,
-                    "3": 2.7
+                    "3": 2.7,
+                    "4": 39.2
                   }
                 }
               ],
               "weekly_points": {
                 "1": 20.7,
                 "2": 24.4,
-                "3": 4.4
+                "3": 4.4,
+                "4": 39.2
               },
-              "total_points": 49.5
+              "total_points": 88.7
             }
           ],
           "receipts": []
@@ -4839,7 +6527,8 @@
           "weeks": [
             1,
             2,
-            3
+            3,
+            4
           ],
           "trade_week": 1,
           "sides": [
@@ -4859,16 +6548,18 @@
                   "weeks": {
                     "1": 4.0,
                     "2": 8.0,
-                    "3": 3.2
+                    "3": 3.2,
+                    "4": 7.7
                   }
                 }
               ],
               "weekly_points": {
                 "1": 4.0,
                 "2": 8.0,
-                "3": 3.2
+                "3": 3.2,
+                "4": 7.7
               },
-              "total_points": 15.2
+              "total_points": 22.9
             },
             {
               "team_id": 12,
@@ -4886,14 +6577,16 @@
                   "weeks": {
                     "1": 0.0,
                     "2": 13.3,
-                    "3": 0.0
+                    "3": 0.0,
+                    "4": 0.0
                   }
                 }
               ],
               "weekly_points": {
                 "1": 0.0,
                 "2": 13.3,
-                "3": 0.0
+                "3": 0.0,
+                "4": 0.0
               },
               "total_points": 13.3
             }
@@ -4905,7 +6598,8 @@
           "traded_at": "2026-09-25T03:05:29.049000+00:00",
           "transaction_week": 3,
           "weeks": [
-            3
+            3,
+            4
           ],
           "trade_week": 3,
           "sides": [
@@ -4923,14 +6617,16 @@
                   "id": 4890973,
                   "name": "Ashton Jeanty",
                   "weeks": {
-                    "3": 10.8
+                    "3": 10.8,
+                    "4": 15.6
                   }
                 }
               ],
               "weekly_points": {
-                "3": 10.8
+                "3": 10.8,
+                "4": 15.6
               },
-              "total_points": 10.8
+              "total_points": 26.4
             },
             {
               "team_id": 9,
@@ -4946,14 +6642,235 @@
                   "id": 4262921,
                   "name": "Justin Jefferson",
                   "weeks": {
-                    "3": 4.2
+                    "3": 4.2,
+                    "4": 0.0
                   }
                 }
               ],
               "weekly_points": {
-                "3": 4.2
+                "3": 4.2,
+                "4": 0.0
               },
               "total_points": 4.2
+            }
+          ],
+          "receipts": []
+        },
+        {
+          "id": "1790868821313-8-10",
+          "traded_at": "2026-10-01T15:33:41.313000+00:00",
+          "transaction_week": 4,
+          "weeks": [
+            4
+          ],
+          "trade_week": 4,
+          "sides": [
+            {
+              "team_id": 8,
+              "team": "Jerry GM + Jerry Owner",
+              "sent": [
+                {
+                  "id": 3915511,
+                  "name": "Joe Burrow"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4685472,
+                  "name": "Tetairoa McMillan",
+                  "weeks": {
+                    "4": 39.2
+                  }
+                },
+                {
+                  "id": 3918298,
+                  "name": "Josh Allen",
+                  "weeks": {
+                    "4": 19.02
+                  }
+                }
+              ],
+              "weekly_points": {
+                "4": 58.22
+              },
+              "total_points": 58.22
+            },
+            {
+              "team_id": 10,
+              "team": "Cowboys September Nightmares",
+              "sent": [
+                {
+                  "id": 4685472,
+                  "name": "Tetairoa McMillan"
+                },
+                {
+                  "id": 3918298,
+                  "name": "Josh Allen"
+                }
+              ],
+              "received": [
+                {
+                  "id": 3915511,
+                  "name": "Joe Burrow",
+                  "weeks": {
+                    "4": 23.72
+                  }
+                }
+              ],
+              "weekly_points": {
+                "4": 23.72
+              },
+              "total_points": 23.72
+            }
+          ],
+          "receipts": []
+        },
+        {
+          "id": "1791270230677-9-12",
+          "traded_at": "2026-10-06T07:03:50.677000+00:00",
+          "transaction_week": 5,
+          "weeks": [],
+          "trade_week": null,
+          "sides": [
+            {
+              "team_id": 9,
+              "team": "Madison Beer",
+              "sent": [
+                {
+                  "id": 4361579,
+                  "name": "Javonte Williams"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4362628,
+                  "name": "Ja'Marr Chase",
+                  "weeks": {}
+                }
+              ],
+              "weekly_points": {},
+              "total_points": null
+            },
+            {
+              "team_id": 12,
+              "team": "Amburgers",
+              "sent": [
+                {
+                  "id": 4362628,
+                  "name": "Ja'Marr Chase"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4361579,
+                  "name": "Javonte Williams",
+                  "weeks": {}
+                }
+              ],
+              "weekly_points": {},
+              "total_points": null
+            }
+          ],
+          "receipts": []
+        },
+        {
+          "id": "1790975071558-2-10",
+          "traded_at": "2026-10-02T21:04:31.558000+00:00",
+          "transaction_week": 4,
+          "weeks": [
+            4
+          ],
+          "trade_week": 4,
+          "sides": [
+            {
+              "team_id": 2,
+              "team": "Jordan's Trainers",
+              "sent": [
+                {
+                  "id": 3929630,
+                  "name": "Saquon Barkley"
+                },
+                {
+                  "id": 4688813,
+                  "name": "Josh Downs"
+                },
+                {
+                  "id": 4239993,
+                  "name": "Tee Higgins"
+                }
+              ],
+              "received": [
+                {
+                  "id": 4890973,
+                  "name": "Ashton Jeanty",
+                  "weeks": {
+                    "4": 15.6
+                  }
+                },
+                {
+                  "id": 4429096,
+                  "name": "Blake Corum",
+                  "weeks": {
+                    "4": 2.6
+                  }
+                },
+                {
+                  "id": 4429205,
+                  "name": "Jordan Addison",
+                  "weeks": {
+                    "4": 7.1
+                  }
+                }
+              ],
+              "weekly_points": {
+                "4": 25.3
+              },
+              "total_points": 25.3
+            },
+            {
+              "team_id": 10,
+              "team": "Cowboys September Nightmares",
+              "sent": [
+                {
+                  "id": 4890973,
+                  "name": "Ashton Jeanty"
+                },
+                {
+                  "id": 4429096,
+                  "name": "Blake Corum"
+                },
+                {
+                  "id": 4429205,
+                  "name": "Jordan Addison"
+                }
+              ],
+              "received": [
+                {
+                  "id": 3929630,
+                  "name": "Saquon Barkley",
+                  "weeks": {
+                    "4": 1.5
+                  }
+                },
+                {
+                  "id": 4688813,
+                  "name": "Josh Downs",
+                  "weeks": {
+                    "4": 3.1
+                  }
+                },
+                {
+                  "id": 4239993,
+                  "name": "Tee Higgins",
+                  "weeks": {
+                    "4": 22.2
+                  }
+                }
+              ],
+              "weekly_points": {
+                "4": 26.8
+              },
+              "total_points": 26.8
             }
           ],
           "receipts": []
@@ -5524,6 +7441,194 @@
                 "away_score": 145.28
               }
             ]
+          },
+          {
+            "week": 4,
+            "rewound_players": 14,
+            "lineups": [
+              {
+                "team_id": 1,
+                "team": "Mac Attack",
+                "actual_points": 118.12,
+                "optimal_points": 131.32,
+                "points_left": 13.2,
+                "top_bench": {
+                  "id": 5083076,
+                  "name": "Harold Fannin Jr.",
+                  "points": 10.2
+                }
+              },
+              {
+                "team_id": 2,
+                "team": "Jordan's Trainers",
+                "actual_points": 111.56,
+                "optimal_points": 146.46,
+                "points_left": 34.9,
+                "top_bench": {
+                  "id": 4431452,
+                  "name": "Drake Maye",
+                  "points": 28.66
+                }
+              },
+              {
+                "team_id": 3,
+                "team": "OKC Schlegstas",
+                "actual_points": 92.52,
+                "optimal_points": 113.42,
+                "points_left": 20.9,
+                "top_bench": {
+                  "id": 4430027,
+                  "name": "Sam LaPorta",
+                  "points": 18.4
+                }
+              },
+              {
+                "team_id": 4,
+                "team": "Prime Lime Time",
+                "actual_points": 118.08,
+                "optimal_points": 141.38,
+                "points_left": 23.3,
+                "top_bench": {
+                  "id": 4432577,
+                  "name": "C.J. Stroud",
+                  "points": 25.08
+                }
+              },
+              {
+                "team_id": 5,
+                "team": "Otter",
+                "actual_points": 118.88,
+                "optimal_points": 148.78,
+                "points_left": 29.9,
+                "top_bench": {
+                  "id": 4711533,
+                  "name": "Ollie Gordon II",
+                  "points": 18.0
+                }
+              },
+              {
+                "team_id": 6,
+                "team": "The Jackal",
+                "actual_points": 102.18,
+                "optimal_points": 133.58,
+                "points_left": 31.4,
+                "top_bench": {
+                  "id": 4241474,
+                  "name": "Brian Robinson Jr.",
+                  "points": 25.2
+                }
+              },
+              {
+                "team_id": 7,
+                "team": "Chase Is My Leader",
+                "actual_points": 150.8,
+                "optimal_points": 166.7,
+                "points_left": 15.9,
+                "top_bench": {
+                  "id": 3139477,
+                  "name": "Patrick Mahomes",
+                  "points": 19.0
+                }
+              },
+              {
+                "team_id": 8,
+                "team": "Jerry GM + Jerry Owner",
+                "actual_points": 144.62,
+                "optimal_points": 155.36,
+                "points_left": 10.74,
+                "top_bench": {
+                  "id": 4685720,
+                  "name": "Bryce Young",
+                  "points": 23.46
+                }
+              },
+              {
+                "team_id": 9,
+                "team": "Madison Beer",
+                "actual_points": 139.08,
+                "optimal_points": 147.28,
+                "points_left": 8.2,
+                "top_bench": {
+                  "id": 3912547,
+                  "name": "Sam Darnold",
+                  "points": 14.82
+                }
+              },
+              {
+                "team_id": 10,
+                "team": "Cowboys September Nightmares",
+                "actual_points": 83.12,
+                "optimal_points": 122.32,
+                "points_left": 39.2,
+                "top_bench": {
+                  "id": 4608686,
+                  "name": "Kyle Monangai",
+                  "points": 28.5
+                }
+              },
+              {
+                "team_id": 11,
+                "team": "Neaux Gold, All Glory",
+                "actual_points": 93.28,
+                "optimal_points": 116.48,
+                "points_left": 23.2,
+                "top_bench": {
+                  "id": 4426388,
+                  "name": "Jameson Williams",
+                  "points": 14.2
+                }
+              },
+              {
+                "team_id": 12,
+                "team": "Amburgers",
+                "actual_points": 91.54,
+                "optimal_points": 91.54,
+                "points_left": 0.0,
+                "top_bench": {
+                  "id": 4686658,
+                  "name": "Mike Washington Jr.",
+                  "points": 2.2
+                }
+              }
+            ],
+            "matchups": [
+              {
+                "home_team_id": 7,
+                "away_team_id": 8,
+                "home_score": 150.8,
+                "away_score": 144.62
+              },
+              {
+                "home_team_id": 6,
+                "away_team_id": 10,
+                "home_score": 102.18,
+                "away_score": 83.12
+              },
+              {
+                "home_team_id": 9,
+                "away_team_id": 4,
+                "home_score": 139.08,
+                "away_score": 118.08
+              },
+              {
+                "home_team_id": 3,
+                "away_team_id": 12,
+                "home_score": 92.52,
+                "away_score": 91.54
+              },
+              {
+                "home_team_id": 5,
+                "away_team_id": 1,
+                "home_score": 118.88,
+                "away_score": 118.12
+              },
+              {
+                "home_team_id": 11,
+                "away_team_id": 2,
+                "home_score": 93.28,
+                "away_score": 111.56
+              }
+            ]
           }
         ],
         "teams": [
@@ -5531,204 +7636,204 @@
             "team_id": 1,
             "team": "Mac Attack",
             "actual_wins": 3,
-            "actual_losses": 0,
+            "actual_losses": 1,
             "actual_ties": 0,
-            "actual_points": 381.32,
+            "actual_points": 499.44,
             "alternate_wins": 3,
-            "alternate_losses": 0,
+            "alternate_losses": 1,
             "alternate_ties": 0,
-            "alternate_points": 440.16,
+            "alternate_points": 571.48,
             "optimal_actual_wins": 3,
-            "optimal_actual_losses": 0,
+            "optimal_actual_losses": 1,
             "optimal_actual_ties": 0,
-            "optimal_actual_points": 440.16,
+            "optimal_actual_points": 571.48,
             "wins_change": 0.0
           },
           {
             "team_id": 2,
             "team": "Jordan's Trainers",
-            "actual_wins": 0,
+            "actual_wins": 1,
             "actual_losses": 3,
             "actual_ties": 0,
-            "actual_points": 262.6,
-            "alternate_wins": 0,
+            "actual_points": 374.16,
+            "alternate_wins": 1,
             "alternate_losses": 3,
             "alternate_ties": 0,
-            "alternate_points": 349.58,
-            "optimal_actual_wins": 0,
+            "alternate_points": 501.04,
+            "optimal_actual_wins": 1,
             "optimal_actual_losses": 3,
             "optimal_actual_ties": 0,
-            "optimal_actual_points": 349.58,
+            "optimal_actual_points": 496.04,
             "wins_change": 0.0
           },
           {
             "team_id": 3,
             "team": "OKC Schlegstas",
-            "actual_wins": 1,
+            "actual_wins": 2,
             "actual_losses": 2,
             "actual_ties": 0,
-            "actual_points": 301.4,
-            "alternate_wins": 2,
+            "actual_points": 393.92,
+            "alternate_wins": 3,
             "alternate_losses": 1,
             "alternate_ties": 0,
-            "alternate_points": 368.1,
-            "optimal_actual_wins": 1,
+            "alternate_points": 481.52,
+            "optimal_actual_wins": 2,
             "optimal_actual_losses": 2,
             "optimal_actual_ties": 0,
-            "optimal_actual_points": 368.1,
+            "optimal_actual_points": 481.52,
             "wins_change": 1.0
           },
           {
             "team_id": 4,
             "team": "Prime Lime Time",
             "actual_wins": 1,
-            "actual_losses": 2,
+            "actual_losses": 3,
             "actual_ties": 0,
-            "actual_points": 318.28,
+            "actual_points": 436.36,
             "alternate_wins": 1,
-            "alternate_losses": 2,
+            "alternate_losses": 3,
             "alternate_ties": 0,
-            "alternate_points": 359.68,
+            "alternate_points": 501.06,
             "optimal_actual_wins": 1,
-            "optimal_actual_losses": 2,
+            "optimal_actual_losses": 3,
             "optimal_actual_ties": 0,
-            "optimal_actual_points": 359.68,
+            "optimal_actual_points": 501.06,
             "wins_change": 0.0
           },
           {
             "team_id": 5,
             "team": "Otter",
-            "actual_wins": 3,
+            "actual_wins": 4,
             "actual_losses": 0,
             "actual_ties": 0,
-            "actual_points": 398.04,
-            "alternate_wins": 3,
+            "actual_points": 516.92,
+            "alternate_wins": 4,
             "alternate_losses": 0,
             "alternate_ties": 0,
-            "alternate_points": 438.14,
-            "optimal_actual_wins": 3,
+            "alternate_points": 586.92,
+            "optimal_actual_wins": 4,
             "optimal_actual_losses": 0,
             "optimal_actual_ties": 0,
-            "optimal_actual_points": 438.14,
+            "optimal_actual_points": 586.92,
             "wins_change": 0.0
           },
           {
             "team_id": 6,
             "team": "The Jackal",
-            "actual_wins": 1,
+            "actual_wins": 2,
             "actual_losses": 2,
             "actual_ties": 0,
-            "actual_points": 326.2,
+            "actual_points": 428.38,
             "alternate_wins": 1,
-            "alternate_losses": 2,
+            "alternate_losses": 3,
             "alternate_ties": 0,
-            "alternate_points": 378.3,
-            "optimal_actual_wins": 1,
+            "alternate_points": 511.88,
+            "optimal_actual_wins": 2,
             "optimal_actual_losses": 2,
             "optimal_actual_ties": 0,
-            "optimal_actual_points": 378.3,
-            "wins_change": 0.0
+            "optimal_actual_points": 511.88,
+            "wins_change": -1.0
           },
           {
             "team_id": 7,
             "team": "Chase Is My Leader",
-            "actual_wins": 2,
+            "actual_wins": 3,
             "actual_losses": 1,
             "actual_ties": 0,
-            "actual_points": 290.32,
-            "alternate_wins": 2,
+            "actual_points": 441.12,
+            "alternate_wins": 3,
             "alternate_losses": 1,
             "alternate_ties": 0,
-            "alternate_points": 365.96,
-            "optimal_actual_wins": 3,
+            "alternate_points": 532.66,
+            "optimal_actual_wins": 4,
             "optimal_actual_losses": 0,
             "optimal_actual_ties": 0,
-            "optimal_actual_points": 365.96,
+            "optimal_actual_points": 532.66,
             "wins_change": -1.0
           },
           {
             "team_id": 8,
             "team": "Jerry GM + Jerry Owner",
             "actual_wins": 1,
-            "actual_losses": 2,
+            "actual_losses": 3,
             "actual_ties": 0,
-            "actual_points": 324.68,
+            "actual_points": 469.3,
             "alternate_wins": 1,
-            "alternate_losses": 2,
+            "alternate_losses": 3,
             "alternate_ties": 0,
-            "alternate_points": 387.62,
+            "alternate_points": 510.14,
             "optimal_actual_wins": 1,
-            "optimal_actual_losses": 2,
+            "optimal_actual_losses": 3,
             "optimal_actual_ties": 0,
-            "optimal_actual_points": 391.42,
+            "optimal_actual_points": 546.78,
             "wins_change": 0.0
           },
           {
             "team_id": 9,
             "team": "Madison Beer",
-            "actual_wins": 2,
+            "actual_wins": 3,
             "actual_losses": 1,
             "actual_ties": 0,
-            "actual_points": 239.46,
-            "alternate_wins": 1,
+            "actual_points": 378.54,
+            "alternate_wins": 2,
             "alternate_losses": 2,
             "alternate_ties": 0,
-            "alternate_points": 242.44,
-            "optimal_actual_wins": 2,
+            "alternate_points": 391.12,
+            "optimal_actual_wins": 3,
             "optimal_actual_losses": 1,
             "optimal_actual_ties": 0,
-            "optimal_actual_points": 304.34,
+            "optimal_actual_points": 451.62,
             "wins_change": -1.0
           },
           {
             "team_id": 10,
             "team": "Cowboys September Nightmares",
             "actual_wins": 1,
-            "actual_losses": 2,
+            "actual_losses": 3,
             "actual_ties": 0,
-            "actual_points": 307.94,
-            "alternate_wins": 2,
+            "actual_points": 391.06,
+            "alternate_wins": 3,
             "alternate_losses": 1,
             "alternate_ties": 0,
-            "alternate_points": 423.94,
+            "alternate_points": 569.16,
             "optimal_actual_wins": 1,
-            "optimal_actual_losses": 2,
+            "optimal_actual_losses": 3,
             "optimal_actual_ties": 0,
-            "optimal_actual_points": 364.84,
-            "wins_change": 1.0
+            "optimal_actual_points": 487.16,
+            "wins_change": 2.0
           },
           {
             "team_id": 11,
             "team": "Neaux Gold, All Glory",
             "actual_wins": 0,
-            "actual_losses": 3,
+            "actual_losses": 4,
             "actual_ties": 0,
-            "actual_points": 315.3,
+            "actual_points": 408.58,
             "alternate_wins": 0,
-            "alternate_losses": 3,
+            "alternate_losses": 4,
             "alternate_ties": 0,
-            "alternate_points": 360.1,
+            "alternate_points": 476.58,
             "optimal_actual_wins": 0,
-            "optimal_actual_losses": 3,
+            "optimal_actual_losses": 4,
             "optimal_actual_ties": 0,
-            "optimal_actual_points": 354.8,
+            "optimal_actual_points": 471.28,
             "wins_change": 0.0
           },
           {
             "team_id": 12,
             "team": "Amburgers",
             "actual_wins": 3,
-            "actual_losses": 0,
+            "actual_losses": 1,
             "actual_ties": 0,
-            "actual_points": 406.78,
+            "actual_points": 498.32,
             "alternate_wins": 2,
-            "alternate_losses": 1,
+            "alternate_losses": 2,
             "alternate_ties": 0,
-            "alternate_points": 445.28,
+            "alternate_points": 540.32,
             "optimal_actual_wins": 2,
-            "optimal_actual_losses": 1,
+            "optimal_actual_losses": 2,
             "optimal_actual_ties": 0,
-            "optimal_actual_points": 450.18,
+            "optimal_actual_points": 541.72,
             "wins_change": 0.0
           }
         ],
@@ -6638,6 +8743,520 @@
                 "name": "Chiefs D/ST",
                 "slot": "D/ST",
                 "points": 7.0
+              }
+            ],
+            "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
+          },
+          {
+            "week": 4,
+            "team_id": 8,
+            "team": "Jerry GM + Jerry Owner",
+            "trade_count": 1,
+            "trade_ids": [
+              "1790868821313-8-10"
+            ],
+            "received": [
+              {
+                "id": 3918298,
+                "name": "Josh Allen"
+              },
+              {
+                "id": 4685472,
+                "name": "Tetairoa McMillan"
+              }
+            ],
+            "sent": [
+              {
+                "id": 3915511,
+                "name": "Joe Burrow"
+              }
+            ],
+            "actual_score": 144.62,
+            "alternate_score": 113.16,
+            "net_points": 31.46,
+            "opponent": "Chase Is My Leader",
+            "opponent_score": 150.8,
+            "opponent_alternate_score": 150.8,
+            "result": "L",
+            "alternate_result": "L",
+            "flipped": false,
+            "replacements": [
+              {
+                "slot": "WR",
+                "name": "Dontayvion Wicks",
+                "points": 3.3,
+                "replaced": null
+              },
+              {
+                "slot": "QB",
+                "name": "Bryce Young",
+                "points": 23.46,
+                "replaced": null
+              }
+            ],
+            "final_lineup": [
+              {
+                "id": 4242335,
+                "name": "Jonathan Taylor",
+                "slot": "RB",
+                "points": 22.2
+              },
+              {
+                "id": 4361307,
+                "name": "Trey McBride",
+                "slot": "TE",
+                "points": 6.6
+              },
+              {
+                "id": 4870653,
+                "name": "KC Concepcion",
+                "slot": "BE",
+                "points": 8.9
+              },
+              {
+                "id": 4427366,
+                "name": "Breece Hall",
+                "slot": "BE",
+                "points": 0.0
+              },
+              {
+                "id": 4685702,
+                "name": "Quinshon Judkins",
+                "slot": "RB",
+                "points": 18.6
+              },
+              {
+                "id": 4242355,
+                "name": "Jake Ferguson",
+                "slot": "RB/WR/TE",
+                "points": 2.6
+              },
+              {
+                "id": 4686361,
+                "name": "Cam Little",
+                "slot": "K",
+                "points": 11.5
+              },
+              {
+                "id": 4360078,
+                "name": "Alec Pierce",
+                "slot": "BE",
+                "points": 0.0
+              },
+              {
+                "id": 4361529,
+                "name": "Isiah Pacheco",
+                "slot": "IR",
+                "points": 0.0
+              },
+              {
+                "id": 4569559,
+                "name": "Devaughn Vele",
+                "slot": "RB/WR/TE",
+                "points": 14.4
+              },
+              {
+                "id": 4428850,
+                "name": "Dontayvion Wicks",
+                "slot": "BE",
+                "points": 3.3
+              },
+              {
+                "id": 4685720,
+                "name": "Bryce Young",
+                "slot": "BE",
+                "points": 23.46
+              },
+              {
+                "id": 4686422,
+                "name": "Xavier Hutchinson",
+                "slot": "BE",
+                "points": 6.1
+              },
+              {
+                "id": 4569587,
+                "name": "Wan'Dale Robinson",
+                "slot": "WR",
+                "points": 9.5
+              },
+              {
+                "id": 4685472,
+                "name": "Tetairoa McMillan",
+                "slot": "WR",
+                "points": 39.2
+              },
+              {
+                "id": 3918298,
+                "name": "Josh Allen",
+                "slot": "QB",
+                "points": 19.02
+              },
+              {
+                "id": -16012,
+                "name": "Chiefs D/ST",
+                "slot": "D/ST",
+                "points": 1.0
+              }
+            ],
+            "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
+          },
+          {
+            "week": 4,
+            "team_id": 10,
+            "team": "Cowboys September Nightmares",
+            "trade_count": 2,
+            "trade_ids": [
+              "1790868821313-8-10",
+              "1790975071558-2-10"
+            ],
+            "received": [
+              {
+                "id": 3915511,
+                "name": "Joe Burrow"
+              },
+              {
+                "id": 3929630,
+                "name": "Saquon Barkley"
+              },
+              {
+                "id": 4239993,
+                "name": "Tee Higgins"
+              },
+              {
+                "id": 4688813,
+                "name": "Josh Downs"
+              }
+            ],
+            "sent": [
+              {
+                "id": 3918298,
+                "name": "Josh Allen"
+              },
+              {
+                "id": 4429096,
+                "name": "Blake Corum"
+              },
+              {
+                "id": 4429205,
+                "name": "Jordan Addison"
+              },
+              {
+                "id": 4685472,
+                "name": "Tetairoa McMillan"
+              },
+              {
+                "id": 4890973,
+                "name": "Ashton Jeanty"
+              }
+            ],
+            "actual_score": 83.12,
+            "alternate_score": 113.52,
+            "net_points": -30.4,
+            "opponent": "The Jackal",
+            "opponent_score": 102.18,
+            "opponent_alternate_score": 102.18,
+            "result": "L",
+            "alternate_result": "W",
+            "flipped": true,
+            "replacements": [
+              {
+                "slot": "QB",
+                "name": "Josh Allen",
+                "points": 19.02,
+                "replaced": null
+              },
+              {
+                "slot": "RB",
+                "name": "Ashton Jeanty",
+                "points": 15.6,
+                "replaced": null
+              },
+              {
+                "slot": "WR",
+                "name": "Tetairoa McMillan",
+                "points": 39.2,
+                "replaced": null
+              },
+              {
+                "slot": "RB/WR/TE",
+                "name": "Jordan Addison",
+                "points": 7.1,
+                "replaced": null
+              }
+            ],
+            "final_lineup": [
+              {
+                "id": 4723086,
+                "name": "Colston Loveland",
+                "slot": "TE",
+                "points": 8.7
+              },
+              {
+                "id": -16026,
+                "name": "Seahawks D/ST",
+                "slot": "D/ST",
+                "points": 12.0
+              },
+              {
+                "id": 4035687,
+                "name": "Michael Pittman Jr.",
+                "slot": "WR",
+                "points": 2.5
+              },
+              {
+                "id": 2473037,
+                "name": "Jason Myers",
+                "slot": "K",
+                "points": 1.5
+              },
+              {
+                "id": 4259545,
+                "name": "D'Andre Swift",
+                "slot": "RB",
+                "points": 6.4
+              },
+              {
+                "id": 3916148,
+                "name": "Tony Pollard",
+                "slot": "BE",
+                "points": 12.0
+              },
+              {
+                "id": 4432620,
+                "name": "Parker Washington",
+                "slot": "RB/WR/TE",
+                "points": 1.5
+              },
+              {
+                "id": 4608686,
+                "name": "Kyle Monangai",
+                "slot": "BE",
+                "points": 28.5
+              },
+              {
+                "id": 4870795,
+                "name": "Makai Lemon",
+                "slot": "BE",
+                "points": 4.2
+              },
+              {
+                "id": 4047646,
+                "name": "A.J. Brown",
+                "slot": "IR",
+                "points": 0.0
+              },
+              {
+                "id": 4597500,
+                "name": "Adonai Mitchell",
+                "slot": "BE",
+                "points": 0.0
+              },
+              {
+                "id": 4682745,
+                "name": "Jaylen Wright",
+                "slot": "BE",
+                "points": 0.7
+              },
+              {
+                "id": -16034,
+                "name": "Texans D/ST",
+                "slot": "BE",
+                "points": 3.0
+              },
+              {
+                "id": 3915511,
+                "name": "Joe Burrow",
+                "slot": "QB",
+                "points": 23.72
+              },
+              {
+                "id": 3929630,
+                "name": "Saquon Barkley",
+                "slot": "RB",
+                "points": 1.5
+              },
+              {
+                "id": 4688813,
+                "name": "Josh Downs",
+                "slot": "WR",
+                "points": 3.1
+              },
+              {
+                "id": 4239993,
+                "name": "Tee Higgins",
+                "slot": "RB/WR/TE",
+                "points": 22.2
+              }
+            ],
+            "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
+          },
+          {
+            "week": 4,
+            "team_id": 2,
+            "team": "Jordan's Trainers",
+            "trade_count": 1,
+            "trade_ids": [
+              "1790975071558-2-10"
+            ],
+            "received": [
+              {
+                "id": 4429096,
+                "name": "Blake Corum"
+              },
+              {
+                "id": 4429205,
+                "name": "Jordan Addison"
+              },
+              {
+                "id": 4890973,
+                "name": "Ashton Jeanty"
+              }
+            ],
+            "sent": [
+              {
+                "id": 3929630,
+                "name": "Saquon Barkley"
+              },
+              {
+                "id": 4239993,
+                "name": "Tee Higgins"
+              },
+              {
+                "id": 4688813,
+                "name": "Josh Downs"
+              }
+            ],
+            "actual_score": 111.56,
+            "alternate_score": 95.36,
+            "net_points": 16.2,
+            "opponent": "Neaux Gold, All Glory",
+            "opponent_score": 93.28,
+            "opponent_alternate_score": 93.28,
+            "result": "W",
+            "alternate_result": "W",
+            "flipped": false,
+            "replacements": [
+              {
+                "slot": "RB",
+                "name": "Saquon Barkley",
+                "points": 1.5,
+                "replaced": null
+              },
+              {
+                "slot": "WR",
+                "name": "Tee Higgins",
+                "points": 22.2,
+                "replaced": null
+              },
+              {
+                "slot": "RB/WR/TE",
+                "name": "Josh Downs",
+                "points": 3.1,
+                "replaced": "Alvin Kamara"
+              }
+            ],
+            "final_lineup": [
+              {
+                "id": 4431452,
+                "name": "Drake Maye",
+                "slot": "BE",
+                "points": 28.66
+              },
+              {
+                "id": 4362238,
+                "name": "Chase Brown",
+                "slot": "RB",
+                "points": 13.6
+              },
+              {
+                "id": 4428331,
+                "name": "Rashee Rice",
+                "slot": "WR",
+                "points": 0.0
+              },
+              {
+                "id": 3040151,
+                "name": "George Kittle",
+                "slot": "TE",
+                "points": 16.0
+              },
+              {
+                "id": -16023,
+                "name": "Steelers D/ST",
+                "slot": "D/ST",
+                "points": 5.0
+              },
+              {
+                "id": 4569173,
+                "name": "Rhamondre Stevenson",
+                "slot": "RB/WR/TE",
+                "points": 16.9
+              },
+              {
+                "id": 4361432,
+                "name": "Romeo Doubs",
+                "slot": "BE",
+                "points": 20.8
+              },
+              {
+                "id": 4034949,
+                "name": "Eddy Pineiro",
+                "slot": "K",
+                "points": 2.5
+              },
+              {
+                "id": 4429013,
+                "name": "Tank Bigsby",
+                "slot": "BE",
+                "points": 5.5
+              },
+              {
+                "id": 4426338,
+                "name": "Bo Nix",
+                "slot": "QB",
+                "points": 14.56
+              },
+              {
+                "id": 4362249,
+                "name": "Jayden Reed",
+                "slot": "IR",
+                "points": 0.0
+              },
+              {
+                "id": 4695883,
+                "name": "Jalen Coker",
+                "slot": "BE",
+                "points": 0.0
+              },
+              {
+                "id": 3054850,
+                "name": "Alvin Kamara",
+                "slot": "RB/WR/TE",
+                "points": 20.3
+              },
+              {
+                "id": 4890973,
+                "name": "Ashton Jeanty",
+                "slot": "RB",
+                "points": 15.6
+              },
+              {
+                "id": 4429096,
+                "name": "Blake Corum",
+                "slot": "BE",
+                "points": 2.6
+              },
+              {
+                "id": 4429205,
+                "name": "Jordan Addison",
+                "slot": "WR",
+                "points": 7.1
+              },
+              {
+                "id": 4360763,
+                "name": "Brycen Tremayne",
+                "slot": "BE",
+                "points": 4.2
               }
             ],
             "snapshot_status": "reconstructed_from_trades_and_weekly_box_score"
